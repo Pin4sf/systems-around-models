@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { SystemTrace } from "@/components/diagrams/system-trace";
 
 it("renders the complete system trace as an ordered, self-explanatory sequence", () => {
-  render(<SystemTrace compact />);
+  render(<SystemTrace />);
 
   expect(screen.getByRole("list")).toHaveAttribute("aria-label", "Agent system trace");
   expect(screen.getAllByTestId("trace-step").map((node) => node.textContent)).toEqual([

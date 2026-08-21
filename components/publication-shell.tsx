@@ -13,9 +13,9 @@ export function PublicationShell({ children }: { children: ReactNode }) {
         </Link>
         <nav aria-label="Publication">
           <Link href="/">Fieldbook</Link>
-          <span aria-disabled="true">Architectures</span>
-          <span aria-disabled="true">Sources</span>
-          <span aria-disabled="true">Revisions</span>
+          <span aria-disabled="true">Architectures — forthcoming</span>
+          <span aria-disabled="true">Sources — forthcoming</span>
+          <span aria-disabled="true">Revisions — forthcoming</span>
         </nav>
       </header>
       <main id="main-content">{children}</main>

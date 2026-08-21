@@ -58,12 +58,37 @@ async function publicFixture() {
     "app/page.tsx",
     'export default function Page() { return <a href="/fieldbook/public-essay">Read</a>; }\n',
   );
+  await write(root, ".gitignore", [
+    "node_modules/",
+    ".next/",
+    "playwright-report/",
+    "test-results/",
+    "",
+  ].join("\n"));
+  await execFileAsync("git", ["init", "-q"], { cwd: root });
+  await execFileAsync("git", ["add", "."], { cwd: root });
   return root;
 }
 
 async function runScanner(root: string) {
   try {
     const result = await execFileAsync(process.execPath, [scanner, "--root", root]);
+    return { code: 0, stdout: result.stdout, stderr: result.stderr };
+  } catch (error) {
+    const failure = error as { code: number; stdout: string; stderr: string };
+    return { code: failure.code, stdout: failure.stdout, stderr: failure.stderr };
+  }
+}
+
+async function runBuiltScanner(root: string, outputDirectory: string) {
+  try {
+    const result = await execFileAsync(process.execPath, [
+      scanner,
+      "--root",
+      root,
+      "--built-output",
+      outputDirectory,
+    ]);
     return { code: 0, stdout: result.stdout, stderr: result.stderr };
   } catch (error) {
     const failure = error as { code: number; stdout: string; stderr: string };
@@ -114,6 +139,70 @@ describe("deterministic public-content scanner", () => {
     expect(result.code).toBe(1);
     expect(result.stderr).toContain(expected);
     expect(result.stderr).toContain(filename);
+  });
+
+  it.each([
+    ["package.json", '{"scripts":{"preview":"echo waldo-brain"}}', "waldo-brain"],
+    ["next.config.ts", 'export default { secret: "sk-abcdefghijklmnopqrstuv" };', "credential pattern"],
+    ["scripts/release.mjs", 'const local = "/Users/example/private/release.json";', "absolute local path"],
+    [".github/workflows/verify.yml", "env:\n  PRIVATE_CORPUS: waldo-brain\n", "waldo-brain"],
+  ])("scans tracked publication/build file %s", async (filename, contents, expected) => {
+    const root = await publicFixture();
+    await write(root, filename, contents);
+
+    const result = await runScanner(root);
+    expect(result.code).toBe(1);
+    expect(result.stderr).toContain(expected);
+    expect(result.stderr).toContain(filename);
+  });
+
+  it("does not scan dependencies, caches, git data, ignored reports, or binary assets", async () => {
+    const root = await publicFixture();
+    await write(root, "node_modules/package/leak.js", "waldo-brain");
+    await write(root, ".next/cache/leak.txt", "waldo-brain");
+    await write(root, ".git/private.txt", "waldo-brain");
+    await write(root, "playwright-report/leak.html", "waldo-brain");
+    await write(root, "public/card.png", "waldo-brain");
+
+    const result = await runScanner(root);
+    expect(result.code).toBe(0);
+  });
+
+  it("ignores a tracked publication file deleted in the working tree", async () => {
+    const root = await publicFixture();
+    await write(root, "scripts/removed.mjs", "export const removed = true;\n");
+    await execFileAsync("git", ["add", "scripts/removed.mjs"], { cwd: root });
+    await rm(path.join(root, "scripts", "removed.mjs"));
+
+    const result = await runScanner(root);
+    expect(result.code).toBe(0);
+  });
+
+  it.each([
+    ["server/app/index.html", "<p>waldo-brain</p>", "waldo-brain"],
+    ["server/app/config.json", '{"path":"/Users/example/private/build.json"}', "absolute local path"],
+    ["static/chunks/app.js", 'const token = "ghp_1234567890abcdefghijklmnop";', "credential pattern"],
+  ])("rejects sensitive text in deployable generated output %s", async (filename, contents, expected) => {
+    const root = await publicFixture();
+    const output = path.join(root, "generated-site");
+    await write(root, `generated-site/${filename}`, contents);
+
+    const result = await runBuiltScanner(root, output);
+    expect(result.code).toBe(1);
+    expect(result.stderr).toContain(`generated-site/${filename}`);
+    expect(result.stderr).toContain(expected);
+  });
+
+  it("accepts safe deployable generated text and ignores generated binary noise", async () => {
+    const root = await publicFixture();
+    const output = path.join(root, "generated-site");
+    await write(root, "generated-site/server/app/index.html", "<p>Public fieldbook</p>");
+    await write(root, "generated-site/static/chunks/app.js", "console.log('public');");
+    await write(root, "generated-site/public/card.png", "waldo-brain");
+
+    const result = await runBuiltScanner(root, output);
+    expect(result.code).toBe(0);
+    expect(result.stdout).toContain("Built output check passed");
   });
 
   it.each([

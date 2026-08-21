@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "validationSchemaVersion": "publication-v1",
+  "revisions": [
+    {
+      "id": "revision-fieldbook-essay-001",
+      "essaySlug": "the-model-is-not-the-agent",
+      "revision": 1,
+      "contentHash": "sha256-3efaf5e305c4b1e4e8c49a7d105d0edb774068f89715371106e27d263784748f",
+      "sourceIds": [
+        "source-earendil-what-is-a-harness",
+        "source-harness-engineering-fieldbook-v1"
+      ],
+      "sourceValidationDates": {
+        "source-earendil-what-is-a-harness": "2026-08-21",
+        "source-harness-engineering-fieldbook-v1": "2026-08-21"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "id": "source-earendil-what-is-a-harness",
+      "lastValidated": "2026-08-21"
+    },
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "lastValidated": "2026-08-21"
+    }
+  ],
+  "buildId": "sha256-c4daf79c7fad7995e462501501597add08b0c1677851608c65dfc22410ddc3a7"
+}

@@ -16,7 +16,7 @@ export default function HomePage() {
         </Link>
       </header>
 
-      <SystemTrace compact />
+      <SystemTrace />
 
       <section className="homepage__section prose" aria-labelledby="harness-engineering">
         <p className="eyebrow interface-text">Sequence one</p>

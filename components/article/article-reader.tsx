@@ -34,6 +34,7 @@ type ArticleReaderProps = {
   revision: RevisionRecord;
   claims: Map<string, ClaimRecord>;
   sources: Map<string, SourceRecord>;
+  releasedEssays: EssayMetadata[];
 };
 
 type MdxEvidenceBadgeProps = {
@@ -47,6 +48,7 @@ export async function ArticleReader({
   revision,
   claims,
   sources,
+  releasedEssays,
 }: ArticleReaderProps) {
   const relativePath = essayPaths[essay.slug];
   if (!relativePath) throw new Error(`No trusted public essay path for ${essay.slug}`);
@@ -106,7 +108,7 @@ export async function ArticleReader({
         </header>
         <div className="article-reader__prose prose">{content}</div>
         <RevisionNotice essay={essay} revision={revision} placement="end" />
-        <ArticlePager />
+        <ArticlePager essay={essay} releasedEssays={releasedEssays} />
       </article>
       <ArticleContents headings={headings} />
     </div>

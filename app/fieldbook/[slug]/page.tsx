@@ -57,6 +57,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     revision,
     claims: content.claims,
     sources: content.sources,
+    releasedEssays: [...content.essays.values()].filter(
+      (releasedEssay) => releasedEssay.status === "public" && releasedEssay.sequence === essay.sequence,
+    ),
   });
 
   return (

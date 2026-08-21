@@ -8,7 +8,7 @@ type RevisionNoticeProps = {
 };
 
 export function RevisionNotice({ essay, revision, placement }: RevisionNoticeProps) {
-  const revisionUrl = `https://github.com/Pin4sf/systems-around-models/blob/main/content/revisions/${revision.id}.yaml`;
+  const revisionUrl = `/manifests/${revision.id}.json`;
   const correctionUrl = createCorrectionUrl({
     route: `/fieldbook/${essay.slug}`,
     revisionId: revision.id,

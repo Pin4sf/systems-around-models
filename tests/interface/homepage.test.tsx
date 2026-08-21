@@ -14,6 +14,9 @@ it("identifies the independent publication and primary sections", () => {
     screen.getByRole("navigation", { name: "Publication" }),
   ).toBeInTheDocument();
   expect(screen.queryByText(/Waldo/i)).not.toBeInTheDocument();
+  expect(screen.getByText("Architectures — forthcoming")).toBeInTheDocument();
+  expect(screen.getByText("Sources — forthcoming")).toBeInTheDocument();
+  expect(screen.getByText("Revisions — forthcoming")).toBeInTheDocument();
 });
 
 it("leads readers from the thesis into the first fieldbook chapter", () => {

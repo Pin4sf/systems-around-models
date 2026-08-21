@@ -12,6 +12,7 @@ import {
   SourceSchema,
   type SourceRecord,
 } from "@/lib/content/schema";
+import { slugifyHeading } from "@/lib/content/slugify";
 
 type Registry = {
   claims: Map<string, ClaimRecord>;
@@ -284,6 +285,7 @@ async function essayFiles(directory: string): Promise<string[]> {
 async function loadEssayRegistry(repositoryRoot: string): Promise<{
   essays: Map<string, EssayMetadata>;
   filenames: Map<string, string>;
+  sources: Map<string, string>;
 }> {
   const essaysRoot = resolveRecordPath(repositoryRoot, "essays", "");
   let filenames: string[];
@@ -291,30 +293,59 @@ async function loadEssayRegistry(repositoryRoot: string): Promise<{
     filenames = (await essayFiles(essaysRoot)).sort((left, right) => left.localeCompare(right));
   } catch (error) {
     const code = error as NodeJS.ErrnoException;
-    if (code.code === "ENOENT") return { essays: new Map(), filenames: new Map() };
+    if (code.code === "ENOENT") {
+      return { essays: new Map(), filenames: new Map(), sources: new Map() };
+    }
     const message = error instanceof Error ? error.message : "unable to read essays";
     throw new Error(`Invalid content/essays: ${message}`);
   }
 
-  const records = await Promise.all(
-    filenames.map(async (filename) =>
-      essayFromFrontmatter(
-        readFrontmatter(await readFile(filename, "utf8"), repositoryRoot, filename),
-        repositoryRoot,
-        filename,
-      ),
-    ),
+  const sourceEntries = await Promise.all(
+    filenames.map(async (filename) => [filename, await readFile(filename, "utf8")] as const),
+  );
+  const records = sourceEntries.map(([filename, source]) =>
+    essayFromFrontmatter(readFrontmatter(source, repositoryRoot, filename), repositoryRoot, filename),
   );
   const essays = new Map<string, EssayMetadata>();
   const filenamesBySlug = new Map<string, string>();
+  const sourcesBySlug = new Map<string, string>();
   records.forEach((essay, index) => {
     if (essays.has(essay.slug)) {
       throw recordError(repositoryRoot, filenames[index], `duplicate essay slug ${essay.slug}`);
     }
     essays.set(essay.slug, essay);
     filenamesBySlug.set(essay.slug, filenames[index]);
+    sourcesBySlug.set(essay.slug, sourceEntries[index][1]);
   });
-  return { essays, filenames: filenamesBySlug };
+  return { essays, filenames: filenamesBySlug, sources: sourcesBySlug };
+}
+
+function essayAnchors(source: string): Set<string> {
+  const anchors = [
+    ...[...source.matchAll(/^#{2,6}\s+(.+?)\s*$/gm)].map((match) => slugifyHeading(match[1])),
+    ...[...source.matchAll(/\bid\s*=\s*(["'])([^"']+)\1/g)].map((match) => match[2]),
+  ];
+  return new Set(anchors);
+}
+
+function duplicateEssayAnchors(source: string): string[] {
+  const anchors = [
+    ...[...source.matchAll(/^#{2,6}\s+(.+?)\s*$/gm)].map((match) => slugifyHeading(match[1])),
+    ...[...source.matchAll(/\bid\s*=\s*(["'])([^"']+)\1/g)].map((match) => match[2]),
+  ];
+  const seen = new Set<string>();
+  return anchors.filter((anchor) => {
+    if (seen.has(anchor)) return true;
+    seen.add(anchor);
+    return false;
+  });
+}
+
+function internalEssayLinks(source: string): string[] {
+  return [
+    ...[...source.matchAll(/\[[^\]]*\]\(([^)\s]+)(?:\s+[^)]*)?\)/g)].map((match) => match[1]),
+    ...[...source.matchAll(/\bhref\s*=\s*(["'])([^"']+)\1/g)].map((match) => match[2]),
+  ].filter((href) => href.startsWith("/") || href.startsWith("#"));
 }
 
 function validateUnifiedIntegrity(
@@ -322,6 +353,7 @@ function validateUnifiedIntegrity(
   registry: LoadedRegistry,
   essays: Map<string, EssayMetadata>,
   essayFilenames: Map<string, string>,
+  essaySources: Map<string, string>,
 ): void {
   for (const revision of registry.revisions.values()) {
     if (!essays.has(revision.targetSlug)) {
@@ -342,6 +374,80 @@ function validateUnifiedIntegrity(
     if (!registry.revisions.has(essay.revisionId)) {
       throw recordError(repositoryRoot, filename, `unresolved revision identifier ${essay.revisionId}`);
     }
+    const revision = registry.revisions.get(essay.revisionId);
+    if (!revision) continue;
+    if (revision.targetSlug !== essay.slug) {
+      throw recordError(
+        repositoryRoot,
+        filename,
+        `revision ${revision.id} targets different essay ${revision.targetSlug}`,
+      );
+    }
+    if (
+      revision.revision !== essay.revision ||
+      revision.publishedAt !== essay.publishedAt ||
+      revision.substantivelyRevisedAt !== essay.substantivelyRevisedAt
+    ) {
+      throw recordError(
+        repositoryRoot,
+        filename,
+        `essay metadata does not agree with revision ${revision.id}`,
+      );
+    }
+
+    const source = essaySources.get(essay.slug) ?? "";
+    const duplicateAnchors = duplicateEssayAnchors(source);
+    if (duplicateAnchors.length > 0) {
+      throw recordError(repositoryRoot, filename, `duplicate heading or anchor ${duplicateAnchors[0]}`);
+    }
+  }
+
+  const publicSequences = new Map<string, EssayMetadata[]>();
+  for (const essay of essays.values()) {
+    if (essay.status !== "public") continue;
+    const sequence = publicSequences.get(essay.sequence) ?? [];
+    sequence.push(essay);
+    publicSequences.set(essay.sequence, sequence);
+  }
+  for (const sequence of publicSequences.values()) {
+    sequence.sort((left, right) => left.sequencePosition - right.sequencePosition);
+    sequence.forEach((essay, index) => {
+      const filename = essayFilenames.get(essay.slug) ?? `content/essays/${essay.slug}.mdx`;
+      const expectedPrevious = sequence[index - 1]?.slug;
+      const expectedNext = sequence[index + 1]?.slug;
+      if (essay.previousEssaySlug !== expectedPrevious) {
+        throw recordError(repositoryRoot, filename, `previous essay does not match public sequence state`);
+      }
+      if (essay.nextEssaySlug !== expectedNext) {
+        throw recordError(repositoryRoot, filename, `next essay does not match public sequence state`);
+      }
+    });
+  }
+
+  const anchorsBySlug = new Map(
+    [...essays.keys()].map((slug) => [slug, essayAnchors(essaySources.get(slug) ?? "")]),
+  );
+  for (const essay of essays.values()) {
+    const filename = essayFilenames.get(essay.slug) ?? `content/essays/${essay.slug}.mdx`;
+    for (const href of internalEssayLinks(essaySources.get(essay.slug) ?? "")) {
+      if (href.startsWith("/manifests/") || href === "/") continue;
+      let targetSlug = essay.slug;
+      let fragment: string | undefined;
+      if (href.startsWith("#")) {
+        fragment = href.slice(1);
+      } else {
+        const match = /^\/fieldbook\/([a-z0-9]+(?:-[a-z0-9]+)*)(?:#([a-z0-9-]+))?$/.exec(href);
+        if (!match) throw recordError(repositoryRoot, filename, `unresolved internal link ${href}`);
+        targetSlug = match[1];
+        fragment = match[2];
+        if (essays.get(targetSlug)?.status !== "public") {
+          throw recordError(repositoryRoot, filename, `unresolved internal link ${href}`);
+        }
+      }
+      if (fragment && !anchorsBySlug.get(targetSlug)?.has(fragment)) {
+        throw recordError(repositoryRoot, filename, `unresolved internal fragment #${fragment}`);
+      }
+    }
   }
 }
 
@@ -350,7 +456,13 @@ export async function loadContent(repositoryRoot = process.cwd()): Promise<Conte
     loadRegistry(repositoryRoot),
     loadEssayRegistry(repositoryRoot),
   ]);
-  validateUnifiedIntegrity(repositoryRoot, registry, essayRegistry.essays, essayRegistry.filenames);
+  validateUnifiedIntegrity(
+    repositoryRoot,
+    registry,
+    essayRegistry.essays,
+    essayRegistry.filenames,
+    essayRegistry.sources,
+  );
   return {
     claims: registry.claims,
     sources: registry.sources,

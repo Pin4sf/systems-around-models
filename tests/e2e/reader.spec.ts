@@ -11,6 +11,17 @@ test("@desktop reader exposes the chapter, rails, evidence, and keyboard path", 
   ).toBeVisible();
   await expect(page).toHaveTitle("The Model Is Not the Agent | Systems Around Models");
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", new RegExp(`${route}$`));
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
+    "content",
+    "https://example.invalid/social/systems-around-models.png",
+  );
+  const socialImage = await page.evaluate(async () => {
+    const image = new Image();
+    image.src = "/social/systems-around-models.png";
+    await image.decode();
+    return { width: image.naturalWidth, height: image.naturalHeight };
+  });
+  expect(socialImage).toEqual({ width: 1200, height: 630 });
   const structuredData = JSON.parse(
     await page.locator('script[type="application/ld\\+json"]').textContent() ?? "{}",
   );
@@ -25,11 +36,10 @@ test("@desktop reader exposes the chapter, rails, evidence, and keyboard path", 
   await expect(page.getByRole("navigation", { name: "On this page" })).toBeVisible();
   await expect(page.getByRole("button", { name: "Open sequence" })).toBeHidden();
 
-  const evidenceButton = page.getByRole("button", { name: "Observed" });
-  await evidenceButton.focus();
+  const evidenceSummary = page.getByText("Proposed", { exact: true }).first();
+  await evidenceSummary.focus();
   await page.keyboard.press("Enter");
-  await expect(evidenceButton).toHaveAttribute("aria-expanded", "true");
-  await expect(page.getByText(/Directly inspected in a cited artifact/)).toBeVisible();
+  await expect(page.getByText(/Introduced by Systems Around Models as a working method/).first()).toBeVisible();
 
   const correction = page.getByRole("link", { name: "Challenge this claim" });
   await expect(correction).toHaveAttribute(
@@ -87,8 +97,7 @@ test("@desktop print and reduced-motion modes preserve evidence without motion",
 
   await page.emulateMedia({ media: "print", reducedMotion: "reduce" });
   await expect(page.getByRole("navigation", { name: "On this page" })).toBeHidden();
-  await expect(page.locator(".evidence-disclosure__static-label").first()).toBeVisible();
-  await expect(page.getByText(/Directly inspected in a cited artifact/)).toBeVisible();
+  await expect(page.locator(".evidence-disclosure summary").first()).toBeVisible();
   await expect(page.locator(".revision-notice--end")).toBeVisible();
   const traceColor = await page.locator(".system-trace__step").first().evaluate(
     (element) => getComputedStyle(element).color,
@@ -120,8 +129,10 @@ test("@nojs reader keeps meaning and ordinary navigation visible", async ({ page
   ).toBeVisible();
   await expect(page.getByText(/Atlas is a fictional software-delivery agent/)).toBeVisible();
   await expect(page.getByRole("list", { name: "Agent system trace" })).toBeVisible();
-  await expect(page.getByText("Observed", { exact: true })).toBeVisible();
-  await expect(page.getByText(/Directly inspected in a cited artifact/)).toBeVisible();
+  const proposedDisclosure = page.getByText("Proposed", { exact: true }).first();
+  await expect(proposedDisclosure).toBeVisible();
+  await proposedDisclosure.click();
+  await expect(page.getByText(/Introduced by Systems Around Models as a working method/).first()).toBeVisible();
   await expect(page.getByRole("link", { name: "What is a Harness?" }).first()).toBeVisible();
   const correction = page.getByRole("link", { name: "Challenge this claim" });
   const correctionBody = new URL(await correction.getAttribute("href") ?? "").searchParams.get(
@@ -134,7 +145,5 @@ test("@nojs reader keeps meaning and ordinary navigation visible", async ({ page
   await expect(
     page.getByRole("link", { name: "Previous: Harness Engineering overview" }),
   ).toBeVisible();
-  await expect(
-    page.getByRole("link", { name: "Next: Memory Engineering overview" }),
-  ).toBeVisible();
+  await expect(page.locator('a[rel="next"]')).toHaveCount(0);
 });

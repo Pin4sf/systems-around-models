@@ -5,6 +5,12 @@ import { canonicalUrl, resolveSiteUrl } from "@/lib/publication/site-url";
 export const publicationTitle = "Systems Around Models";
 export const publicationDescription =
   "An independent fieldbook for examining the harnesses, memory, authority, and evidence that turn model responses into work.";
+const socialImage = {
+  url: "/social/systems-around-models.png",
+  width: 1200,
+  height: 630,
+  alt: "Systems Around Models — The model is only one part of the agent.",
+};
 
 export function buildHomeMetadata(): Metadata {
   return {
@@ -28,11 +34,13 @@ export function buildHomeMetadata(): Metadata {
       title: publicationTitle,
       description: publicationDescription,
       url: canonicalUrl("/"),
+      images: [socialImage],
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title: publicationTitle,
       description: publicationDescription,
+      images: [socialImage.url],
     },
   };
 }
@@ -59,11 +67,13 @@ export function buildArticleMetadata(
       authors: essay.authors,
       publishedTime: revision.publishedAt,
       modifiedTime: revision.substantivelyRevisedAt,
+      images: [socialImage],
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title: essay.title,
       description: essay.description,
+      images: [socialImage.url],
     },
     other: {
       "article:revision": revision.id,

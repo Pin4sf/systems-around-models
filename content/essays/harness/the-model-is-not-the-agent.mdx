@@ -4,6 +4,7 @@ title: The Model Is Not the Agent
 description: Why deployed agent capability depends on the model, harness, environment, and authority boundary rather than the model alone.
 sequence: Harness Engineering
 sequence_position: 1
+revision: 1
 authors:
   - Systems Around Models
 published_at: 2026-08-21
@@ -20,7 +21,7 @@ revision_id: revision-fieldbook-essay-001
 
 Begin with a failure, because the failure draws a more useful boundary than a definition does.
 
-Atlas is a fictional software-delivery agent investigating duplicate payments after provider timeouts. The following is a synthetic failure trace derived from an observed failure class. It is not a documented incident at a named company.
+Atlas is a fictional software-delivery agent investigating duplicate payments after provider timeouts. The following synthetic trace illustrates a proposed failure pattern for architecture review. It is not a reproduced observation or a documented incident at a named company.
 
 ```text
 09:07:03  request admitted: investigate duplicate payments
@@ -34,7 +35,7 @@ Atlas is a fictional software-delivery agent investigating duplicate payments af
 
 The visible mistake appears in the model's sentence: it inferred failure and proposed a retry. But that sentence is only one event in the incident. The surrounding system admitted the work, exposed the payment capability, sent the request, lost certainty about the result, permitted a second attempt, and accepted evidence unrelated to whether one or two charges existed. No durable effect identifier connected the two attempts. No reconciliation step asked the provider what had committed. No independent success condition prevented “tests passed” from becoming the final report.
 
-That broader pattern—an uncertain external result followed by a blind retry—can duplicate an effect even when every individual call looks locally reasonable.
+The proposed risk is that an uncertain external result followed by a blind retry can duplicate an effect even when every individual call looks locally reasonable. The trace makes the causal hypothesis inspectable; it does not establish incident frequency or operational proof.
 
 <EvidenceBadge
   claimId="claim-ambiguous-effect-failure-pattern"
@@ -257,7 +258,7 @@ If that result held under careful, repeated evaluation, the model × harness × 
 This chapter uses two public source records.
 
 1. [What is a Harness?](https://earendil.com/posts/what-is-a-harness/) by Earendil supplies the attributed beginner-oriented four-part framing and the source author's ownership philosophy. This publication does not treat it as proof of provider parity, authorization enforcement, or external-effect success.
-2. [The Agent Systems Fieldbook — Harness Engineering, version 1](https://github.com/Pin4sf/systems-around-models/blob/main/content/essays/harness/the-model-is-not-the-agent.mdx) records this publication synthesis and its provenance. It is not independent proof of the central inferred claim.
+2. [The Agent Systems Fieldbook — Harness Engineering, version 1](/manifests/revision-fieldbook-essay-001.json) records this publication synthesis, source validation dates, and content hash. It is not independent proof of the central inferred claim.
 
 Evidence labels describe the state of a specific claim, not the prestige of a source. Source evidence grades describe the basis available in that source record. The interface keeps those classifications separate: `observed` is not another name for `IP`, and a first-party document does not become implementation evidence through presentation.
 

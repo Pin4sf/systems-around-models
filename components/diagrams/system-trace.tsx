@@ -42,15 +42,14 @@ const traceSteps = [
 ] as const;
 
 type SystemTraceProps = {
-  compact?: boolean;
   headingLevel?: 2 | 3;
 };
 
-export function SystemTrace({ compact = false, headingLevel = 2 }: SystemTraceProps) {
+export function SystemTrace({ headingLevel = 2 }: SystemTraceProps) {
   const Heading = headingLevel === 3 ? "h3" : "h2";
 
   return (
-    <section className={`system-trace${compact ? " system-trace--compact" : ""}`} aria-labelledby="system-trace-title">
+    <section className="system-trace" aria-labelledby="system-trace-title">
       <div className="system-trace__heading">
         <p className="eyebrow trace-text">System trace</p>
         <Heading id="system-trace-title">The work around a model</Heading>
