@@ -98,6 +98,55 @@ describe("deterministic public-content scanner", () => {
     expect(result.stderr).toContain("content/essays/leak.md");
   });
 
+  it.each([
+    ["public/trace.txt", "Local trace /private/var/folders/ab/private-trace.json", "absolute local path"],
+    ["app/globals.css", "/* Runtime dependency: waldo-brain */", "waldo-brain"],
+    ["content/essays/LEAK.MDX", "Leaked token: ghp_1234567890abcdefghijklmnop", "credential pattern"],
+    ["public/config.json", '{"privatePath":"/root/private/config.json"}', "absolute local path"],
+    ["public/diagram.svg", "<svg><text>Runtime dependency: waldo-brain</text></svg>", "waldo-brain"],
+    ["public/index.html", "<p>Runtime dependency: waldo-brain</p>", "waldo-brain"],
+    ["public/runtime.js", "const privateCorpus = 'waldo-brain';", "waldo-brain"],
+  ])("scans deployable text surface %s", async (filename, contents, expected) => {
+    const root = await publicFixture();
+    await write(root, filename, contents);
+
+    const result = await runScanner(root);
+    expect(result.code).toBe(1);
+    expect(result.stderr).toContain(expected);
+    expect(result.stderr).toContain(filename);
+  });
+
+  it.each([
+    "/root/private/trace.json",
+    "/private/tmp/private-trace.json",
+    "/var/folders/ab/private-trace.json",
+    "/Volumes/Research/private-trace.json",
+    "C:\\work\\private-trace.json",
+    "\\\\workstation\\private\\trace.json",
+  ])("rejects additional absolute local path form %s", async (localPath) => {
+    const root = await publicFixture();
+    await write(root, "public/trace.txt", `Local artifact: ${localPath}`);
+
+    const result = await runScanner(root);
+    expect(result.code).toBe(1);
+    expect(result.stderr).toContain("absolute local path");
+    expect(result.stderr).toContain("public/trace.txt");
+  });
+
+  it("does not confuse ordinary web paths with local filesystem paths", async () => {
+    const root = await publicFixture();
+    await write(root, "app/globals.css", "@font-face { src: url(/fonts/editorial.woff2); }\n");
+    await write(root, "public/routes.json", JSON.stringify({
+      chapter: "/fieldbook/public-essay",
+      home: "/home/about",
+      source: "https://example.org/posts/harnesses",
+      users: "/users/profile",
+    }));
+
+    const result = await runScanner(root);
+    expect(result.code).toBe(0);
+  });
+
   it("rejects unresolved source_ids", async () => {
     const root = await publicFixture();
     await write(root, "content/claims/claim-public.yaml", [

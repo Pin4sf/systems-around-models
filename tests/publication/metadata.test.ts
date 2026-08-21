@@ -26,6 +26,45 @@ describe("canonical publication metadata", () => {
     );
   });
 
+  it.each([
+    "http://localhost:3000",
+    "http://LOCALHOST.:3000",
+    "http://preview.localhost:3000",
+    "http://127.0.0.2:3000",
+    "http://127.1:3000",
+    "http://0.0.0.0:3000",
+    "http://[::1]:3000",
+    "http://[0:0:0:0:0:0:0:1]:3000",
+    "http://[::]:3000",
+    "http://[::ffff:127.0.0.1]:3000",
+    "http://[::ffff:7f00:1]:3000",
+  ])("rejects a production localhost or loopback SITE_URL: %s", (siteUrl) => {
+    expect(() => resolveSiteUrl({ NODE_ENV: "production", SITE_URL: siteUrl })).toThrow(
+      "SITE_URL must not use localhost or a loopback origin in production",
+    );
+  });
+
+  it("permits explicit localhost in development and the reserved CI origin in production", () => {
+    expect(resolveSiteUrl({ NODE_ENV: "development", SITE_URL: "http://127.0.0.1:4000" }).origin)
+      .toBe("http://127.0.0.1:4000");
+    expect(resolveSiteUrl({ NODE_ENV: "test", SITE_URL: "http://[::1]:4000" }).origin)
+      .toBe("http://[::1]:4000");
+    expect(resolveSiteUrl({ NODE_ENV: "production", SITE_URL: "https://example.invalid" }).origin)
+      .toBe("https://example.invalid");
+  });
+
+  it.each([
+    "fieldbook.example",
+    "ftp://fieldbook.example",
+    "https://fieldbook.example/path",
+    "https://user:password@fieldbook.example",
+    "https://fieldbook.example?preview=true",
+  ])("retains absolute http(s) origin validation for SITE_URL: %s", (siteUrl) => {
+    expect(() => resolveSiteUrl({ NODE_ENV: "production", SITE_URL: siteUrl })).toThrow(
+      "SITE_URL must be an absolute http(s) origin",
+    );
+  });
+
   it("gives the homepage and chapter distinct canonical records", async () => {
     vi.stubEnv("SITE_URL", canonicalSite);
     const home = buildHomeMetadata();

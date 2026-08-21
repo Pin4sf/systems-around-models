@@ -10,10 +10,45 @@ const allowedEvidenceLabels = new Set([
   "proposed",
   "unproved",
 ]);
-const scannedRoots = ["content", "app", "components", "lib"];
-const scannedExtensions = new Set([".md", ".mdx", ".yaml", ".yml", ".ts", ".tsx"]);
+const scannedRoots = ["content", "app", "components", "lib", "public"];
+const scannedExtensions = new Set([
+  ".atom",
+  ".cjs",
+  ".css",
+  ".csv",
+  ".env",
+  ".gql",
+  ".graphql",
+  ".htm",
+  ".html",
+  ".ini",
+  ".js",
+  ".json",
+  ".jsx",
+  ".less",
+  ".map",
+  ".md",
+  ".mdx",
+  ".mjs",
+  ".rss",
+  ".sass",
+  ".scss",
+  ".svg",
+  ".toml",
+  ".ts",
+  ".tsv",
+  ".tsx",
+  ".txt",
+  ".webmanifest",
+  ".xml",
+  ".yaml",
+  ".yml",
+]);
 const sensitivePatterns = [
-  { label: "absolute local path", pattern: /(?:file:\/\/|\/Users\/[^\s'"`]+|\/home\/[^\s/'"`]+\/|[A-Za-z]:\\Users\\)/i },
+  {
+    label: "absolute local path",
+    pattern: /(?:[Ff][Ii][Ll][Ee]:\/\/|\/Users\/[^\s/'"`]+\/[^\s'"`]+|\/home\/[^\s/'"`]+\/[^\s'"`]+|\/(?:root|tmp|private\/(?:tmp|var)|var\/folders)\/[^\s'"`]+|\/(?:Volumes|mnt)\/[^\s/'"`]+\/[^\s'"`]+|(?<![A-Za-z0-9+.-])[A-Za-z]:[\\/][^\s'"`]+|\\\\[^\\\s'"`]+\\[^\s'"`]+)/,
+  },
   { label: "waldo-brain", pattern: /waldo-brain/i },
   { label: "credential pattern", pattern: /(?:-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----|\bAKIA[0-9A-Z]{16}\b|\bgh[pousr]_[A-Za-z0-9]{20,}\b|\bsk-[A-Za-z0-9_-]{20,}\b|\b(?:api[_-]?key|password|secret)\s*[:=]\s*["']?[^\s"']{8,})/i },
 ];
@@ -33,7 +68,9 @@ async function filesRecursively(directory) {
   const nested = await Promise.all(entries.map(async (entry) => {
     const filename = path.join(directory, entry.name);
     if (entry.isDirectory()) return filesRecursively(filename);
-    return entry.isFile() && scannedExtensions.has(path.extname(entry.name)) ? [filename] : [];
+    return entry.isFile() && scannedExtensions.has(path.extname(entry.name).toLowerCase())
+      ? [filename]
+      : [];
   }));
   return nested.flat();
 }
@@ -54,7 +91,7 @@ function frontmatter(contents, filename, errors) {
 
 async function yamlRecords(root, directory, errors) {
   const files = (await filesRecursively(path.join(root, "content", directory)))
-    .filter((filename) => [".yaml", ".yml"].includes(path.extname(filename)))
+    .filter((filename) => [".yaml", ".yml"].includes(path.extname(filename).toLowerCase()))
     .sort();
   const records = [];
   for (const filename of files) {
@@ -134,7 +171,7 @@ export async function checkPublicContent(root = process.cwd()) {
   }
 
   const essayFiles = (await filesRecursively(path.join(repositoryRoot, "content", "essays")))
-    .filter((filename) => path.extname(filename) === ".mdx")
+    .filter((filename) => path.extname(filename).toLowerCase() === ".mdx")
     .sort();
   const essays = new Map();
   for (const filename of essayFiles) {

@@ -275,7 +275,7 @@ async function essayFiles(directory: string): Promise<string[]> {
     entries.map(async (entry) => {
       const entryPath = path.join(directory, entry.name);
       if (entry.isDirectory()) return essayFiles(entryPath);
-      return entry.isFile() && entry.name.endsWith(".mdx") ? [entryPath] : [];
+      return entry.isFile() && entry.name.toLowerCase().endsWith(".mdx") ? [entryPath] : [];
     }),
   );
   return nested.flat();
