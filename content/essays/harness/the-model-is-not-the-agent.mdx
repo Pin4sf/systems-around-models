@@ -134,6 +134,14 @@ Inspectable instructions let a person see which durable rules and task-specific 
 
 None of those properties follows automatically from where the process runs. Local execution may improve custody while still exposing broad credentials or hiding state in an opaque store. A provider selector may offer model choice while sessions, capabilities, and recovery remain locked to one provider's semantics. Open source may improve inspectability while a hosted deployment still controls the user's data. Ownership, privacy, security, and independence are separate claims that need separate evidence.
 
+Earendil argues that people can own and adapt their harness, choose among model providers through its translation layer, and retain local copies of sessions. That is the source's author-reported ownership philosophy; it is not evidence that every harness delivers those properties.
+
+<EvidenceBadge
+  claimId="claim-earendil-harness-ownership-philosophy"
+  sectionAnchor="control-and-user-leverage"
+  challengeLabel="Challenge this ownership attribution"
+/>
+
 Authority also has layers. A person can authorize a class of work without delegating Acceptance of every result. An organization can allow a tool call while requiring independent Verification before a change reaches production. A harness can enforce a budget without deciding whether the resulting outcome was worth pursuing. Treating all of these as “permission granted” hides the very boundaries a reliable system must preserve.
 
 For Atlas, user leverage would mean more than a visible retry toggle. The operator should be able to inspect the effect intent, see the credential and environment used, understand why a retry was proposed, revoke further writes, export the incident state, and require reconciliation evidence before another attempt. Control becomes leverage when it is legible and reversible from the user's side.

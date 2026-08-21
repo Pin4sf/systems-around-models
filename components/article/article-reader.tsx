@@ -1,7 +1,6 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import type { HTMLAttributes } from "react";
-import { compileMDX } from "next-mdx-remote/rsc";
 import { ArticleContents, type ArticleHeading } from "@/components/article/article-contents";
 import { EvidenceBadge } from "@/components/article/evidence-badge";
 import { RevisionNotice } from "@/components/article/revision-notice";
@@ -16,18 +15,12 @@ import type {
   RevisionRecord,
   SourceRecord,
 } from "@/lib/content/schema";
+import { compilePublicMdx } from "@/lib/content/compile-public-mdx";
 import { slugifyHeading } from "@/lib/content/slugify";
 
 const essayPaths: Record<string, string> = {
   "the-model-is-not-the-agent": "harness/the-model-is-not-the-agent.mdx",
 };
-
-function assertTrustedMdx(source: string, slug: string) {
-  const body = source.replace(/^---\r?\n[\s\S]*?\r?\n---(?:\r?\n|$)/, "");
-  if (/^\s*(?:import|export)\s/m.test(body)) {
-    throw new Error(`Essay ${slug} contains an arbitrary MDX import or export`);
-  }
-}
 
 function articleHeadings(source: string): ArticleHeading[] {
   return [...source.matchAll(/^##\s+(.+?)\s*$/gm)].map((match) => ({
@@ -62,7 +55,6 @@ export async function ArticleReader({
     path.join(process.cwd(), "content", "essays", relativePath),
     "utf8",
   );
-  assertTrustedMdx(source, essay.slug);
   const headings = articleHeadings(source);
   const route = `/fieldbook/${essay.slug}`;
 
@@ -86,14 +78,14 @@ export async function ArticleReader({
       revisionId={revision.id}
     />
   );
+  const ArticleSystemTrace = () => <SystemTrace headingLevel={3} />;
 
-  const { content } = await compileMDX<EssayMetadata>({
+  const { content } = await compilePublicMdx<EssayMetadata>({
     source,
-    options: { parseFrontmatter: true },
     components: {
       h2: Heading,
       EvidenceBadge: BoundEvidenceBadge,
-      SystemTrace,
+      SystemTrace: ArticleSystemTrace,
     },
   });
 

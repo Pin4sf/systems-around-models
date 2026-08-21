@@ -44,6 +44,29 @@ describe("public content registry", () => {
     expect(revisions.has("revision-fieldbook-essay-001")).toBe(true);
   });
 
+  it("relates Earendil's ownership philosophy to its public source and revision", async () => {
+    const [claims, sources, revisions] = await Promise.all([
+      loadClaims(),
+      loadSources(),
+      loadRevisions(),
+    ]);
+    const statement =
+      "Earendil argues that people can own and adapt their agent harness, use its translation layer to choose among model providers, and retain local copies of sessions.";
+    const claim = claims.get("claim-earendil-harness-ownership-philosophy");
+
+    expect(claim).toMatchObject({
+      statement,
+      label: "author-reported",
+      sourceIds: ["source-earendil-what-is-a-harness"],
+    });
+    expect(
+      sources.get("source-earendil-what-is-a-harness")?.authorReportedClaims,
+    ).toContain(statement);
+    expect(
+      revisions.get("revision-fieldbook-essay-001")?.affectedClaimIds,
+    ).toContain("claim-earendil-harness-ownership-philosophy");
+  });
+
   it("names malformed public fixtures when validation rejects them", async () => {
     const repository = await fixtureRepository({
       "claims/invalid-label.yaml": validClaim.replace("label: inferred", "label: private"),

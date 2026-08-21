@@ -8,6 +8,7 @@ affected_claim_ids:
   - claim-ambiguous-effect-failure-pattern
   - claim-architecture-selection-responsibilities
   - claim-earendil-beginner-harness-map
+  - claim-earendil-harness-ownership-philosophy
   - claim-harness-capability-configuration
   - claim-system-trace-responsibility-checklist
 correction_disposition: publication

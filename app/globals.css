@@ -209,7 +209,7 @@ footer {
   margin-bottom: 2rem;
 }
 
-.system-trace__heading h2 {
+.system-trace__heading :is(h2, h3) {
   max-width: none;
   font-size: clamp(1.5rem, 2vw, 2rem);
   letter-spacing: -0.02em;
@@ -681,7 +681,7 @@ footer {
   margin-block: 2.5rem;
 }
 
-.article-reader__prose .system-trace__heading h2 {
+.article-reader__prose .system-trace__heading :is(h2, h3) {
   margin: 0;
   font-size: clamp(1.4rem, 2vw, 1.8rem);
   letter-spacing: -0.02em;

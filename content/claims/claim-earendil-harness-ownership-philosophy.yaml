@@ -1,0 +1,10 @@
+id: claim-earendil-harness-ownership-philosophy
+statement: Earendil argues that people can own and adapt their agent harness, use its translation layer to choose among model providers, and retain local copies of sessions.
+label: author-reported
+scope: Earendil's public ownership philosophy, not proof that a specific harness delivers custody, portability, or provider independence.
+source_ids:
+  - source-earendil-what-is-a-harness
+falsifiers:
+  - A correction from Earendil revises or withdraws the published ownership philosophy.
+last_reviewed: 2026-08-21
+revision: 1
