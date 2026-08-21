@@ -128,6 +128,9 @@ describe("deterministic public-content scanner", () => {
     "/workspace/private/notes.md",
     "/var/lib/company/private.db",
     "/quasar-lab/private/evidence.parquet",
+    "/assets/private/research.json",
+    "/fieldbook/private/research.json",
+    "/images/etc/company/secret.conf",
   ])("rejects additional absolute local path form %s", async (localPath) => {
     const root = await publicFixture();
     await write(root, "public/trace.txt", `Local artifact: ${localPath}`);

@@ -44,24 +44,23 @@ const scannedExtensions = new Set([
   ".yaml",
   ".yml",
 ]);
-// Multi-segment absolute POSIX tokens fail closed unless their route root has
-// been reviewed here. This keeps arbitrary filesystem roots detectable while
-// allowing the publication's real routes/assets. A new route root must be
-// added deliberately rather than becoming an implicit scanner exemption.
-const approvedPublicPathPrefixes = [
-  "/_next/",
-  "/assets/",
-  "/fieldbook/",
-  "/fonts/",
-  "/images/",
-];
+// Multi-segment absolute POSIX tokens fail closed unless their complete shape
+// has been reviewed here. Exact asset paths act as a tiny public manifest; no
+// approved root exempts its descendants. New assets or route shapes must be
+// added deliberately rather than becoming implicit scanner exemptions.
 const approvedPublicPaths = new Set([
+  "/fonts/editorial.woff2",
   "/home/about",
   "/robots.txt",
   "/rss.xml",
   "/sitemap.xml",
   "/users/profile",
 ]);
+const fieldbookRoute = /^\/fieldbook\/[a-z0-9]+(?:-[a-z0-9]+)*$/;
+
+function isApprovedPublicPath(candidate) {
+  return approvedPublicPaths.has(candidate) || fieldbookRoute.test(candidate);
+}
 
 function containsAbsoluteLocalPath(contents) {
   if (/[Ff][Ii][Ll][Ee]:\/\//.test(contents)) return true;
@@ -78,10 +77,7 @@ function containsAbsoluteLocalPath(contents) {
   const absolutePosixPaths = withoutModuleSpecifiers.match(
     /(?<![:/])\/(?!\/)(?:[A-Za-z0-9._~%-]+\/)+[A-Za-z0-9._~%+=:@,;-]+/g,
   ) ?? [];
-  return absolutePosixPaths.some((candidate) =>
-    !approvedPublicPaths.has(candidate)
-    && !approvedPublicPathPrefixes.some((prefix) => candidate.startsWith(prefix)),
-  );
+  return absolutePosixPaths.some((candidate) => !isApprovedPublicPath(candidate));
 }
 
 const sensitiveChecks = [
