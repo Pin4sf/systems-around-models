@@ -44,13 +44,53 @@ const scannedExtensions = new Set([
   ".yaml",
   ".yml",
 ]);
-const sensitivePatterns = [
+// Multi-segment absolute POSIX tokens fail closed unless their route root has
+// been reviewed here. This keeps arbitrary filesystem roots detectable while
+// allowing the publication's real routes/assets. A new route root must be
+// added deliberately rather than becoming an implicit scanner exemption.
+const approvedPublicPathPrefixes = [
+  "/_next/",
+  "/assets/",
+  "/fieldbook/",
+  "/fonts/",
+  "/images/",
+];
+const approvedPublicPaths = new Set([
+  "/home/about",
+  "/robots.txt",
+  "/rss.xml",
+  "/sitemap.xml",
+  "/users/profile",
+]);
+
+function containsAbsoluteLocalPath(contents) {
+  if (/[Ff][Ii][Ll][Ee]:\/\//.test(contents)) return true;
+  if (/(?<![A-Za-z0-9+.-])[A-Za-z]:[\\/][^\s'"`]+/.test(contents)) return true;
+  if (/\\\\[^\\\s'"`]+\\[^\s'"`]+/.test(contents)) return true;
+
+  // Remove complete web URLs before looking for slash-prefixed tokens so the
+  // `/posts/...` portion of an HTTPS citation cannot be mistaken for a path.
+  const withoutWebUrls = contents.replace(/\bhttps?:\/\/[^\s'"`<>{}\[\]()]+/gi, "");
+  const withoutModuleAliases = withoutWebUrls.replace(/@\/[^\s'"`<>{}\[\]()]+/g, "");
+  const withoutModuleSpecifiers = withoutModuleAliases
+    .replace(/(?:from\s+|import\s*)["'][^"']+["']/g, "")
+    .replace(/(?:require|import)\(["'][^"']+["']\)/g, "");
+  const absolutePosixPaths = withoutModuleSpecifiers.match(
+    /(?<![:/])\/(?!\/)(?:[A-Za-z0-9._~%-]+\/)+[A-Za-z0-9._~%+=:@,;-]+/g,
+  ) ?? [];
+  return absolutePosixPaths.some((candidate) =>
+    !approvedPublicPaths.has(candidate)
+    && !approvedPublicPathPrefixes.some((prefix) => candidate.startsWith(prefix)),
+  );
+}
+
+const sensitiveChecks = [
+  { label: "absolute local path", test: containsAbsoluteLocalPath },
+  { label: "waldo-brain", test: (contents) => /waldo-brain/i.test(contents) },
   {
-    label: "absolute local path",
-    pattern: /(?:[Ff][Ii][Ll][Ee]:\/\/|\/Users\/[^\s/'"`]+\/[^\s'"`]+|\/home\/[^\s/'"`]+\/[^\s'"`]+|\/(?:root|tmp|private\/(?:tmp|var)|var\/folders)\/[^\s'"`]+|\/(?:Volumes|mnt)\/[^\s/'"`]+\/[^\s'"`]+|(?<![A-Za-z0-9+.-])[A-Za-z]:[\\/][^\s'"`]+|\\\\[^\\\s'"`]+\\[^\s'"`]+)/,
+    label: "credential pattern",
+    test: (contents) => /(?:-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----|\bAKIA[0-9A-Z]{16}\b|\bgh[pousr]_[A-Za-z0-9]{20,}\b|\bsk-[A-Za-z0-9_-]{20,}\b|\b(?:api[_-]?key|password|secret)\s*[:=]\s*["']?[^\s"']{8,})/i.test(contents),
   },
-  { label: "waldo-brain", pattern: /waldo-brain/i },
-  { label: "credential pattern", pattern: /(?:-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----|\bAKIA[0-9A-Z]{16}\b|\bgh[pousr]_[A-Za-z0-9]{20,}\b|\bsk-[A-Za-z0-9_-]{20,}\b|\b(?:api[_-]?key|password|secret)\s*[:=]\s*["']?[^\s"']{8,})/i },
 ];
 
 function publicName(root, filename) {
@@ -126,8 +166,8 @@ export async function checkPublicContent(root = process.cwd()) {
   for (const filename of surfaceFiles) {
     const contents = await readFile(filename, "utf8");
     surfaceContents.set(filename, contents);
-    for (const { label, pattern } of sensitivePatterns) {
-      if (pattern.test(contents)) errors.push(`${publicName(repositoryRoot, filename)}: ${label}`);
+    for (const { label, test } of sensitiveChecks) {
+      if (test(contents)) errors.push(`${publicName(repositoryRoot, filename)}: ${label}`);
     }
   }
 

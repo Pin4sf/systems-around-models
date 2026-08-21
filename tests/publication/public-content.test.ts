@@ -123,6 +123,11 @@ describe("deterministic public-content scanner", () => {
     "/Volumes/Research/private-trace.json",
     "C:\\work\\private-trace.json",
     "\\\\workstation\\private\\trace.json",
+    "/opt/private/research.json",
+    "/etc/company/secret.conf",
+    "/workspace/private/notes.md",
+    "/var/lib/company/private.db",
+    "/quasar-lab/private/evidence.parquet",
   ])("rejects additional absolute local path form %s", async (localPath) => {
     const root = await publicFixture();
     await write(root, "public/trace.txt", `Local artifact: ${localPath}`);
@@ -136,9 +141,18 @@ describe("deterministic public-content scanner", () => {
   it("does not confuse ordinary web paths with local filesystem paths", async () => {
     const root = await publicFixture();
     await write(root, "app/globals.css", "@font-face { src: url(/fonts/editorial.woff2); }\n");
+    await write(root, "lib/imports.ts", [
+      'import font from "next/font/google";',
+      'import helper from "@/lib/helper";',
+      "export { font, helper };",
+      "",
+    ].join("\n"));
     await write(root, "public/routes.json", JSON.stringify({
       chapter: "/fieldbook/public-essay",
       home: "/home/about",
+      robots: "/robots.txt",
+      rss: "/rss.xml",
+      sitemap: "/sitemap.xml",
       source: "https://example.org/posts/harnesses",
       users: "/users/profile",
     }));
