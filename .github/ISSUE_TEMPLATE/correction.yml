@@ -1,0 +1,62 @@
+name: Publication correction
+description: Challenge a specific public statement with inspectable counter-evidence.
+title: "Correction: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping improve Systems Around Models. Corrections remain connected to the public revision record.
+
+        Do not submit credentials, personal data, health data, private traces, private URLs, or copyrighted documents. Link only to material you are authorized to share publicly.
+  - type: input
+    id: page-url
+    attributes:
+      label: Exact page URL
+      description: Include the complete public URL for the page containing the disputed statement.
+      placeholder: https://example.org/fieldbook/chapter
+    validations:
+      required: true
+  - type: input
+    id: revision
+    attributes:
+      label: Article revision
+      description: Copy the revision identifier shown on the page.
+      placeholder: revision-fieldbook-essay-001
+    validations:
+      required: true
+  - type: input
+    id: section
+    attributes:
+      label: Section or anchor
+      description: Name the section and include its anchor when possible.
+      placeholder: The Harness Boundary (#the-harness-boundary)
+    validations:
+      required: true
+  - type: textarea
+    id: disputed-statement
+    attributes:
+      label: Disputed statement
+      description: Quote only the smallest passage needed to identify the claim.
+    validations:
+      required: true
+  - type: textarea
+    id: counter-evidence
+    attributes:
+      label: Counter-evidence
+      description: Provide public links and explain what each source changes. Do not paste private or copyrighted documents.
+    validations:
+      required: true
+  - type: textarea
+    id: desired-correction
+    attributes:
+      label: Desired correction
+      description: Describe whether the statement should be corrected, qualified, removed, or left unresolved.
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy-confirmation
+    attributes:
+      label: Public-data confirmation
+      options:
+        - label: I have not included credentials, personal data, health data, private traces, private URLs, or copyrighted documents.
+          required: true

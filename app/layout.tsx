@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { IBM_Plex_Mono, Inter, Source_Serif_4 } from "next/font/google";
 import type { ReactNode } from "react";
 import { PublicationShell } from "@/components/publication-shell";
+import { buildHomeMetadata } from "@/lib/publication/metadata";
 import "./globals.css";
 
 const displayFont = Source_Serif_4({
@@ -20,10 +21,7 @@ const traceFont = IBM_Plex_Mono({
   weight: ["400", "500"],
 });
 
-export const metadata: Metadata = {
-  title: "Systems Around Models",
-  description: "Independent research on systems around models.",
-};
+export const metadata: Metadata = buildHomeMetadata();
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (

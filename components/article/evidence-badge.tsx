@@ -52,7 +52,7 @@ export function createCorrectionUrl({
       "",
       "Requested correction:",
       "",
-      "Please do not include credentials, personal data, private traces, or copyrighted documents.",
+      "Please do not include credentials, personal data, health data, private traces, or copyrighted documents.",
     ].join("\n"),
   );
   return issueUrl.toString();

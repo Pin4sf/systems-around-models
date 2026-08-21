@@ -539,18 +539,23 @@ footer {
   display: inline;
 }
 
-.evidence-disclosure__button {
+.evidence-disclosure__button,
+.evidence-disclosure__static-label {
+  display: inline-block;
   padding: 0.42rem 0.65rem;
   border: 1px solid currentColor;
   border-radius: 99rem;
   background: transparent;
   color: var(--evidence);
-  cursor: pointer;
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   line-height: 1;
   text-transform: uppercase;
+}
+
+.evidence-disclosure__button {
+  cursor: pointer;
 }
 
 .evidence-disclosure__details {
@@ -798,9 +803,8 @@ footer {
   *::before,
   *::after {
     scroll-behavior: auto !important;
-    transition-duration: 0.01ms !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
+    transition: none !important;
+    animation: none !important;
   }
 }
 
@@ -824,6 +828,10 @@ footer {
     display: none;
   }
 
+  .evidence-disclosure__static-label {
+    display: inline-block !important;
+  }
+
   .site-header,
   footer,
   main {
@@ -842,10 +850,17 @@ footer {
     display: block !important;
   }
 
-  .article-reader__prose a[href^="http"]::after {
+  .article-reader a[href^="http"]::after {
     content: " (" attr(href) ")";
     font-family: var(--font-trace), monospace;
     font-size: 0.72em;
     overflow-wrap: anywhere;
+  }
+
+  .system-trace,
+  .system-trace__step,
+  .evidence-badge,
+  .revision-notice {
+    break-inside: avoid;
   }
 }

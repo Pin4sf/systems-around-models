@@ -6,6 +6,10 @@ import {
   loadContent,
   loadEssay,
 } from "@/lib/content/load-content";
+import {
+  buildArticleJsonLd,
+  buildArticleMetadata,
+} from "@/lib/publication/metadata";
 
 type ArticlePageProps = {
   params: Promise<{ slug: string }>;
@@ -21,13 +25,20 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
   const { slug } = await params;
-  const essay = await loadEssay(slug);
+  const [essay, content] = await Promise.all([loadEssay(slug), loadContent()]);
   if (!essay || essay.status !== "public") return {};
+  const revision = content.revisions.get(essay.revisionId);
+  if (!revision) throw new Error(`Missing public revision: ${essay.revisionId}`);
 
-  return {
-    title: `${essay.title} | Systems Around Models`,
-    description: essay.description,
-  };
+  return buildArticleMetadata(essay, revision);
+}
+
+export async function buildArticleStructuredData(slug: string) {
+  const [essay, content] = await Promise.all([loadEssay(slug), loadContent()]);
+  if (!essay || essay.status !== "public") return undefined;
+  const revision = content.revisions.get(essay.revisionId);
+  if (!revision) throw new Error(`Missing public revision: ${essay.revisionId}`);
+  return buildArticleJsonLd(essay, revision);
 }
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
@@ -40,11 +51,23 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   if (!essay || essay.status !== "public") notFound();
   const revision = content.revisions.get(essay.revisionId);
   if (!revision) throw new Error(`Missing public revision: ${essay.revisionId}`);
-
-  return ArticleReader({
+  const structuredData = buildArticleJsonLd(essay, revision);
+  const article = await ArticleReader({
     essay,
     revision,
     claims: content.claims,
     sources: content.sources,
   });
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+        }}
+      />
+      {article}
+    </>
+  );
 }

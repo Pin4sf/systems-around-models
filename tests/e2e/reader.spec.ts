@@ -9,6 +9,16 @@ test("@desktop reader exposes the chapter, rails, evidence, and keyboard path", 
   await expect(
     page.getByRole("heading", { name: "The Model Is Not the Agent" }),
   ).toBeVisible();
+  await expect(page).toHaveTitle("The Model Is Not the Agent | Systems Around Models");
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", new RegExp(`${route}$`));
+  const structuredData = JSON.parse(
+    await page.locator('script[type="application/ld\\+json"]').textContent() ?? "{}",
+  );
+  expect(structuredData).toMatchObject({
+    "@type": "Article",
+    headline: "The Model Is Not the Agent",
+    dateModified: "2026-08-21",
+  });
   await expect(
     page.getByRole("navigation", { name: "Harness Engineering sequence" }),
   ).toBeVisible();
@@ -43,6 +53,49 @@ test("@desktop reader exposes the chapter, rails, evidence, and keyboard path", 
   ).toBeHidden();
 });
 
+test("@desktop discovery endpoints expose only released publication routes", async ({
+  request,
+}) => {
+  const [sitemapResponse, robotsResponse, rssResponse] = await Promise.all([
+    request.get("/sitemap.xml"),
+    request.get("/robots.txt"),
+    request.get("/rss.xml"),
+  ]);
+  const sitemap = await sitemapResponse.text();
+  const robots = await robotsResponse.text();
+  const rss = await rssResponse.text();
+
+  expect(sitemapResponse.ok()).toBe(true);
+  expect(sitemap.match(/<url>/g)).toHaveLength(2);
+  expect(sitemap).toContain(route);
+  expect(robots).toContain("Sitemap:");
+  expect(rssResponse.headers()["content-type"]).toContain("application/rss+xml");
+  expect(rss).toContain("The Model Is Not the Agent");
+  expect(rss).toContain("revision-fieldbook-essay-001");
+});
+
+test("@desktop print and reduced-motion modes preserve evidence without motion", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto(route);
+  const motion = await page.locator(".system-trace__step").first().evaluate((element) => {
+    const style = getComputedStyle(element);
+    return { animationName: style.animationName, transitionDuration: style.transitionDuration };
+  });
+  expect(motion).toEqual({ animationName: "none", transitionDuration: "0s" });
+
+  await page.emulateMedia({ media: "print", reducedMotion: "reduce" });
+  await expect(page.getByRole("navigation", { name: "On this page" })).toBeHidden();
+  await expect(page.locator(".evidence-disclosure__static-label").first()).toBeVisible();
+  await expect(page.getByText(/Directly inspected in a cited artifact/)).toBeVisible();
+  await expect(page.locator(".revision-notice--end")).toBeVisible();
+  const traceColor = await page.locator(".system-trace__step").first().evaluate(
+    (element) => getComputedStyle(element).color,
+  );
+  expect(traceColor).toBe("rgb(0, 0, 0)");
+});
+
 test("@mobile reader preserves one prose column and native navigation drawers", async ({
   page,
 }) => {
@@ -67,7 +120,17 @@ test("@nojs reader keeps meaning and ordinary navigation visible", async ({ page
   ).toBeVisible();
   await expect(page.getByText(/Atlas is a fictional software-delivery agent/)).toBeVisible();
   await expect(page.getByRole("list", { name: "Agent system trace" })).toBeVisible();
+  await expect(page.getByText("Observed", { exact: true })).toBeVisible();
+  await expect(page.getByText(/Directly inspected in a cited artifact/)).toBeVisible();
   await expect(page.getByRole("link", { name: "What is a Harness?" }).first()).toBeVisible();
+  const correction = page.getByRole("link", { name: "Challenge this claim" });
+  const correctionBody = new URL(await correction.getAttribute("href") ?? "").searchParams.get(
+    "body",
+  );
+  expect(correctionBody).toContain("Counter-evidence (public links only):");
+  expect(correctionBody).toContain(
+    "Please do not include credentials, personal data, health data, private traces, or copyrighted documents.",
+  );
   await expect(
     page.getByRole("link", { name: "Previous: Harness Engineering overview" }),
   ).toBeVisible();

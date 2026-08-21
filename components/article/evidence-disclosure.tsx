@@ -24,6 +24,12 @@ export function EvidenceDisclosure({
 
   return (
     <div className="evidence-disclosure">
+      <span
+        className="evidence-disclosure__static-label trace-text"
+        hidden={enhanced}
+      >
+        {buttonLabel}
+      </span>
       <button
         type="button"
         className="evidence-disclosure__button trace-text"
