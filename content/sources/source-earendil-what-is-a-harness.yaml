@@ -1,0 +1,22 @@
+id: source-earendil-what-is-a-harness
+title: What is a Harness?
+author: Earendil
+canonical_url: https://earendil.com/posts/what-is-a-harness/
+published_at: 2026-08-20
+retrieved_at: 2026-08-21
+inspected_paths: []
+source_type: first-party-essay
+license_status: unknown
+evidence_grade: FD
+observed_mechanisms: []
+author_reported_claims:
+  - A beginner harness model consists of a system prompt, tools, an agent loop, and a provider translation layer.
+  - The harness turns a model into an agent that can execute tasks.
+unknowns:
+  - The source does not establish provider parity across materially different providers or harnesses.
+  - The source does not establish how authorization boundaries are enforced in a deployed agent.
+  - The source does not establish whether a completed model turn produces a successful external effect.
+falsifiers:
+  - A correction from Earendil revises or withdraws the four-part beginner model described in this record.
+last_validated: 2026-08-21
+correction_ledger_status: reviewed

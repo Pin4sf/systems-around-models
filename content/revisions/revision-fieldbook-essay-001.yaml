@@ -1,0 +1,9 @@
+id: revision-fieldbook-essay-001
+target_slug: the-model-is-not-the-agent
+revision: 1
+published_at: 2026-08-21
+substantively_revised_at: 2026-08-21
+summary: Initial public revision for the first Harness Engineering fieldbook chapter.
+affected_claim_ids:
+  - claim-harness-capability-configuration
+correction_disposition: publication
