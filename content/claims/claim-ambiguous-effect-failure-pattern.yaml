@@ -1,0 +1,10 @@
+id: claim-ambiguous-effect-failure-pattern
+statement: Ambiguous external effects can be duplicated when a timeout is interpreted as failure and a retry proceeds without effect identity or reconciliation.
+label: observed
+scope: The general failure class only; the displayed Atlas trace is synthetic and is not a documented company incident.
+source_ids:
+  - source-harness-engineering-fieldbook-v1
+falsifiers:
+  - The publication synthesis is corrected to withdraw the observed ambiguous-effect failure class or materially change its causal description.
+last_reviewed: 2026-08-21
+revision: 1

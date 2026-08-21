@@ -1,0 +1,10 @@
+id: claim-earendil-beginner-harness-map
+statement: Earendil frames a beginner harness as a system prompt, tools, an agentic loop, and a provider translation layer.
+label: author-reported
+scope: Earendil's beginner-oriented public explanation, not a complete production contract or an industry standard.
+source_ids:
+  - source-earendil-what-is-a-harness
+falsifiers:
+  - A correction from Earendil revises or withdraws the published four-part beginner framing.
+last_reviewed: 2026-08-21
+revision: 1

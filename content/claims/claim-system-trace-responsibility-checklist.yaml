@@ -1,0 +1,10 @@
+id: claim-system-trace-responsibility-checklist
+statement: The shared end-to-end trace is a proposed responsibility checklist for reasoning about agent systems, not a universal workflow.
+label: proposed
+scope: A fieldbook method that may omit effect stages for read-only work and require every stage for high-risk writes.
+source_ids:
+  - source-harness-engineering-fieldbook-v1
+falsifiers:
+  - A materially important responsibility repeatedly falls outside the trace and cannot be represented without changing its structure.
+last_reviewed: 2026-08-21
+revision: 1

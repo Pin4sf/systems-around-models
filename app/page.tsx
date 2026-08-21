@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { SystemTrace } from "@/components/diagrams/system-trace";
 
 export default function HomePage() {
@@ -10,9 +11,9 @@ export default function HomePage() {
           Systems Around Models is an independent fieldbook for examining the harnesses, memory,
           authority, and evidence that turn a model response into work in the world.
         </p>
-        <a className="homepage__chapter-link interface-text" href="/fieldbook/the-model-is-not-the-agent">
+        <Link className="homepage__chapter-link interface-text" href="/fieldbook/the-model-is-not-the-agent">
           Start with the model
-        </a>
+        </Link>
       </header>
 
       <SystemTrace compact />

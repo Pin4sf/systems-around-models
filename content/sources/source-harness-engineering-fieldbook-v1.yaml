@@ -8,7 +8,10 @@ inspected_paths: []
 source_type: publication-synthesis
 license_status: all-rights-reserved
 evidence_grade: FL
-observed_mechanisms: []
+observed_mechanisms:
+  - description: An ambiguous external effect can be duplicated when a timeout permits blind retry without effect identity or reconciliation.
+    evidence_grade: FL
+    basis: The publication synthesis records the intentionally transferred failure class; the displayed Atlas trace is explicitly synthetic.
 author_reported_claims: []
 unknowns:
   - This synthesis is provenance for the publication argument, not independent proof of the central inferred claim.
