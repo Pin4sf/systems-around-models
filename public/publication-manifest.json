@@ -6,6 +6,18 @@
       "id": "revision-fieldbook-essay-001",
       "essaySlug": "the-model-is-not-the-agent",
       "revision": 1,
+      "publishedAt": "2026-08-21",
+      "substantivelyRevisedAt": "2026-08-21",
+      "summary": "Initial public revision for the first Harness Engineering fieldbook chapter.",
+      "affectedClaimIds": [
+        "claim-ambiguous-effect-failure-pattern",
+        "claim-architecture-selection-responsibilities",
+        "claim-earendil-beginner-harness-map",
+        "claim-earendil-harness-ownership-philosophy",
+        "claim-harness-capability-configuration",
+        "claim-system-trace-responsibility-checklist"
+      ],
+      "correctionDisposition": "publication",
       "contentHash": "sha256-3efaf5e305c4b1e4e8c49a7d105d0edb774068f89715371106e27d263784748f",
       "sourceIds": [
         "source-earendil-what-is-a-harness",
@@ -27,5 +39,5 @@
       "lastValidated": "2026-08-21"
     }
   ],
-  "buildId": "sha256-c4daf79c7fad7995e462501501597add08b0c1677851608c65dfc22410ddc3a7"
+  "buildId": "sha256-5a221c076737ec278357cd6d11b2fee2e3fa8530e1da00c2cf8c33df4572f4e0"
 }

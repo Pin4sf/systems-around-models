@@ -55,6 +55,11 @@ export async function generatePublicManifest(root = process.cwd()) {
       id: revision.id,
       essaySlug: essay.metadata.slug,
       revision: revision.revision,
+      publishedAt: revision.published_at,
+      substantivelyRevisedAt: revision.substantively_revised_at,
+      summary: revision.summary,
+      affectedClaimIds: [...revision.affected_claim_ids].sort(),
+      correctionDisposition: revision.correction_disposition,
       contentHash: sha256(essay.source),
       sourceIds: [...essay.metadata.source_manifest_ids].sort(),
       sourceValidationDates: Object.fromEntries(

@@ -4,7 +4,7 @@ const labelDefinitions: Record<ClaimRecord["label"], string> = {
   observed: "Directly inspected in a cited artifact, document, or reproduced behavior.",
   "author-reported": "Reported by the named author or builder and not independently reproduced here.",
   inferred: "Derived from observed mechanisms or multiple sources; the conclusion remains falsifiable.",
-  proposed: "Introduced by Systems Around Models as a working method, not asserted as an industry standard.",
+  proposed: "Introduced by Systems Around Models as a claim, pattern, or working method, not asserted as an industry standard.",
   unproved: "Described or designed without sufficient implementation or operational evidence.",
 };
 

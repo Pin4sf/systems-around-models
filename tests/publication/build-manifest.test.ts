@@ -46,6 +46,18 @@ describe("deterministic public build manifest", () => {
         {
           id: "revision-fieldbook-essay-001",
           essaySlug: "the-model-is-not-the-agent",
+          publishedAt: "2026-08-21",
+          substantivelyRevisedAt: "2026-08-21",
+          summary: "Initial public revision for the first Harness Engineering fieldbook chapter.",
+          affectedClaimIds: [
+            "claim-ambiguous-effect-failure-pattern",
+            "claim-architecture-selection-responsibilities",
+            "claim-earendil-beginner-harness-map",
+            "claim-earendil-harness-ownership-philosophy",
+            "claim-harness-capability-configuration",
+            "claim-system-trace-responsibility-checklist",
+          ],
+          correctionDisposition: "publication",
           sourceIds: [
             "source-earendil-what-is-a-harness",
             "source-harness-engineering-fieldbook-v1",
@@ -66,7 +78,7 @@ describe("deterministic public build manifest", () => {
         path.join(root, "public", "manifests", "revision-fieldbook-essay-001.json"),
         "utf8",
       ),
-    ).resolves.toContain("sha256-");
+    ).resolves.toContain('"correctionDisposition": "publication"');
   });
 
   it("is stable for identical content and changes its hashes when essay content changes", async () => {

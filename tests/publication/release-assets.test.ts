@@ -105,6 +105,21 @@ describe("release review assets", () => {
     });
   });
 
+  it("keeps the share-card trace aligned with the canonical end-to-end trace", async () => {
+    const svg = await repositoryFile("assets/social/systems-around-models.svg");
+    const labels = [
+      "ADMIT", "CONTEXT", "CAPABILITIES", "EXECUTE", "STATE", "EFFECT", "RECONCILE",
+      "EVIDENCE", "VERIFY", "ACCEPT OR RE-ENTER",
+    ];
+
+    let cursor = -1;
+    for (const label of labels) {
+      const index = svg.indexOf(label);
+      expect(index, `share-card trace includes ${label}`).toBeGreaterThan(cursor);
+      cursor = index;
+    }
+  });
+
   it("keeps every normal-size publication text token above WCAG AA contrast", async () => {
     const css = await repositoryFile("app/globals.css");
     const tokens = Object.fromEntries(

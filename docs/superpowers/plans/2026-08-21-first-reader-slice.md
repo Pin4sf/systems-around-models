@@ -12,7 +12,7 @@
 
 ## Global Constraints
 
-- `waldo-brain` is manual research input only; no runtime, build-time, package, symlink, or deployment dependency may point to it.
+- The private research corpus is manual input only; no runtime, build-time, package, symlink, or deployment dependency may point to it.
 - Public content lives only under this repository's `content/` tree and must pass evidence, privacy, license, and correction-ledger review before release.
 - Use the approved Annotated Field Manual tokens: paper `#F4F0E6`, ink `#171510`, evidence `#28513D`, correction `#A63F28`, gold `#A47C2B`.
 - Use Source Serif 4 for editorial text, Inter for UI, and IBM Plex Mono for evidence and trace data.
@@ -88,7 +88,7 @@ tests/
 Run from a temporary directory, then copy only the generated application files into the repository:
 
 ```bash
-npx create-next-app@16.3.1 /tmp/systems-around-models-app --ts --eslint --app --src-dir=false --use-npm --no-tailwind --import-alias='@/*'
+npx create-next-app@16.3.1 "$TMPDIR/systems-around-models-app" --ts --eslint --app --src-dir=false --use-npm --no-tailwind --import-alias='@/*'
 ```
 
 Preserve the existing design commit. Remove starter page content before the first product-specific commit.
@@ -446,7 +446,7 @@ Print expands source URLs, retains evidence labels and revision metadata, remove
 
 - [ ] **Step 5: Add deterministic public-content checks**
 
-`scripts/check-public-content.mjs` must fail on absolute local paths, `waldo-brain`, credential patterns, unresolved `source_ids`, invalid evidence labels, missing license status, and unpublished records referenced by navigation. Add `npm run check:public`.
+`scripts/check-public-content.mjs` must fail on absolute local paths, the private-corpus identifier, credential patterns, unresolved `source_ids`, invalid evidence labels, missing license status, and unpublished records referenced by navigation. Add `npm run check:public`.
 
 - [ ] **Step 6: Add correction issue template and CI**
 

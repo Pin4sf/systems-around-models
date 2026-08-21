@@ -10,11 +10,6 @@ const privateCorpusName = ["waldo", "brain"].join("-");
 const allowedEvidenceLabels = new Set([
   "observed", "author-reported", "inferred", "proposed", "unproved",
 ]);
-const sourceDirectories = [".github", "app", "components", "content", "lib", "public", "scripts"];
-const rootBuildFiles = new Set([
-  ".gitignore", "eslint.config.mjs", "next-env.d.ts", "next.config.ts", "package-lock.json",
-  "package.json", "playwright.config.ts", "tsconfig.json", "vitest.config.ts", "vitest.setup.ts",
-]);
 const excludedDirectories = new Set([
   ".git", ".next", ".superpowers", ".worktrees", "coverage", "node_modules", "out",
   "playwright-report", "test-results",
@@ -23,7 +18,13 @@ const sourceTextExtensions = new Set([
   ".cjs", ".css", ".env", ".html", ".js", ".json", ".jsx", ".md", ".mdx", ".mjs",
   ".svg", ".toml", ".ts", ".tsx", ".txt", ".xml", ".yaml", ".yml",
 ]);
-const builtTextExtensions = new Set([".css", ".html", ".js", ".json", ".svg", ".txt", ".xml"]);
+const sourceBinaryExtensions = new Set([
+  ".avif", ".br", ".eot", ".gif", ".gz", ".ico", ".jpeg", ".jpg", ".otf", ".pdf",
+  ".png", ".tar", ".ttf", ".webp", ".woff", ".woff2", ".zip",
+]);
+const builtTextExtensions = new Set([
+  ".body", ".css", ".html", ".js", ".json", ".rsc", ".svg", ".txt", ".xml",
+]);
 
 function publicName(root, filename) {
   return path.relative(root, filename).split(path.sep).join("/");
@@ -35,18 +36,14 @@ function isExcluded(relativeName) {
 
 function isReviewedSourceFile(relativeName) {
   if (isExcluded(relativeName)) return false;
-  const segments = relativeName.split("/");
-  const included = segments.length === 1
-    ? rootBuildFiles.has(relativeName)
-    : sourceDirectories.includes(segments[0]);
-  return included && sourceTextExtensions.has(path.extname(relativeName).toLowerCase());
+  return !sourceBinaryExtensions.has(path.extname(relativeName).toLowerCase());
 }
 
 async function reviewedSourceFiles(repositoryRoot) {
   try {
     const { stdout } = await execFileAsync(
       "git",
-      ["-C", repositoryRoot, "ls-files", "--cached", "--others", "--exclude-standard", "-z"],
+      ["-C", repositoryRoot, "ls-files", "-z"],
       { encoding: "buffer" },
     );
     const candidates = stdout.toString("utf8").split("\0").filter(Boolean).filter(isReviewedSourceFile)
@@ -257,7 +254,7 @@ export async function checkBuiltOutput(root, outputDirectory) {
   const repositoryRoot = path.resolve(root);
   const outputRoot = path.resolve(outputDirectory);
   const deployableRoots = path.basename(outputRoot) === ".next"
-    ? [path.join(outputRoot, "server", "app"), path.join(outputRoot, "static")]
+    ? [path.join(outputRoot, "server"), path.join(outputRoot, "static")]
     : [outputRoot];
   const files = (await Promise.all(
     deployableRoots.map((directory) => filesRecursively(directory, builtTextExtensions)),

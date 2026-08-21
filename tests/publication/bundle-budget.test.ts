@@ -47,29 +47,85 @@ async function run(root: string, limit: number) {
   }
 }
 
+async function runStripper(root: string) {
+  try {
+    const result = await execFileAsync(process.execPath, [stripper, "--build-dir", root]);
+    return { code: 0, stdout: result.stdout, stderr: result.stderr };
+  } catch (error) {
+    const failure = error as { code: number; stdout: string; stderr: string };
+    return { code: failure.code, stdout: failure.stdout, stderr: failure.stderr };
+  }
+}
+
+async function productionHtmlFixture() {
+  const root = await mkdtemp(path.join(tmpdir(), "systems-around-models-static-html-"));
+  fixtureRoots.push(root);
+  await Promise.all([
+    write(root, "server/app/index.html", "<main>Homepage</main>"),
+    write(root, "server/app/fieldbook/the-model-is-not-the-agent.html", "<main>Chapter</main>"),
+    write(root, "server/app/_not-found.html", "<main>Not found</main>"),
+    write(root, "server/pages/404.html", "<main>404</main>"),
+  ]);
+  return root;
+}
+
 afterEach(async () => {
   await Promise.all(fixtureRoots.splice(0).map((root) => rm(root, { recursive: true, force: true })));
 });
 
 describe("representative route JavaScript budget", () => {
-  it("removes hydration scripts from static HTML while preserving JSON-LD", async () => {
-    const root = await mkdtemp(path.join(tmpdir(), "systems-around-models-static-html-"));
+  it("fails closed when no production HTML exists", async () => {
+    const root = await mkdtemp(path.join(tmpdir(), "systems-around-models-empty-build-"));
     fixtureRoots.push(root);
-    const htmlPath = "server/app/fieldbook/chapter.html";
+    await mkdir(path.join(root, "server", "app"), { recursive: true });
+
+    const result = await runStripper(root);
+
+    expect(result.code).toBe(1);
+    expect(result.stderr).toContain("No production HTML documents found");
+  });
+
+  it("requires the homepage, chapter, and not-found production documents", async () => {
+    const root = await productionHtmlFixture();
+    await rm(path.join(root, "server", "app", "_not-found.html"));
+
+    const result = await runStripper(root);
+
+    expect(result.code).toBe(1);
+    expect(result.stderr).toContain("Missing expected production HTML");
+    expect(result.stderr).toContain("server/app/_not-found.html");
+  });
+
+  it.each([
+    ["homepage", "server/app/index.html"],
+    ["chapter", "server/app/fieldbook/the-model-is-not-the-agent.html"],
+    ["not-found", "server/app/_not-found.html"],
+    ["404", "server/pages/404.html"],
+  ])("strips executable script forms from the %s document", async (_name, htmlPath) => {
+    const root = await productionHtmlFixture();
     await write(root, htmlPath, [
-      '<link rel="preload" as="script" href="/_next/static/chunks/a.js">',
-      '<script src="/_next/static/chunks/a.js"></script>',
+      '<link rel="preload" as="font" href="/font.woff2">',
+      '<link rel="stylesheet" href="/styles.css">',
+      '<link rel=preload as=script href="/_next/static/chunks/preload.js">',
+      '<link rel=modulepreload href="/_next/static/chunks/module.js">',
+      '<script src="/_next/static/chunks/self-closing.js"/>',
+      '<script src="/_next/static/chunks/paired.js"></script>',
       '<script>self.__next_f.push([1,"route data"])</script>',
       '<script type="application/ld+json">{"@type":"Article"}</script>',
+      '<script src="/_next/static/chunks/unclosed.js">',
       '<main>Readable without JavaScript</main>',
     ].join(""));
 
-    const result = await execFileAsync(process.execPath, [stripper, "--build-dir", root]);
+    const result = await runStripper(root);
+    expect(result.code).toBe(0);
     expect(result.stdout).toContain("Static client scripts removed");
     const stripped = await import("node:fs/promises").then(({ readFile }) => readFile(path.join(root, htmlPath), "utf8"));
-    expect(stripped).not.toContain("/_next/static/chunks/a.js");
-    expect(stripped).not.toContain("self.__next_f");
+    expect(stripped).not.toMatch(/<script(?![^>]*type=["']application\/ld\+json["'])/i);
+    expect(stripped).not.toMatch(/rel=["'](?:modulepreload|preload)["'][^>]*as=["']script["']/i);
+    expect(stripped).not.toContain("modulepreload");
     expect(stripped).toContain('<script type="application/ld+json">{"@type":"Article"}</script>');
+    expect(stripped).toContain('rel="preload" as="font"');
+    expect(stripped).toContain('rel="stylesheet"');
     expect(stripped).toContain("Readable without JavaScript");
   });
 

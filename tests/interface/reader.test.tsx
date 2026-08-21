@@ -60,7 +60,7 @@ describe("flagship fieldbook reader", () => {
       "id",
       "the-harness-boundary",
     );
-    expect(screen.getAllByText(/Introduced by Systems Around Models as a working method/).length)
+    expect(screen.getAllByText(/Introduced by Systems Around Models as a claim, pattern, or working method/).length)
       .toBeGreaterThan(0);
     expect(screen.getAllByRole("link", { name: "What is a Harness?" })[0]).toHaveAttribute(
       "href",

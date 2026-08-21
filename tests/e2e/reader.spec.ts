@@ -5,6 +5,12 @@ const route = "/fieldbook/the-model-is-not-the-agent";
 test("@desktop reader exposes the chapter, rails, evidence, and keyboard path", async ({
   page,
 }) => {
+  const javascriptRequests: string[] = [];
+  page.on("request", (request) => {
+    if (request.resourceType() === "script" || /\.js(?:\?|$)/i.test(request.url())) {
+      javascriptRequests.push(request.url());
+    }
+  });
   await page.goto(route);
   await expect(
     page.getByRole("heading", { name: "The Model Is Not the Agent" }),
@@ -39,7 +45,8 @@ test("@desktop reader exposes the chapter, rails, evidence, and keyboard path", 
   const evidenceSummary = page.getByText("Proposed", { exact: true }).first();
   await evidenceSummary.focus();
   await page.keyboard.press("Enter");
-  await expect(page.getByText(/Introduced by Systems Around Models as a working method/).first()).toBeVisible();
+  await expect(page.getByText(/Introduced by Systems Around Models as a claim, pattern, or working method/).first()).toBeVisible();
+  expect(javascriptRequests).toEqual([]);
 
   const correction = page.getByRole("link", { name: "Challenge this claim" });
   await expect(correction).toHaveAttribute(
@@ -132,7 +139,7 @@ test("@nojs reader keeps meaning and ordinary navigation visible", async ({ page
   const proposedDisclosure = page.getByText("Proposed", { exact: true }).first();
   await expect(proposedDisclosure).toBeVisible();
   await proposedDisclosure.click();
-  await expect(page.getByText(/Introduced by Systems Around Models as a working method/).first()).toBeVisible();
+  await expect(page.getByText(/Introduced by Systems Around Models as a claim, pattern, or working method/).first()).toBeVisible();
   await expect(page.getByRole("link", { name: "What is a Harness?" }).first()).toBeVisible();
   const correction = page.getByRole("link", { name: "Challenge this claim" });
   const correctionBody = new URL(await correction.getAttribute("href") ?? "").searchParams.get(
