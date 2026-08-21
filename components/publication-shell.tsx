@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { ReactNode } from "react";
 
 export function PublicationShell({ children }: { children: ReactNode }) {
@@ -7,11 +8,11 @@ export function PublicationShell({ children }: { children: ReactNode }) {
         Skip to content
       </a>
       <header className="site-header">
-        <a className="wordmark" href="/">
+        <Link className="wordmark" href="/">
           Systems Around Models
-        </a>
+        </Link>
         <nav aria-label="Publication">
-          <a href="/">Fieldbook</a>
+          <Link href="/">Fieldbook</Link>
           <span aria-disabled="true">Architectures</span>
           <span aria-disabled="true">Sources</span>
           <span aria-disabled="true">Revisions</span>
