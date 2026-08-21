@@ -19,6 +19,14 @@ type Registry = {
   revisions: Map<string, RevisionRecord>;
 };
 
+type LoadedRegistry = Registry & {
+  revisionFilenames: Map<string, string>;
+};
+
+export type ContentRegistry = Registry & {
+  essays: Map<string, EssayMetadata>;
+};
+
 const CONTENT_DIRECTORY = "content";
 
 function publicFilename(repositoryRoot: string, filename: string): string {
@@ -159,7 +167,7 @@ function mapById<T extends { id: string }>(
   return registry;
 }
 
-async function loadRegistry(repositoryRoot = process.cwd()): Promise<Registry> {
+async function loadRegistry(repositoryRoot = process.cwd()): Promise<LoadedRegistry> {
   const [claimValues, sourceValues, revisionValues] = await Promise.all([
     yamlRecords(repositoryRoot, "claims"),
     yamlRecords(repositoryRoot, "sources"),
@@ -214,7 +222,7 @@ async function loadRegistry(repositoryRoot = process.cwd()): Promise<Registry> {
     }
   }
 
-  return { claims, sources, revisions };
+  return { claims, sources, revisions, revisionFilenames };
 }
 
 export async function loadClaims(repositoryRoot = process.cwd()): Promise<Map<string, ClaimRecord>> {
@@ -273,32 +281,92 @@ async function essayFiles(directory: string): Promise<string[]> {
   return nested.flat();
 }
 
-export async function listEssays(): Promise<EssayMetadata[]> {
-  const repositoryRoot = process.cwd();
+async function loadEssayRegistry(repositoryRoot: string): Promise<{
+  essays: Map<string, EssayMetadata>;
+  filenames: Map<string, string>;
+}> {
   const essaysRoot = resolveRecordPath(repositoryRoot, "essays", "");
   let filenames: string[];
   try {
     filenames = (await essayFiles(essaysRoot)).sort((left, right) => left.localeCompare(right));
   } catch (error) {
     const code = error as NodeJS.ErrnoException;
-    if (code.code === "ENOENT") return [];
+    if (code.code === "ENOENT") return { essays: new Map(), filenames: new Map() };
     const message = error instanceof Error ? error.message : "unable to read essays";
     throw new Error(`Invalid content/essays: ${message}`);
   }
 
-  const essays = await Promise.all(
-    filenames.map(async (filename) => essayFromFrontmatter(await readFrontmatter(await readFile(filename, "utf8"), repositoryRoot, filename), repositoryRoot, filename)),
+  const records = await Promise.all(
+    filenames.map(async (filename) =>
+      essayFromFrontmatter(
+        readFrontmatter(await readFile(filename, "utf8"), repositoryRoot, filename),
+        repositoryRoot,
+        filename,
+      ),
+    ),
   );
-  const slugs = new Set<string>();
-  essays.forEach((essay, index) => {
-    if (slugs.has(essay.slug)) {
+  const essays = new Map<string, EssayMetadata>();
+  const filenamesBySlug = new Map<string, string>();
+  records.forEach((essay, index) => {
+    if (essays.has(essay.slug)) {
       throw recordError(repositoryRoot, filenames[index], `duplicate essay slug ${essay.slug}`);
     }
-    slugs.add(essay.slug);
+    essays.set(essay.slug, essay);
+    filenamesBySlug.set(essay.slug, filenames[index]);
   });
-  return essays.sort((left, right) => left.sequencePosition - right.sequencePosition);
+  return { essays, filenames: filenamesBySlug };
 }
 
-export async function loadEssay(slug: string): Promise<EssayMetadata | undefined> {
-  return (await listEssays()).find((essay) => essay.slug === slug);
+function validateUnifiedIntegrity(
+  repositoryRoot: string,
+  registry: LoadedRegistry,
+  essays: Map<string, EssayMetadata>,
+  essayFilenames: Map<string, string>,
+): void {
+  for (const revision of registry.revisions.values()) {
+    if (!essays.has(revision.targetSlug)) {
+      throw recordError(
+        repositoryRoot,
+        registry.revisionFilenames.get(revision.id) ?? `content/revisions/${revision.id}.yaml`,
+        `unresolved essay target ${revision.targetSlug}`,
+      );
+    }
+  }
+  for (const essay of essays.values()) {
+    const filename = essayFilenames.get(essay.slug) ?? `content/essays/${essay.slug}.mdx`;
+    for (const sourceId of essay.sourceManifestIds) {
+      if (!registry.sources.has(sourceId)) {
+        throw recordError(repositoryRoot, filename, `unresolved source identifier ${sourceId}`);
+      }
+    }
+    if (!registry.revisions.has(essay.revisionId)) {
+      throw recordError(repositoryRoot, filename, `unresolved revision identifier ${essay.revisionId}`);
+    }
+  }
+}
+
+export async function loadContent(repositoryRoot = process.cwd()): Promise<ContentRegistry> {
+  const [registry, essayRegistry] = await Promise.all([
+    loadRegistry(repositoryRoot),
+    loadEssayRegistry(repositoryRoot),
+  ]);
+  validateUnifiedIntegrity(repositoryRoot, registry, essayRegistry.essays, essayRegistry.filenames);
+  return {
+    claims: registry.claims,
+    sources: registry.sources,
+    revisions: registry.revisions,
+    essays: essayRegistry.essays,
+  };
+}
+
+export async function listEssays(repositoryRoot = process.cwd()): Promise<EssayMetadata[]> {
+  const { essays } = await loadEssayRegistry(repositoryRoot);
+  return [...essays.values()].sort((left, right) => left.sequencePosition - right.sequencePosition);
+}
+
+export async function loadEssay(
+  slug: string,
+  repositoryRoot = process.cwd(),
+): Promise<EssayMetadata | undefined> {
+  return (await listEssays(repositoryRoot)).find((essay) => essay.slug === slug);
 }
