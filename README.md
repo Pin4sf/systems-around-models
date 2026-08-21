@@ -1,0 +1,15 @@
+# Systems Around Models
+
+An independent, evidence-labeled field guide to the systems surrounding AI models: harnesses, memory, environments, authority, recovery, verification, and completion.
+
+## Current status
+
+The standalone reading portal is in production design. The approved first surface is **The Agent Systems Fieldbook**, beginning with “The Model Is Not the Agent.”
+
+The production contract is in [`docs/design/2026-08-21-reading-portal-design.md`](docs/design/2026-08-21-reading-portal-design.md).
+
+## Clean-room boundary
+
+`waldo-brain` is a private research corpus and may be consulted manually for source discovery and context. This repository is the only input to the public website. It must not import from, depend on, or automatically copy the private vault during development, build, or deployment.
+
+Public claims, sources, diagrams, and architecture records must be independently reviewed and intentionally transferred into this repository with their evidence, version, privacy, and license status intact.
