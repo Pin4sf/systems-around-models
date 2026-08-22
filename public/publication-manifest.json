@@ -11,7 +11,7 @@
       "summary": "Initial public revision of the loops, workflows, graphs, and delegation chapter.",
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-6fbd2832897c0a3746b42acaa094aaa91895e2fda381a2ccec26c0d4a1012b79",
+      "contentHash": "sha256-3da06adbca2f5b2765c055f56b9bfdcc425202ce31c914c695875cb0a0177801",
       "sourceIds": [
         "source-anthropic-effective-long-running-harnesses",
         "source-harness-engineering-fieldbook-v1"
@@ -94,7 +94,7 @@
       "summary": "Initial public revision of the four harness authority surface classes.",
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-8eb9fc97791bbcbfa907b2e9da0976c31aa07bac0288471a9a39b3231482713b",
+      "contentHash": "sha256-8fdfd664119e7fd4cff101d69adaae1b7e3bc60ce9f35b3b8d4c38f0efe5b549",
       "sourceIds": [
         "source-harness-engineering-fieldbook-v1"
       ],
@@ -111,7 +111,7 @@
       "summary": "Initial public revision of the H0 to H9 diagnostic progression chapter.",
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-96812ad90879231c9c974215916a18e11da4ac5dd118d4ca2afa8dab996b94db",
+      "contentHash": "sha256-e83edc312cab8a45b2fdc939b0137b7ced5a3bfb63e9a7faa688d060eecc4e82",
       "sourceIds": [
         "source-harness-engineering-fieldbook-v1",
         "source-rasa-why-agents-fail"
@@ -170,7 +170,7 @@
       "summary": "Initial public revision of the instructions and context assembly chapter.",
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-2e592b5a4fbd7832c10c509c4a0eaf1060c5c674f9ebd82fa08bb5482f2c7dc3",
+      "contentHash": "sha256-227e374bb8e5ede0918703222bef53dbb7829071ea3aaf57b9bb4349df4e4975",
       "sourceIds": [
         "source-harness-engineering-fieldbook-v1",
         "source-memory-anthropic-context-engineering"
@@ -189,7 +189,7 @@
       "summary": "Initial public revision of the memory, compaction, and continuity chapter.",
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-bb060fdebb98d8a2abaecb9785d4882934e8bfcba5f709a69ed244f61ddeb76a",
+      "contentHash": "sha256-16c2e224e7fa62c5d30e6f261156e1d946677c396e55dade7047ffa1e5a34f52",
       "sourceIds": [
         "source-harness-engineering-fieldbook-v1",
         "source-memory-anthropic-context-engineering",
@@ -253,7 +253,7 @@
       "summary": "Initial public revision of the state, journals, checkpoints, and replay chapter.",
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-8395ccf43167d6a519c3509f393a68d411cc51818debc2a0f9dbac39dd081ffa",
+      "contentHash": "sha256-845da58ffa09bddacb832b0c1f521472ee28079a065e0ac969d1730499a4fef5",
       "sourceIds": [
         "source-anthropic-effective-long-running-harnesses",
         "source-harness-engineering-fieldbook-v1"
@@ -272,7 +272,7 @@
       "summary": "Initial public revision of the tools, capability manifests, and binding chapter.",
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-af5e631dca69d55c11e2321b252e3c2410abb5a259f52db06f6565665f84173b",
+      "contentHash": "sha256-431a68344d77d227643823be854c9d97d22ad0e3048d34953b1605cb1224d51d",
       "sourceIds": [
         "source-earendil-what-is-a-harness",
         "source-harness-engineering-fieldbook-v1"
@@ -291,7 +291,7 @@
       "summary": "Initial public revision of the twelve recurring harness failure classes.",
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-48b7ece1f34412e55adc080652fd1c295efa22d59d4b3c2e9611d52cdc21bf68",
+      "contentHash": "sha256-7a8dc0cba647f5818ae98e875e82961b1200123c2a5f12c49f8026908970361f",
       "sourceIds": [
         "source-harness-engineering-fieldbook-v1",
         "source-rasa-why-agents-fail"
@@ -639,5 +639,5 @@
       }
     }
   ],
-  "buildId": "sha256-6d73e4c92530f87ad0e3aedeeeb21ccc72ec4ed89924d461d0ac781a6af29f4a"
+  "buildId": "sha256-d6564424e36840bb36fcd33c83c5ebf8b54eeed1b49d7c7befadfcfddc995285"
 }

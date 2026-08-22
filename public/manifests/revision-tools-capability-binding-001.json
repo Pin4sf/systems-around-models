@@ -7,7 +7,7 @@
   "summary": "Initial public revision of the tools, capability manifests, and binding chapter.",
   "affectedClaimIds": [],
   "correctionDisposition": "publication",
-  "contentHash": "sha256-af5e631dca69d55c11e2321b252e3c2410abb5a259f52db06f6565665f84173b",
+  "contentHash": "sha256-431a68344d77d227643823be854c9d97d22ad0e3048d34953b1605cb1224d51d",
   "sourceIds": [
     "source-earendil-what-is-a-harness",
     "source-harness-engineering-fieldbook-v1"

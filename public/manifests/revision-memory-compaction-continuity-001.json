@@ -7,7 +7,7 @@
   "summary": "Initial public revision of the memory, compaction, and continuity chapter.",
   "affectedClaimIds": [],
   "correctionDisposition": "publication",
-  "contentHash": "sha256-bb060fdebb98d8a2abaecb9785d4882934e8bfcba5f709a69ed244f61ddeb76a",
+  "contentHash": "sha256-16c2e224e7fa62c5d30e6f261156e1d946677c396e55dade7047ffa1e5a34f52",
   "sourceIds": [
     "source-harness-engineering-fieldbook-v1",
     "source-memory-anthropic-context-engineering",

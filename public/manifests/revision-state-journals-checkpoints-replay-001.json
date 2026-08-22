@@ -7,7 +7,7 @@
   "summary": "Initial public revision of the state, journals, checkpoints, and replay chapter.",
   "affectedClaimIds": [],
   "correctionDisposition": "publication",
-  "contentHash": "sha256-8395ccf43167d6a519c3509f393a68d411cc51818debc2a0f9dbac39dd081ffa",
+  "contentHash": "sha256-845da58ffa09bddacb832b0c1f521472ee28079a065e0ac969d1730499a4fef5",
   "sourceIds": [
     "source-anthropic-effective-long-running-harnesses",
     "source-harness-engineering-fieldbook-v1"

@@ -7,7 +7,7 @@
   "summary": "Initial public revision of the four harness authority surface classes.",
   "affectedClaimIds": [],
   "correctionDisposition": "publication",
-  "contentHash": "sha256-8eb9fc97791bbcbfa907b2e9da0976c31aa07bac0288471a9a39b3231482713b",
+  "contentHash": "sha256-8fdfd664119e7fd4cff101d69adaae1b7e3bc60ce9f35b3b8d4c38f0efe5b549",
   "sourceIds": [
     "source-harness-engineering-fieldbook-v1"
   ],

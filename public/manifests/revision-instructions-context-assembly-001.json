@@ -7,7 +7,7 @@
   "summary": "Initial public revision of the instructions and context assembly chapter.",
   "affectedClaimIds": [],
   "correctionDisposition": "publication",
-  "contentHash": "sha256-2e592b5a4fbd7832c10c509c4a0eaf1060c5c674f9ebd82fa08bb5482f2c7dc3",
+  "contentHash": "sha256-227e374bb8e5ede0918703222bef53dbb7829071ea3aaf57b9bb4349df4e4975",
   "sourceIds": [
     "source-harness-engineering-fieldbook-v1",
     "source-memory-anthropic-context-engineering"
