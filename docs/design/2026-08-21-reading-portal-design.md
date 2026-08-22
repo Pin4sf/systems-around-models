@@ -141,7 +141,7 @@ The chapter order is:
 
 ## 6. Content architecture
 
-The public repository is the only input to the public build. It must never read directly from `waldo-brain` at runtime or during deployment.
+The public repository is the only input to the public build. It must never read directly from a private research corpus at runtime or during deployment.
 
 ```text
 content/
@@ -331,7 +331,7 @@ Every chapter has canonical metadata derived from its essay record:
 
 The first release includes RSS and sitemap generation. Search across essays and Architecture Cards waits until enough public content exists to produce meaningful results.
 
-## 13. Public/private/legal boundary
+## 13. Public, private, and legal boundary
 
 The clean-room public repository must not contain:
 

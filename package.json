@@ -1,0 +1,44 @@
+{
+  "name": "systems-around-models-app",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "npm run generate:manifest && next build && node scripts/strip-static-client-scripts.mjs",
+    "start": "next start",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "generate:manifest": "node scripts/generate-public-manifest.mjs",
+    "generate:social": "node scripts/generate-social-card.mjs",
+    "check:public": "node scripts/check-public-content.mjs",
+    "check:built": "node scripts/check-public-content.mjs --built-output .next",
+    "check:bundle": "node scripts/check-bundle-budget.mjs --limit 120000",
+    "verify:release": "npm run lint && npm test && npm run check:public && npm run build && npm run check:built && npm run check:bundle && npm run test:e2e"
+  },
+  "dependencies": {
+    "@babel/parser": "^7.29.8",
+    "next": "16.3.1",
+    "next-mdx-remote": "^6.0.0",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "yaml": "^2.9.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.1",
+    "jsdom": "^30.0.1",
+    "sharp": "^0.35.3",
+    "typescript": "^5",
+    "vitest": "^4.1.11"
+  }
+}

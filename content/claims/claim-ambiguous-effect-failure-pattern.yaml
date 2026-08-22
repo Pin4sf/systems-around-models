@@ -1,0 +1,10 @@
+id: claim-ambiguous-effect-failure-pattern
+statement: Ambiguous external effects can be duplicated when a timeout is interpreted as failure and a retry proceeds without effect identity or reconciliation.
+label: proposed
+scope: A proposed failure pattern for architecture review; the displayed Atlas trace is synthetic and is not a documented company incident or reproduced observation.
+source_ids:
+  - source-harness-engineering-fieldbook-v1
+falsifiers:
+  - Public implementation evidence shows that blind retry after an ambiguous committed effect cannot produce duplication under the stated absence of effect identity and reconciliation.
+last_reviewed: 2026-08-21
+revision: 1

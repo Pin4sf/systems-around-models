@@ -1,0 +1,21 @@
+id: source-harness-engineering-fieldbook-v1
+title: The Agent Systems Fieldbook — Harness Engineering, version 1
+author: Systems Around Models
+canonical_url: /manifests/revision-fieldbook-essay-001.json
+published_at: 2026-08-21
+retrieved_at: 2026-08-21
+inspected_paths: []
+source_type: publication-synthesis
+basis: Original public synthesis by Systems Around Models; Atlas is synthetic and the failure relationship is proposed rather than observed.
+license_status: all-rights-reserved
+evidence_grade: FL
+observed_mechanisms: []
+author_reported_claims: []
+unknowns:
+  - The synthetic Atlas trace has not been independently reproduced as a public implementation-primary observation.
+  - This synthesis is provenance for the publication argument, not independent proof of the central inferred claim.
+  - No implementation-primary mechanism is claimed without a public inspected implementation artifact.
+falsifiers:
+  - A primary source shows that the central claim's configuration omits a material factor required for deployed capability.
+last_validated: 2026-08-21
+correction_ledger_status: reviewed

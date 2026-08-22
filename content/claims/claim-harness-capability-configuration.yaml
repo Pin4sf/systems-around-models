@@ -1,0 +1,11 @@
+id: claim-harness-capability-configuration
+statement: System capability belongs to the model-harness-environment-authority configuration.
+label: inferred
+scope: general
+source_ids:
+  - source-earendil-what-is-a-harness
+  - source-harness-engineering-fieldbook-v1
+falsifiers:
+  - A model-only evaluation predicts deployed agent performance across materially different harnesses, environments, and authority boundaries.
+last_reviewed: 2026-08-21
+revision: 1

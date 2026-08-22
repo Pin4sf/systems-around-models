@@ -1,0 +1,14 @@
+id: revision-fieldbook-essay-001
+target_slug: the-model-is-not-the-agent
+revision: 1
+published_at: 2026-08-21
+substantively_revised_at: 2026-08-21
+summary: Initial public revision for the first Harness Engineering fieldbook chapter.
+affected_claim_ids:
+  - claim-ambiguous-effect-failure-pattern
+  - claim-architecture-selection-responsibilities
+  - claim-earendil-beginner-harness-map
+  - claim-earendil-harness-ownership-philosophy
+  - claim-harness-capability-configuration
+  - claim-system-trace-responsibility-checklist
+correction_disposition: publication

@@ -1,0 +1,10 @@
+id: claim-architecture-selection-responsibilities
+statement: Agent architectures should be compared by the responsibilities they own, mediate, transfer, or explicitly exclude.
+label: proposed
+scope: A fieldbook selection method rather than a universal framework ranking or proof of production quality.
+source_ids:
+  - source-harness-engineering-fieldbook-v1
+falsifiers:
+  - Architecture decisions made from a universal ranking consistently outperform responsibility-boundary analysis across materially different intended outcomes.
+last_reviewed: 2026-08-21
+revision: 1

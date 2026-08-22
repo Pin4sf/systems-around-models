@@ -1,0 +1,44 @@
+{
+  "id": "revision-fieldbook-essay-001",
+  "essaySlug": "the-model-is-not-the-agent",
+  "revision": 1,
+  "publishedAt": "2026-08-21",
+  "substantivelyRevisedAt": "2026-08-21",
+  "summary": "Initial public revision for the first Harness Engineering fieldbook chapter.",
+  "affectedClaimIds": [
+    "claim-ambiguous-effect-failure-pattern",
+    "claim-architecture-selection-responsibilities",
+    "claim-earendil-beginner-harness-map",
+    "claim-earendil-harness-ownership-philosophy",
+    "claim-harness-capability-configuration",
+    "claim-system-trace-responsibility-checklist"
+  ],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-3efaf5e305c4b1e4e8c49a7d105d0edb774068f89715371106e27d263784748f",
+  "sourceIds": [
+    "source-earendil-what-is-a-harness",
+    "source-harness-engineering-fieldbook-v1"
+  ],
+  "sourceValidationDates": {
+    "source-earendil-what-is-a-harness": "2026-08-21",
+    "source-harness-engineering-fieldbook-v1": "2026-08-21"
+  },
+  "schemaVersion": 1,
+  "validationSchemaVersion": "publication-v1",
+  "sources": [
+    {
+      "id": "source-earendil-what-is-a-harness",
+      "title": "What is a Harness?",
+      "canonicalUrl": "https://earendil.com/posts/what-is-a-harness/",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "unknown"
+    },
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    }
+  ]
+}
