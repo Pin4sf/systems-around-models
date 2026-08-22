@@ -1,0 +1,12 @@
+id: claim-harness-h0-h9-progression
+statement: The H0 through H9 progression is a proposed cumulative teaching framework for adding harness responsibilities only when the task contract requires them.
+label: proposed
+scope: Harness Engineering study guide
+source_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-walkinglabs-learn-harness-engineering
+  - source-rasa-why-agents-fail
+falsifiers:
+  - Learner studies show that the cumulative progression reliably obscures prerequisites or produces worse harness designs than an alternative teaching order.
+last_reviewed: 2026-08-22
+revision: 1

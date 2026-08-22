@@ -1,10 +1,10 @@
 # Systems Around Models
 
-An independent, evidence-labeled field guide to the systems surrounding AI models: harnesses, memory, environments, authority, recovery, verification, and completion.
+A practical, independent study guide to the systems surrounding AI models: harnesses, memory, environments, authority, recovery, verification, and completion.
 
 ## Current status
 
-The standalone reading portal is in production design. The approved first surface is **The Agent Systems Fieldbook**, beginning with “The Model Is Not the Agent.”
+The first public surface is the **Harness Engineering Study Guide**: a complete short course readers can finish in one sitting, backed by a 40-chapter curriculum, 12 labs, a capstone, and detailed chapters released over time. The first deeper chapter is “The Model Is Not the Agent.”
 
 The production contract is in [`docs/design/2026-08-21-reading-portal-design.md`](docs/design/2026-08-21-reading-portal-design.md).
 

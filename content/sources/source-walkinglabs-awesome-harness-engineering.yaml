@@ -1,0 +1,26 @@
+id: source-walkinglabs-awesome-harness-engineering
+title: Awesome Harness Engineering
+author: Walking Labs
+canonical_url: https://github.com/walkinglabs/awesome-harness-engineering
+published_at: 2026-03-29
+retrieved_at: 2026-08-22
+repository_commit: cff9b006ef64c624a62cbb1ee36b0c4b2b3a67ad
+inspected_paths:
+  - README.md
+  - LICENSE
+source_type: first-party-repository
+basis: Direct inspection of the public repository README and license at the pinned commit.
+license_status: CC0-1.0
+evidence_grade: FD
+observed_mechanisms:
+  - description: The repository organizes harness resources across context, memory, safety, evaluation, observability, runtimes, and benchmarks.
+    evidence_grade: FD
+    basis: The pinned README exposes the curated category structure and inclusion boundary.
+author_reported_claims:
+  - The list focuses on resources that make agents more dependable in real workflows.
+unknowns:
+  - Inclusion in a curated list does not establish that a linked mechanism works under a new system boundary.
+falsifiers:
+  - The pinned README no longer contains the named category structure or inclusion boundary.
+last_validated: 2026-08-22
+correction_ledger_status: reviewed

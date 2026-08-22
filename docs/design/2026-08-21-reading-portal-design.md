@@ -5,6 +5,24 @@
 **Owner:** Shivansh Fulper  
 **First release:** Portal homepage plus one complete Harness Engineering chapter  
 
+> **Reader-interface amendment — 2026-08-22:** Direct reader review supersedes the
+> visible evidence-badge, source-drawer, and revision-panel requirements below for
+> the study-guide reader. Evidence labels, source manifests, and revision records
+> remain build-time editorial controls. The public reading surface uses ordinary
+> links, a sources section, a quiet last-updated line, and one article-level
+> correction path. The primary release now includes a complete short Harness
+> Engineering guide, with detailed chapters as optional deeper reading.
+>
+> For the 2026-08-22 Harness study-guide release, this amendment also
+> supersedes the earlier first-release product clauses in Sections 1, 2, 5,
+> 15, and 16 that require a Fieldbook identity, a simultaneous Memory track,
+> visible claim inspection, evidence drawers, revision panels, or explicit
+> evidence-badge acceptance. Memory Engineering and gallery work remain future
+> projects. The current acceptance contract is: a complete Harness short
+> course; truthful curriculum and detailed-chapter status; ordinary public
+> sources with complete backstage manifests; one quiet article-level correction
+> path; and responsive, static, private-corpus-independent reading.
+
 ## 1. Product decision
 
 Build **Systems Around Models** as a standalone, clean-room research publication. Its first public artifact is **The Agent Systems Fieldbook**, with connected Harness Engineering and Memory Engineering sequences.
@@ -416,8 +434,8 @@ Before public release, every page passes:
 The first release is acceptable when:
 
 - a new reader can state why the model is not the agent after reading the opening chapter;
-- the homepage clearly presents Harness and Memory Engineering as connected but distinct tracks;
-- every explicit evidence badge resolves to a canonical claim and source context;
+- the homepage leads directly to a complete Harness Engineering short course and truthfully labels the deeper curriculum;
+- every public source named by the guide resolves to a backstage source record even though evidence controls are not shown in the reader;
 - the system trace is understandable without interaction;
 - chapter, section, source, and correction links are durable;
 - the representative reader works on mobile, keyboard-only, reduced-motion, print, and JavaScript-disabled paths;

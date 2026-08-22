@@ -1,0 +1,266 @@
+---
+slug: harness-engineering-study-guide
+title: "Harness Engineering: A Practical Study Guide"
+description: A readable introduction to the systems around AI models, from context and tools to durable state, recovery, verification, and completion.
+sequence: Harness Engineering
+sequence_position: 1
+revision: 1
+authors:
+  - Systems Around Models
+published_at: 2026-08-22
+substantively_revised_at: 2026-08-22
+reading_time_source: 24 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-earendil-what-is-a-harness
+  - source-harness-engineering-fieldbook-v1
+  - source-walkinglabs-learn-harness-engineering
+  - source-walkinglabs-awesome-harness-engineering
+  - source-rasa-why-agents-fail
+  - source-anthropic-effective-long-running-harnesses
+  - source-langchain-anatomy-agent-harness
+  - source-humanlayer-12-factor-agents
+revision_id: revision-harness-engineering-study-guide-001
+next_essay_slug: the-model-is-not-the-agent
+---
+
+Most introductions to AI agents begin with a model, add tools, and draw a loop. That is enough to make something act. It is not enough to understand whether the resulting system can act safely, resume after failure, recover from an uncertain external result, or prove that the work is actually done.
+
+This guide is about everything around the model that makes those questions answerable. We call that surrounding system a **harness**.
+
+You can read this page in one sitting. It condenses the foundations of a forty-chapter working course assembled from public agent runtimes, coding systems, workflow engines, memory research, evaluation methods, security work, and failure studies. The detailed chapters go deeper; this page gives you the map first.
+
+You do not need to build the thickest possible harness. The goal is to add the smallest set of mechanisms that your real task requires—and to understand what remains outside the system's responsibility.
+
+## 1. Start with the system, not the model
+
+A language model turns an input into an output. An agent puts that model inside a loop that can observe, decide, call tools, and continue. A harness governs the loop: it prepares context, exposes capabilities, chooses an environment, preserves state, applies policy, handles failures, and decides what evidence is required before the system can stop.
+
+The environment is the world the harness can observe or change: a repository, browser, database, calendar, payment provider, desktop, or physical device. Authority is the permission to use those powers on somebody's behalf.
+
+That gives us a useful design rule:
+
+> **System capability depends on the model, harness, environment, and authority boundary together.**
+
+This is not a scoring formula. It is a reminder that a capable model cannot use a tool it was never given, recover state the runtime never stored, or prove an outcome using evidence the system never collected.
+
+Imagine a software agent asked to fix duplicate payments after provider timeouts. The model writes a plausible patch and reports that tests pass. But the surrounding system used a shared sandbox, retried a request after an uncertain timeout, stored no stable request identifier, and checked only the code—not whether the provider committed one charge or two. The model's answer may be fluent while the system remains wrong.
+
+Naming the harness changes the review. Instead of asking only “Which model did this?”, ask:
+
+- What work entered the system, and under whose authority?
+- What context did the model actually see?
+- Which tools were available, and what were they allowed to change?
+- Which state survived the timeout?
+- What counted as evidence?
+- Who was allowed to call the work complete?
+
+These questions expose responsibilities that otherwise disappear behind the word “agent.”
+
+Earendil's [What Is a Harness?](https://earendil.com/posts/what-is-a-harness/) offers a friendly beginner map: system prompt, tools, agentic loop, and translation layer. It also emphasizes user leverage—the ability to own and adapt the harness rather than renting a sealed interface. For production work, extend that map with state, authority, recovery, evidence, and completion. The beginner map tells you how action becomes possible; the extended map asks whether the action remains understandable and governable.
+
+**Try it:** choose one agent you use today. Draw four boxes labelled model, harness, environment, and human authority. Put each important responsibility in one primary box. Anything that appears nowhere is an unowned failure. Anything enforced in several places may have a bypass.
+
+## 2. Grow the harness one responsibility at a time
+
+It is easy to jump from a chatbot to a diagram with memory, multiple agents, queues, graphs, evaluators, and a control plane. A better approach is to grow the system in levels. Stop when the task's contract is satisfied.
+
+<dl className="harness-levels">
+  <div><dt>H0 · One model request</dt><dd>Can the model produce a useful answer?</dd></div>
+  <div><dt>H1 · Instructions and context</dt><dd>Does it see the right task, rules, and evidence?</dd></div>
+  <div><dt>H2 · Tools and a bounded loop</dt><dd>Can it act through explicit capabilities?</dd></div>
+  <div><dt>H3 · Environment, identity, permissions</dt><dd>Where may it act, and as whom?</dd></div>
+  <div><dt>H4 · Durable state</dt><dd>Can work survive interruption or context loss?</dd></div>
+  <div><dt>H5 · Bounded orchestration</dt><dd>Can multi-step work stop, delegate, and recover?</dd></div>
+  <div><dt>H6 · Memory and continuity</dt><dd>Can selected knowledge return safely later?</dd></div>
+  <div><dt>H7 · Reliable external effects</dt><dd>Can uncertain or repeated actions be reconciled?</dd></div>
+  <div><dt>H8 · Evidence and completion</dt><dd>What proves the result, and who may accept it?</dd></div>
+  <div><dt>H9 · Evaluation and evolution</dt><dd>Can the harness improve without gaming its judge?</dd></div>
+</dl>
+
+Higher is not automatically better. Every level adds cost, attack surface, and new ways to fail. A drafting assistant may be complete at H1. A repository agent that works for twenty minutes may need H3. A long-running agent that changes external systems will often need H4, H7, and H8 even if it uses only one model and no delegation.
+
+The levels are cumulative questions, not a maturity leaderboard. For each level, write down:
+
+1. the concrete problem that requires it;
+2. the failure you expect it to prevent or make recoverable;
+3. the artifact that will show whether it worked;
+4. the condition under which you would remove it again.
+
+This prevents architecture from becoming a collection of fashionable components.
+
+A common mistake is jumping from H2 to H8: the agent can call tools, so the team adds an evaluator and calls the system production-ready. The missing middle still matters. If the environment is shared, authority is broad, state is ephemeral, and retries are blind, a final evaluator cannot reconstruct or undo every unsafe transition.
+
+**Rule of thumb:** add context before autonomy, durable state before recovery, effect semantics before retries, evidence before completion, and evaluation before self-improvement.
+
+## 3. Build the runtime around six working parts
+
+Most harness designs become easier to reason about when you separate six working parts. They can live in one process or several services; the boundary matters more than the deployment diagram.
+
+### Context
+
+Context is not “whatever fits in the prompt.” It is a compiled view of the current task: instructions, user intent, relevant files or records, prior attempts, tool results, and selected memory. Useful context has provenance—where each item came from—and authority—why it may be used now.
+
+Good context assembly prefers the smallest sufficient set. It reveals more only when the task needs it. It also survives a fresh-session test: another worker should be able to reconstruct the material inputs without relying on an old chat window.
+
+### Capabilities
+
+A tool description is not the same as an available capability. The harness must bind the description to a concrete implementation, resource, identity, environment, and permission. “Send email” is incomplete until the system knows which account, recipients, scope, approval rule, and audit path apply.
+
+A capability can be discovered but denied, granted but unavailable, or invoked and failed. Preserve those states. Otherwise the model receives vague errors and begins guessing about powers it does not have.
+
+### Environment
+
+The environment holds the files, processes, services, networks, and credentials through which work happens. Isolation answers “what can this process reach?” Custody answers “who controls the process, data, credentials, artifacts, and lifecycle?” They are related but not interchangeable.
+
+A local process may still hold broad credentials. A remote sandbox may be well isolated and short-lived. State the environment contract directly: mounted data, network access, secrets, cleanup, artifact export, and revocation.
+
+### State
+
+Keep canonical facts separate from convenient views. An append-only event journal or a small set of durable records can describe what was requested, attempted, observed, and decided. Checkpoints and summaries help resume work, but they are derived representations and may be incomplete.
+
+The practical test is simple: crash the process after a meaningful step. Can a fresh worker tell what definitely happened, what may have happened, and what the next safe action is?
+
+### Control
+
+A loop is useful when the next action depends on new observations. A workflow is useful when the sequence is mostly known. A graph is useful when state transitions, joins, or branches need to be explicit. Delegation is useful when work can be separated by contract.
+
+None is universally superior. Choose the simplest control structure that represents the problem honestly. Every long-running structure needs admission, budgets, cancellation, stopping conditions, and a way to return inconclusive rather than wandering forever.
+
+### Memory
+
+Memory is selected information that can influence future work. A transcript is history, not automatically memory. Useful memory needs rules for writing, retrieval, correction, expiry, deletion, and authority. A summary must not turn uncertainty into fact.
+
+Continuity also includes unfinished responsibility. “Waiting for the clinic to reply” is not merely a remembered sentence; it needs an owner, current evidence, a wake condition, the next safe action, and a way to close or release the responsibility.
+
+<SystemTrace />
+
+The trace is a reading aid, not a mandatory service layout. A small application might implement every step in one program. A larger system might distribute them across a control plane, workers, stores, and evaluators.
+
+## 4. Make action bounded and recoverable
+
+The hardest harness problems appear when an agent can change the world. External systems do not share one transaction with your local state. A timeout does not always mean failure; the remote action may have committed while its response was lost.
+
+Before a consequential action, record an **effect intent**: the requested change, its authority, parameters, and stable request key. Then attempt the action and record what you actually learned.
+
+Useful effect states include:
+
+- **not attempted** — no external request was sent;
+- **reported success** — the provider says it succeeded, but the outcome may still need checking;
+- **definite failure** — the provider rejected the action without committing it;
+- **ambiguous** — the response was lost or does not establish the outcome;
+- **reconciled success or failure** — a later query established the external state;
+- **conflict** — the observed state does not match the intended change.
+
+When the result is ambiguous, reconcile before retrying. Query the provider using the same business request identifier. If the effect already exists, continue from it. If the provider can establish that nothing committed and the same key is safe to reuse, retry under the original intent. If neither is possible, stop and ask for help.
+
+Idempotency reduces the chance that repeated delivery creates repeated business effects. It is not magic. The key must represent the same business request, survive retries, and be understood by the downstream system. Creating a new key for every attempt defeats the point.
+
+Authority needs the same concreteness. Replace broad phrases such as “the agent has access” with grants scoped by principal, task, capability, resource, time, and revocation condition. Use leases and fencing when several workers can compete for the same work: once ownership changes, a stale worker must be unable to commit a late result.
+
+Cancellation is also layered. Stopping generation does not cancel an already-dispatched API request. Revoking a capability does not reverse an external effect. Define what cancellation means for the model turn, worker, queued task, credential, and remote action separately.
+
+**Try it:** inject a timeout immediately after a remote write. Do not tell the worker whether the write committed. A trustworthy design should preserve the ambiguity, query external state, and either continue safely or escalate. If it simply retries, the recovery design is incomplete.
+
+## 5. Define what done means
+
+Agent systems often collapse several different events into one word: complete. Keeping them separate makes both debugging and user trust easier.
+
+1. **Execution** — a tool or worker finished running.
+2. **Effect success** — the intended external change occurred.
+3. **Evidence** — artifacts or observations support a statement about the result.
+4. **Verification** — a checker evaluated that evidence against a contract.
+5. **Policy** — the result is allowed under current rules.
+6. **Acceptance** — the authorized owner decides the result satisfies the intended outcome.
+7. **Closure** — the responsibility is completed, released, deferred, or transferred.
+
+A passing test is evidence for a code behavior. It is not proof that a payment provider holds the right state. A booking confirmation is evidence that an appointment exists. It is not permission to accept a changed doctor on the user's behalf.
+
+Define the success contract before the run. A useful contract names the outcome, evidence sources, evaluator, allowed uncertainty, and terminal dispositions. Let the checker return **confirmed**, **refuted**, or **inconclusive**. Missing evidence should not silently become a pass.
+
+Maker/checker separation helps when the cost of a mistaken claim is meaningful. Independence does not come merely from calling a second model. The checker should resolve the relevant artifacts itself, use a locked contract, and lack authority to rewrite the evidence or approve its own changes.
+
+Keep open work visible. An unresolved responsibility should carry enough information to re-enter later: owner, current status, proved facts, uncertain effects, next wake condition, next safe action, and forbidden actions. Closure is a conscious disposition, not the disappearance of a chat.
+
+For low-risk tasks, many of these steps can be combined. The point is not bureaucracy. The point is knowing which guarantee you actually have when the interface says “done.”
+
+## 6. Choose architectures by responsibility
+
+There is no single best agent architecture. A coding assistant, workflow runtime, autonomous software worker, verification service, and personal agent solve different problems and operate under different authority.
+
+Compare architectures with the same questions:
+
+- **Boundary:** what is inside the harness, and what is left to the host or user?
+- **Control:** loop, workflow, graph, delegation, or a mixture?
+- **Context:** how is model-visible input assembled and reconstructed?
+- **Capabilities:** how are tools discovered, bound, granted, and revoked?
+- **State:** what is canonical, durable, replayable, and portable?
+- **Custody:** who controls runtime, credentials, sessions, and artifacts?
+- **Recovery:** what happens after crash, timeout, duplicate delivery, or stale work?
+- **Authority:** which actions and decisions are permitted, and for whom?
+- **Verification:** what proves outcomes independently of the maker's narration?
+- **Completion:** who may accept, defer, release, or reopen work?
+- **Observability and security:** can the effective system be inspected without exposing sensitive data?
+- **Excluded responsibility:** what important problem does this architecture deliberately not solve?
+
+The last question prevents feature-list comparisons. A framework may provide durable graph execution without owning credential policy. A coding agent may excel at repository work without owning deployment. A verification product may inspect a pull request without owning the build environment or product acceptance. These are boundaries, not automatic defects.
+
+Our case corpus spans coding agents, graph runtimes, serverless agent platforms, long-running developer harnesses, multi-agent systems, verification tools, and personal-agent designs. The recurring lesson is that mechanisms transfer better than product categories. Context manifests, capability grants, journals, outboxes, reconciliation, maker/checker separation, and explicit completion contracts can appear in very different systems.
+
+Select the architecture whose owned responsibilities match your actual failure costs. Then test the seams where responsibility changes hands.
+
+## 7. Learn by building and breaking
+
+The fastest way to understand a harness is to construct one in layers and inject failures after every addition. A practical lab sequence is:
+
+1. Call a model and record the raw request and response.
+2. Add a small, reconstructable context package.
+3. Register one typed capability and make denial explicit.
+4. Run inside a bounded environment with narrow credentials.
+5. Add a durable journal and resume after a forced crash.
+6. Bound the loop with budgets, cancellation, and a clear stop policy.
+7. Add selected memory with correction and deletion paths.
+8. Record effect intents and recover from an ambiguous commit.
+9. Add a checker that reads evidence independently.
+10. Compare a loop with an explicit workflow or graph.
+11. Run the same task across model-and-harness combinations.
+12. Build a small inspector showing what happened and why the run stopped.
+
+For a capstone, choose a task with one external effect and one approval boundary. Demonstrate the happy path, then crash the worker, lose a provider response, return a stale worker after takeover, remove a permission, corrupt a checkpoint, and provide insufficient evidence. A polished success path teaches less than a system that can preserve uncertainty and recover honestly.
+
+Evaluation should use the **model-and-harness configuration** as the unit. If you change the model, context compiler, tools, permissions, or stop policy, you changed the system under test. Record the configuration and compare outcomes, trajectories, recoverability, cost, and human intervention.
+
+When the harness learns from failures, keep the improvement loop separate from its judge. A proposed prompt change, tool policy, or recovery rule should enter a registry with a motivating incident, expected benefit, failure mode, test fixture, owner, and retirement condition. Promote it gradually. Do not let the system rewrite the evaluation that declares the change successful.
+
+## A compact design worksheet
+
+Before implementing an agent system, answer these questions in plain language:
+
+1. What outcome is the system responsible for?
+2. Which person or organization is the principal?
+3. What may the system observe, and what may it change?
+4. Which decisions always remain with a human or external policy owner?
+5. What context is required for one good decision?
+6. Which capabilities exist, and how are they bound to identities and environments?
+7. What facts must survive a crash?
+8. Which external effects can become ambiguous or duplicated?
+9. How will those effects be identified and reconciled?
+10. What evidence proves the outcome?
+11. Who verifies, who accepts, and how can the work be reopened?
+12. What important responsibility is intentionally excluded?
+
+If any answer is “the model will handle it,” translate that into an observable mechanism or state that the limitation is deliberate.
+
+## Sources and next reading
+
+This short guide is a synthesis of a larger working manuscript and its source-inspected case corpus. These public resources are good next stops:
+
+- [What Is a Harness?](https://earendil.com/posts/what-is-a-harness/) by Earendil — a clear beginner model and an argument for adaptable, user-owned harnesses.
+- [Learn Harness Engineering](https://walkinglabs.github.io/learn-harness-engineering/en/) by Walking Labs — a structured course focused on harness concepts and practice.
+- [Awesome Harness Engineering](https://github.com/walkinglabs/awesome-harness-engineering) — a growing map of tools, systems, and learning resources.
+- [Why Agents Fail](https://github.com/RasaHQ/why-agents-fail) by Rasa — a failure-oriented taxonomy for agent systems.
+- [Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents) by Anthropic — practical patterns for progress files, scoped tasks, and resumable work.
+- [The anatomy of an agent harness](https://www.langchain.com/blog/the-anatomy-of-an-agent-harness) by LangChain — a runtime-oriented breakdown of common components.
+- [12-Factor Agents](https://github.com/humanlayer/12-factor-agents) by HumanLayer — principles for composable, production-oriented agent software.
+
+For the deeper version of the boundary argument, [read the full first chapter](/fieldbook/the-model-is-not-the-agent).

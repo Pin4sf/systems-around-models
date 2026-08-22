@@ -1,35 +1,52 @@
 import Link from "next/link";
 import type { EssayMetadata } from "@/lib/content/schema";
 
-function SequenceLinks() {
+const guideSlug = "harness-engineering-study-guide";
+const firstChapterSlug = "the-model-is-not-the-agent";
+
+function SequenceLinks({ essay }: { essay: EssayMetadata }) {
+  const isGuide = essay.slug === guideSlug;
   return (
     <ol>
       <li>
-        <Link href="/">Fieldbook overview</Link>
+        <Link href="/#chapters">Course overview</Link>
       </li>
-      <li aria-current="page">The Model Is Not the Agent</li>
-      <li className="sequence-navigation__forthcoming">
-        <span>Next chapter</span>
-        Harness responsibilities in practice · forthcoming
+      <li aria-current={isGuide ? "page" : undefined}>
+        <span>Short course</span>
+        {isGuide ? "Harness Engineering Study Guide" : (
+          <Link href={`/fieldbook/${guideSlug}`}>Harness Engineering Study Guide</Link>
+        )}
       </li>
+      <li aria-current={!isGuide ? "page" : undefined}>
+        <span>Chapter 1 of 40</span>
+        {!isGuide ? "The Model Is Not the Agent" : (
+          <Link href={`/fieldbook/${firstChapterSlug}`}>The Model Is Not the Agent</Link>
+        )}
+      </li>
+      {!isGuide ? (
+        <li className="sequence-navigation__forthcoming">
+          <span>Up next</span>
+          The H0→H9 progression
+        </li>
+      ) : null}
     </ol>
   );
 }
 
-export function SequenceNavigation() {
+export function SequenceNavigation({ essay }: { essay: EssayMetadata }) {
   return (
     <aside className="sequence-navigation interface-text">
       <nav
         className="sequence-navigation__desktop"
-        aria-label="Harness Engineering sequence"
+        aria-label="Harness Engineering chapters"
       >
         <p className="eyebrow">Harness Engineering</p>
-        <SequenceLinks />
+        <SequenceLinks essay={essay} />
       </nav>
       <details className="sequence-navigation__mobile">
-        <summary role="button">Open sequence</summary>
-        <div aria-label="Harness Engineering sequence chapters">
-          <SequenceLinks />
+        <summary role="button">Open chapters</summary>
+        <div aria-label="Harness Engineering chapter list">
+          <SequenceLinks essay={essay} />
         </div>
       </details>
     </aside>
@@ -59,12 +76,12 @@ export function ArticlePager({ essay, releasedEssays }: ArticlePagerProps) {
         </Link>
       ) : (
         <Link
-          href="/#harness-engineering"
+          href="/#chapters"
           rel="prev"
-          aria-label="Previous: Harness Engineering overview"
+          aria-label="Previous: Course overview"
         >
           <span>Previous</span>
-          Harness Engineering overview
+          Course overview
         </Link>
       )}
       {next ? (
@@ -79,7 +96,7 @@ export function ArticlePager({ essay, releasedEssays }: ArticlePagerProps) {
       ) : (
         <p className="article-pager__forthcoming">
           <span>Next chapter</span>
-          Harness responsibilities in practice · forthcoming
+          The H0→H9 progression
         </p>
       )}
     </nav>

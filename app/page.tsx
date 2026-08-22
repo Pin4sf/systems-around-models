@@ -1,62 +1,72 @@
 import Link from "next/link";
 import { SystemTrace } from "@/components/diagrams/system-trace";
+import { harnessChapterCount, harnessCourse } from "@/lib/study-guide/harness-course";
 
 export default function HomePage() {
   return (
     <article className="homepage">
       <header className="homepage__hero prose">
-        <p className="eyebrow interface-text">The Agent Systems Fieldbook</p>
-        <h1>The model is only one part of the agent.</h1>
+        <p className="eyebrow interface-text">A free, practical study guide</p>
+        <h1>Harness Engineering, from first principles.</h1>
         <p className="homepage__lede">
-          Systems Around Models is an independent fieldbook for examining the harnesses, memory,
-          authority, and evidence that turn a model response into work in the world.
+          Learn the systems around a model: instructions, tools, runtime loops, environments,
+          state, memory, authority, recovery, verification, and completion. Read it in order or
+          use it as a reference while you build.
         </p>
-        <Link className="homepage__chapter-link interface-text" href="/fieldbook/the-model-is-not-the-agent">
-          Start with the model
+        <p className="homepage__course-stats interface-text">
+          {harnessChapterCount} chapters · 12 labs · 1 capstone
+        </p>
+        <Link className="homepage__chapter-link interface-text" href="/fieldbook/harness-engineering-study-guide">
+          Start reading
         </Link>
       </header>
 
       <SystemTrace />
 
-      <section className="homepage__section prose" aria-labelledby="harness-engineering">
-        <p className="eyebrow interface-text">Sequence one</p>
-        <h2 id="harness-engineering">Harness Engineering</h2>
+      <section className="homepage__section prose" aria-labelledby="what-you-will-learn">
+        <p className="eyebrow interface-text">What this guide teaches</p>
+        <h2 id="what-you-will-learn">The model is one component. The system does the work.</h2>
         <p>
-          A capable model still needs a system that can admit work, assemble context, constrain
-          capabilities, preserve state, and verify effects. This sequence studies that boundary:
-          the part that makes a model usable, legible, and accountable in a real environment.
+          A useful agent needs more than a prompt and a tool call. It needs a harness that can
+          assemble the right context, bind the right capabilities, preserve enough state to
+          recover, handle ambiguous effects, and distinguish execution from verified completion.
+          The guide builds that understanding one responsibility at a time.
         </p>
       </section>
 
-      <section className="homepage__section prose" aria-labelledby="memory-engineering">
-        <p className="eyebrow interface-text">Sequence two</p>
-        <h2 id="memory-engineering">Memory Engineering</h2>
-        <p>
-          Memory is not a longer prompt. It is the work of deciding what a system may retain, how
-          that record can be inspected and corrected, and when a past event should change the next
-          decision. This sequence follows continuity without confusing accumulation for truth.
-        </p>
-      </section>
-
-      <section className="homepage__promises" aria-label="Publication promises">
-        <div>
-          <h2>Evidence before confidence</h2>
+      <section className="course-map" id="chapters" aria-labelledby="course-map-title">
+        <div className="course-map__heading prose">
+          <p className="eyebrow interface-text">The complete syllabus</p>
+          <h2 id="course-map-title">The curriculum behind the guide</h2>
           <p>
-            Important claims name their evidence state, sources, scope, and falsifiers so readers
-            can inspect what the fieldbook knows and what it does not.
+            Start with the complete short guide, then use this map to go deeper. It comes from a
+            forty-chapter working manuscript built from agent runtimes, coding agents, workflow
+            systems, memory systems, evaluation research, and failure reports. Detailed chapters
+            will be released as they are edited for the web.
           </p>
         </div>
-        <div>
-          <h2>Corrections stay visible</h2>
-          <p>
-            A claim can be challenged with counter-evidence. Substantive corrections become part
-            of the public revision record rather than disappearing into an unmarked rewrite.
-          </p>
+        <div className="course-map__parts">
+          {harnessCourse.map((part) => (
+            <section className="course-part" key={part.id} aria-labelledby={`${part.id}-title`}>
+              <div className="course-part__heading">
+                <h3 id={`${part.id}-title`}>{part.label}</h3>
+                <span className="interface-text">{part.chapters.length} chapters</span>
+              </div>
+              <p>{part.description}</p>
+              <ol start={part.chapters[0]?.number}>
+                {part.chapters.map((chapter) => (
+                  <li key={chapter.number}>
+                    {chapter.href ? <Link href={chapter.href}>{chapter.title}</Link> : chapter.title}
+                  </li>
+                ))}
+              </ol>
+            </section>
+          ))}
         </div>
       </section>
 
       <footer className="homepage__status interface-text">
-        <p>Alpha publication · Fieldbook v0.1 · First chapter in review</p>
+        <p>Public working edition · Read the short course now; detailed chapters follow</p>
       </footer>
     </article>
   );

@@ -1,0 +1,24 @@
+id: source-walkinglabs-learn-harness-engineering
+title: Learn Harness Engineering
+author: Walking Labs
+canonical_url: https://walkinglabs.github.io/learn-harness-engineering/en/
+published_at: 2026-03-29
+retrieved_at: 2026-08-22
+repository_commit: e205c6f1d3cd6455ac4db9ecf6e3838a6dcda513
+inspected_paths: []
+source_type: first-party-course
+basis: Direct reading of the public course landing page and its linked first-party repository and license.
+license_status: MIT
+evidence_grade: FD
+observed_mechanisms:
+  - description: The course combines lectures, projects, a resource library, and design breakdowns around explicit harness boundaries.
+    evidence_grade: FD
+    basis: The public landing page names these learning paths and their intended use.
+author_reported_claims:
+  - The course teaches environment design, state management, verification, and control systems for reliable coding agents.
+unknowns:
+  - This record does not independently evaluate learner outcomes or the transferability of every course mechanism.
+falsifiers:
+  - The maintainers remove or materially revise the named course structure and learning objectives.
+last_validated: 2026-08-22
+correction_ledger_status: reviewed

@@ -1,8 +1,21 @@
 import { expect, test } from "@playwright/test";
 
 const route = "/fieldbook/the-model-is-not-the-agent";
+const guideRoute = "/fieldbook/harness-engineering-study-guide";
 
-test("@desktop reader exposes the chapter, rails, evidence, and keyboard path", async ({
+test("@desktop homepage leads to a complete readable Harness Engineering guide", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.getByRole("link", { name: "Start reading" })).toHaveAttribute("href", guideRoute);
+  await page.getByRole("link", { name: "Start reading" }).click();
+  await expect(
+    page.getByRole("heading", { name: "Harness Engineering: A Practical Study Guide" }),
+  ).toBeVisible();
+  await expect(page.getByText(/Complete short course/)).toBeVisible();
+  await expect(page.getByRole("heading", { name: "7. Learn by building and breaking" })).toBeVisible();
+  await expect(page.getByRole("group", { name: /evidence/i })).toHaveCount(0);
+});
+
+test("@desktop reader exposes a simple chapter and ordinary study navigation", async ({
   page,
 }) => {
   const javascriptRequests: string[] = [];
@@ -37,18 +50,16 @@ test("@desktop reader exposes the chapter, rails, evidence, and keyboard path", 
     dateModified: "2026-08-21",
   });
   await expect(
-    page.getByRole("navigation", { name: "Harness Engineering sequence" }),
+    page.getByRole("navigation", { name: "Harness Engineering chapters" }),
   ).toBeVisible();
   await expect(page.getByRole("navigation", { name: "On this page" })).toBeVisible();
-  await expect(page.getByRole("button", { name: "Open sequence" })).toBeHidden();
+  await expect(page.getByRole("button", { name: "Open chapters" })).toBeHidden();
 
-  const evidenceSummary = page.getByText("Proposed", { exact: true }).first();
-  await evidenceSummary.focus();
-  await page.keyboard.press("Enter");
-  await expect(page.getByText(/Introduced by Systems Around Models as a claim, pattern, or working method/).first()).toBeVisible();
+  await expect(page.getByText("Chapter 1 of 40").first()).toBeVisible();
+  await expect(page.getByRole("group", { name: /evidence/i })).toHaveCount(0);
   expect(javascriptRequests).toEqual([]);
 
-  const correction = page.getByRole("link", { name: "Challenge this claim" });
+  const correction = page.getByRole("link", { name: "Suggest a correction" });
   await expect(correction).toHaveAttribute(
     "href",
     /github\.com\/Pin4sf\/systems-around-models\/issues\/new/,
@@ -56,17 +67,15 @@ test("@desktop reader exposes the chapter, rails, evidence, and keyboard path", 
   const correctionBody = new URL(await correction.getAttribute("href") ?? "").searchParams.get(
     "body",
   );
-  expect(correctionBody).toContain("Repository: Pin4sf/systems-around-models");
-  expect(correctionBody).toContain(`Page route: ${route}`);
-  expect(correctionBody).toContain("Article revision: revision-fieldbook-essay-001");
-  expect(correctionBody).toContain("Section anchor: #failure-before-definition");
-  expect(correctionBody).toContain("Claim ID: claim-harness-capability-configuration");
+  expect(correctionBody).toContain(`Page: ${route}`);
+  expect(correctionBody).toContain("Edition: revision-fieldbook-essay-001");
+  expect(correctionBody).toContain("What should change?");
 
   await page.setViewportSize({ width: 390, height: 844 });
-  await expect(page.getByRole("button", { name: "Open sequence" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Open chapters" })).toBeVisible();
   await expect(page.getByRole("button", { name: "Open contents" })).toBeVisible();
   await expect(
-    page.getByRole("navigation", { name: "Harness Engineering sequence" }),
+    page.getByRole("navigation", { name: "Harness Engineering chapters" }),
   ).toBeHidden();
 });
 
@@ -83,7 +92,8 @@ test("@desktop discovery endpoints expose only released publication routes", asy
   const rss = await rssResponse.text();
 
   expect(sitemapResponse.ok()).toBe(true);
-  expect(sitemap.match(/<url>/g)).toHaveLength(2);
+  expect(sitemap.match(/<url>/g)).toHaveLength(3);
+  expect(sitemap).toContain(guideRoute);
   expect(sitemap).toContain(route);
   expect(robots).toContain("Sitemap:");
   expect(rssResponse.headers()["content-type"]).toContain("application/rss+xml");
@@ -91,7 +101,7 @@ test("@desktop discovery endpoints expose only released publication routes", asy
   expect(rss).toContain("revision-fieldbook-essay-001");
 });
 
-test("@desktop print and reduced-motion modes preserve evidence without motion", async ({
+test("@desktop print and reduced-motion modes preserve the guide without motion", async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
@@ -104,8 +114,8 @@ test("@desktop print and reduced-motion modes preserve evidence without motion",
 
   await page.emulateMedia({ media: "print", reducedMotion: "reduce" });
   await expect(page.getByRole("navigation", { name: "On this page" })).toBeHidden();
-  await expect(page.locator(".evidence-disclosure summary").first()).toBeVisible();
-  await expect(page.locator(".revision-notice--end")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Sources and further reading" })).toBeVisible();
+  await expect(page.locator(".study-guide-footer")).toBeVisible();
   const traceColor = await page.locator(".system-trace__step").first().evaluate(
     (element) => getComputedStyle(element).color,
   );
@@ -115,10 +125,10 @@ test("@desktop print and reduced-motion modes preserve evidence without motion",
 test("@mobile reader preserves one prose column and native navigation drawers", async ({
   page,
 }) => {
-  await page.goto(route);
-  await expect(page.getByRole("button", { name: "Open sequence" })).toBeVisible();
-  await page.getByRole("button", { name: "Open sequence" }).click();
-  await expect(page.getByRole("link", { name: "Fieldbook overview" }).last()).toBeVisible();
+  await page.goto(guideRoute);
+  await expect(page.getByRole("button", { name: "Open chapters" })).toBeVisible();
+  await page.getByRole("button", { name: "Open chapters" }).click();
+  await expect(page.getByRole("link", { name: "Course overview" }).last()).toBeVisible();
   const gridColumnCount = await page.locator(".article-reader").evaluate((element) =>
     getComputedStyle(element).gridTemplateColumns.split(" ").length,
   );
@@ -129,28 +139,25 @@ test("@mobile reader preserves one prose column and native navigation drawers", 
   expect(proseFitsViewport).toBe(true);
 });
 
-test("@nojs reader keeps meaning and ordinary navigation visible", async ({ page }) => {
-  await page.goto(route);
+test("@nojs reader keeps the lesson, sources, and ordinary navigation visible", async ({ page }) => {
+  await page.goto(guideRoute);
   await expect(
-    page.getByRole("heading", { name: "The Model Is Not the Agent" }),
+    page.getByRole("heading", { name: "Harness Engineering: A Practical Study Guide" }),
   ).toBeVisible();
-  await expect(page.getByText(/Atlas is a fictional software-delivery agent/)).toBeVisible();
+  await expect(page.getByText(/You can read this page in one sitting/)).toBeVisible();
   await expect(page.getByRole("list", { name: "Agent system trace" })).toBeVisible();
-  const proposedDisclosure = page.getByText("Proposed", { exact: true }).first();
-  await expect(proposedDisclosure).toBeVisible();
-  await proposedDisclosure.click();
-  await expect(page.getByText(/Introduced by Systems Around Models as a claim, pattern, or working method/).first()).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Sources and next reading" })).toBeVisible();
   await expect(page.getByRole("link", { name: "What is a Harness?" }).first()).toBeVisible();
-  const correction = page.getByRole("link", { name: "Challenge this claim" });
+  const correction = page.getByRole("link", { name: "Suggest a correction" });
   const correctionBody = new URL(await correction.getAttribute("href") ?? "").searchParams.get(
     "body",
   );
-  expect(correctionBody).toContain("Counter-evidence (public links only):");
+  expect(correctionBody).toContain("Public source or counter-example:");
   expect(correctionBody).toContain(
     "Please do not include credentials, personal data, health data, private traces, or copyrighted documents.",
   );
   await expect(
-    page.getByRole("link", { name: "Previous: Harness Engineering overview" }),
+    page.getByRole("link", { name: "Previous: Course overview" }),
   ).toBeVisible();
-  await expect(page.locator('a[rel="next"]')).toHaveCount(0);
+  await expect(page.getByRole("link", { name: "Next: The Model Is Not the Agent" })).toBeVisible();
 });

@@ -1,0 +1,26 @@
+id: source-rasa-why-agents-fail
+title: Why Agents Fail
+author: Rasa
+canonical_url: https://github.com/RasaHQ/why-agents-fail
+published_at: 2026-04-23
+retrieved_at: 2026-08-22
+repository_commit: 48039ddc2c6d7bddcd5a829dbd287f1ed43dfd00
+inspected_paths:
+  - README.md
+  - LICENSE
+source_type: first-party-course
+basis: Direct inspection of the public course README and MIT license at the pinned commit.
+license_status: MIT
+evidence_grade: FD
+observed_mechanisms:
+  - description: The course teaches harness concepts through twelve failure-led episodes and one evolving reference agent.
+    evidence_grade: FD
+    basis: The pinned README provides the curriculum, learning objectives, and branch-based lesson structure.
+author_reported_claims:
+  - The course covers context, typed state, verification, evaluation, observability, and conversational-agent failure patterns.
+unknowns:
+  - This record does not reproduce the course demonstrations or independently validate its comparative performance claims.
+falsifiers:
+  - The pinned course materials do not contain the stated twelve-episode failure-led curriculum.
+last_validated: 2026-08-22
+correction_ledger_status: reviewed

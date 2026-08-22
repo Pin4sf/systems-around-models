@@ -4,7 +4,7 @@ import { canonicalUrl, resolveSiteUrl } from "@/lib/publication/site-url";
 
 export const publicationTitle = "Systems Around Models";
 export const publicationDescription =
-  "An independent fieldbook for examining the harnesses, memory, authority, and evidence that turn model responses into work.";
+  "A practical study guide to the harnesses, memory, environments, authority, recovery, and verification that turn model responses into reliable work.";
 const socialImage = {
   url: "/social/systems-around-models.png",
   width: 1200,

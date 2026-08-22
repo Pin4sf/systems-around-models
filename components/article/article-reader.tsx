@@ -2,25 +2,26 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import type { HTMLAttributes } from "react";
 import { ArticleContents, type ArticleHeading } from "@/components/article/article-contents";
-import { EvidenceBadge } from "@/components/article/evidence-badge";
-import { RevisionNotice } from "@/components/article/revision-notice";
+import { StudyGuideFooter } from "@/components/article/study-guide-footer";
 import {
   ArticlePager,
   SequenceNavigation,
 } from "@/components/article/sequence-navigation";
 import { SystemTrace } from "@/components/diagrams/system-trace";
-import type {
-  ClaimRecord,
-  EssayMetadata,
-  RevisionRecord,
-  SourceRecord,
-} from "@/lib/content/schema";
+import type { EssayMetadata, RevisionRecord } from "@/lib/content/schema";
 import { compilePublicMdx } from "@/lib/content/compile-public-mdx";
 import { slugifyHeading } from "@/lib/content/slugify";
+import { harnessChapterCount } from "@/lib/study-guide/harness-course";
 
 const essayPaths: Record<string, string> = {
+  "harness-engineering-study-guide": "harness/harness-engineering-study-guide.mdx",
   "the-model-is-not-the-agent": "harness/the-model-is-not-the-agent.mdx",
 };
+
+function readerPosition(essay: EssayMetadata) {
+  if (essay.slug === "harness-engineering-study-guide") return "Complete short course";
+  return `Chapter 1 of ${harnessChapterCount}`;
+}
 
 function articleHeadings(source: string): ArticleHeading[] {
   return [...source.matchAll(/^##\s+(.+?)\s*$/gm)].map((match) => ({
@@ -32,22 +33,12 @@ function articleHeadings(source: string): ArticleHeading[] {
 type ArticleReaderProps = {
   essay: EssayMetadata;
   revision: RevisionRecord;
-  claims: Map<string, ClaimRecord>;
-  sources: Map<string, SourceRecord>;
   releasedEssays: EssayMetadata[];
-};
-
-type MdxEvidenceBadgeProps = {
-  claimId: string;
-  sectionAnchor?: string;
-  challengeLabel?: string;
 };
 
 export async function ArticleReader({
   essay,
   revision,
-  claims,
-  sources,
   releasedEssays,
 }: ArticleReaderProps) {
   const relativePath = essayPaths[essay.slug];
@@ -58,7 +49,6 @@ export async function ArticleReader({
     "utf8",
   );
   const headings = articleHeadings(source);
-  const route = `/fieldbook/${essay.slug}`;
 
   const Heading = ({ children, ...props }: HTMLAttributes<HTMLHeadingElement>) => {
     const label = typeof children === "string" ? children : String(children);
@@ -71,43 +61,34 @@ export async function ArticleReader({
     );
   };
 
-  const BoundEvidenceBadge = (props: MdxEvidenceBadgeProps) => (
-    <EvidenceBadge
-      {...props}
-      claims={claims}
-      sources={sources}
-      route={route}
-      revisionId={revision.id}
-    />
-  );
+  const HiddenPublicationNote = () => null;
   const ArticleSystemTrace = () => <SystemTrace headingLevel={3} />;
 
   const { content } = await compilePublicMdx<EssayMetadata>({
     source,
     components: {
       h2: Heading,
-      EvidenceBadge: BoundEvidenceBadge,
+      EvidenceBadge: HiddenPublicationNote,
       SystemTrace: ArticleSystemTrace,
     },
   });
 
   return (
     <div className="article-reader">
-      <SequenceNavigation />
+      <SequenceNavigation essay={essay} />
       <article className="article-reader__article">
         <header className="article-reader__header">
           <p className="eyebrow interface-text">
-            {essay.sequence} · Chapter {essay.sequencePosition}
+            {essay.sequence} · {readerPosition(essay)}
           </p>
           <h1>{essay.title}</h1>
           <p className="article-reader__description">{essay.description}</p>
           <p className="article-reader__byline interface-text">
             By {essay.authors.join(", ")} · {essay.readingTimeSource}
           </p>
-          <RevisionNotice essay={essay} revision={revision} placement="beginning" />
         </header>
         <div className="article-reader__prose prose">{content}</div>
-        <RevisionNotice essay={essay} revision={revision} placement="end" />
+        <StudyGuideFooter essay={essay} revision={revision} />
         <ArticlePager essay={essay} releasedEssays={releasedEssays} />
       </article>
       <ArticleContents headings={headings} />

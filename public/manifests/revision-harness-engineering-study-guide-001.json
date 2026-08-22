@@ -1,0 +1,100 @@
+{
+  "id": "revision-harness-engineering-study-guide-001",
+  "essaySlug": "harness-engineering-study-guide",
+  "revision": 1,
+  "publishedAt": "2026-08-22",
+  "substantivelyRevisedAt": "2026-08-22",
+  "summary": "Initial public edition of the complete short Harness Engineering study guide.",
+  "affectedClaimIds": [
+    "claim-ambiguous-effect-failure-pattern",
+    "claim-architecture-selection-responsibilities",
+    "claim-earendil-beginner-harness-map",
+    "claim-earendil-harness-ownership-philosophy",
+    "claim-harness-capability-configuration",
+    "claim-harness-failure-injection-learning-method",
+    "claim-harness-h0-h9-progression",
+    "claim-system-trace-responsibility-checklist"
+  ],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-a261feaa38335c81871d6422e6f8946d33ca8d579f697197413980f3da43297a",
+  "sourceIds": [
+    "source-anthropic-effective-long-running-harnesses",
+    "source-earendil-what-is-a-harness",
+    "source-harness-engineering-fieldbook-v1",
+    "source-humanlayer-12-factor-agents",
+    "source-langchain-anatomy-agent-harness",
+    "source-rasa-why-agents-fail",
+    "source-walkinglabs-awesome-harness-engineering",
+    "source-walkinglabs-learn-harness-engineering"
+  ],
+  "sourceValidationDates": {
+    "source-earendil-what-is-a-harness": "2026-08-21",
+    "source-harness-engineering-fieldbook-v1": "2026-08-21",
+    "source-walkinglabs-learn-harness-engineering": "2026-08-22",
+    "source-walkinglabs-awesome-harness-engineering": "2026-08-22",
+    "source-rasa-why-agents-fail": "2026-08-22",
+    "source-anthropic-effective-long-running-harnesses": "2026-08-22",
+    "source-langchain-anatomy-agent-harness": "2026-08-22",
+    "source-humanlayer-12-factor-agents": "2026-08-22"
+  },
+  "schemaVersion": 1,
+  "validationSchemaVersion": "publication-v1",
+  "sources": [
+    {
+      "id": "source-anthropic-effective-long-running-harnesses",
+      "title": "Effective harnesses for long-running agents",
+      "canonicalUrl": "https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-earendil-what-is-a-harness",
+      "title": "What is a Harness?",
+      "canonicalUrl": "https://earendil.com/posts/what-is-a-harness/",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "unknown"
+    },
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-humanlayer-12-factor-agents",
+      "title": "12-Factor Agents",
+      "canonicalUrl": "https://github.com/humanlayer/12-factor-agents",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "Apache-2.0"
+    },
+    {
+      "id": "source-langchain-anatomy-agent-harness",
+      "title": "The Anatomy of an Agent Harness",
+      "canonicalUrl": "https://www.langchain.com/blog/the-anatomy-of-an-agent-harness",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-rasa-why-agents-fail",
+      "title": "Why Agents Fail",
+      "canonicalUrl": "https://github.com/RasaHQ/why-agents-fail",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "MIT"
+    },
+    {
+      "id": "source-walkinglabs-awesome-harness-engineering",
+      "title": "Awesome Harness Engineering",
+      "canonicalUrl": "https://github.com/walkinglabs/awesome-harness-engineering",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "CC0-1.0"
+    },
+    {
+      "id": "source-walkinglabs-learn-harness-engineering",
+      "title": "Learn Harness Engineering",
+      "canonicalUrl": "https://walkinglabs.github.io/learn-harness-engineering/en/",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "MIT"
+    }
+  ]
+}

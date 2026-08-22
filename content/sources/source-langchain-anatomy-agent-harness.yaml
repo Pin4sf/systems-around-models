@@ -1,0 +1,23 @@
+id: source-langchain-anatomy-agent-harness
+title: The Anatomy of an Agent Harness
+author: Vivek Trivedy and LangChain
+canonical_url: https://www.langchain.com/blog/the-anatomy-of-an-agent-harness
+published_at: 2026-03-10
+retrieved_at: 2026-08-22
+inspected_paths: []
+source_type: first-party-article
+basis: Direct reading of LangChain's public article at its current canonical URL.
+license_status: all-rights-reserved
+evidence_grade: FD
+observed_mechanisms:
+  - description: The article maps prompts, tools, bundled infrastructure, orchestration, middleware, durable state, context management, and verification to the harness.
+    evidence_grade: FD
+    basis: The public article explicitly presents these components as harness-level design choices.
+author_reported_claims:
+  - LangChain argues that harness engineering turns model intelligence into useful long-horizon work.
+unknowns:
+  - The article's broad boundary is an authored definition rather than a settled industry standard.
+falsifiers:
+  - LangChain revises the article so the named components are no longer presented as harness-level responsibilities.
+last_validated: 2026-08-22
+correction_ledger_status: reviewed
