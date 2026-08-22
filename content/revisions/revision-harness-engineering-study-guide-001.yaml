@@ -1,0 +1,16 @@
+id: revision-harness-engineering-study-guide-001
+target_slug: harness-engineering-study-guide
+revision: 1
+published_at: 2026-08-22
+substantively_revised_at: 2026-08-22
+summary: Initial public edition of the complete short Harness Engineering study guide.
+affected_claim_ids:
+  - claim-ambiguous-effect-failure-pattern
+  - claim-architecture-selection-responsibilities
+  - claim-earendil-beginner-harness-map
+  - claim-earendil-harness-ownership-philosophy
+  - claim-harness-capability-configuration
+  - claim-harness-h0-h9-progression
+  - claim-harness-failure-injection-learning-method
+  - claim-system-trace-responsibility-checklist
+correction_disposition: publication

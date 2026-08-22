@@ -1,5 +1,5 @@
 import { loadClaims, loadContent, loadRevisions, loadSources } from "@/lib/content/load-content";
-import { mkdtemp, mkdir, rm, writeFile } from "node:fs/promises";
+import { mkdtemp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 
@@ -78,6 +78,25 @@ describe("public content registry", () => {
     expect(
       revisions.get("revision-fieldbook-essay-001")?.affectedClaimIds,
     ).toContain("claim-earendil-harness-ownership-philosophy");
+  });
+
+  it("registers every external source named in the public study guide", async () => {
+    const content = await loadContent();
+    const guide = content.essays.get("harness-engineering-study-guide");
+    if (!guide) throw new Error("Expected public Harness Engineering study guide");
+    const source = await readFile(
+      path.join(process.cwd(), "content/essays/harness/harness-engineering-study-guide.mdx"),
+      "utf8",
+    );
+    const readingSection = source.split("## Sources and next reading")[1] ?? "";
+    const namedExternalUrls = [...readingSection.matchAll(/\]\((https?:\/\/[^)]+)\)/g)]
+      .map((match) => match[1]);
+    const registeredUrls = guide.sourceManifestIds
+      .map((sourceId) => content.sources.get(sourceId)?.canonicalUrl)
+      .filter((url): url is string => Boolean(url?.startsWith("http")));
+
+    expect(namedExternalUrls).toHaveLength(7);
+    expect(registeredUrls).toEqual(expect.arrayContaining(namedExternalUrls));
   });
 
   it("names malformed public fixtures when validation rejects them", async () => {

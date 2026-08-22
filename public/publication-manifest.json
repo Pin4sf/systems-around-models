@@ -18,7 +18,7 @@
         "claim-system-trace-responsibility-checklist"
       ],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-3efaf5e305c4b1e4e8c49a7d105d0edb774068f89715371106e27d263784748f",
+      "contentHash": "sha256-d41e5dc591e0a52e02fa6ed87d1f8e32a308b4a452af4568c312dc9d2570d746",
       "sourceIds": [
         "source-earendil-what-is-a-harness",
         "source-harness-engineering-fieldbook-v1"
@@ -27,9 +27,53 @@
         "source-earendil-what-is-a-harness": "2026-08-21",
         "source-harness-engineering-fieldbook-v1": "2026-08-21"
       }
+    },
+    {
+      "id": "revision-harness-engineering-study-guide-001",
+      "essaySlug": "harness-engineering-study-guide",
+      "revision": 1,
+      "publishedAt": "2026-08-22",
+      "substantivelyRevisedAt": "2026-08-22",
+      "summary": "Initial public edition of the complete short Harness Engineering study guide.",
+      "affectedClaimIds": [
+        "claim-ambiguous-effect-failure-pattern",
+        "claim-architecture-selection-responsibilities",
+        "claim-earendil-beginner-harness-map",
+        "claim-earendil-harness-ownership-philosophy",
+        "claim-harness-capability-configuration",
+        "claim-harness-failure-injection-learning-method",
+        "claim-harness-h0-h9-progression",
+        "claim-system-trace-responsibility-checklist"
+      ],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-a261feaa38335c81871d6422e6f8946d33ca8d579f697197413980f3da43297a",
+      "sourceIds": [
+        "source-anthropic-effective-long-running-harnesses",
+        "source-earendil-what-is-a-harness",
+        "source-harness-engineering-fieldbook-v1",
+        "source-humanlayer-12-factor-agents",
+        "source-langchain-anatomy-agent-harness",
+        "source-rasa-why-agents-fail",
+        "source-walkinglabs-awesome-harness-engineering",
+        "source-walkinglabs-learn-harness-engineering"
+      ],
+      "sourceValidationDates": {
+        "source-earendil-what-is-a-harness": "2026-08-21",
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-walkinglabs-learn-harness-engineering": "2026-08-22",
+        "source-walkinglabs-awesome-harness-engineering": "2026-08-22",
+        "source-rasa-why-agents-fail": "2026-08-22",
+        "source-anthropic-effective-long-running-harnesses": "2026-08-22",
+        "source-langchain-anatomy-agent-harness": "2026-08-22",
+        "source-humanlayer-12-factor-agents": "2026-08-22"
+      }
     }
   ],
   "sources": [
+    {
+      "id": "source-anthropic-effective-long-running-harnesses",
+      "lastValidated": "2026-08-22"
+    },
     {
       "id": "source-earendil-what-is-a-harness",
       "lastValidated": "2026-08-21"
@@ -37,7 +81,27 @@
     {
       "id": "source-harness-engineering-fieldbook-v1",
       "lastValidated": "2026-08-21"
+    },
+    {
+      "id": "source-humanlayer-12-factor-agents",
+      "lastValidated": "2026-08-22"
+    },
+    {
+      "id": "source-langchain-anatomy-agent-harness",
+      "lastValidated": "2026-08-22"
+    },
+    {
+      "id": "source-rasa-why-agents-fail",
+      "lastValidated": "2026-08-22"
+    },
+    {
+      "id": "source-walkinglabs-awesome-harness-engineering",
+      "lastValidated": "2026-08-22"
+    },
+    {
+      "id": "source-walkinglabs-learn-harness-engineering",
+      "lastValidated": "2026-08-22"
     }
   ],
-  "buildId": "sha256-5a221c076737ec278357cd6d11b2fee2e3fa8530e1da00c2cf8c33df4572f4e0"
+  "buildId": "sha256-db38fb331bdf099bedf35421bf53aa834232dcf2df30c6cb517ecf286ff9d9b2"
 }

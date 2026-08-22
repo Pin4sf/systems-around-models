@@ -185,6 +185,15 @@ footer {
   line-height: 1.5;
 }
 
+.homepage__course-stats {
+  margin: 1.5rem 0 0;
+  color: var(--ink-muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
 .homepage__chapter-link {
   display: inline-block;
   margin-top: 2rem;
@@ -258,6 +267,99 @@ footer {
 }
 
 .homepage__section p:last-child {
+  margin-bottom: 0;
+}
+
+.course-map {
+  scroll-margin-top: 2rem;
+}
+
+.course-map__heading {
+  margin-bottom: clamp(2rem, 5vw, 4rem);
+}
+
+.course-map__heading h2 {
+  margin-bottom: 1.5rem;
+}
+
+.course-map__parts {
+  display: grid;
+  gap: 1px;
+  padding: 1px;
+  background: var(--rule);
+}
+
+.course-part {
+  display: grid;
+  grid-template-columns: minmax(12rem, 0.8fr) minmax(16rem, 1fr) minmax(18rem, 1.35fr);
+  gap: 1.5rem clamp(1.5rem, 4vw, 4rem);
+  padding: clamp(1.5rem, 4vw, 3rem);
+  background: var(--paper);
+}
+
+.course-part__heading h3 {
+  margin: 0;
+  font-family: var(--font-interface), Arial, sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: 0;
+  line-height: 1.35;
+}
+
+.course-part__heading span {
+  display: block;
+  margin-top: 0.5rem;
+  color: var(--ink-muted);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.course-part > p {
+  margin: 0;
+  color: var(--ink-muted);
+  font-size: 0.94em;
+  line-height: 1.55;
+}
+
+.course-part ol {
+  margin: 0;
+  padding-left: 2.2rem;
+  font-family: var(--font-interface), Arial, sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.course-part li + li {
+  margin-top: 0.55rem;
+}
+
+.course-part li::marker {
+  color: var(--ink-muted);
+  font-family: var(--font-trace), "SFMono-Regular", monospace;
+}
+
+.homepage__learning-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  scroll-margin-top: 2rem;
+  padding: 1px;
+  background: var(--rule);
+}
+
+.homepage__learning-grid > div {
+  padding: clamp(1.5rem, 4vw, 3rem);
+  background: var(--paper-deep);
+}
+
+.homepage__learning-grid h2 {
+  max-width: 15ch;
+  color: var(--evidence);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.homepage__learning-grid p:last-child {
+  max-width: 44ch;
   margin-bottom: 0;
 }
 
@@ -421,8 +523,36 @@ footer {
   font-size: 0.83em;
 }
 
+.article-reader__prose table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin-block: 2rem;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-family: var(--font-interface), Arial, sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.article-reader__prose th,
+.article-reader__prose td {
+  min-width: 8rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--rule);
+  text-align: left;
+  vertical-align: top;
+}
+
+.article-reader__prose th {
+  background: var(--paper-deep);
+  color: var(--ink);
+  font-weight: 750;
+}
+
 .beginner-map,
-.completion-map {
+.completion-map,
+.harness-levels {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1px;
@@ -431,13 +561,15 @@ footer {
 }
 
 .beginner-map > div,
-.completion-map > div {
+.completion-map > div,
+.harness-levels > div {
   padding: 1.25rem;
   background: var(--paper);
 }
 
 .beginner-map dt,
-.completion-map dt {
+.completion-map dt,
+.harness-levels dt {
   color: var(--evidence);
   font-family: var(--font-interface), Arial, sans-serif;
   font-size: 0.86rem;
@@ -446,7 +578,8 @@ footer {
 }
 
 .beginner-map dd,
-.completion-map dd {
+.completion-map dd,
+.harness-levels dd {
   margin: 0.55rem 0 0;
   font-size: 0.92em;
   line-height: 1.55;
@@ -487,6 +620,16 @@ footer {
 .sequence-navigation [aria-current="page"] {
   color: var(--ink);
   font-weight: 700;
+}
+
+.sequence-navigation [aria-current="page"] span {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--ink-muted);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .sequence-navigation__forthcoming {
@@ -708,6 +851,27 @@ footer {
   font-weight: 750;
 }
 
+.study-guide-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: clamp(4rem, 10vw, 7rem);
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink-muted);
+  font-size: 0.78rem;
+}
+
+.study-guide-footer p {
+  margin: 0;
+}
+
+.study-guide-footer a {
+  color: var(--ink);
+}
+
 .article-pager {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -798,6 +962,16 @@ footer {
     grid-template-columns: 1fr;
   }
 
+  .course-part,
+  .homepage__learning-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .study-guide-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
   .article-reader__header h1 {
     font-size: clamp(2.85rem, 15vw, 4.2rem);
   }
@@ -808,6 +982,7 @@ footer {
 
   .beginner-map,
   .completion-map,
+  .harness-levels,
   .article-pager {
     grid-template-columns: 1fr;
   }

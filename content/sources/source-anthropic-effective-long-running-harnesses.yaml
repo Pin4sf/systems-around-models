@@ -1,0 +1,23 @@
+id: source-anthropic-effective-long-running-harnesses
+title: Effective harnesses for long-running agents
+author: Justin Young and Anthropic
+canonical_url: https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents
+published_at: 2025-11-26
+retrieved_at: 2026-08-22
+inspected_paths: []
+source_type: first-party-article
+basis: Direct reading of Anthropic's public engineering article at its canonical URL.
+license_status: all-rights-reserved
+evidence_grade: FD
+observed_mechanisms:
+  - description: The article describes initializer and coding-agent roles, feature lists, progress artifacts, clean-state handoffs, and end-to-end testing.
+    evidence_grade: FD
+    basis: The named mechanisms are described by the team that built and evaluated the harness.
+author_reported_claims:
+  - The two-role harness helped agents make incremental progress across many context windows in the described web-application setting.
+unknowns:
+  - The article does not establish that the same harness is optimal for every domain or authority model.
+falsifiers:
+  - Anthropic corrects the article or publishes evidence that the named mechanisms did not support the described long-running experiment.
+last_validated: 2026-08-22
+correction_ledger_status: reviewed

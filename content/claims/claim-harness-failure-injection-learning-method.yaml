@@ -1,0 +1,12 @@
+id: claim-harness-failure-injection-learning-method
+statement: Building a harness in layers and injecting failures after each layer is a proposed practical method for learning which mechanism owns each recovery responsibility.
+label: proposed
+scope: Harness Engineering study guide
+source_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-walkinglabs-learn-harness-engineering
+  - source-rasa-why-agents-fail
+falsifiers:
+  - Comparative course results show that the layered failure-injection method produces less transferable understanding than a simpler implementation-first curriculum.
+last_reviewed: 2026-08-22
+revision: 1

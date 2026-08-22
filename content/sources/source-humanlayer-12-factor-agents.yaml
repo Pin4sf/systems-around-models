@@ -1,0 +1,26 @@
+id: source-humanlayer-12-factor-agents
+title: 12-Factor Agents
+author: HumanLayer
+canonical_url: https://github.com/humanlayer/12-factor-agents
+published_at: 2025-03-30
+retrieved_at: 2026-08-22
+repository_commit: d20c728368bf9c189d6d7aab704744decb6ec0cc
+inspected_paths:
+  - README.md
+  - LICENSE
+source_type: first-party-repository
+basis: Direct inspection of the public repository README and Apache license at the pinned commit.
+license_status: Apache-2.0
+evidence_grade: FD
+observed_mechanisms:
+  - description: The guide presents twelve factors covering prompts, context, state, control flow, pause and resume, human contact, and focused agents.
+    evidence_grade: FD
+    basis: The pinned README lists and links the twelve factors as production-oriented principles.
+author_reported_claims:
+  - The project proposes software-engineering principles for reliable and maintainable LLM-powered applications.
+unknowns:
+  - The principles are practitioner guidance and are not a universal conformance standard.
+falsifiers:
+  - The pinned repository does not contain the named twelve-factor structure or production-oriented framing.
+last_validated: 2026-08-22
+correction_ledger_status: reviewed

@@ -42,8 +42,8 @@ describe("deterministic public build manifest", () => {
     expect(manifest).toMatchObject({
       schemaVersion: 1,
       validationSchemaVersion: "publication-v1",
-      revisions: [
-        {
+      revisions: expect.arrayContaining([
+        expect.objectContaining({
           id: "revision-fieldbook-essay-001",
           essaySlug: "the-model-is-not-the-agent",
           publishedAt: "2026-08-21",
@@ -58,12 +58,30 @@ describe("deterministic public build manifest", () => {
             "claim-system-trace-responsibility-checklist",
           ],
           correctionDisposition: "publication",
-          sourceIds: [
+          sourceIds: expect.arrayContaining([
             "source-earendil-what-is-a-harness",
             "source-harness-engineering-fieldbook-v1",
-          ],
-        },
-      ],
+          ]),
+        }),
+        expect.objectContaining({
+          id: "revision-harness-engineering-study-guide-001",
+          essaySlug: "harness-engineering-study-guide",
+          publishedAt: "2026-08-22",
+          substantivelyRevisedAt: "2026-08-22",
+          summary: "Initial public edition of the complete short Harness Engineering study guide.",
+          correctionDisposition: "publication",
+          sourceIds: expect.arrayContaining([
+            "source-earendil-what-is-a-harness",
+            "source-harness-engineering-fieldbook-v1",
+            "source-walkinglabs-learn-harness-engineering",
+            "source-walkinglabs-awesome-harness-engineering",
+            "source-rasa-why-agents-fail",
+            "source-anthropic-effective-long-running-harnesses",
+            "source-langchain-anatomy-agent-harness",
+            "source-humanlayer-12-factor-agents",
+          ]),
+        }),
+      ]),
     });
     expect(manifest.buildId).toMatch(/^sha256-[a-f0-9]{64}$/);
     expect(manifest.revisions[0].contentHash).toMatch(/^sha256-[a-f0-9]{64}$/);
@@ -79,6 +97,12 @@ describe("deterministic public build manifest", () => {
         "utf8",
       ),
     ).resolves.toContain('"correctionDisposition": "publication"');
+    await expect(
+      readFile(
+        path.join(root, "public", "manifests", "revision-harness-engineering-study-guide-001.json"),
+        "utf8",
+      ),
+    ).resolves.toContain('"essaySlug": "harness-engineering-study-guide"');
   });
 
   it("is stable for identical content and changes its hashes when essay content changes", async () => {

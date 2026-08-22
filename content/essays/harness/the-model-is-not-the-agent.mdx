@@ -3,7 +3,7 @@ slug: the-model-is-not-the-agent
 title: The Model Is Not the Agent
 description: Why deployed agent capability depends on the model, harness, environment, and authority boundary rather than the model alone.
 sequence: Harness Engineering
-sequence_position: 1
+sequence_position: 2
 revision: 1
 authors:
   - Systems Around Models
@@ -15,9 +15,10 @@ source_manifest_ids:
   - source-earendil-what-is-a-harness
   - source-harness-engineering-fieldbook-v1
 revision_id: revision-fieldbook-essay-001
+previous_essay_slug: harness-engineering-study-guide
 ---
 
-## Failure Before Definition
+## Start with a failure
 
 Begin with a failure, because the failure draws a more useful boundary than a definition does.
 
@@ -35,11 +36,11 @@ Atlas is a fictional software-delivery agent investigating duplicate payments af
 
 The visible mistake appears in the model's sentence: it inferred failure and proposed a retry. But that sentence is only one event in the incident. The surrounding system admitted the work, exposed the payment capability, sent the request, lost certainty about the result, permitted a second attempt, and accepted evidence unrelated to whether one or two charges existed. No durable effect identifier connected the two attempts. No reconciliation step asked the provider what had committed. No independent success condition prevented “tests passed” from becoming the final report.
 
-The proposed risk is that an uncertain external result followed by a blind retry can duplicate an effect even when every individual call looks locally reasonable. The trace makes the causal hypothesis inspectable; it does not establish incident frequency or operational proof.
+The lesson is simple: an uncertain external result followed by a blind retry can duplicate an effect even when every individual call looks locally reasonable. This is a teaching example, not a real incident report.
 
 <EvidenceBadge
   claimId="claim-ambiguous-effect-failure-pattern"
-  sectionAnchor="failure-before-definition"
+  sectionAnchor="start-with-a-failure"
   challengeLabel="Challenge this failure claim"
 />
 
@@ -57,12 +58,12 @@ The multiplication is conceptual, not a benchmark equation. It says that the dep
 
 <EvidenceBadge
   claimId="claim-harness-capability-configuration"
-  sectionAnchor="failure-before-definition"
+  sectionAnchor="start-with-a-failure"
 />
 
 That distinction changes where engineering attention goes. A better model may improve interpretation, planning, and recovery choices. It cannot retroactively create an effect identifier that the runtime never stored, narrow a credential that the harness granted too broadly, or make unrelated evidence prove the intended outcome.
 
-## The Harness Boundary
+## What a harness actually does
 
 “Harness” is useful because it points at the system around model inference, but the word does not yet mark one settled industry boundary. Some people use it for a compact loop and tool adapter. Others include state, policy, execution, recovery, evaluation, and user controls. The name matters less than making each responsibility visible.
 
@@ -86,7 +87,7 @@ In [What is a Harness?](https://earendil.com/posts/what-is-a-harness/), publishe
 
 <EvidenceBadge
   claimId="claim-earendil-beginner-harness-map"
-  sectionAnchor="the-harness-boundary"
+  sectionAnchor="what-a-harness-actually-does"
   challengeLabel="Challenge this attribution"
 />
 
@@ -127,19 +128,19 @@ Model portability asks whether another model can be selected. Session portabilit
 
 An honest adapter preserves material differences. Event types may not line up. Tool transport, approval flows, reasoning blocks, steering, caching, session state, compaction, and recovery may have unequal or unsupported semantics. A translation layer should name those gaps and test the conformance it claims. Erasing them behind one portability checkbox creates false semantic parity precisely where recovery and control depend on the details.
 
-## Control and User Leverage
+## What control should feel like
 
 The harness is a control layer: it decides what enters context, which capability can be called, how state is recorded, and when the loop may continue. The same layer can also create user leverage, but only when “user-owned” describes behavior that can be tested.
 
 Inspectable instructions let a person see which durable rules and task-specific inputs shaped execution. Controllable extensions let them decide which capabilities exist and under what conditions. Exportable session and work state lets them leave without surrendering continuity. Replaceable model providers reduce dependence on one inference supplier. Understandable credential custody answers where secrets live, when they are used, and how their scope is limited. Revocation and deletion let the user withdraw authority and remove retained material. Degraded behavior shows what remains usable if a provider disappears.
 
-None of those properties follows automatically from where the process runs. Local execution may improve custody while still exposing broad credentials or hiding state in an opaque store. A provider selector may offer model choice while sessions, capabilities, and recovery remain locked to one provider's semantics. Open source may improve inspectability while a hosted deployment still controls the user's data. Ownership, privacy, security, and independence are separate claims that need separate evidence.
+None of those properties follows automatically from where the process runs. Local execution may improve custody while still exposing broad credentials or hiding state in an opaque store. A provider selector may offer model choice while sessions, capabilities, and recovery remain locked to one provider's semantics. Open source may improve inspectability while a hosted deployment still controls the user's data. Test each property directly.
 
-Earendil argues that people can own and adapt their harness, choose among model providers through its translation layer, and retain local copies of sessions. That is the source's author-reported ownership philosophy; it is not evidence that every harness delivers those properties.
+Earendil argues that people can own and adapt their harness, choose among model providers through its translation layer, and retain local copies of sessions. We treat that as a useful design direction, while checking each product against what it actually lets a user inspect, export, replace, revoke, and delete.
 
 <EvidenceBadge
   claimId="claim-earendil-harness-ownership-philosophy"
-  sectionAnchor="control-and-user-leverage"
+  sectionAnchor="what-control-should-feel-like"
   challengeLabel="Challenge this ownership attribution"
 />
 
@@ -147,13 +148,13 @@ Authority also has layers. A person can authorize a class of work without delega
 
 For Atlas, user leverage would mean more than a visible retry toggle. The operator should be able to inspect the effect intent, see the credential and environment used, understand why a retry was proposed, revoke further writes, export the incident state, and require reconciliation evidence before another attempt. Control becomes leverage when it is legible and reversible from the user's side.
 
-## The End-to-End Trace
+## Follow the work from request to completion
 
 The shared trace below is a proposed responsibility checklist. It is not a universal workflow. Read-only research may omit external-effect stages. A high-risk write system may need every transition, with more than one independent check inside each.
 
 <EvidenceBadge
   claimId="claim-system-trace-responsibility-checklist"
-  sectionAnchor="the-end-to-end-trace"
+  sectionAnchor="follow-the-work-from-request-to-completion"
   challengeLabel="Challenge this proposed trace"
 />
 
@@ -206,13 +207,13 @@ An API 200 proves that a server accepted or answered a request under that API's 
 
 In the Atlas trace, the provider timeout left effect success unknown. The second charge later succeeded, but did not repair the first ambiguity. “Tests passed” supplied evidence about something, yet not the payment outcome. Verification against the wrong contract could still pass. Acceptance without reconciliation would merely authorize an unsupported conclusion. Closure would release responsibility while the duplicate charge remained real.
 
-## What Architecture Selection Changes
+## How to choose an architecture
 
 Architecture selection often collapses into a leaderboard: which framework has more tools, which provider scored higher, which runtime appears easiest to start. Those comparisons can inform a decision, but they do not reveal the responsibility boundary of the deployed system.
 
 <EvidenceBadge
   claimId="claim-architecture-selection-responsibilities"
-  sectionAnchor="what-architecture-selection-changes"
+  sectionAnchor="how-to-choose-an-architecture"
   challengeLabel="Challenge this selection method"
 />
 
@@ -233,33 +234,21 @@ The questions also make exclusions honest. A research harness may deliberately a
 
 The practical selection question is therefore not “which framework is best?” It is: **which responsibilities does this system actually own, and which remain mine?** The answer should be visible in contracts, state, authority, and evidence—not inferred from the model name or the length of a feature list.
 
-## Uncertainties and Falsifiers
+## What is still unsettled
 
-This chapter proposes a way to inspect agent systems, not a final vocabulary for the field.
+“Harness” is not yet a settled industry term. Some teams mean the prompt, tools, and loop. Others include state, policy, recovery, evaluation, and user controls. A narrower definition is fine as long as the excluded responsibilities remain visible.
 
-First, “harness” is not a settled industry standard. Boundaries vary across sources and implementations. A narrower definition is not automatically wrong; it becomes dangerous only when responsibilities outside that definition are treated as if they disappeared.
+Stronger models may also remove some scaffolding. Better tool use, longer context, and more reliable planning can simplify a runtime. They do not automatically provide credential scope, effect identity, approval, revocation, or durable recovery.
 
-Second, Earendil's four-part framing is a beginner map, not a complete production contract. The production extensions in this chapter are this publication's synthesis. They should not be attributed back to Earendil.
+Provider portability remains uneven. A shared interface can normalize basic messages while sessions, approvals, events, tool semantics, and recovery behave differently. Likewise, “user-owned” should be demonstrated through custody, export, provider replacement, revocation, deletion, and useful degraded behavior—not assumed from a local process or model dropdown.
 
-Third, stronger models may retire some capability-bearing scaffolding. Better native tool use, longer context, or more reliable planning can simplify parts of a harness. They do not automatically remove governance-bearing controls such as credential scope, effect identity, independent Verification, approval, revocation, and durable recovery.
+These boundaries will change as systems improve. The useful habit is to keep them visible and update the architecture when real behavior contradicts the map.
 
-Fourth, portability claims require provider-specific conformance tests. A shared interface demonstrates common syntax. It does not by itself demonstrate equal event semantics, session recovery, approval behavior, capability scope, or degraded-mode operation.
+## Sources and further reading
 
-Fifth, user ownership must be demonstrated through custody, export, revoke, delete, and degraded-mode behavior. A local process or a model dropdown is evidence for only part of that claim.
+- [What Is a Harness?](https://earendil.com/posts/what-is-a-harness/) by Earendil — the beginner map and user-owned harness framing used in this chapter.
+- [Learn Harness Engineering](https://walkinglabs.github.io/learn-harness-engineering/en/) by Walking Labs — a structured course for further study.
+- [Why Agents Fail](https://github.com/RasaHQ/why-agents-fail) by Rasa — a failure-oriented map of agent systems.
+- [Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents) by Anthropic — practical patterns for resumable, long-running work.
 
-The central configuration thesis is falsifiable. A strong counterexample would be:
-
-> A model-only evaluation reliably predicts deployed agent performance across materially different harnesses, environments, and authority boundaries.
-
-If that result held under careful, repeated evaluation, the model × harness × environment × authority formulation would need to shrink or change. Specific architecture claims should carry narrower falsifiers: a conformance suite may disprove a claimed provider gap; a recovery test may show that state survives a failure we expected to lose; a custody audit may show that a supposedly local system depends on remote state. The point is to make revision possible, not to protect the thesis from evidence.
-
-## Sources and Revision Record
-
-This chapter uses two public source records.
-
-1. [What is a Harness?](https://earendil.com/posts/what-is-a-harness/) by Earendil supplies the attributed beginner-oriented four-part framing and the source author's ownership philosophy. This publication does not treat it as proof of provider parity, authorization enforcement, or external-effect success.
-2. [The Agent Systems Fieldbook — Harness Engineering, version 1](/manifests/revision-fieldbook-essay-001.json) records this publication synthesis, source validation dates, and content hash. It is not independent proof of the central inferred claim.
-
-Evidence labels describe the state of a specific claim, not the prestige of a source. Source evidence grades describe the basis available in that source record. The interface keeps those classifications separate: `observed` is not another name for `IP`, and a first-party document does not become implementation evidence through presentation.
-
-The revision record at the end of this page names the public release, the affected claims, and the path for corrections. A correction should identify the exact route, revision, section, and claim; provide public counter-evidence; and omit credentials, personal data, private traces, and copyrighted documents.
+The chapter also synthesizes our broader study of agent runtimes, coding agents, workflow systems, memory systems, evaluation research, and recurring failure patterns. If you find a mistake or a better example, use the correction link below.
