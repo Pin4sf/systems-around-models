@@ -1,0 +1,11 @@
+id: claim-memory-capture-not-belief
+statement: Captured memory should remain a candidate until validation, authorization, and promotion establish what it may represent and how it may influence later work.
+label: proposed
+scope: Memory Engineering study guide
+source_ids:
+  - source-memory-memgpt
+  - source-memory-owasp-memory-attack-surface
+falsifiers:
+  - A governed agent safely promotes unvalidated captured content directly into belief and action-relevant memory without provenance, authority, or correction controls.
+last_reviewed: 2026-08-22
+revision: 1

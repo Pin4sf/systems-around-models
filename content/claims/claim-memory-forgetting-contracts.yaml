@@ -1,0 +1,11 @@
+id: claim-memory-forgetting-contracts
+statement: Decay, supersession, suppression, invalidation, and purge are distinct memory operations that require separate implementation and evaluation contracts.
+label: inferred
+scope: Memory Engineering study guide
+source_ids:
+  - source-memory-memoryagentbench
+  - source-memory-owasp-memory-attack-surface
+falsifiers:
+  - A single retention operation demonstrably provides equivalent behavior for ranking, historical truth, scoped non-use, invalidity, and deletion across all projections.
+last_reviewed: 2026-08-22
+revision: 1

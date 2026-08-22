@@ -1,0 +1,23 @@
+id: source-memory-anthropic-context-engineering
+title: Effective Context Engineering for AI Agents
+author: Anthropic
+canonical_url: https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents
+published_at: 2025-09-29
+retrieved_at: 2026-08-22
+inspected_paths: []
+source_type: first-party-article
+basis: Direct reading of Anthropic's public engineering article at its canonical URL.
+license_status: all-rights-reserved
+evidence_grade: FD
+observed_mechanisms:
+  - description: The article discusses context selection, compaction, and just-in-time retrieval as ways to manage model-visible information.
+    evidence_grade: FD
+    basis: These mechanisms are described directly in the public engineering article.
+author_reported_claims:
+  - Deliberate context management helps agents maintain performance across longer tasks in the settings Anthropic discusses.
+unknowns:
+  - The article does not define a complete governance model for durable memory, correction, or user authority.
+falsifiers:
+  - Anthropic corrects the article or removes the named context-engineering guidance.
+last_validated: 2026-08-22
+correction_ledger_status: reviewed

@@ -1,0 +1,110 @@
+{
+  "id": "revision-memory-engineering-study-guide-001",
+  "essaySlug": "memory-engineering-study-guide",
+  "revision": 1,
+  "publishedAt": "2026-08-22",
+  "substantivelyRevisedAt": "2026-08-22",
+  "summary": "Initial public edition of the complete short Memory Engineering study guide.",
+  "affectedClaimIds": [
+    "claim-memory-authority-non-amplification",
+    "claim-memory-canonical-projections",
+    "claim-memory-capture-not-belief",
+    "claim-memory-decision-scoped-retrieval",
+    "claim-memory-forgetting-contracts",
+    "claim-memory-function-before-database",
+    "claim-memory-lifecycle-evaluation",
+    "claim-memory-lifecycle-not-storage",
+    "claim-memory-prospective-eligibility"
+  ],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-d2210855bfd51d823275454d8a625f9e4cd2e20973db9b5fc7f66f67f598c050",
+  "sourceIds": [
+    "source-memory-anthropic-context-engineering",
+    "source-memory-karpathy-llm-wiki",
+    "source-memory-locomo",
+    "source-memory-longmemeval",
+    "source-memory-memgpt",
+    "source-memory-memoryagentbench",
+    "source-memory-nist-agent-hijacking-evaluations",
+    "source-memory-owasp-memory-attack-surface",
+    "source-memory-pm-bench"
+  ],
+  "sourceValidationDates": {
+    "source-memory-memgpt": "2026-08-22",
+    "source-memory-anthropic-context-engineering": "2026-08-22",
+    "source-memory-karpathy-llm-wiki": "2026-08-22",
+    "source-memory-locomo": "2026-08-22",
+    "source-memory-longmemeval": "2026-08-22",
+    "source-memory-memoryagentbench": "2026-08-22",
+    "source-memory-pm-bench": "2026-08-22",
+    "source-memory-owasp-memory-attack-surface": "2026-08-22",
+    "source-memory-nist-agent-hijacking-evaluations": "2026-08-22"
+  },
+  "schemaVersion": 1,
+  "validationSchemaVersion": "publication-v1",
+  "sources": [
+    {
+      "id": "source-memory-anthropic-context-engineering",
+      "title": "Effective Context Engineering for AI Agents",
+      "canonicalUrl": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-memory-karpathy-llm-wiki",
+      "title": "LLM Wiki",
+      "canonicalUrl": "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "unknown"
+    },
+    {
+      "id": "source-memory-locomo",
+      "title": "Evaluating Very Long-Term Conversational Memory of LLM Agents",
+      "canonicalUrl": "https://aclanthology.org/2024.acl-long.747/",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "CC-BY-4.0"
+    },
+    {
+      "id": "source-memory-longmemeval",
+      "title": "LongMemEval: Benchmarking Chat Assistants on Long-Term Interactive Memory",
+      "canonicalUrl": "https://proceedings.iclr.cc/paper_files/paper/2025/file/d813d324dbf0598bbdc9c8e79740ed01-Paper-Conference.pdf",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "CC-BY-4.0"
+    },
+    {
+      "id": "source-memory-memgpt",
+      "title": "MemGPT: Towards LLMs as Operating Systems",
+      "canonicalUrl": "https://arxiv.org/abs/2310.08560",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "unknown"
+    },
+    {
+      "id": "source-memory-memoryagentbench",
+      "title": "Evaluating Memory in LLM Agents via Incremental Multi-Turn Interactions",
+      "canonicalUrl": "https://openreview.net/forum?id=DT7JyQC3MR",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "unknown"
+    },
+    {
+      "id": "source-memory-nist-agent-hijacking-evaluations",
+      "title": "Strengthening AI Agent Hijacking Evaluations",
+      "canonicalUrl": "https://www.nist.gov/news-events/news/2025/01/technical-blog-strengthening-ai-agent-hijacking-evaluations",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "unknown"
+    },
+    {
+      "id": "source-memory-owasp-memory-attack-surface",
+      "title": "Memory Is a Feature. It Is Also an Attack Surface",
+      "canonicalUrl": "https://genai.owasp.org/2026/05/13/memory-is-a-feature-it-is-also-an-attack-surface/",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "CC-BY-SA-4.0"
+    },
+    {
+      "id": "source-memory-pm-bench",
+      "title": "PM-Bench: Evaluating Prospective Memory in LLM Agents",
+      "canonicalUrl": "https://arxiv.org/abs/2607.12385",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "unknown"
+    }
+  ]
+}

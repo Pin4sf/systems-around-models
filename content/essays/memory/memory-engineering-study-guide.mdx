@@ -1,0 +1,190 @@
+---
+slug: memory-engineering-study-guide
+title: "Memory Engineering: A Practical Study Guide"
+description: "A practical guide to designing agent memory as a governed lifecycle: what it remembers, why it may use it, how it changes, and when it is removed."
+sequence: Memory Engineering
+sequence_position: 1
+revision: 1
+authors:
+  - Systems Around Models
+published_at: 2026-08-22
+substantively_revised_at: 2026-08-22
+reading_time_source: 27 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-memory-memgpt
+  - source-memory-anthropic-context-engineering
+  - source-memory-karpathy-llm-wiki
+  - source-memory-locomo
+  - source-memory-longmemeval
+  - source-memory-memoryagentbench
+  - source-memory-pm-bench
+  - source-memory-owasp-memory-attack-surface
+  - source-memory-nist-agent-hijacking-evaluations
+revision_id: revision-memory-engineering-study-guide-001
+---
+
+An agent with no memory starts each request from scratch. An agent with ungoverned memory carries forward mistakes, stale facts, and unearned authority. The useful middle is not a larger database. It is a system that can say what a record means, where it came from, when it was true, whether it may influence a decision, and how to correct or remove it.
+
+This short course uses two running examples. In the first, a team changes a service configuration from key-pair authentication to OAuth. In the second, a person asks an agent to revisit a renewal only after a verified response arrives. Both look like “remembering,” but they require different records, controls, and evidence.
+
+## 1. Memory is not storage
+
+Memory is selected information that can influence later work. Storage is only one place that information can sit. A transcript, a file, a table, an embedding index, a graph, and a cache each retain something; none automatically provides trustworthy memory.
+
+Use four plain-language functions before choosing technology:
+
+- **Semantic memory** is what the system currently treats as true: the service uses OAuth.
+- **Episodic memory** is what happened: a configuration read-back on 9 April showed the cutover had completed.
+- **Procedural memory** is how to do something: a bounded diagnostic procedure for an authentication failure.
+- **Prospective memory** is what must become relevant later: reconsider the renewal when the verified response arrives.
+
+These functions can share a store, but they should not be confused. A past conversation is not automatically a current fact. A procedure retrieved from a successful run is not automatically safe to repeat. A future intention is not a permission to act.
+
+The [MemGPT](https://arxiv.org/abs/2310.08560) architecture is a useful starting image: context is a constrained working surface, while other information must be selected and moved in deliberately. That image is helpful because it makes context finite. It becomes misleading if it suggests that every retained item has the same truth or authority.
+
+## 2. Choose the memory function before the database
+
+Start with the decision that needs help. If the question is “what is the current configuration?”, a small temporal fact record and an exact lookup may be enough. If the question is “which incident resembles this one?”, episode search may help. If the question is “what should I do after this confirmed event?”, you need an intention and a cue—not a nearest-neighbour result.
+
+This avoids treating files, vectors, graphs, and long context as maturity levels. They are representations with different query and failure shapes:
+
+- a file or structured record is easy to inspect and change;
+- an exact or temporal index answers known fields and dates predictably;
+- an embedding index can surface semantically related candidates, but does not establish truth;
+- a graph helps when relationships and time-shifted paths are the query;
+- a summary or cache saves attention, but may drop qualification;
+- a trigger index can watch an intention’s stated cue, but must not convert eligibility into action.
+
+[Anthropic’s context-engineering guidance](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) describes context as a deliberately selected working set. Apply the same restraint to memory: retrieve the smallest sufficient record set for a named decision. Begin shallow. Add structure only after a held-out failure shows that the simpler design cannot answer a needed query or preserve a needed control.
+
+## 3. Keep canonical records separate from projections
+
+A canonical record is the durable place where meaning and policy live. A projection is a convenient derived representation: a current-profile row, search document, embedding, graph edge, summary, cache entry, or trigger index. Projections may be rebuilt. They must not become the only place that knows where a claim came from or whether it may be used.
+
+For the configuration change, preserve history rather than overwriting it:
+
+```text
+canonical records
+  Jan 12–Apr 9: authentication = key-pair
+  Apr 9–present: authentication = OAuth
+  Apr 10: read-back observed the Apr 9 cutover
+
+current projection
+  authentication = OAuth
+  source = verified read-back
+```
+
+The current projection makes the ordinary question fast. The history lets a reviewer answer a historical question, inspect a late-arriving observation, or correct an error without pretending the prior state never existed. It also gives deletion and correction work a place to begin: find the canonical record, then find every projection derived from it.
+
+[Karpathy’s LLM Wiki artifact](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) offers a complementary discipline for durable file knowledge: knowledge should compound in inspectable artifacts instead of being rediscovered from raw material each time. For consequential records, compounding also needs provenance, conflict, and a route to reversal.
+
+## 4. Capture is not belief
+
+Capture means “the system received a possible memory.” It does not mean “the system now believes this,” much less “the system may act on it.” Make the lifecycle explicit:
+
+```text
+capture → encode → candidate → validate → authorize → promote
+→ retrieve → influence → correct or consolidate
+→ suppress, invalidate, or purge
+```
+
+An imported note saying that the service uses OAuth can become a candidate. A verified read-back can promote a scoped fact. A model inference from a vague conversation may remain a candidate or be rejected. The text may look identical in each case; its source, confidence, authority, and permitted use do not.
+
+Keep at least source, observed time, valid time, record time, scope, status, and derived-copy lineage. A newer inference should not silently outrank an explicit correction from the person who owns a preference. A summary should preserve its supporting record identifiers rather than laundering a disputed sentence into a confident fact.
+
+The key rule is **authority non-amplification**: retrieved content may inform reasoning, but it never grants authority it did not already carry. A search hit can suggest a next question. It cannot authorize a change, certify a procedure, or become a user’s intention merely because it was included in a prompt.
+
+## 5. Retrieve for a decision, not merely for similarity
+
+Retrieval has two jobs: find useful candidates and constrain their use. Similarity is one candidate-generation method, not a decision policy.
+
+For a configuration incident, the retrieval plan might be: resolve the current configuration fact in this environment; retrieve the last verified change event; then retrieve only diagnostic procedures whose preconditions match. It should surface conflict when a newer low-authority note disagrees with the verified record. It should refuse another organisation’s records before anything reaches model context.
+
+Ask of every result:
+
+1. What decision is this intended to support?
+2. Which principal and scope permit it here?
+3. Is it current, historical, contested, suppressed, or invalidated?
+4. Is it evidence, a cue, a claim, a procedure, or an intention?
+5. May it only inform reasoning, or may a separate policy authorize an attempt?
+
+Long-conversation evaluations such as [LoCoMo](https://aclanthology.org/2024.acl-long.747/) and [LongMemEval](https://proceedings.iclr.cc/paper_files/paper/2025/file/d813d324dbf0598bbdc9c8e79740ed01-Paper-Conference.pdf) make recall and long-range understanding measurable under their own task designs. They do not establish that a retrieved fact was current, permitted, or used correctly in a real deployment. Measure retrieval and use separately.
+
+## 6. Remember the future without taking control
+
+Prospective memory is an intention plus a cue. “Revisit the renewal after the verified response arrives” is not the same as “send a message when any email mentions renewal.” The first needs an owner, an intended outcome, a cue definition, timing, scope, cancellation, and a way to close or release the responsibility.
+
+Keep this chain separate:
+
+```text
+remembered intention → cue eligible → authorized attempt
+→ verification → user acceptance → conscious closure or release
+```
+
+A cue makes work eligible; it does not grant an effect. The agent may prepare a draft, request approval, or take a previously authorized bounded action. It must not turn a remembered intention into an unrestricted instruction. After an attempt, verification establishes what happened; the owner decides whether the matter is accepted, deferred, released, or reopened.
+
+[PM-Bench](https://arxiv.org/abs/2607.12385) is emerging evidence for this distinction: it evaluates delayed intentions and cue recall rather than merely answering questions about the past. Treat it as an incomplete evaluation model, not a product authority contract. Good prospective systems also measure false reminders, early and late cues, duplicate attempts, snooze behavior, cancellation, and the burden of interruptions.
+
+## 7. Correct, forget, and defend the memory surface
+
+“Forget” describes several different operations. Decay lowers a record’s retrieval rank. Supersession marks an older fact as no longer current. Suppression prevents use in a scope while retaining the record for a stated reason. Invalidation says a claim should not be used as true. Purge removes a canonical record and its reachable projections, subject to documented retention limits. A time-to-live setting is not proof of all five.
+
+Correction must identify what changed, why it changed, which projections need rebuilding, and what history remains valid. Deletion must reach summaries, embeddings, edges, caches, and trigger indexes—or plainly state which copies remain and why. Test for resurrection after reindex and restore, not just absence from one search result.
+
+Memory is also an attack surface. It can be poisoned through direct input, imported material, a summarization step, a retrieved procedure, or an indirect tool result. [OWASP’s practitioner guidance](https://genai.owasp.org/2026/05/13/memory-is-a-feature-it-is-also-an-attack-surface/) names memory-specific risks; [NIST’s agent-hijacking evaluation guidance](https://www.nist.gov/news-events/news/2025/01/technical-blog-strengthening-ai-agent-hijacking-evaluations) provides a broader official frame for testing adversarial agent behavior. Keep both labels calibrated: practitioner guidance is useful for controls, while the official guidance is broader than memory alone.
+
+Defenses begin before retrieval: restrict write channels, attach provenance and authority to every candidate, separate principals, quarantine untrusted content, require promotion rules for procedures, and require policy at the action boundary. A safe design can still decline a useful-looking memory when its source or scope is wrong.
+
+## 8. Evaluate the whole lifecycle
+
+One benchmark score cannot certify memory. Evaluate each layer of the lifecycle with fixtures that preserve the actual failure boundary:
+
+- **write quality:** candidate precision, duplicate rate, contradiction rate, and provenance completeness;
+- **retrieval:** recall under a token budget, temporal correctness, stale-hit rate, and cross-principal denial;
+- **use:** whether the decision used the right record, abstained on conflict, and stayed within authority;
+- **prospective timing:** cue recall, false-reminder rate, early/late triggers, duplicate attempts, and cancellation;
+- **correction and deletion:** projection discovery, post-delete probes, restore behavior, and purge receipts;
+- **adversarial safety:** poisoning success by write channel, provenance laundering, extraction, and high-risk action denial.
+
+[MemoryAgentBench](https://openreview.net/forum?id=DT7JyQC3MR) evaluates multiple memory competencies in an incremental setting. It is helpful evidence that memory has more than one capability, not a substitute for an application’s authority, privacy, or deletion tests. Hold model, tools, prompts, and task constant when comparing memory designs; otherwise a change in one layer can masquerade as a memory result.
+
+## A compact memory design worksheet
+
+Fill this out for one decision, not for an entire company:
+
+1. Which memory function is needed: semantic, episodic, procedural, prospective, or a combination?
+2. What is the canonical record, and which fields establish source, time, scope, status, and authority?
+3. Which representations are projections that can be rebuilt?
+4. Which write channels can create a candidate, and who may promote it?
+5. What may this record inform? What may it never authorize?
+6. What exact decision will retrieval support, for which principal and scope?
+7. How will conflict, correction, suppression, invalidation, and purge work?
+8. If this is prospective, what is the cue, who owns it, and what action remains subject to approval?
+9. Which held-out failure would justify adding vectors, graph structure, or autonomous consolidation?
+10. What evidence will show that the lifecycle—not only recall—worked?
+
+If an answer is “the model will decide,” name the record, policy, evidence, and owner that make the decision reviewable.
+
+## Eight build-and-break labs
+
+1. **Canonical facts:** create semantic and episodic records for the configuration change; answer both the current and historical question.
+2. **Disposable projections:** derive an exact index and a semantic index, rebuild both, then show that a corrected record updates each projection.
+3. **Candidate versus belief:** ingest a conflicting untrusted note and prove that it cannot replace the verified OAuth fact.
+4. **Decision retrieval:** retrieve a bounded configuration packet, surface a conflict, and deny a record from the wrong principal before model context.
+5. **Prospective cue:** encode the renewal intention, test a false-positive cue and a valid cue, then show that the valid cue still does not send a message without authority.
+6. **Procedure promotion:** turn several incidents into a candidate playbook, run it in shadow mode on held-out cases, and reject an unsafe branch.
+7. **Deletion proof:** purge a chosen record, then probe the canonical store, summary, vector, graph edge, cache, and trigger index for resurrection.
+8. **Lifecycle ablation:** hold model and tools fixed while comparing no memory, raw history, canonical records, and one justified projection on quality, cost, correction burden, and adversarial safety.
+
+## Sources and next reading
+
+- [MemGPT](https://arxiv.org/abs/2310.08560) — a memory-as-virtual-context architecture and a useful bounded-context mental model.
+- [Effective Context Engineering for AI Agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) — first-party guidance on context selection and compaction.
+- [LLM Wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) — a public artifact about compounding knowledge in inspectable files.
+- [LoCoMo](https://aclanthology.org/2024.acl-long.747/) — a peer-reviewed long-conversation evaluation.
+- [LongMemEval](https://proceedings.iclr.cc/paper_files/paper/2025/file/d813d324dbf0598bbdc9c8e79740ed01-Paper-Conference.pdf) — a peer-reviewed long-context memory evaluation.
+- [MemoryAgentBench](https://openreview.net/forum?id=DT7JyQC3MR) — a peer-reviewed competency-oriented memory benchmark.
+- [PM-Bench](https://arxiv.org/abs/2607.12385) — emerging prospective-memory evaluation evidence.
+- [Memory is a Feature. It Is Also an Attack Surface.](https://genai.owasp.org/2026/05/13/memory-is-a-feature-it-is-also-an-attack-surface/) — practitioner guidance for memory threats and controls.
+- [Strengthening AI Agent Hijacking Evaluations](https://www.nist.gov/news-events/news/2025/01/technical-blog-strengthening-ai-agent-hijacking-evaluations) — official evaluation guidance broader than memory alone.

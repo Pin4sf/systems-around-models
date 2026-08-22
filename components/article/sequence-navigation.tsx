@@ -1,51 +1,53 @@
 import Link from "next/link";
 import type { EssayMetadata } from "@/lib/content/schema";
-
-const guideSlug = "harness-engineering-study-guide";
-const firstChapterSlug = "the-model-is-not-the-agent";
+import { getStudyGuideEntryForEssay } from "@/lib/study-guide/study-guide-registry";
 
 function SequenceLinks({ essay }: { essay: EssayMetadata }) {
-  const isGuide = essay.slug === guideSlug;
+  const guide = getStudyGuideEntryForEssay(essay);
   return (
     <ol>
-      <li>
-        <Link href="/#chapters">Course overview</Link>
-      </li>
-      <li aria-current={isGuide ? "page" : undefined}>
-        <span>Short course</span>
-        {isGuide ? "Harness Engineering Study Guide" : (
-          <Link href={`/fieldbook/${guideSlug}`}>Harness Engineering Study Guide</Link>
-        )}
-      </li>
-      <li aria-current={!isGuide ? "page" : undefined}>
-        <span>Chapter 1 of 40</span>
-        {!isGuide ? "The Model Is Not the Agent" : (
-          <Link href={`/fieldbook/${firstChapterSlug}`}>The Model Is Not the Agent</Link>
-        )}
-      </li>
-      {!isGuide ? (
-        <li className="sequence-navigation__forthcoming">
-          <span>Up next</span>
-          The H0→H9 progression
-        </li>
-      ) : null}
+      {guide.navigation.items.map((item) => {
+        if (item.kind === "link") {
+          return (
+            <li key={item.label}>
+              {item.eyebrow ? <span>{item.eyebrow}</span> : null}
+              <Link href={item.href}>{item.label}</Link>
+            </li>
+          );
+        }
+        if (item.kind === "current") {
+          return (
+            <li key={item.label} aria-current="page">
+              {item.eyebrow ? <span>{item.eyebrow}</span> : null}
+              {item.label}
+            </li>
+          );
+        }
+        return (
+          <li key={item.label} className="sequence-navigation__forthcoming">
+            <span>{item.eyebrow}</span>
+            {item.label}
+          </li>
+        );
+      })}
     </ol>
   );
 }
 
 export function SequenceNavigation({ essay }: { essay: EssayMetadata }) {
+  const guide = getStudyGuideEntryForEssay(essay);
   return (
     <aside className="sequence-navigation interface-text">
       <nav
         className="sequence-navigation__desktop"
-        aria-label="Harness Engineering chapters"
+        aria-label={guide.navigation.label}
       >
-        <p className="eyebrow">Harness Engineering</p>
+        <p className="eyebrow">{guide.sequenceName}</p>
         <SequenceLinks essay={essay} />
       </nav>
       <details className="sequence-navigation__mobile">
-        <summary role="button">Open chapters</summary>
-        <div aria-label="Harness Engineering chapter list">
+        <summary role="button">{guide.navigation.drawerLabel}</summary>
+        <div aria-label={guide.navigation.mobileLabel}>
           <SequenceLinks essay={essay} />
         </div>
       </details>
@@ -59,12 +61,13 @@ type ArticlePagerProps = {
 };
 
 export function ArticlePager({ essay, releasedEssays }: ArticlePagerProps) {
+  const guide = getStudyGuideEntryForEssay(essay);
   const bySlug = new Map(releasedEssays.map((releasedEssay) => [releasedEssay.slug, releasedEssay]));
   const previous = essay.previousEssaySlug ? bySlug.get(essay.previousEssaySlug) : undefined;
   const next = essay.nextEssaySlug ? bySlug.get(essay.nextEssaySlug) : undefined;
 
   return (
-    <nav className="article-pager interface-text" aria-label="Previous and next chapters">
+    <nav className="article-pager interface-text" aria-label={`Previous and next ${guide.sequenceName} reading`}>
       {previous ? (
         <Link
           href={`/fieldbook/${previous.slug}`}
@@ -76,12 +79,12 @@ export function ArticlePager({ essay, releasedEssays }: ArticlePagerProps) {
         </Link>
       ) : (
         <Link
-          href="/#chapters"
+          href={guide.navigation.overview.href}
           rel="prev"
-          aria-label="Previous: Course overview"
+          aria-label={`Previous: ${guide.navigation.overview.label}`}
         >
           <span>Previous</span>
-          Course overview
+          {guide.navigation.overview.label}
         </Link>
       )}
       {next ? (
@@ -93,12 +96,12 @@ export function ArticlePager({ essay, releasedEssays }: ArticlePagerProps) {
           <span>Next</span>
           {next.title}
         </Link>
-      ) : (
+      ) : guide.finalLabel ? (
         <p className="article-pager__forthcoming">
           <span>Next chapter</span>
-          The H0→H9 progression
+          {guide.finalLabel}
         </p>
-      )}
+      ) : null}
     </nav>
   );
 }

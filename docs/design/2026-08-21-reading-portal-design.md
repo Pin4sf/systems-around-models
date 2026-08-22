@@ -13,15 +13,17 @@
 > correction path. The primary release now includes a complete short Harness
 > Engineering guide, with detailed chapters as optional deeper reading.
 >
-> For the 2026-08-22 Harness study-guide release, this amendment also
+> **Superseded — 2026-08-22 Harness-only study-guide release:** This amendment
+> formerly also
 > supersedes the earlier first-release product clauses in Sections 1, 2, 5,
 > 15, and 16 that require a Fieldbook identity, a simultaneous Memory track,
 > visible claim inspection, evidence drawers, revision panels, or explicit
-> evidence-badge acceptance. Memory Engineering and gallery work remain future
-> projects. The current acceptance contract is: a complete Harness short
+> evidence-badge acceptance. Its historical acceptance contract was: a complete Harness short
 > course; truthful curriculum and detailed-chapter status; ordinary public
 > sources with complete backstage manifests; one quiet article-level correction
-> path; and responsive, static, private-corpus-independent reading.
+> path; and responsive, static, private-corpus-independent reading. The later
+> “one complete Memory guide, same simple reader” amendment supersedes the
+> Harness-only scope and releases the complete Memory Engineering short guide.
 
 ## 1. Product decision
 
@@ -457,3 +459,9 @@ The first release is acceptable when:
 - Waldo product conversion or lead capture.
 
 These may be evaluated only after the reader proves that people can understand, inspect, and challenge the core work.
+
+## Amendment — 2026-08-22: one complete Memory guide, same simple reader
+
+The first public slice now includes one complete **Memory Engineering** short guide beside the Harness Engineering guide. It is a one-sitting, prose-first lesson that teaches memory as a governed lifecycle: memory functions, canonical records and projections, capture and correction, retrieval and authority, prospective intentions, forgetting, security, and lifecycle evaluation.
+
+This addition does not change the simple-reader contract. The guide uses ordinary source links and one article-wide correction path; evidence records, source manifests, and revision data remain validated backstage rather than becoming badges, drawers, scores, or interruption-heavy review UI. Memory sequence navigation must name the Memory guide truthfully and must not inherit Harness-specific chapter counts or forthcoming-curriculum labels.

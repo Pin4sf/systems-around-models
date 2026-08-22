@@ -1,0 +1,11 @@
+id: claim-memory-authority-non-amplification
+statement: Retrieved memory may inform a decision but must not grant authority that its source, scope, and current policy did not already provide.
+label: proposed
+scope: Memory Engineering study guide
+source_ids:
+  - source-memory-owasp-memory-attack-surface
+  - source-memory-nist-agent-hijacking-evaluations
+falsifiers:
+  - A safe agent design demonstrates that untrusted retrieved content can authorize consequential action without an independent policy boundary.
+last_reviewed: 2026-08-22
+revision: 1

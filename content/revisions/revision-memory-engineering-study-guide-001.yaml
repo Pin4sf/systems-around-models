@@ -1,0 +1,17 @@
+id: revision-memory-engineering-study-guide-001
+target_slug: memory-engineering-study-guide
+revision: 1
+published_at: 2026-08-22
+substantively_revised_at: 2026-08-22
+summary: Initial public edition of the complete short Memory Engineering study guide.
+affected_claim_ids:
+  - claim-memory-lifecycle-not-storage
+  - claim-memory-function-before-database
+  - claim-memory-canonical-projections
+  - claim-memory-capture-not-belief
+  - claim-memory-authority-non-amplification
+  - claim-memory-decision-scoped-retrieval
+  - claim-memory-prospective-eligibility
+  - claim-memory-lifecycle-evaluation
+  - claim-memory-forgetting-contracts
+correction_disposition: publication

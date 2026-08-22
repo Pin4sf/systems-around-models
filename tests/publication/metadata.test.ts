@@ -9,6 +9,7 @@ import { GET as getRss } from "@/app/rss.xml/route";
 const canonicalSite = "https://fieldbook.example";
 const chapterPath = "/fieldbook/the-model-is-not-the-agent";
 const guidePath = "/fieldbook/harness-engineering-study-guide";
+const memoryGuidePath = "/fieldbook/memory-engineering-study-guide";
 
 afterEach(() => {
   vi.unstubAllEnvs();
@@ -116,6 +117,7 @@ describe("publication discovery endpoints", () => {
     expect(entries.map((entry) => entry.url)).toEqual([
       `${canonicalSite}/`,
       `${canonicalSite}${guidePath}`,
+      `${canonicalSite}${memoryGuidePath}`,
       `${canonicalSite}${chapterPath}`,
     ]);
   });
@@ -128,8 +130,11 @@ describe("publication discovery endpoints", () => {
     expect(response.headers.get("content-type")).toContain("application/rss+xml");
     expect(body).toContain("<title>The Model Is Not the Agent</title>");
     expect(body).toContain("<title>Harness Engineering: A Practical Study Guide</title>");
+    expect(body).toContain("<title>Memory Engineering: A Practical Study Guide</title>");
     expect(body).toContain(`<link>${canonicalSite}${guidePath}</link>`);
     expect(body).toContain(`<link>${canonicalSite}${chapterPath}</link>`);
+    expect(body).toContain(`<link>${canonicalSite}${memoryGuidePath}</link>`);
+    expect(body).toContain("revision-memory-engineering-study-guide-001");
     expect(body).toContain("revision-fieldbook-essay-001");
   });
 

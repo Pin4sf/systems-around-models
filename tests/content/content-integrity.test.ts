@@ -1,4 +1,5 @@
 import { loadClaims, loadContent, loadRevisions, loadSources } from "@/lib/content/load-content";
+import { memoryClaimCoverage } from "@/lib/study-guide/memory-claim-coverage";
 import { mkdtemp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
@@ -97,6 +98,91 @@ describe("public content registry", () => {
 
     expect(namedExternalUrls).toHaveLength(7);
     expect(registeredUrls).toEqual(expect.arrayContaining(namedExternalUrls));
+  });
+
+  it("registers every visible source family for the Memory Engineering guide", async () => {
+    const content = await loadContent();
+    const guide = content.essays.get("memory-engineering-study-guide");
+    if (!guide) throw new Error("Expected public Memory Engineering study guide");
+    const source = await readFile(
+      path.join(process.cwd(), "content/essays/memory/memory-engineering-study-guide.mdx"),
+      "utf8",
+    );
+    const readingSection = source.split("## Sources and next reading")[1] ?? "";
+    const namedExternalUrls = [...readingSection.matchAll(/\]\((https?:\/\/[^)]+)\)/g)]
+      .map((match) => match[1]);
+    const registeredUrls = guide.sourceManifestIds
+      .map((sourceId) => content.sources.get(sourceId)?.canonicalUrl)
+      .filter((url): url is string => Boolean(url?.startsWith("http")));
+
+    expect(namedExternalUrls).toHaveLength(9);
+    expect(registeredUrls).toEqual(expect.arrayContaining(namedExternalUrls));
+  });
+
+  it("preserves the canonical ACL author order for the LoCoMo source record", async () => {
+    const sources = await loadSources();
+
+    expect(sources.get("source-memory-locomo")?.author).toBe(
+      "Adyasha Maharana, Dong-Ho Lee, Sergey Tulyakov, Mohit Bansal, Francesco Barbieri, and Yuwei Fang",
+    );
+  });
+
+  it("covers the central Memory Engineering claims with source-backed revision records", async () => {
+    const [content, source] = await Promise.all([
+      loadContent(),
+      readFile(
+        path.join(process.cwd(), "content/essays/memory/memory-engineering-study-guide.mdx"),
+        "utf8",
+      ),
+    ]);
+    const revision = content.revisions.get("revision-memory-engineering-study-guide-001");
+
+    expect(memoryClaimCoverage).toEqual([
+      {
+        claimId: "claim-memory-function-before-database",
+        heading: "2. Choose the memory function before the database",
+        sourceIds: [
+          "source-memory-memgpt",
+          "source-memory-anthropic-context-engineering",
+        ],
+      },
+      {
+        claimId: "claim-memory-capture-not-belief",
+        heading: "4. Capture is not belief",
+        sourceIds: [
+          "source-memory-memgpt",
+          "source-memory-owasp-memory-attack-surface",
+        ],
+      },
+      {
+        claimId: "claim-memory-decision-scoped-retrieval",
+        heading: "5. Retrieve for a decision, not merely for similarity",
+        sourceIds: [
+          "source-memory-anthropic-context-engineering",
+          "source-memory-longmemeval",
+        ],
+      },
+    ]);
+    for (const coverage of memoryClaimCoverage) {
+      const claim = content.claims.get(coverage.claimId);
+      expect(claim).toMatchObject({
+        label: "proposed",
+        scope: "Memory Engineering study guide",
+        sourceIds: coverage.sourceIds,
+      });
+      expect(revision?.affectedClaimIds).toContain(coverage.claimId);
+      expect(source).toContain(`## ${coverage.heading}`);
+    }
+  });
+
+  it("marks the superseded Memory-future design amendment without obscuring its history", async () => {
+    const design = await readFile(
+      path.join(process.cwd(), "docs/design/2026-08-21-reading-portal-design.md"),
+      "utf8",
+    );
+
+    expect(design).not.toMatch(/Memory Engineering and gallery work remain future\s+projects\./i);
+    expect(design).toMatch(/Superseded.*Harness-only[\s\S]*complete Memory Engineering short guide/i);
   });
 
   it("names malformed public fixtures when validation rejects them", async () => {

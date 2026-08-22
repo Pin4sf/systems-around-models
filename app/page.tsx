@@ -65,6 +65,21 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="homepage__section prose" aria-labelledby="memory-guide-title">
+        <p className="eyebrow interface-text">Companion guide</p>
+        <h2 id="memory-guide-title">Memory Engineering: a practical companion guide</h2>
+        <p>
+          Design agent memory as a governed lifecycle: what a record means, where it came from,
+          when it may influence work, how it is corrected, and when it is removed.
+        </p>
+        <Link
+          className="homepage__chapter-link interface-text"
+          href="/fieldbook/memory-engineering-study-guide"
+        >
+          Read the Memory guide
+        </Link>
+      </section>
+
       <footer className="homepage__status interface-text">
         <p>Public working edition · Read the short course now; detailed chapters follow</p>
       </footer>

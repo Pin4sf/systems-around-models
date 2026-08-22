@@ -81,6 +81,19 @@ describe("deterministic public build manifest", () => {
             "source-humanlayer-12-factor-agents",
           ]),
         }),
+        expect.objectContaining({
+          id: "revision-memory-engineering-study-guide-001",
+          essaySlug: "memory-engineering-study-guide",
+          publishedAt: "2026-08-22",
+          substantivelyRevisedAt: "2026-08-22",
+          summary: "Initial public edition of the complete short Memory Engineering study guide.",
+          correctionDisposition: "publication",
+          sourceIds: expect.arrayContaining([
+            "source-memory-memgpt",
+            "source-memory-anthropic-context-engineering",
+            "source-memory-owasp-memory-attack-surface",
+          ]),
+        }),
       ]),
     });
     expect(manifest.buildId).toMatch(/^sha256-[a-f0-9]{64}$/);
@@ -89,6 +102,10 @@ describe("deterministic public build manifest", () => {
       expect.objectContaining({
         id: "source-harness-engineering-fieldbook-v1",
         lastValidated: "2026-08-21",
+      }),
+      expect.objectContaining({
+        id: "source-memory-memgpt",
+        lastValidated: "2026-08-22",
       }),
     ]));
     await expect(
@@ -103,6 +120,12 @@ describe("deterministic public build manifest", () => {
         "utf8",
       ),
     ).resolves.toContain('"essaySlug": "harness-engineering-study-guide"');
+    await expect(
+      readFile(
+        path.join(root, "public", "manifests", "revision-memory-engineering-study-guide-001.json"),
+        "utf8",
+      ),
+    ).resolves.toContain('"essaySlug": "memory-engineering-study-guide"');
   });
 
   it("is stable for identical content and changes its hashes when essay content changes", async () => {

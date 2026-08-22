@@ -1,0 +1,23 @@
+id: source-memory-memgpt
+title: "MemGPT: Towards LLMs as Operating Systems"
+author: Charles Packer, Sarah Wooders, Kevin Lin, Vivian Fang, Shishir G. Patil, Ion Stoica, and Joseph E. Gonzalez
+canonical_url: https://arxiv.org/abs/2310.08560
+published_at: 2023-10-12
+retrieved_at: 2026-08-22
+inspected_paths: []
+source_type: first-party-article
+basis: Direct reading of the public technical preprint at its canonical URL.
+license_status: unknown
+evidence_grade: FD
+observed_mechanisms:
+  - description: The paper presents a virtual-context architecture that manages information across constrained model context and external memory.
+    evidence_grade: FD
+    basis: The architecture and its memory-management framing are described in the public paper.
+author_reported_claims:
+  - The proposed architecture can manage a model's limited context using an operating-system-inspired memory hierarchy.
+unknowns:
+  - The preprint does not establish a universal policy for authority, correction, retention, or deletion in deployed agent memory.
+falsifiers:
+  - The authors correct the public paper or retract the described architecture.
+last_validated: 2026-08-22
+correction_ledger_status: reviewed

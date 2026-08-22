@@ -1,0 +1,11 @@
+id: claim-memory-decision-scoped-retrieval
+statement: Memory retrieval should be scoped to an identified decision, principal, time, record state, and allowed influence rather than relying on semantic similarity alone.
+label: proposed
+scope: Memory Engineering study guide
+source_ids:
+  - source-memory-anthropic-context-engineering
+  - source-memory-longmemeval
+falsifiers:
+  - Similarity-only retrieval consistently preserves temporal correctness, principal scope, and permitted influence across consequential memory-backed decisions.
+last_reviewed: 2026-08-22
+revision: 1

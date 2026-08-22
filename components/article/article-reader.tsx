@@ -11,17 +11,7 @@ import { SystemTrace } from "@/components/diagrams/system-trace";
 import type { EssayMetadata, RevisionRecord } from "@/lib/content/schema";
 import { compilePublicMdx } from "@/lib/content/compile-public-mdx";
 import { slugifyHeading } from "@/lib/content/slugify";
-import { harnessChapterCount } from "@/lib/study-guide/harness-course";
-
-const essayPaths: Record<string, string> = {
-  "harness-engineering-study-guide": "harness/harness-engineering-study-guide.mdx",
-  "the-model-is-not-the-agent": "harness/the-model-is-not-the-agent.mdx",
-};
-
-function readerPosition(essay: EssayMetadata) {
-  if (essay.slug === "harness-engineering-study-guide") return "Complete short course";
-  return `Chapter 1 of ${harnessChapterCount}`;
-}
+import { getStudyGuideEntryForEssay } from "@/lib/study-guide/study-guide-registry";
 
 function articleHeadings(source: string): ArticleHeading[] {
   return [...source.matchAll(/^##\s+(.+?)\s*$/gm)].map((match) => ({
@@ -41,11 +31,10 @@ export async function ArticleReader({
   revision,
   releasedEssays,
 }: ArticleReaderProps) {
-  const relativePath = essayPaths[essay.slug];
-  if (!relativePath) throw new Error(`No trusted public essay path for ${essay.slug}`);
+  const guide = getStudyGuideEntryForEssay(essay);
 
   const source = await readFile(
-    path.join(process.cwd(), "content", "essays", relativePath),
+    path.join(process.cwd(), "content", "essays", guide.sourcePath),
     "utf8",
   );
   const headings = articleHeadings(source);
@@ -79,7 +68,7 @@ export async function ArticleReader({
       <article className="article-reader__article">
         <header className="article-reader__header">
           <p className="eyebrow interface-text">
-            {essay.sequence} · {readerPosition(essay)}
+            {guide.sequenceName} · {guide.readerPosition}
           </p>
           <h1>{essay.title}</h1>
           <p className="article-reader__description">{essay.description}</p>

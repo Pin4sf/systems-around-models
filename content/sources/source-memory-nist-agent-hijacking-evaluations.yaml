@@ -1,0 +1,23 @@
+id: source-memory-nist-agent-hijacking-evaluations
+title: Strengthening AI Agent Hijacking Evaluations
+author: Technical Staff at the Center for AI Standards and Innovation
+canonical_url: https://www.nist.gov/news-events/news/2025/01/technical-blog-strengthening-ai-agent-hijacking-evaluations
+published_at: 2025-01-17
+retrieved_at: 2026-08-22
+inspected_paths: []
+source_type: first-party-article
+basis: Direct reading of the public NIST technical blog at its canonical URL.
+license_status: unknown
+evidence_grade: FD
+observed_mechanisms:
+  - description: The guidance discusses stronger evaluation design for AI agent hijacking and adversarial behavior.
+    evidence_grade: FD
+    basis: The named evaluation framing appears directly in the official public guidance.
+author_reported_claims:
+  - Agent security evaluations should test adversarial behavior with explicit, realistic threat models.
+unknowns:
+  - The guidance is broader than memory and does not by itself define a memory-system control standard.
+falsifiers:
+  - NIST corrects or withdraws the named public guidance.
+last_validated: 2026-08-22
+correction_ledger_status: reviewed

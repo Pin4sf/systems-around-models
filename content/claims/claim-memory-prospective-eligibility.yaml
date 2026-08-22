@@ -1,0 +1,11 @@
+id: claim-memory-prospective-eligibility
+statement: A prospective-memory cue makes an intention eligible for review or a bounded attempt; it does not by itself authorize an external effect or closure.
+label: proposed
+scope: Memory Engineering study guide
+source_ids:
+  - source-memory-pm-bench
+  - source-memory-nist-agent-hijacking-evaluations
+falsifiers:
+  - A prospective-memory system safely converts cues directly into unrestricted effects while preserving owner intent, approval, and recovery guarantees.
+last_reviewed: 2026-08-22
+revision: 1
