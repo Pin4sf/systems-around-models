@@ -118,6 +118,14 @@ describe("public content registry", () => {
     expect(registeredUrls).toEqual(expect.arrayContaining(namedExternalUrls));
   });
 
+  it("preserves the canonical ACL author order for the LoCoMo source record", async () => {
+    const sources = await loadSources();
+
+    expect(sources.get("source-memory-locomo")?.author).toBe(
+      "Adyasha Maharana, Dong-Ho Lee, Sergey Tulyakov, Mohit Bansal, Francesco Barbieri, and Yuwei Fang",
+    );
+  });
+
   it("names malformed public fixtures when validation rejects them", async () => {
     const repository = await fixtureRepository({
       "claims/invalid-label.yaml": validClaim.replace("label: inferred", "label: private"),
