@@ -1,0 +1,28 @@
+{
+  "id": "architecture-claude-code",
+  "slug": "claude-code",
+  "recordKind": "system",
+  "productClass": "frontier-coding-harness",
+  "revision": 1,
+  "lastReviewed": "2026-08-22",
+  "inspectedVersion": "16440d0f6ee8c47f34169687044b89eafa8b0f8d",
+  "dossierStatus": "deep-dive-needed",
+  "contentHash": "sha256-ded183c646fde0a84274fde15c8e7f4302915fc45f1e1c1000b98e631eaa39f1",
+  "sourceIds": [
+    "source-architecture-claude-code"
+  ],
+  "sourceValidationDates": {
+    "source-architecture-claude-code": "2026-08-22"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-architecture-claude-code",
+      "title": "Claude Code repository",
+      "canonicalUrl": "https://github.com/anthropics/claude-code",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "unknown"
+    }
+  ]
+}

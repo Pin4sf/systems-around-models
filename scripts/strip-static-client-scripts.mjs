@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 
 const expectedProductionDocuments = [
   "server/app/_not-found.html",
+  "server/app/architectures.html",
   "server/app/fieldbook/the-model-is-not-the-agent.html",
   "server/app/index.html",
   "server/pages/404.html",

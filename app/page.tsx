@@ -6,22 +6,49 @@ export default function HomePage() {
   return (
     <article className="homepage">
       <header className="homepage__hero prose">
-        <p className="eyebrow interface-text">A free, practical study guide</p>
-        <h1>Harness Engineering, from first principles.</h1>
+        <p className="eyebrow interface-text">A visual study hub for agent systems</p>
+        <h1>Study the machinery around models.</h1>
         <p className="homepage__lede">
-          Learn the systems around a model: instructions, tools, runtime loops, environments,
-          state, memory, authority, recovery, verification, and completion. Read it in order or
-          use it as a reference while you build.
+          Learn harnesses, memory, authority, recovery, and verification—then compare how real
+          systems arrange them. Start with the complete guide or follow the question you are building around.
         </p>
         <p className="homepage__course-stats interface-text">
           {harnessChapterCount} chapters · 12 labs · 1 capstone
         </p>
         <Link className="homepage__chapter-link interface-text" href="/fieldbook/harness-engineering-study-guide">
-          Start reading
+          Start with Harness Engineering
+        </Link>
+        <Link className="homepage__chapter-link homepage__chapter-link--secondary interface-text" href="/architectures">
+          Explore architectures
         </Link>
       </header>
 
       <SystemTrace />
+
+      <section className="study-paths" aria-labelledby="study-paths-title">
+        <div className="course-map__heading prose">
+          <p className="eyebrow interface-text">Start here</p>
+          <h2 id="study-paths-title">Three ways into the field</h2>
+          <p>Read chronologically, compare real systems, or move between concepts as your own architecture takes shape.</p>
+        </div>
+        <div className="study-paths__rows">
+          <Link href="/fieldbook/harness-engineering-study-guide">
+            <span className="interface-text">01 · Complete guide</span>
+            <strong>Harness Engineering</strong>
+            <small>Learn the runtime responsibilities around a model.</small>
+          </Link>
+          <Link href="/fieldbook/memory-engineering-study-guide">
+            <span className="interface-text">02 · Complete guide</span>
+            <strong>Memory Engineering</strong>
+            <small>Design memory as a governed lifecycle, not a vector lookup.</small>
+          </Link>
+          <Link href="/architectures">
+            <span className="interface-text">03 · Field map</span>
+            <strong>Architecture Comparison</strong>
+            <small>Compare major harnesses and memory systems without a universal leaderboard.</small>
+          </Link>
+        </div>
+      </section>
 
       <section className="homepage__section prose" aria-labelledby="what-you-will-learn">
         <p className="eyebrow interface-text">What this guide teaches</p>

@@ -23,8 +23,8 @@
     "source-earendil-what-is-a-harness": "2026-08-21",
     "source-harness-engineering-fieldbook-v1": "2026-08-21"
   },
-  "schemaVersion": 1,
-  "validationSchemaVersion": "publication-v1",
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
   "sources": [
     {
       "id": "source-earendil-what-is-a-harness",

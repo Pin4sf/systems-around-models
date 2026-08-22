@@ -40,8 +40,8 @@
     "source-memory-owasp-memory-attack-surface": "2026-08-22",
     "source-memory-nist-agent-hijacking-evaluations": "2026-08-22"
   },
-  "schemaVersion": 1,
-  "validationSchemaVersion": "publication-v1",
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
   "sources": [
     {
       "id": "source-memory-anthropic-context-engineering",

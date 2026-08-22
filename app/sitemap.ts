@@ -13,6 +13,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     return revision.substantivelyRevisedAt;
   });
   const publicationLastModified = revisionDates.sort().at(-1);
+  const architectureLastModified = [...content.architectures.values()]
+    .filter((record) => record.status === "public")
+    .map((record) => record.lastReviewed)
+    .sort()
+    .at(-1);
 
   return [
     {
@@ -20,6 +25,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: publicationLastModified,
       changeFrequency: "monthly",
       priority: 1,
+    },
+    {
+      url: canonicalUrl("/architectures"),
+      lastModified: architectureLastModified,
+      changeFrequency: "monthly",
+      priority: 0.9,
     },
     ...essays.map((essay) => {
       const revision = content.revisions.get(essay.revisionId);

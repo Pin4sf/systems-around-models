@@ -12,14 +12,14 @@ export function PublicationShell({ children }: { children: ReactNode }) {
           Systems Around Models
         </Link>
         <nav aria-label="Publication">
-          <Link href="/fieldbook/harness-engineering-study-guide">Harness guide</Link>
-          <Link href="/fieldbook/memory-engineering-study-guide">Memory guide</Link>
-          <Link href="/#chapters">Curriculum</Link>
-          <Link href="/fieldbook/the-model-is-not-the-agent">First chapter</Link>
+          <Link href="/">Start here</Link>
+          <Link href="/fieldbook/harness-engineering-study-guide">Harness</Link>
+          <Link href="/fieldbook/memory-engineering-study-guide">Memory</Link>
+          <Link href="/architectures">Architectures</Link>
         </nav>
       </header>
       <main id="main-content">{children}</main>
-      <footer>A practical, independent guide to building systems around models.</footer>
+      <footer className="site-footer">A practical, independent guide to building systems around models.</footer>
     </>
   );
 }

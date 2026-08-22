@@ -1,0 +1,24 @@
+id: lesson-how-to-compare-agent-systems
+slug: how-to-compare-agent-systems
+title: How to compare agent systems
+status: public
+problem: Agent systems are often compared as feature lists even when they own different parts of the work.
+mechanism: Normalize each system across job, control, state, authority, recovery, verification, and deliberate omission before comparing it.
+failure_boundary: A normalized diagram can still invent equivalence if an unsupported responsibility is silently marked as owned.
+transferable_lesson: Compare the same questions across systems, while preserving different product boundaries and explicit unknowns.
+architecture_ids:
+  - architecture-baseline-harness
+  - architecture-claude-code
+  - architecture-openai-codex
+  - architecture-gemini-cli
+  - architecture-openhands
+  - architecture-langgraph
+  - architecture-letta
+  - architecture-mem0
+  - architecture-graphiti
+source_ids:
+  - source-earendil-what-is-a-harness
+  - source-langchain-anatomy-agent-harness
+  - source-memory-memgpt
+last_reviewed: 2026-08-22
+revision: 1

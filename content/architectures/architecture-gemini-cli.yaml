@@ -1,0 +1,40 @@
+id: architecture-gemini-cli
+slug: gemini-cli
+name: Gemini CLI
+record_kind: system
+product_class: frontier-coding-harness
+status: public
+summary: An open terminal agent that combines a conversational loop, local tools, and extension surfaces around Gemini models.
+primary_job: Bring model-guided coding and research work into a terminal workspace.
+teaching_question: How does an open terminal harness balance built-in tools with extensibility?
+coordination_shape: iterative-loop
+control_owner: The CLI runtime coordinates model turns, built-in tools, and configured extensions.
+context_model: Conversation, project context, instructions, and tool outputs are assembled for the model.
+state_model: Session and project context support continuity; the complete durability contract needs deeper inspection.
+authority_boundary: The CLI mediates local tools while extensions can widen the effective capability boundary.
+recovery_model: Checkpoint and resume behavior must be separated from ordinary conversational continuity.
+verification_model: Tool results and checks inform the run; external project policy decides acceptance.
+transferable_lesson: Extensibility makes capability discovery and authority boundaries part of the architecture.
+deliberate_omissions:
+  - The CLI does not own application-specific completion policy or deployment acceptance.
+topology_steps:
+  - { stage: admit, label: Admit, ownership: owned, description: The CLI accepts a request inside its configured project environment. }
+  - { stage: assemble, label: Assemble, ownership: owned, description: Project context and conversation are compiled for the model. }
+  - { stage: bind, label: Bind, ownership: owned, description: Built-in and configured extension tools form the capability surface. }
+  - { stage: run, label: Run, ownership: owned, description: The CLI iterates model responses and tool results. }
+  - { stage: recover, label: Recover, ownership: delegated, description: Session continuity exists but complete interruption recovery needs deeper verification. }
+  - { stage: verify-close, label: Verify and close, ownership: external, description: Project checks and human review remain outside universal CLI closure. }
+lifecycle_trace:
+  - { order: 1, label: Load project context, owner: Gemini CLI, outcome: A project-scoped request is assembled. }
+  - { order: 2, label: Invoke tools, owner: Gemini CLI, outcome: Tool observations re-enter the conversational loop. }
+  - { order: 3, label: Return result, owner: Gemini CLI plus user, outcome: The user inspects the proposed outcome and evidence. }
+evidence_grade: FD
+evidence_fidelity: working-profile
+dossier_status: deep-dive-needed
+source_ids:
+  - source-architecture-gemini-cli
+inspected_version: 5411f113cafae26161b4969b0237b8e1e024e2c2
+unknowns:
+  - A deeper dossier should verify checkpointing, tool policy, extension isolation, and verification paths in current code.
+last_reviewed: 2026-08-22
+revision: 1

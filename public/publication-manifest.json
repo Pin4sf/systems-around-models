@@ -1,6 +1,6 @@
 {
-  "schemaVersion": 1,
-  "validationSchemaVersion": "publication-v1",
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
   "revisions": [
     {
       "id": "revision-fieldbook-essay-001",
@@ -118,6 +118,38 @@
       "lastValidated": "2026-08-22"
     },
     {
+      "id": "source-architecture-claude-code",
+      "lastValidated": "2026-08-22"
+    },
+    {
+      "id": "source-architecture-gemini-cli",
+      "lastValidated": "2026-08-22"
+    },
+    {
+      "id": "source-architecture-graphiti",
+      "lastValidated": "2026-08-22"
+    },
+    {
+      "id": "source-architecture-langgraph",
+      "lastValidated": "2026-08-22"
+    },
+    {
+      "id": "source-architecture-letta",
+      "lastValidated": "2026-08-22"
+    },
+    {
+      "id": "source-architecture-mem0",
+      "lastValidated": "2026-08-22"
+    },
+    {
+      "id": "source-architecture-openai-codex",
+      "lastValidated": "2026-08-22"
+    },
+    {
+      "id": "source-architecture-openhands",
+      "lastValidated": "2026-08-22"
+    },
+    {
       "id": "source-earendil-what-is-a-harness",
       "lastValidated": "2026-08-21"
     },
@@ -182,5 +214,194 @@
       "lastValidated": "2026-08-22"
     }
   ],
-  "buildId": "sha256-082cc57a3efd26f816a8068e92aa35fda2982fa7c1143b3d7a0922484ff5e35c"
+  "architectures": [
+    {
+      "id": "architecture-baseline-harness",
+      "slug": "baseline-harness",
+      "recordKind": "synthetic-baseline",
+      "productClass": "general-agent-runtime",
+      "revision": 1,
+      "lastReviewed": "2026-08-22",
+      "inspectedVersion": "article-2026-08-21",
+      "dossierStatus": "ready",
+      "contentHash": "sha256-f1c8a48ccb112ed10f28683ec6119bf45d3db12c315dca4e128f04539203c742",
+      "sourceIds": [
+        "source-earendil-what-is-a-harness"
+      ],
+      "sourceValidationDates": {
+        "source-earendil-what-is-a-harness": "2026-08-21"
+      }
+    },
+    {
+      "id": "architecture-claude-code",
+      "slug": "claude-code",
+      "recordKind": "system",
+      "productClass": "frontier-coding-harness",
+      "revision": 1,
+      "lastReviewed": "2026-08-22",
+      "inspectedVersion": "16440d0f6ee8c47f34169687044b89eafa8b0f8d",
+      "dossierStatus": "deep-dive-needed",
+      "contentHash": "sha256-ded183c646fde0a84274fde15c8e7f4302915fc45f1e1c1000b98e631eaa39f1",
+      "sourceIds": [
+        "source-architecture-claude-code"
+      ],
+      "sourceValidationDates": {
+        "source-architecture-claude-code": "2026-08-22"
+      }
+    },
+    {
+      "id": "architecture-gemini-cli",
+      "slug": "gemini-cli",
+      "recordKind": "system",
+      "productClass": "frontier-coding-harness",
+      "revision": 1,
+      "lastReviewed": "2026-08-22",
+      "inspectedVersion": "5411f113cafae26161b4969b0237b8e1e024e2c2",
+      "dossierStatus": "deep-dive-needed",
+      "contentHash": "sha256-72713964cca91080d038d49a195269ba83eec7f5b98915718e8ff8341afcc688",
+      "sourceIds": [
+        "source-architecture-gemini-cli"
+      ],
+      "sourceValidationDates": {
+        "source-architecture-gemini-cli": "2026-08-22"
+      }
+    },
+    {
+      "id": "architecture-graphiti",
+      "slug": "graphiti",
+      "recordKind": "system",
+      "productClass": "memory-framework",
+      "revision": 1,
+      "lastReviewed": "2026-08-22",
+      "inspectedVersion": "993e081a6d7948a0d8851c12a5fbdbeb49fed862",
+      "dossierStatus": "deep-dive-needed",
+      "contentHash": "sha256-ae42d635232e405b7df29f78c47ca7f0627ffbd8ef29aa7ae4ea719dc7668997",
+      "sourceIds": [
+        "source-architecture-graphiti"
+      ],
+      "sourceValidationDates": {
+        "source-architecture-graphiti": "2026-08-22"
+      }
+    },
+    {
+      "id": "architecture-langgraph",
+      "slug": "langgraph",
+      "recordKind": "system",
+      "productClass": "general-agent-runtime",
+      "revision": 1,
+      "lastReviewed": "2026-08-22",
+      "inspectedVersion": "f09cfe8ffc1eeffd68f4b628ed69c30f7cad229f",
+      "dossierStatus": "refresh-needed",
+      "contentHash": "sha256-66e11edd49fcd2e57f1bfe35ad82b38ceb5ad5376f10a4d1f103238eededaeb5",
+      "sourceIds": [
+        "source-architecture-langgraph",
+        "source-langchain-anatomy-agent-harness"
+      ],
+      "sourceValidationDates": {
+        "source-architecture-langgraph": "2026-08-22",
+        "source-langchain-anatomy-agent-harness": "2026-08-22"
+      }
+    },
+    {
+      "id": "architecture-letta",
+      "slug": "letta",
+      "recordKind": "system",
+      "productClass": "general-agent-runtime",
+      "revision": 1,
+      "lastReviewed": "2026-08-22",
+      "inspectedVersion": "87fd37aab68c7bdd0d66fe63751553756f6af3e5",
+      "dossierStatus": "refresh-needed",
+      "contentHash": "sha256-8ecac016567479c1b644818c4af62fba268091e9365ef7bc0228e15120c4f7ae",
+      "sourceIds": [
+        "source-architecture-letta",
+        "source-memory-memgpt"
+      ],
+      "sourceValidationDates": {
+        "source-architecture-letta": "2026-08-22",
+        "source-memory-memgpt": "2026-08-22"
+      }
+    },
+    {
+      "id": "architecture-mem0",
+      "slug": "mem0",
+      "recordKind": "system",
+      "productClass": "memory-framework",
+      "revision": 1,
+      "lastReviewed": "2026-08-22",
+      "inspectedVersion": "9b565da8e3f1b05fc3ed80ac338e6bbb9622d4d7",
+      "dossierStatus": "deep-dive-needed",
+      "contentHash": "sha256-8879bfcd61e9be89e4878a1669ae8e1458315f25c334a3c097717824c6d034f8",
+      "sourceIds": [
+        "source-architecture-mem0"
+      ],
+      "sourceValidationDates": {
+        "source-architecture-mem0": "2026-08-22"
+      }
+    },
+    {
+      "id": "architecture-openai-codex",
+      "slug": "openai-codex",
+      "recordKind": "system",
+      "productClass": "frontier-coding-harness",
+      "revision": 1,
+      "lastReviewed": "2026-08-22",
+      "inspectedVersion": "343074d4207d572809bd8cea15f4be1d09d98e0b",
+      "dossierStatus": "deep-dive-needed",
+      "contentHash": "sha256-1dd2711587812b3db85c51138a25da9a3b3f9d0caf1218a42c4927d29a696ba0",
+      "sourceIds": [
+        "source-architecture-openai-codex"
+      ],
+      "sourceValidationDates": {
+        "source-architecture-openai-codex": "2026-08-22"
+      }
+    },
+    {
+      "id": "architecture-openhands",
+      "slug": "openhands",
+      "recordKind": "system",
+      "productClass": "frontier-coding-harness",
+      "revision": 1,
+      "lastReviewed": "2026-08-22",
+      "inspectedVersion": "4bf8dd3aaf1217916b2ce8a6f9168fa7633a26f8",
+      "dossierStatus": "refresh-needed",
+      "contentHash": "sha256-e141a1781b88c9cc18cc059f29e63a2f8d2592ea82a2f93ec45ea810cb833d4d",
+      "sourceIds": [
+        "source-architecture-openhands"
+      ],
+      "sourceValidationDates": {
+        "source-architecture-openhands": "2026-08-22"
+      }
+    }
+  ],
+  "lessons": [
+    {
+      "id": "lesson-how-to-compare-agent-systems",
+      "slug": "how-to-compare-agent-systems",
+      "revision": 1,
+      "lastReviewed": "2026-08-22",
+      "contentHash": "sha256-e14cb23bc7fa92f31e8877d63a663cf0fbd1e9b0a2977cd1c7d26050cb938c14",
+      "architectureIds": [
+        "architecture-baseline-harness",
+        "architecture-claude-code",
+        "architecture-gemini-cli",
+        "architecture-graphiti",
+        "architecture-langgraph",
+        "architecture-letta",
+        "architecture-mem0",
+        "architecture-openai-codex",
+        "architecture-openhands"
+      ],
+      "sourceIds": [
+        "source-earendil-what-is-a-harness",
+        "source-langchain-anatomy-agent-harness",
+        "source-memory-memgpt"
+      ],
+      "sourceValidationDates": {
+        "source-earendil-what-is-a-harness": "2026-08-21",
+        "source-langchain-anatomy-agent-harness": "2026-08-22",
+        "source-memory-memgpt": "2026-08-22"
+      }
+    }
+  ],
+  "buildId": "sha256-ae5732fa7467cbf1a4edf6a457c3334d49a0456f230b410e56e70ccba1784c17"
 }

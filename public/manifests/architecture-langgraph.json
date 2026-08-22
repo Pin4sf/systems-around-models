@@ -1,0 +1,37 @@
+{
+  "id": "architecture-langgraph",
+  "slug": "langgraph",
+  "recordKind": "system",
+  "productClass": "general-agent-runtime",
+  "revision": 1,
+  "lastReviewed": "2026-08-22",
+  "inspectedVersion": "f09cfe8ffc1eeffd68f4b628ed69c30f7cad229f",
+  "dossierStatus": "refresh-needed",
+  "contentHash": "sha256-66e11edd49fcd2e57f1bfe35ad82b38ceb5ad5376f10a4d1f103238eededaeb5",
+  "sourceIds": [
+    "source-architecture-langgraph",
+    "source-langchain-anatomy-agent-harness"
+  ],
+  "sourceValidationDates": {
+    "source-architecture-langgraph": "2026-08-22",
+    "source-langchain-anatomy-agent-harness": "2026-08-22"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-architecture-langgraph",
+      "title": "LangGraph repository",
+      "canonicalUrl": "https://github.com/langchain-ai/langgraph",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "MIT"
+    },
+    {
+      "id": "source-langchain-anatomy-agent-harness",
+      "title": "The Anatomy of an Agent Harness",
+      "canonicalUrl": "https://www.langchain.com/blog/the-anatomy-of-an-agent-harness",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "all-rights-reserved"
+    }
+  ]
+}

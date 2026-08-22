@@ -119,6 +119,23 @@ describe("deterministic public-content scanner", () => {
     expect(result.stdout).toContain("Public content check passed");
   });
 
+  it("rejects an architecture record with an unresolved source", async () => {
+    const root = await publicFixture();
+    await writeTracked(root, "content/architectures/architecture-invalid.yaml", [
+      "id: architecture-invalid",
+      "source_ids:",
+      "  - source-missing",
+      "status: public",
+      "evidence_grade: FD",
+      "",
+    ].join("\n"));
+
+    const result = await runScanner(root);
+    expect(result.code).toBe(1);
+    expect(result.stderr).toContain("content/architectures/architecture-invalid.yaml");
+    expect(result.stderr).toContain("unresolved source identifier source-missing");
+  });
+
   it.each([
     ["absolute local paths", `Local file ${posixPath("Users", "example", "private", "trace.json")}`, "absolute local path"],
     ["private corpus names", `Runtime dependency: ${privateCorpusName}`, privateCorpusName],

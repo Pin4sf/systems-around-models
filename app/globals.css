@@ -64,7 +64,7 @@ summary:focus-visible,
 }
 
 .site-header,
-footer {
+.site-footer {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -88,7 +88,7 @@ footer {
   text-decoration: none;
 }
 
-nav {
+.site-header nav {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem 1rem;
@@ -98,7 +98,7 @@ nav {
   text-transform: uppercase;
 }
 
-nav a {
+.site-header nav a {
   color: var(--ink);
 }
 
@@ -108,7 +108,7 @@ main {
   padding-block: clamp(2.5rem, 6vw, 6rem);
 }
 
-footer {
+.site-footer {
   margin-top: auto;
   border-top: 1px solid var(--rule);
   color: var(--ink-muted);
@@ -202,6 +202,72 @@ footer {
   font-size: 0.9375rem;
   font-weight: 700;
 }
+
+.homepage__chapter-link--secondary { margin-left: 1.5rem; color: var(--ink-muted); }
+
+.study-paths__rows { border-top: 1px solid var(--rule); }
+.study-paths__rows > a { display: grid; grid-template-columns: minmax(8rem, .45fr) minmax(13rem, .7fr) minmax(18rem, 1fr); gap: 1.5rem clamp(1.5rem, 4vw, 4rem); align-items: baseline; padding: 1.35rem 0; border-bottom: 1px solid var(--rule); text-decoration: none; }
+.study-paths__rows span { color: var(--ink-muted); font-size: .7rem; letter-spacing: .07em; text-transform: uppercase; }
+.study-paths__rows strong { color: var(--evidence); font-size: clamp(1.25rem, 2vw, 1.7rem); }
+.study-paths__rows small { color: var(--ink-muted); font-size: .9rem; }
+
+.architecture-reader { display: grid; gap: clamp(5rem, 11vw, 9rem); padding-bottom: 4rem; }
+.architecture-reader > *, .architecture-section--wide { width: 100%; min-width: 0; }
+.architecture-hero { max-width: 82rem; padding-top: clamp(1rem, 4vw, 4rem); }
+.architecture-hero h1 { max-width: 13ch; margin: 0; font-size: clamp(3.5rem, 8vw, 7.5rem); font-weight: 600; letter-spacing: -.055em; line-height: .92; }
+.architecture-hero__deck { max-width: 58ch; margin: 2rem 0 0; color: var(--ink-muted); font-size: clamp(1.3rem, 1.05rem + .9vw, 1.8rem); line-height: 1.45; }
+.architecture-hero__meta { margin: 1.5rem 0 0; color: var(--ink-muted); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; }
+.architecture-jump { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; margin-top: 2.5rem; font-family: var(--font-interface), Arial, sans-serif; font-size: .82rem; }
+.architecture-section, .architecture-method { scroll-margin-top: 2rem; }
+.architecture-section__intro, .architecture-method { margin-bottom: clamp(2rem, 5vw, 4rem); }
+.architecture-section__intro h2, .architecture-method h2 { max-width: 18ch; margin: 0 0 1.25rem; font-size: clamp(2.2rem, 5vw, 4.2rem); font-weight: 600; letter-spacing: -.045em; line-height: 1; }
+.architecture-section--baseline { padding: clamp(2rem, 5vw, 4rem); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); background: var(--paper-deep); }
+
+.comparison-lenses { display: grid; grid-template-columns: repeat(7, minmax(8rem, 1fr)); gap: 1px; margin: 0; padding: 1px; overflow-x: auto; background: var(--rule); }
+.comparison-lenses > div { min-width: 9rem; padding: 1rem; background: var(--paper); }
+.comparison-lenses dt, .architecture-band dt { color: var(--evidence); font-family: var(--font-interface), Arial, sans-serif; font-size: .78rem; font-weight: 750; letter-spacing: .04em; text-transform: uppercase; }
+.comparison-lenses dd, .architecture-band dd { margin: .55rem 0 0; font-size: .86rem; line-height: 1.5; }
+
+.normalized-topology { min-width: 0; margin: 0; }
+.normalized-topology figcaption { margin-bottom: .75rem; color: var(--ink-muted); font-family: var(--font-interface), Arial, sans-serif; font-size: .7rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
+.normalized-topology ol { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: .6rem; margin: 0; padding: 0; list-style: none; }
+.topology-step { position: relative; min-height: 9rem; padding: .85rem; border-top: .25rem solid var(--rule); background: var(--paper); }
+.topology-step:not(:last-child)::after { position: absolute; top: 1.05rem; right: -.52rem; z-index: 1; color: var(--ink-muted); content: "→"; }
+.topology-step--owned { border-top-color: var(--evidence); }
+.topology-step--delegated { border-top-color: var(--gold); }
+.topology-step--external { border-top-style: dashed; }
+.topology-step--not-established { border-top-style: dotted; opacity: .72; }
+.topology-step strong, .topology-step span { display: block; }
+.topology-step strong { font-family: var(--font-interface), Arial, sans-serif; font-size: .8rem; }
+.topology-step__owner { margin: .35rem 0 .8rem; color: var(--ink-muted); font-family: var(--font-trace), monospace; font-size: .64rem; text-transform: uppercase; }
+.topology-step > span:last-child { font-size: .76rem; line-height: 1.45; }
+
+.comparison-table-well { width: 100%; max-width: 100%; overflow-x: auto; border: 1px solid var(--rule); }
+.architecture-comparison { width: 100%; min-width: 84rem; border-collapse: collapse; font-family: var(--font-interface), Arial, sans-serif; font-size: .73rem; line-height: 1.45; }
+.architecture-comparison caption { padding: 1rem; border-bottom: 1px solid var(--rule); color: var(--ink-muted); text-align: left; }
+.architecture-comparison th, .architecture-comparison td { min-width: 10rem; padding: .9rem 1rem; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+.architecture-comparison thead th { background: var(--paper-deep); font-size: .66rem; letter-spacing: .05em; text-transform: uppercase; }
+.architecture-comparison tbody th { position: sticky; left: 0; z-index: 1; background: var(--paper); font-size: .8rem; }
+
+.architecture-gallery { border-top: 1px solid var(--ink); }
+.architecture-band { display: grid; grid-template-columns: minmax(12rem, .72fr) minmax(30rem, 1.5fr) minmax(18rem, .95fr); gap: clamp(1.5rem, 3vw, 3rem); scroll-margin-top: 2rem; padding: clamp(2rem, 5vw, 4rem) 0; border-bottom: 1px solid var(--ink); }
+.architecture-band > * { min-width: 0; }
+.architecture-band__identity h3 { margin: 0; font-size: clamp(2rem, 4vw, 3.3rem); font-weight: 600; letter-spacing: -.04em; line-height: 1; }
+.architecture-band__identity > p:not(.eyebrow, .architecture-band__number, .architecture-band__version) { color: var(--ink-muted); font-size: .95rem; line-height: 1.5; }
+.architecture-band__number, .architecture-band__version { color: var(--ink-muted); font-size: .66rem; letter-spacing: .04em; text-transform: uppercase; }
+.architecture-band__number { margin: 0 0 1rem; }
+.architecture-band__contract dl { margin: 0; }
+.architecture-band__contract dl > div { padding: .7rem 0; border-top: 1px solid var(--rule); }
+.architecture-band__lesson { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 3rem; padding: 1.25rem 0 0; border-top: 1px solid var(--rule); font-size: .9rem; }
+.architecture-band__lesson > p { margin: 0; }
+.architecture-band__lesson ul { margin: .5rem 0 0; }
+.architecture-band__lesson details { grid-column: 1 / -1; }
+.architecture-band__lesson summary { cursor: pointer; font-family: var(--font-interface), Arial, sans-serif; font-size: .78rem; font-weight: 700; }
+.architecture-band__trace { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; padding: 1px; background: var(--rule); list-style: none; }
+.architecture-band__trace li { padding: 1rem; background: var(--paper); }
+.architecture-band__trace span { color: var(--ink-muted); font-family: var(--font-trace), monospace; font-size: .68rem; }
+.architecture-band__trace p { margin: .5rem 0 0; }
+.architecture-method { padding: clamp(2rem, 5vw, 4rem); border-left: .3rem solid var(--gold); background: var(--paper-deep); }
 
 .system-trace {
   width: 100%;
@@ -924,7 +990,7 @@ footer {
 
 @media (max-width: 42rem) {
   .site-header,
-  footer {
+  .site-footer {
     align-items: flex-start;
     flex-direction: column;
   }
@@ -963,9 +1029,19 @@ footer {
   }
 
   .course-part,
-  .homepage__learning-grid {
+  .homepage__learning-grid,
+  .study-paths__rows > a {
     grid-template-columns: 1fr;
   }
+
+  .homepage__chapter-link--secondary { display: block; width: max-content; margin-left: 0; }
+  .architecture-hero h1 { font-size: clamp(3.2rem, 16vw, 5rem); }
+  .architecture-section--baseline, .architecture-method { margin-inline: -1.25rem; padding-inline: 1.25rem; }
+  .normalized-topology ol, .architecture-band__trace { grid-template-columns: 1fr; }
+  .topology-step { min-height: auto; }
+  .topology-step:not(:last-child)::after { top: auto; right: auto; bottom: -.75rem; left: .9rem; content: "↓"; }
+  .architecture-band, .architecture-band__lesson { grid-template-columns: 1fr; }
+  .architecture-band__lesson, .architecture-band__lesson details { grid-column: auto; }
 
   .study-guide-footer {
     align-items: flex-start;
@@ -1006,6 +1082,9 @@ footer {
 }
 
 @media (max-width: 68rem) {
+  .architecture-band, .architecture-band__lesson { grid-template-columns: 1fr; }
+  .architecture-band__lesson, .architecture-band__lesson details { grid-column: auto; }
+
   .article-reader {
     grid-template-columns: minmax(0, 1fr);
     gap: 1.25rem;
@@ -1077,7 +1156,7 @@ footer {
   }
 
   .site-header,
-  footer,
+  .site-footer,
   main {
     width: 100%;
     max-width: none;
@@ -1103,6 +1182,8 @@ footer {
 
   .system-trace,
   .system-trace__step,
+  .architecture-band,
+  .normalized-topology,
   .evidence-badge,
   .revision-notice {
     break-inside: avoid;

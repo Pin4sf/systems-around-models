@@ -3,11 +3,12 @@ import { expect, test } from "@playwright/test";
 const route = "/fieldbook/the-model-is-not-the-agent";
 const guideRoute = "/fieldbook/harness-engineering-study-guide";
 const memoryGuideRoute = "/fieldbook/memory-engineering-study-guide";
+const architecturesRoute = "/architectures";
 
 test("@desktop homepage leads to a complete readable Harness Engineering guide", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByRole("link", { name: "Start reading" })).toHaveAttribute("href", guideRoute);
-  await page.getByRole("link", { name: "Start reading" }).click();
+  await expect(page.getByRole("link", { name: "Start with Harness Engineering" })).toHaveAttribute("href", guideRoute);
+  await page.getByRole("link", { name: "Start with Harness Engineering" }).click();
   await expect(
     page.getByRole("heading", { name: "Harness Engineering: A Practical Study Guide" }),
   ).toBeVisible();
@@ -25,7 +26,7 @@ test("@desktop homepage exposes the released Memory companion without a card gri
     "href",
     memoryGuideRoute,
   );
-  await expect(page.getByRole("link", { name: "Memory guide", exact: true })).toHaveAttribute(
+  await expect(page.getByRole("link", { name: "Memory", exact: true })).toHaveAttribute(
     "href",
     memoryGuideRoute,
   );
@@ -108,7 +109,8 @@ test("@desktop discovery endpoints expose only released publication routes", asy
   const rss = await rssResponse.text();
 
   expect(sitemapResponse.ok()).toBe(true);
-  expect(sitemap.match(/<url>/g)).toHaveLength(4);
+  expect(sitemap.match(/<url>/g)).toHaveLength(5);
+  expect(sitemap).toContain(architecturesRoute);
   expect(sitemap).toContain(guideRoute);
   expect(sitemap).toContain(route);
   expect(sitemap).toContain(memoryGuideRoute);
@@ -118,6 +120,27 @@ test("@desktop discovery endpoints expose only released publication routes", asy
   expect(rss).toContain("Memory Engineering: A Practical Study Guide");
   expect(rss).toContain("revision-memory-engineering-study-guide-001");
   expect(rss).toContain("revision-fieldbook-essay-001");
+});
+
+test("@desktop architecture field map compares and links eight source-backed profiles without JavaScript", async ({ page }) => {
+  const javascriptRequests: string[] = [];
+  page.on("request", (request) => {
+    if (request.resourceType() === "script" || /\.js(?:\?|$)/i.test(request.url())) javascriptRequests.push(request.url());
+  });
+  await page.goto(architecturesRoute);
+
+  await expect(page.getByRole("heading", { name: "Many harnesses, different jobs." })).toBeVisible();
+  await expect(page.getByRole("table", { name: "Agent architecture comparison" })).toBeVisible();
+  await expect(page.locator("article[id^='system-']")).toHaveCount(8);
+  const codexLink = page.getByRole("link", { name: "OpenAI Codex profile" });
+  await expect(codexLink).toHaveAttribute("href", "#system-openai-codex");
+  await codexLink.click();
+  await expect(page.locator("#system-openai-codex")).toBeInViewport();
+  const tableContained = await page.locator(".comparison-table-well").evaluate((element) =>
+    element.scrollWidth >= element.clientWidth && element.getBoundingClientRect().right <= window.innerWidth,
+  );
+  expect(tableContained).toBe(true);
+  expect(javascriptRequests).toEqual([]);
 });
 
 test("@desktop print and reduced-motion modes preserve the guide without motion", async ({
@@ -175,6 +198,20 @@ test("@mobile Memory reader preserves one prose column and truthful guide naviga
   await expect(page.getByText(/Chapter 1 of 40|H0→H9 progression/)).toHaveCount(0);
 });
 
+test("@mobile architecture field map keeps narrative contained and topology labels visible", async ({ page }) => {
+  await page.goto(architecturesRoute);
+  await expect(page.getByRole("heading", { name: "Many harnesses, different jobs." })).toBeVisible();
+  await expect(page.locator("#baseline").getByText("Verify and close", { exact: true })).toBeVisible();
+  const pageFits = await page.locator(".architecture-reader").evaluate((element) =>
+    element.getBoundingClientRect().right <= window.innerWidth && element.getBoundingClientRect().left >= 0,
+  );
+  expect(pageFits).toBe(true);
+  const tableScrolls = await page.locator(".comparison-table-well").evaluate((element) =>
+    element.scrollWidth > element.clientWidth,
+  );
+  expect(tableScrolls).toBe(true);
+});
+
 test("@nojs reader keeps the lesson, sources, and ordinary navigation visible", async ({ page }) => {
   await page.goto(guideRoute);
   await expect(
@@ -209,4 +246,12 @@ test("@nojs Memory reader keeps the complete lesson, sources, and correction pat
   await expect(page.getByRole("link", { name: "MemGPT" }).first()).toBeVisible();
   await expect(page.getByRole("link", { name: "Suggest a correction" })).toBeVisible();
   await expect(page.getByText(/Chapter 1 of 40|H0→H9 progression/)).toHaveCount(0);
+});
+
+test("@nojs architecture profiles preserve native disclosure and ordinary sources", async ({ page }) => {
+  await page.goto(architecturesRoute);
+  const disclosure = page.getByText("Trace, sources, and current unknowns").first();
+  await disclosure.click();
+  await expect(page.getByRole("link", { name: "Claude Code repository" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Report a correction" })).toBeVisible();
 });

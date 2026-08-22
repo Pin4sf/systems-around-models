@@ -10,6 +10,7 @@ const privateCorpusName = ["waldo", "brain"].join("-");
 const allowedEvidenceLabels = new Set([
   "observed", "author-reported", "inferred", "proposed", "unproved",
 ]);
+const allowedArchitectureGrades = new Set(["IP", "FD"]);
 const excludedDirectories = new Set([
   ".git", ".next", ".superpowers", ".worktrees", "coverage", "node_modules", "out",
   "playwright-report", "test-results",
@@ -188,10 +189,12 @@ export async function checkPublicContent(root = process.cwd()) {
   const surfaceContents = new Map(
     await Promise.all(surfaceFiles.map(async (filename) => [filename, await readFile(filename, "utf8")])),
   );
-  const [claimRecords, sourceRecords, revisionRecords] = await Promise.all([
+  const [claimRecords, sourceRecords, revisionRecords, architectureRecords, lessonRecords] = await Promise.all([
     yamlRecords(repositoryRoot, "claims", errors),
     yamlRecords(repositoryRoot, "sources", errors),
     yamlRecords(repositoryRoot, "revisions", errors),
+    yamlRecords(repositoryRoot, "architectures", errors),
+    yamlRecords(repositoryRoot, "lessons", errors),
   ]);
   const sourceIds = new Set();
   for (const { filename, value } of sourceRecords) {
@@ -216,6 +219,33 @@ export async function checkPublicContent(root = process.cwd()) {
     if (id) revisionIds.add(id);
     for (const claimId of Array.isArray(value?.affected_claim_ids) ? value.affected_claim_ids : []) {
       if (!claimIds.has(claimId)) errors.push(`${filename}: unresolved claim identifier ${claimId}`);
+    }
+  }
+  const architectureIds = new Set();
+  for (const { filename, value } of architectureRecords) {
+    const id = requiredId(value, filename, "architecture", errors);
+    if (id) architectureIds.add(id);
+    for (const sourceId of Array.isArray(value?.source_ids) ? value.source_ids : []) {
+      if (!sourceIds.has(sourceId)) errors.push(`${filename}: unresolved source identifier ${sourceId}`);
+    }
+    if (
+      value?.status === "public" &&
+      value?.record_kind !== "synthetic-baseline" &&
+      !allowedArchitectureGrades.has(value?.evidence_grade)
+    ) {
+      errors.push(`${filename}: invalid public architecture evidence grade ${String(value?.evidence_grade)}`);
+    }
+    if (value?.record_kind === "synthetic-baseline" && value?.evidence_grade !== undefined) {
+      errors.push(`${filename}: synthetic baseline must not have an evidence grade`);
+    }
+  }
+  for (const { filename, value } of lessonRecords) {
+    requiredId(value, filename, "lesson", errors);
+    for (const sourceId of Array.isArray(value?.source_ids) ? value.source_ids : []) {
+      if (!sourceIds.has(sourceId)) errors.push(`${filename}: unresolved source identifier ${sourceId}`);
+    }
+    for (const architectureId of Array.isArray(value?.architecture_ids) ? value.architecture_ids : []) {
+      if (!architectureIds.has(architectureId)) errors.push(`${filename}: unresolved architecture identifier ${architectureId}`);
     }
   }
   const essayFiles = (await filesRecursively(path.join(repositoryRoot, "content", "essays"), sourceTextExtensions))

@@ -4,8 +4,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { parse as parseYaml } from "yaml";
 
-const schemaVersion = 1;
-const validationSchemaVersion = "publication-v1";
+const schemaVersion = 2;
+const validationSchemaVersion = "publication-v2";
 
 function sha256(contents) {
   return `sha256-${createHash("sha256").update(contents).digest("hex")}`;
@@ -32,6 +32,14 @@ async function yamlRecords(directory) {
   return Promise.all(filenames.map(async (filename) => parseYaml(await readFile(filename, "utf8"))));
 }
 
+async function versionedYamlRecords(directory) {
+  const filenames = (await filesRecursively(directory, ".yaml")).sort();
+  return Promise.all(filenames.map(async (filename) => {
+    const source = await readFile(filename, "utf8");
+    return { filename, source, metadata: parseYaml(source) };
+  }));
+}
+
 export async function generatePublicManifest(root = process.cwd()) {
   const repositoryRoot = path.resolve(root);
   const contentRoot = path.join(repositoryRoot, "content");
@@ -40,9 +48,11 @@ export async function generatePublicManifest(root = process.cwd()) {
     const source = await readFile(filename, "utf8");
     return { filename, source, metadata: frontmatter(source, filename) };
   }));
-  const [revisions, sourceRecords] = await Promise.all([
+  const [revisions, sourceRecords, architectureFiles, lessonFiles] = await Promise.all([
     yamlRecords(path.join(contentRoot, "revisions")),
     yamlRecords(path.join(contentRoot, "sources")),
+    versionedYamlRecords(path.join(contentRoot, "architectures")),
+    versionedYamlRecords(path.join(contentRoot, "lessons")),
   ]);
   const sourceValidation = sourceRecords.map((source) => ({
     id: source.id,
@@ -71,11 +81,50 @@ export async function generatePublicManifest(root = process.cwd()) {
       ),
     };
   }).sort((left, right) => left.id.localeCompare(right.id));
+
+  const sourceValidationDates = (sourceIds) => Object.fromEntries(
+    sourceIds.map((id) => {
+      const source = sourceRecords.find((record) => record.id === id);
+      if (!source) throw new Error(`Unresolved source ${id}`);
+      return [id, source.last_validated];
+    }),
+  );
+  const architectureRecords = architectureFiles
+    .filter(({ metadata }) => metadata.status === "public")
+    .map(({ source, metadata }) => ({
+      id: metadata.id,
+      slug: metadata.slug,
+      recordKind: metadata.record_kind,
+      productClass: metadata.product_class,
+      revision: metadata.revision,
+      lastReviewed: metadata.last_reviewed,
+      inspectedVersion: metadata.inspected_version,
+      dossierStatus: metadata.dossier_status,
+      contentHash: sha256(source),
+      sourceIds: [...metadata.source_ids].sort(),
+      sourceValidationDates: sourceValidationDates(metadata.source_ids),
+    }))
+    .sort((left, right) => left.id.localeCompare(right.id));
+  const lessonRecords = lessonFiles
+    .filter(({ metadata }) => metadata.status === "public")
+    .map(({ source, metadata }) => ({
+      id: metadata.id,
+      slug: metadata.slug,
+      revision: metadata.revision,
+      lastReviewed: metadata.last_reviewed,
+      contentHash: sha256(source),
+      architectureIds: [...metadata.architecture_ids].sort(),
+      sourceIds: [...metadata.source_ids].sort(),
+      sourceValidationDates: sourceValidationDates(metadata.source_ids),
+    }))
+    .sort((left, right) => left.id.localeCompare(right.id));
   const payload = {
     schemaVersion,
     validationSchemaVersion,
     revisions: revisionRecords,
     sources: sourceValidation,
+    architectures: architectureRecords,
+    lessons: lessonRecords,
   };
   const manifest = { ...payload, buildId: sha256(JSON.stringify(payload)) };
   const publicRoot = path.join(repositoryRoot, "public");
@@ -99,6 +148,22 @@ export async function generatePublicManifest(root = process.cwd()) {
     await writeFile(
       path.join(manifestRoot, `${revision.id}.json`),
       `${JSON.stringify({ ...revision, schemaVersion, validationSchemaVersion, sources: sourceDetails }, null, 2)}\n`,
+    );
+  }));
+  await Promise.all(architectureRecords.map(async (architecture) => {
+    const sources = architecture.sourceIds.map((id) => {
+      const source = sourceRecords.find((record) => record.id === id);
+      return {
+        id,
+        title: source.title,
+        canonicalUrl: source.canonical_url,
+        lastValidated: source.last_validated,
+        licenseStatus: source.license_status,
+      };
+    });
+    await writeFile(
+      path.join(manifestRoot, `${architecture.id}.json`),
+      `${JSON.stringify({ ...architecture, schemaVersion, validationSchemaVersion, sources }, null, 2)}\n`,
     );
   }));
   return manifest;

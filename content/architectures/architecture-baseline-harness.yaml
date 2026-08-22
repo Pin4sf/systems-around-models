@@ -1,0 +1,39 @@
+id: architecture-baseline-harness
+slug: baseline-harness
+name: Baseline harness
+record_kind: synthetic-baseline
+product_class: general-agent-runtime
+status: public
+summary: A beginner conceptual decomposition that makes the minimum work around a model visible without claiming production completeness.
+primary_job: Turn a model response into bounded, continued work.
+teaching_question: Which responsibilities must exist somewhere around the model?
+coordination_shape: iterative-loop
+control_owner: A host loop decides when the model runs again and when work stops.
+context_model: Instructions, task state, and selected history are assembled for each call.
+state_model: State may begin in process but durable work needs an explicit owner.
+authority_boundary: The host decides which tools are exposed and which calls are permitted.
+recovery_model: Recovery is not guaranteed until work state and effects become durable.
+verification_model: A model stop is separate from evidence, acceptance, and closure.
+transferable_lesson: Start with the smallest loop, then ask where each production responsibility lives.
+deliberate_omissions:
+  - No durability, policy, security, or operational reliability is implied by the baseline.
+topology_steps:
+  - { stage: admit, label: Admit, ownership: not-established, description: Admission is a production question beyond the beginner loop. }
+  - { stage: assemble, label: Assemble, ownership: owned, description: The host assembles instructions, task input, and prior messages. }
+  - { stage: bind, label: Bind, ownership: owned, description: The host exposes tools and translates their schemas for the model. }
+  - { stage: run, label: Run, ownership: owned, description: The loop alternates model output and tool results until a stop condition. }
+  - { stage: recover, label: Recover, ownership: not-established, description: Crash recovery is not established by the conceptual decomposition. }
+  - { stage: verify-close, label: Verify and close, ownership: not-established, description: Outcome verification and human acceptance remain outside the baseline. }
+lifecycle_trace:
+  - { order: 1, label: Compile context, owner: Host, outcome: A bounded model request is assembled. }
+  - { order: 2, label: Run model, owner: Provider adapter, outcome: The response is translated into text or a tool request. }
+  - { order: 3, label: Continue or stop, owner: Host loop, outcome: A tool result re-enters the loop or execution stops. }
+evidence_fidelity: first-party-documented
+dossier_status: ready
+source_ids:
+  - source-earendil-what-is-a-harness
+inspected_version: article-2026-08-21
+unknowns:
+  - The baseline intentionally leaves production ownership and reliability mechanisms unresolved.
+last_reviewed: 2026-08-22
+revision: 1

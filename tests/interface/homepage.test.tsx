@@ -14,20 +14,31 @@ it("presents a simple study-guide navigation", () => {
     screen.getByRole("navigation", { name: "Publication" }),
   ).toBeInTheDocument();
   expect(screen.queryByText(/Waldo/i)).not.toBeInTheDocument();
-  expect(screen.getByRole("link", { name: "Harness guide" })).toHaveAttribute(
+  expect(screen.getByRole("link", { name: "Harness" })).toHaveAttribute(
     "href",
     "/fieldbook/harness-engineering-study-guide",
   );
-  expect(screen.getByRole("link", { name: "Memory guide" })).toHaveAttribute(
+  expect(screen.getByRole("link", { name: "Memory" })).toHaveAttribute(
     "href",
     "/fieldbook/memory-engineering-study-guide",
   );
-  expect(screen.getByRole("link", { name: "Curriculum" })).toHaveAttribute("href", "/#chapters");
-  expect(screen.getByRole("link", { name: "First chapter" })).toHaveAttribute(
+  expect(screen.getByRole("link", { name: "Architectures" })).toHaveAttribute(
     "href",
-    "/fieldbook/the-model-is-not-the-agent",
+    "/architectures",
   );
+  expect(screen.getByRole("link", { name: "Start here" })).toHaveAttribute("href", "/");
   expect(screen.queryByText(/forthcoming/i)).not.toBeInTheDocument();
+});
+
+it("offers architecture comparison as a first-class study path", () => {
+  render(<HomePage />);
+
+  expect(screen.getByRole("heading", { name: "Study the machinery around models." })).toBeInTheDocument();
+  expect(screen.getByRole("link", { name: "Explore architectures" })).toHaveAttribute(
+    "href",
+    "/architectures",
+  );
+  expect(screen.getByRole("heading", { name: "Three ways into the field" })).toBeInTheDocument();
 });
 
 it("offers the released Memory companion as ordinary reading", () => {
@@ -48,11 +59,11 @@ it("leads readers into a complete harness-engineering course map", () => {
 
   expect(
     screen.getByRole("heading", {
-      name: "Harness Engineering, from first principles.",
+      name: "Study the machinery around models.",
       level: 1,
     }),
   ).toBeInTheDocument();
-  expect(screen.getByRole("link", { name: "Start reading" })).toHaveAttribute(
+  expect(screen.getByRole("link", { name: "Start with Harness Engineering" })).toHaveAttribute(
     "href",
     "/fieldbook/harness-engineering-study-guide",
   );

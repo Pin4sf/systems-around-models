@@ -1,0 +1,40 @@
+id: architecture-openhands
+slug: openhands
+name: OpenHands
+record_kind: system
+product_class: frontier-coding-harness
+status: public
+summary: An open software-agent platform that joins an agent controller to a contained development workspace and interactive product surface.
+primary_job: Give software agents a workspace in which to inspect, change, and run code.
+teaching_question: What becomes explicit when the execution environment is a named platform component?
+coordination_shape: durable-runtime
+control_owner: The agent runtime coordinates model decisions and actions inside the workspace.
+context_model: Task, event history, repository observations, and tool results feed the agent.
+state_model: Runtime events and workspace state divide conversational continuity from execution state.
+authority_boundary: The contained workspace bounds many actions, while integrations can extend effects beyond it.
+recovery_model: Durable task and workspace behavior depends on the selected runtime and deployment path.
+verification_model: The agent can exercise code in its environment; external review still owns final acceptance.
+transferable_lesson: Environment containment is an architectural responsibility, not a property of the model.
+deliberate_omissions:
+  - A contained workspace does not prove that a software task meets its external acceptance criteria.
+topology_steps:
+  - { stage: admit, label: Admit, ownership: owned, description: The platform receives a software task and creates an agent workspace. }
+  - { stage: assemble, label: Assemble, ownership: owned, description: Task and runtime events become model-visible context. }
+  - { stage: bind, label: Bind, ownership: owned, description: The runtime exposes development tools through the contained workspace. }
+  - { stage: run, label: Run, ownership: owned, description: Agent decisions and environment actions advance through the controller. }
+  - { stage: recover, label: Recover, ownership: delegated, description: Deployment and runtime configuration determine durable recovery guarantees. }
+  - { stage: verify-close, label: Verify and close, ownership: external, description: Tests may run inside the workspace while acceptance remains project-owned. }
+lifecycle_trace:
+  - { order: 1, label: Create workspace, owner: OpenHands platform, outcome: The task receives an execution environment. }
+  - { order: 2, label: Drive agent events, owner: Agent runtime, outcome: Actions and observations advance the software task. }
+  - { order: 3, label: Inspect outcome, owner: User or evaluator, outcome: Workspace changes and checks are reviewed for acceptance. }
+evidence_grade: FD
+evidence_fidelity: working-profile
+dossier_status: refresh-needed
+source_ids:
+  - source-architecture-openhands
+inspected_version: 4bf8dd3aaf1217916b2ce8a6f9168fa7633a26f8
+unknowns:
+  - The relation between current Agent Canvas surfaces and underlying runtime boundaries needs a dedicated current deep dive.
+last_reviewed: 2026-08-22
+revision: 1

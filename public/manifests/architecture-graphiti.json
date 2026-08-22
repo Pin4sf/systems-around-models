@@ -1,0 +1,28 @@
+{
+  "id": "architecture-graphiti",
+  "slug": "graphiti",
+  "recordKind": "system",
+  "productClass": "memory-framework",
+  "revision": 1,
+  "lastReviewed": "2026-08-22",
+  "inspectedVersion": "993e081a6d7948a0d8851c12a5fbdbeb49fed862",
+  "dossierStatus": "deep-dive-needed",
+  "contentHash": "sha256-ae42d635232e405b7df29f78c47ca7f0627ffbd8ef29aa7ae4ea719dc7668997",
+  "sourceIds": [
+    "source-architecture-graphiti"
+  ],
+  "sourceValidationDates": {
+    "source-architecture-graphiti": "2026-08-22"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-architecture-graphiti",
+      "title": "Graphiti repository",
+      "canonicalUrl": "https://github.com/getzep/graphiti",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "Apache-2.0"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+id: architecture-mem0
+slug: mem0
+name: Mem0
+record_kind: system
+product_class: memory-framework
+status: public
+summary: A memory service that extracts, stores, and retrieves durable context for agent applications while leaving the run loop elsewhere.
+primary_job: Give an application a reusable memory layer across model sessions.
+teaching_question: Which responsibilities belong inside a memory service, and which remain with the harness?
+coordination_shape: memory-service
+control_owner: The calling application owns the agent loop; Mem0 owns memory operations behind its API.
+context_model: Retrieved memories are returned to the caller, which decides how they enter model context.
+state_model: Memory records persist separately from the application's transient conversation state.
+authority_boundary: The caller controls when memory is written, retrieved, and allowed to influence action.
+recovery_model: Durable memory survives sessions, but recovery of agent work belongs to the calling runtime.
+verification_model: Retrieval quality can be evaluated; real-world action and completion are outside the service.
+transferable_lesson: A memory framework is not a complete harness, and that narrower boundary is often its strength.
+deliberate_omissions:
+  - Mem0 does not own the model loop, execution environment, or application acceptance policy.
+topology_steps:
+  - { stage: admit, label: Admit, ownership: external, description: The calling application decides whether work may begin. }
+  - { stage: assemble, label: Assemble, ownership: delegated, description: Mem0 returns memories while the caller assembles final model context. }
+  - { stage: bind, label: Bind, ownership: external, description: The application binds action tools and their permissions. }
+  - { stage: run, label: Run, ownership: external, description: The calling harness owns model execution and continuation. }
+  - { stage: recover, label: Recover, ownership: delegated, description: Memory persists while task recovery remains outside the memory service. }
+  - { stage: verify-close, label: Verify and close, ownership: external, description: The application verifies actions and decides completion. }
+lifecycle_trace:
+  - { order: 1, label: Ingest candidate memory, owner: Mem0 plus caller, outcome: Input is transformed into durable memory records. }
+  - { order: 2, label: Retrieve memory, owner: Mem0, outcome: Relevant records are returned for a caller-defined decision. }
+  - { order: 3, label: Use or ignore, owner: Calling harness, outcome: The application decides whether retrieved memory affects the run. }
+evidence_grade: FD
+evidence_fidelity: working-profile
+dossier_status: deep-dive-needed
+source_ids:
+  - source-architecture-mem0
+inspected_version: 9b565da8e3f1b05fc3ed80ac338e6bbb9622d4d7
+unknowns:
+  - Managed and open-source ingestion, update, deletion, and retrieval paths need a current side-by-side deep dive.
+last_reviewed: 2026-08-22
+revision: 1

@@ -1,0 +1,24 @@
+id: source-architecture-claude-code
+title: Claude Code repository
+author: Anthropic
+canonical_url: https://github.com/anthropics/claude-code
+published_at: 2025-02-22
+retrieved_at: 2026-08-22
+repository_commit: 16440d0f6ee8c47f34169687044b89eafa8b0f8d
+inspected_paths:
+  - README.md
+source_type: first-party-repository
+basis: Commit-pinned inspection of the official public repository README and its documented agentic coding surface.
+license_status: unknown
+evidence_grade: FD
+observed_mechanisms:
+  - description: The repository presents Claude Code as a terminal coding tool that can inspect a codebase and execute development tasks.
+    evidence_grade: FD
+    basis: The official README states the product boundary and its codebase and git workflow scope.
+author_reported_claims: []
+unknowns:
+  - The repository does not expose the complete proprietary runtime implementation for implementation-primary verification.
+falsifiers:
+  - Anthropic changes the documented product boundary or publishes architecture that contradicts this profile.
+last_validated: 2026-08-22
+correction_ledger_status: reviewed

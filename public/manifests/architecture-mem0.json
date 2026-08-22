@@ -1,0 +1,28 @@
+{
+  "id": "architecture-mem0",
+  "slug": "mem0",
+  "recordKind": "system",
+  "productClass": "memory-framework",
+  "revision": 1,
+  "lastReviewed": "2026-08-22",
+  "inspectedVersion": "9b565da8e3f1b05fc3ed80ac338e6bbb9622d4d7",
+  "dossierStatus": "deep-dive-needed",
+  "contentHash": "sha256-8879bfcd61e9be89e4878a1669ae8e1458315f25c334a3c097717824c6d034f8",
+  "sourceIds": [
+    "source-architecture-mem0"
+  ],
+  "sourceValidationDates": {
+    "source-architecture-mem0": "2026-08-22"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-architecture-mem0",
+      "title": "Mem0 repository",
+      "canonicalUrl": "https://github.com/mem0ai/mem0",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "Apache-2.0"
+    }
+  ]
+}

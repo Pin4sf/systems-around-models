@@ -1,0 +1,28 @@
+{
+  "id": "architecture-openai-codex",
+  "slug": "openai-codex",
+  "recordKind": "system",
+  "productClass": "frontier-coding-harness",
+  "revision": 1,
+  "lastReviewed": "2026-08-22",
+  "inspectedVersion": "343074d4207d572809bd8cea15f4be1d09d98e0b",
+  "dossierStatus": "deep-dive-needed",
+  "contentHash": "sha256-1dd2711587812b3db85c51138a25da9a3b3f9d0caf1218a42c4927d29a696ba0",
+  "sourceIds": [
+    "source-architecture-openai-codex"
+  ],
+  "sourceValidationDates": {
+    "source-architecture-openai-codex": "2026-08-22"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-architecture-openai-codex",
+      "title": "OpenAI Codex repository",
+      "canonicalUrl": "https://github.com/openai/codex",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "Apache-2.0"
+    }
+  ]
+}

@@ -97,7 +97,111 @@ export const EssayMetadataSchema = z.object({
   nextEssaySlug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/).optional(),
 });
 
+export const ArchitectureProductClass = z.enum([
+  "frontier-coding-harness",
+  "general-agent-runtime",
+  "memory-framework",
+]);
+
+export const CoordinationShape = z.enum([
+  "iterative-loop",
+  "workflow-graph",
+  "durable-runtime",
+  "memory-service",
+]);
+
+export const TopologyStage = z.enum([
+  "admit",
+  "assemble",
+  "bind",
+  "run",
+  "recover",
+  "verify-close",
+]);
+
+const topologyStages = TopologyStage.options;
+
+const TopologyStepSchema = z.object({
+  stage: TopologyStage,
+  label: z.string().min(2),
+  ownership: z.enum(["owned", "delegated", "external", "not-established"]),
+  description: z.string().min(10),
+});
+
+const LifecycleStepSchema = z.object({
+  order: z.number().int().positive(),
+  label: z.string().min(2),
+  owner: z.string().min(2),
+  outcome: z.string().min(10),
+});
+
+export const ArchitectureSchema = z.object({
+  id: Identifier("architecture"),
+  slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
+  name: z.string().min(2),
+  recordKind: z.enum(["system", "synthetic-baseline", "bounded-case-study"]),
+  productClass: ArchitectureProductClass,
+  status: z.enum(["draft", "public"]),
+  summary: z.string().min(20),
+  primaryJob: z.string().min(10),
+  teachingQuestion: z.string().min(10),
+  coordinationShape: CoordinationShape,
+  controlOwner: z.string().min(10),
+  contextModel: z.string().min(10),
+  stateModel: z.string().min(10),
+  authorityBoundary: z.string().min(10),
+  recoveryModel: z.string().min(10),
+  verificationModel: z.string().min(10),
+  transferableLesson: z.string().min(20),
+  deliberateOmissions: z.array(z.string().min(10)).min(1),
+  topologySteps: z.array(TopologyStepSchema).length(topologyStages.length),
+  lifecycleTrace: z.array(LifecycleStepSchema).min(3),
+  evidenceGrade: EvidenceGrade.optional(),
+  evidenceFidelity: z.enum(["implementation-pinned", "first-party-documented", "working-profile"]),
+  dossierStatus: z.enum(["ready", "refresh-needed", "deep-dive-needed"]),
+  sourceIds: z.array(Identifier("source")).min(1),
+  inspectedVersion: z.string().min(7),
+  unknowns: z.array(z.string().min(10)).min(1),
+  lastReviewed: DateString,
+  revision: z.number().int().positive(),
+}).superRefine((record, context) => {
+  const seenStages = new Set(record.topologySteps.map((step) => step.stage));
+  if (seenStages.size !== topologyStages.length) {
+    context.addIssue({ code: "custom", path: ["topologySteps"], message: "topology must include every stage exactly once" });
+  }
+  const orders = record.lifecycleTrace.map((step) => step.order);
+  if (new Set(orders).size !== orders.length) {
+    context.addIssue({ code: "custom", path: ["lifecycleTrace"], message: "lifecycle trace orders must be unique" });
+  }
+  if (record.recordKind === "synthetic-baseline" && record.evidenceGrade !== undefined) {
+    context.addIssue({ code: "custom", path: ["evidenceGrade"], message: "synthetic baselines do not receive evidence grades" });
+  }
+  if (record.recordKind !== "synthetic-baseline" && record.evidenceGrade === undefined) {
+    context.addIssue({ code: "custom", path: ["evidenceGrade"], message: "named systems require an evidence grade" });
+  }
+  if (record.status === "public" && record.evidenceGrade && !["IP", "FD"].includes(record.evidenceGrade)) {
+    context.addIssue({ code: "custom", path: ["evidenceGrade"], message: "public systems require IP or FD evidence" });
+  }
+});
+
+export const LessonSchema = z.object({
+  id: Identifier("lesson"),
+  slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
+  title: z.string().min(3),
+  status: z.enum(["draft", "public"]),
+  problem: z.string().min(20),
+  mechanism: z.string().min(20),
+  failureBoundary: z.string().min(20),
+  transferableLesson: z.string().min(20),
+  architectureIds: z.array(Identifier("architecture")).min(1),
+  sourceIds: z.array(Identifier("source")).min(1),
+  lastReviewed: DateString,
+  revision: z.number().int().positive(),
+});
+
 export type ClaimRecord = z.infer<typeof ClaimSchema>;
 export type SourceRecord = z.infer<typeof SourceSchema>;
 export type RevisionRecord = z.infer<typeof RevisionSchema>;
 export type EssayMetadata = z.infer<typeof EssayMetadataSchema>;
+export type ArchitectureRecord = z.infer<typeof ArchitectureSchema>;
+export type LessonRecord = z.infer<typeof LessonSchema>;

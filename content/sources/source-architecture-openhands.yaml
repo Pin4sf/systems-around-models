@@ -1,0 +1,24 @@
+id: source-architecture-openhands
+title: OpenHands repository
+author: OpenHands
+canonical_url: https://github.com/OpenHands/OpenHands
+published_at: 2024-03-13
+retrieved_at: 2026-08-22
+repository_commit: 4bf8dd3aaf1217916b2ce8a6f9168fa7633a26f8
+inspected_paths:
+  - README.md
+source_type: first-party-repository
+basis: Commit-pinned inspection of the official public repository README and its documented software-agent platform boundary.
+license_status: MIT
+evidence_grade: FD
+observed_mechanisms:
+  - description: The repository presents an agent platform that operates through a software-development workspace and tool environment.
+    evidence_grade: FD
+    basis: The official README documents the project as a software-development agent platform and links its runtime surfaces.
+author_reported_claims: []
+unknowns:
+  - The current first-pass card does not separate every Agent Canvas surface from the underlying runtime implementation.
+falsifiers:
+  - Current source shows that the normalized runtime boundary materially combines responsibilities kept separate in this profile.
+last_validated: 2026-08-22
+correction_ledger_status: reviewed

@@ -1,0 +1,28 @@
+{
+  "id": "architecture-baseline-harness",
+  "slug": "baseline-harness",
+  "recordKind": "synthetic-baseline",
+  "productClass": "general-agent-runtime",
+  "revision": 1,
+  "lastReviewed": "2026-08-22",
+  "inspectedVersion": "article-2026-08-21",
+  "dossierStatus": "ready",
+  "contentHash": "sha256-f1c8a48ccb112ed10f28683ec6119bf45d3db12c315dca4e128f04539203c742",
+  "sourceIds": [
+    "source-earendil-what-is-a-harness"
+  ],
+  "sourceValidationDates": {
+    "source-earendil-what-is-a-harness": "2026-08-21"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-earendil-what-is-a-harness",
+      "title": "What is a Harness?",
+      "canonicalUrl": "https://earendil.com/posts/what-is-a-harness/",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "unknown"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "id": "architecture-letta",
+  "slug": "letta",
+  "recordKind": "system",
+  "productClass": "general-agent-runtime",
+  "revision": 1,
+  "lastReviewed": "2026-08-22",
+  "inspectedVersion": "87fd37aab68c7bdd0d66fe63751553756f6af3e5",
+  "dossierStatus": "refresh-needed",
+  "contentHash": "sha256-8ecac016567479c1b644818c4af62fba268091e9365ef7bc0228e15120c4f7ae",
+  "sourceIds": [
+    "source-architecture-letta",
+    "source-memory-memgpt"
+  ],
+  "sourceValidationDates": {
+    "source-architecture-letta": "2026-08-22",
+    "source-memory-memgpt": "2026-08-22"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-architecture-letta",
+      "title": "Letta repository",
+      "canonicalUrl": "https://github.com/letta-ai/letta",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "Apache-2.0"
+    },
+    {
+      "id": "source-memory-memgpt",
+      "title": "MemGPT: Towards LLMs as Operating Systems",
+      "canonicalUrl": "https://arxiv.org/abs/2310.08560",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "unknown"
+    }
+  ]
+}

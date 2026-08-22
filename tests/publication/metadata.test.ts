@@ -116,6 +116,7 @@ describe("publication discovery endpoints", () => {
 
     expect(entries.map((entry) => entry.url)).toEqual([
       `${canonicalSite}/`,
+      `${canonicalSite}/architectures`,
       `${canonicalSite}${guidePath}`,
       `${canonicalSite}${memoryGuidePath}`,
       `${canonicalSite}${chapterPath}`,

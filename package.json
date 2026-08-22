@@ -15,7 +15,7 @@
     "generate:social": "node scripts/generate-social-card.mjs",
     "check:public": "node scripts/check-public-content.mjs",
     "check:built": "node scripts/check-public-content.mjs --built-output .next",
-    "check:bundle": "node scripts/check-bundle-budget.mjs --limit 120000",
+    "check:bundle": "node scripts/check-bundle-budget.mjs --limit 120000 && node scripts/check-bundle-budget.mjs --route-html server/app/architectures.html --limit 120000",
     "verify:release": "npm run lint && npm test && npm run check:public && npm run build && npm run check:built && npm run check:bundle && npm run test:e2e"
   },
   "dependencies": {
