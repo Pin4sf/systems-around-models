@@ -1,13 +1,13 @@
 id: source-memory-owasp-memory-attack-surface
-title: Memory is a Feature. It Is Also an Attack Surface.
-author: OWASP GenAI Security Project
+title: Memory Is a Feature. It Is Also an Attack Surface
+author: Idan Habler
 canonical_url: https://genai.owasp.org/2026/05/13/memory-is-a-feature-it-is-also-an-attack-surface/
 published_at: 2026-05-13
 retrieved_at: 2026-08-22
 inspected_paths: []
 source_type: first-party-article
 basis: Direct reading of the public OWASP practitioner guidance at its canonical URL.
-license_status: CC-BY-4.0
+license_status: CC-BY-SA-4.0
 evidence_grade: FL
 observed_mechanisms:
   - description: The guidance describes memory poisoning, persistence, and related controls as an agent security concern.

@@ -1,6 +1,6 @@
 id: source-memory-locomo
-title: "LoCoMo: Evaluating Very Long-Term Conversational Memory of LLM Agents"
-author: Gunjan Chhikara and collaborators
+title: Evaluating Very Long-Term Conversational Memory of LLM Agents
+author: Adyasha Maharana, Mohit Bansal, Dong-Ho Lee, Francesco Barbieri, Sergey Tulyakov, and Yuwei Fang
 canonical_url: https://aclanthology.org/2024.acl-long.747/
 published_at: 2024-08-11
 retrieved_at: 2026-08-22

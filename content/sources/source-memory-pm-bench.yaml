@@ -1,12 +1,12 @@
 id: source-memory-pm-bench
-title: "PM-Bench: Benchmarking Prospective Memory in LLM Agents"
-author: PM-Bench authors
+title: "PM-Bench: Evaluating Prospective Memory in LLM Agents"
+author: Genglin Liu and Saadia Gabriel
 canonical_url: https://arxiv.org/abs/2607.12385
-published_at: 2026-07-16
+published_at: 2026-07-14
 retrieved_at: 2026-08-22
 inspected_paths: []
 source_type: first-party-article
-basis: Direct reading of the public preprint record at its canonical URL.
+basis: Direct reading of the public arXiv record, which identifies the paper as a COLM 2026 publication.
 license_status: unknown
 evidence_grade: FL
 observed_mechanisms:
@@ -16,7 +16,7 @@ observed_mechanisms:
 author_reported_claims:
   - Prospective-memory evaluation requires measures beyond retrospective question answering.
 unknowns:
-  - This emerging preprint does not establish a complete product authority, acceptance, or closure model.
+  - The paper does not establish a complete product authority, acceptance, or closure model.
 falsifiers:
   - The authors correct the public preprint or remove the named benchmark design.
 last_validated: 2026-08-22

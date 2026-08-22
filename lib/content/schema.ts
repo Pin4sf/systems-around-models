@@ -55,6 +55,7 @@ export const SourceSchema = z.object({
     "Apache-2.0",
     "CC0-1.0",
     "CC-BY-4.0",
+    "CC-BY-SA-4.0",
     "all-rights-reserved",
     "unknown",
   ]),

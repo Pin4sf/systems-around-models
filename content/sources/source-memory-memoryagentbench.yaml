@@ -1,6 +1,6 @@
 id: source-memory-memoryagentbench
-title: "MemoryAgentBench: Evaluating Memory in LLM Agents"
-author: MemoryAgentBench authors
+title: Evaluating Memory in LLM Agents via Incremental Multi-Turn Interactions
+author: Yuanzhe Hu, Yu Wang, and Julian McAuley
 canonical_url: https://openreview.net/forum?id=DT7JyQC3MR
 published_at: 2026-04-23
 retrieved_at: 2026-08-22

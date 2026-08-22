@@ -7,7 +7,7 @@ const firstChapterSlug = "the-model-is-not-the-agent";
 
 function SequenceLinks({ essay }: { essay: EssayMetadata }) {
   const guide = getStudyGuideEntryForEssay(essay);
-  if (guide.sequenceName === "Memory Engineering") {
+  if (guide.navigationKind === "single-guide") {
     return (
       <ol>
         <li><Link href="/#chapters">{guide.overviewLabel}</Link></li>

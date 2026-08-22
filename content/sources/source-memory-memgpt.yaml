@@ -1,8 +1,8 @@
 id: source-memory-memgpt
 title: "MemGPT: Towards LLMs as Operating Systems"
-author: Charles Packer and collaborators
+author: Charles Packer, Sarah Wooders, Kevin Lin, Vivian Fang, Shishir G. Patil, Ion Stoica, and Joseph E. Gonzalez
 canonical_url: https://arxiv.org/abs/2310.08560
-published_at: 2023-10-05
+published_at: 2023-10-12
 retrieved_at: 2026-08-22
 inspected_paths: []
 source_type: first-party-article

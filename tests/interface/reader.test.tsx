@@ -83,6 +83,10 @@ describe("flagship fieldbook reader", () => {
     );
   });
 
+  it("registers the Memory Engineering guide as a static public route", async () => {
+    await expect(generateStaticParams()).resolves.toContainEqual({ slug: memoryGuideSlug });
+  });
+
   it("publishes the Memory Engineering guide as a simple, corrected short course", async () => {
     const page = await ArticlePage({ params: Promise.resolve({ slug: memoryGuideSlug }) });
     render(page);
@@ -94,7 +98,12 @@ describe("flagship fieldbook reader", () => {
     expect(
       screen.getByRole("navigation", { name: "Memory Engineering guide" }),
     ).toBeInTheDocument();
-    for (const heading of [
+    const article = screen.getByRole("article");
+    expect(
+      within(article)
+        .getAllByRole("heading", { level: 2 })
+        .map((heading) => heading.textContent),
+    ).toEqual([
       "1. Memory is not storage",
       "2. Choose the memory function before the database",
       "3. Keep canonical records separate from projections",
@@ -106,9 +115,7 @@ describe("flagship fieldbook reader", () => {
       "A compact memory design worksheet",
       "Eight build-and-break labs",
       "Sources and next reading",
-    ]) {
-      expect(screen.getByRole("heading", { name: heading, level: 2 })).toBeInTheDocument();
-    }
+    ]);
     expect(screen.getAllByRole("link", { name: "MemGPT" })[0]).toHaveAttribute(
       "href",
       "https://arxiv.org/abs/2310.08560",

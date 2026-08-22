@@ -2,6 +2,7 @@ import type { EssayMetadata } from "@/lib/content/schema";
 
 type StudyGuideEntry = {
   sourcePath: string;
+  navigationKind: "harness" | "single-guide";
   readerPosition: string;
   sequenceName: string;
   navigationLabel: string;
@@ -14,6 +15,7 @@ type StudyGuideEntry = {
 const studyGuideRegistry: Record<string, StudyGuideEntry> = {
   "harness-engineering-study-guide": {
     sourcePath: "harness/harness-engineering-study-guide.mdx",
+    navigationKind: "harness",
     readerPosition: "Complete short course",
     sequenceName: "Harness Engineering",
     navigationLabel: "Harness Engineering chapters",
@@ -23,6 +25,7 @@ const studyGuideRegistry: Record<string, StudyGuideEntry> = {
   },
   "the-model-is-not-the-agent": {
     sourcePath: "harness/the-model-is-not-the-agent.mdx",
+    navigationKind: "harness",
     readerPosition: "Chapter 1 of 40",
     sequenceName: "Harness Engineering",
     navigationLabel: "Harness Engineering chapters",
@@ -33,6 +36,7 @@ const studyGuideRegistry: Record<string, StudyGuideEntry> = {
   },
   "memory-engineering-study-guide": {
     sourcePath: "memory/memory-engineering-study-guide.mdx",
+    navigationKind: "single-guide",
     readerPosition: "Complete short course",
     sequenceName: "Memory Engineering",
     navigationLabel: "Memory Engineering guide",
