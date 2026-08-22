@@ -457,3 +457,9 @@ The first release is acceptable when:
 - Waldo product conversion or lead capture.
 
 These may be evaluated only after the reader proves that people can understand, inspect, and challenge the core work.
+
+## Amendment — 2026-08-22: one complete Memory guide, same simple reader
+
+The first public slice now includes one complete **Memory Engineering** short guide beside the Harness Engineering guide. It is a one-sitting, prose-first lesson that teaches memory as a governed lifecycle: memory functions, canonical records and projections, capture and correction, retrieval and authority, prospective intentions, forgetting, security, and lifecycle evaluation.
+
+This addition does not change the simple-reader contract. The guide uses ordinary source links and one article-wide correction path; evidence records, source manifests, and revision data remain validated backstage rather than becoming badges, drawers, scores, or interruption-heavy review UI. Memory sequence navigation must name the Memory guide truthfully and must not inherit Harness-specific chapter counts or forthcoming-curriculum labels.

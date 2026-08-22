@@ -99,6 +99,25 @@ describe("public content registry", () => {
     expect(registeredUrls).toEqual(expect.arrayContaining(namedExternalUrls));
   });
 
+  it("registers every visible source family for the Memory Engineering guide", async () => {
+    const content = await loadContent();
+    const guide = content.essays.get("memory-engineering-study-guide");
+    if (!guide) throw new Error("Expected public Memory Engineering study guide");
+    const source = await readFile(
+      path.join(process.cwd(), "content/essays/memory/memory-engineering-study-guide.mdx"),
+      "utf8",
+    );
+    const readingSection = source.split("## Sources and next reading")[1] ?? "";
+    const namedExternalUrls = [...readingSection.matchAll(/\]\((https?:\/\/[^)]+)\)/g)]
+      .map((match) => match[1]);
+    const registeredUrls = guide.sourceManifestIds
+      .map((sourceId) => content.sources.get(sourceId)?.canonicalUrl)
+      .filter((url): url is string => Boolean(url?.startsWith("http")));
+
+    expect(namedExternalUrls).toHaveLength(9);
+    expect(registeredUrls).toEqual(expect.arrayContaining(namedExternalUrls));
+  });
+
   it("names malformed public fixtures when validation rejects them", async () => {
     const repository = await fixtureRepository({
       "claims/invalid-label.yaml": validClaim.replace("label: inferred", "label: private"),

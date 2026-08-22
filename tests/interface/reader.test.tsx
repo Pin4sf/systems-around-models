@@ -9,6 +9,7 @@ import { loadContent } from "@/lib/content/load-content";
 
 const slug = "the-model-is-not-the-agent";
 const guideSlug = "harness-engineering-study-guide";
+const memoryGuideSlug = "memory-engineering-study-guide";
 
 async function renderReader() {
   const page = await ArticlePage({ params: Promise.resolve({ slug }) });
@@ -80,6 +81,45 @@ describe("flagship fieldbook reader", () => {
       "href",
       "/fieldbook/the-model-is-not-the-agent",
     );
+  });
+
+  it("publishes the Memory Engineering guide as a simple, corrected short course", async () => {
+    const page = await ArticlePage({ params: Promise.resolve({ slug: memoryGuideSlug }) });
+    render(page);
+
+    expect(
+      screen.getByRole("heading", { name: "Memory Engineering: A Practical Study Guide", level: 1 }),
+    ).toBeInTheDocument();
+    expect(screen.getByText(/Complete short course/)).toBeInTheDocument();
+    expect(
+      screen.getByRole("navigation", { name: "Memory Engineering guide" }),
+    ).toBeInTheDocument();
+    for (const heading of [
+      "1. Memory is not storage",
+      "2. Choose the memory function before the database",
+      "3. Keep canonical records separate from projections",
+      "4. Capture is not belief",
+      "5. Retrieve for a decision, not merely for similarity",
+      "6. Remember the future without taking control",
+      "7. Correct, forget, and defend the memory surface",
+      "8. Evaluate the whole lifecycle",
+      "A compact memory design worksheet",
+      "Eight build-and-break labs",
+      "Sources and next reading",
+    ]) {
+      expect(screen.getByRole("heading", { name: heading, level: 2 })).toBeInTheDocument();
+    }
+    expect(screen.getAllByRole("link", { name: "MemGPT" })[0]).toHaveAttribute(
+      "href",
+      "https://arxiv.org/abs/2310.08560",
+    );
+    expect(screen.getByRole("link", { name: "Suggest a correction" })).toHaveAttribute(
+      "href",
+      expect.stringContaining("github.com/Pin4sf/systems-around-models/issues/new"),
+    );
+    expect(screen.queryByText("Evidence grade")).not.toBeInTheDocument();
+    expect(screen.queryByRole("group", { name: /evidence/i })).not.toBeInTheDocument();
+    expect(screen.queryByText(/Chapter 1 of 40|H0→H9 progression/)).not.toBeInTheDocument();
   });
 
   it("uses durable heading anchors and ordinary source links", async () => {

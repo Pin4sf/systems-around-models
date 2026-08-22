@@ -1,0 +1,23 @@
+id: source-memory-memoryagentbench
+title: "MemoryAgentBench: Evaluating Memory in LLM Agents"
+author: MemoryAgentBench authors
+canonical_url: https://openreview.net/forum?id=DT7JyQC3MR
+published_at: 2026-04-23
+retrieved_at: 2026-08-22
+inspected_paths: []
+source_type: first-party-article
+basis: Direct reading of the public OpenReview record and linked paper at its canonical URL.
+license_status: unknown
+evidence_grade: FD
+observed_mechanisms:
+  - description: The paper evaluates memory agents across incremental tasks and multiple memory competencies, including consolidation and selective forgetting.
+    evidence_grade: FD
+    basis: The public paper describes the competency-oriented evaluation and its definitions.
+author_reported_claims:
+  - The benchmark measures memory capabilities that cannot be reduced to a single retrieval score.
+unknowns:
+  - Selective forgetting in this benchmark is not evidence of physical deletion, privacy erasure, or a complete authority contract.
+falsifiers:
+  - The public record or authors correct the named competency and evaluation description.
+last_validated: 2026-08-22
+correction_ledger_status: reviewed

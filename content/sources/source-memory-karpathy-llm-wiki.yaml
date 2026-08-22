@@ -1,0 +1,23 @@
+id: source-memory-karpathy-llm-wiki
+title: LLM Wiki
+author: Andrej Karpathy
+canonical_url: https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f
+published_at: 2026-04-01
+retrieved_at: 2026-08-22
+inspected_paths: []
+source_type: first-party-article
+basis: Direct reading of the public author-maintained artifact at its canonical URL.
+license_status: unknown
+evidence_grade: FL
+observed_mechanisms:
+  - description: The artifact argues for durable, inspectable files that accumulate knowledge rather than repeatedly rediscovering it from raw material.
+    evidence_grade: FL
+    basis: The framing appears directly in the public author-maintained artifact.
+author_reported_claims:
+  - Compounding knowledge in a maintained wiki can be more useful than repeatedly retrieving unstructured history.
+unknowns:
+  - The artifact is a personal primary source and does not independently validate governance or safety outcomes.
+falsifiers:
+  - The author corrects or materially removes the named framing from the public artifact.
+last_validated: 2026-08-22
+correction_ledger_status: reviewed

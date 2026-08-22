@@ -1,0 +1,13 @@
+id: claim-memory-lifecycle-evaluation
+statement: Memory evaluation should separate write quality, retrieval, use, prospective timing, correction and deletion, and adversarial safety rather than rely on one leaderboard score.
+label: inferred
+scope: Memory Engineering study guide
+source_ids:
+  - source-memory-locomo
+  - source-memory-longmemeval
+  - source-memory-memoryagentbench
+  - source-memory-pm-bench
+falsifiers:
+  - A single benchmark score consistently predicts safe and correct outcomes across all listed lifecycle boundaries in materially different agent systems.
+last_reviewed: 2026-08-22
+revision: 1

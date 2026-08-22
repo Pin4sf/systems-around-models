@@ -1,0 +1,23 @@
+id: source-memory-longmemeval
+title: "LongMemEval: Benchmarking Chat Assistants on Long-Term Interactive Memory"
+author: Zexuan Zhong and collaborators
+canonical_url: https://proceedings.iclr.cc/paper_files/paper/2025/file/d813d324dbf0598bbdc9c8e79740ed01-Paper-Conference.pdf
+published_at: 2025-04-24
+retrieved_at: 2026-08-22
+inspected_paths: []
+source_type: first-party-article
+basis: Direct reading of the public ICLR proceedings paper at its canonical URL.
+license_status: CC-BY-4.0
+evidence_grade: FD
+observed_mechanisms:
+  - description: The paper benchmarks long-term interactive memory for chat assistants across information and temporal reasoning tasks.
+    evidence_grade: FD
+    basis: The published proceedings paper describes the benchmark and its reported measurements.
+author_reported_claims:
+  - The benchmark distinguishes several long-term memory capabilities under its published protocol.
+unknowns:
+  - The benchmark does not assess every real-world permission, correction, or deletion boundary.
+falsifiers:
+  - The ICLR proceedings record or authors correct the named benchmark description.
+last_validated: 2026-08-22
+correction_ledger_status: reviewed

@@ -1,0 +1,11 @@
+id: claim-memory-canonical-projections
+statement: Canonical memory records should remain separate from rebuildable projections so correction, provenance, conflict, and deletion lineage remain inspectable.
+label: proposed
+scope: Memory Engineering study guide
+source_ids:
+  - source-memory-memgpt
+  - source-memory-karpathy-llm-wiki
+falsifiers:
+  - A projection-only design provides equivalent provenance, conflict handling, and deletion traceability across rebuilds and corrections.
+last_reviewed: 2026-08-22
+revision: 1

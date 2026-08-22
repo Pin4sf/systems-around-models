@@ -1,0 +1,11 @@
+id: claim-memory-lifecycle-not-storage
+statement: Agent memory is a governed lifecycle for selected future influence, not merely a storage feature or a larger context window.
+label: inferred
+scope: Memory Engineering study guide
+source_ids:
+  - source-memory-memgpt
+  - source-memory-anthropic-context-engineering
+falsifiers:
+  - A durable memory system demonstrates reliable correction, authority, and deletion guarantees without lifecycle policy beyond storage.
+last_reviewed: 2026-08-22
+revision: 1

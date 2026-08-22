@@ -1,0 +1,23 @@
+id: source-memory-locomo
+title: "LoCoMo: Evaluating Very Long-Term Conversational Memory of LLM Agents"
+author: Gunjan Chhikara and collaborators
+canonical_url: https://aclanthology.org/2024.acl-long.747/
+published_at: 2024-08-11
+retrieved_at: 2026-08-22
+inspected_paths: []
+source_type: first-party-article
+basis: Direct reading of the public ACL proceedings record and linked paper at its canonical URL.
+license_status: CC-BY-4.0
+evidence_grade: FD
+observed_mechanisms:
+  - description: The paper evaluates language models on long-term conversational memory tasks with multi-session conversation histories.
+    evidence_grade: FD
+    basis: The published paper describes its evaluation setup and task categories.
+author_reported_claims:
+  - The benchmark exposes limitations in long-term conversational memory under its reported protocol.
+unknowns:
+  - Benchmark performance does not establish authority, privacy, correction, or deletion behavior in a deployed product.
+falsifiers:
+  - The ACL proceedings record or authors correct the named evaluation description.
+last_validated: 2026-08-22
+correction_ledger_status: reviewed

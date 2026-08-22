@@ -1,0 +1,23 @@
+id: source-memory-pm-bench
+title: "PM-Bench: Benchmarking Prospective Memory in LLM Agents"
+author: PM-Bench authors
+canonical_url: https://arxiv.org/abs/2607.12385
+published_at: 2026-07-16
+retrieved_at: 2026-08-22
+inspected_paths: []
+source_type: first-party-article
+basis: Direct reading of the public preprint record at its canonical URL.
+license_status: unknown
+evidence_grade: FL
+observed_mechanisms:
+  - description: The preprint evaluates delayed intentions, cue recall, and proactive behavior over a simulated sequence of ordinary activity.
+    evidence_grade: FL
+    basis: The authors describe the benchmark tasks and reported measurements in the public preprint.
+author_reported_claims:
+  - Prospective-memory evaluation requires measures beyond retrospective question answering.
+unknowns:
+  - This emerging preprint does not establish a complete product authority, acceptance, or closure model.
+falsifiers:
+  - The authors correct the public preprint or remove the named benchmark design.
+last_validated: 2026-08-22
+correction_ledger_status: reviewed
