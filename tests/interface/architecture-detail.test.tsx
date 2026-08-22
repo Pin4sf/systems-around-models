@@ -22,8 +22,17 @@ describe("canonical architecture studies", () => {
     expect(screen.getAllByText(new RegExp(version)).length).toBeGreaterThan(0);
     expect(screen.getByRole("heading", { name: "System boundary", level: 2 })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Normalized topology", level: 2 })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "One complete run", level: 2 })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "State, authority, recovery, and proof", level: 2 })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Adopt, adapt, or reject", level: 2 })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Failure boundary", level: 2 })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Retrieval check", level: 2 })).toBeInTheDocument();
+    expect(screen.getByText(/Last reviewed 2026-08-22/)).toBeInTheDocument();
+  });
+
+  it("preserves DeepSeek's native event and lifecycle shape beside the normalized comparison", async () => {
+    render(await ArchitectureDetailPage({ params: Promise.resolve({ slug: "deepseek-harness-cordis" }) }));
+    expect(screen.getByRole("img", { name: "DeepSeek Harness native session and plugin lifecycle" })).toBeInTheDocument();
   });
 
   it("builds route-specific metadata", async () => {

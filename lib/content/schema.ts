@@ -135,6 +135,22 @@ const LifecycleStepSchema = z.object({
   outcome: z.string().min(10),
 });
 
+const ArchitectureStudySchema = z.object({
+  deck: z.string().min(20),
+  evidenceBoundary: z.string().min(20),
+  systemBoundary: z.array(z.string().min(20)).min(2),
+  mechanismNotes: z.array(z.object({ title: z.string().min(3), body: z.string().min(20) })).min(2),
+  failureBoundary: z.array(z.string().min(20)).min(2),
+  retrievalCheck: z.string().min(20),
+  refreshTarget: z.string().min(20).optional(),
+  nativeDiagram: z.enum(["deepseek-session-lifecycle"]).optional(),
+  adoptAdaptReject: z.object({
+    adopt: z.string().min(20),
+    adapt: z.string().min(20),
+    reject: z.string().min(20),
+  }),
+});
+
 export const ArchitectureSchema = z.object({
   id: Identifier("architecture"),
   slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
@@ -164,6 +180,7 @@ export const ArchitectureSchema = z.object({
   unknowns: z.array(z.string().min(10)).min(1),
   lastReviewed: DateString,
   revision: z.number().int().positive(),
+  study: ArchitectureStudySchema.optional(),
 }).superRefine((record, context) => {
   const seenStages = new Set(record.topologySteps.map((step) => step.stage));
   if (seenStages.size !== topologyStages.length) {

@@ -9,7 +9,7 @@
   "dossierStatus": "refresh-needed",
   "evidenceGrade": "IP",
   "evidenceFidelity": "implementation-pinned",
-  "contentHash": "sha256-dd56214692f1a942e986cf2fe887c735254a751a4fd9cdab727a45c9894e9b28",
+  "contentHash": "sha256-eb79337270b6e46526f666603f6c70fa5b1a8ab78ad0154e4ec4ed0c26d12f7e",
   "sourceIds": [
     "source-architecture-cordis",
     "source-architecture-deepseek-harness"

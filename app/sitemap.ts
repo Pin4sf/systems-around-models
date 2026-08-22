@@ -19,11 +19,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .map((record) => record.lastReviewed)
     .sort()
     .at(-1);
-  const studyRecords = listArchitectureStudies().map((study) => {
-    const record = content.architectures.get(study.architectureId);
-    if (!record || record.status !== "public") throw new Error(`Missing public architecture study: ${study.architectureId}`);
-    return record;
-  });
+  const studyRecords = listArchitectureStudies(content.architectures);
 
   return [
     {

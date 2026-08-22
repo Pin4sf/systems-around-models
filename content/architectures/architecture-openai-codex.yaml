@@ -38,3 +38,27 @@ unknowns:
   - A deeper dossier should map compaction, resume, multi-agent, and ambiguous-effect behavior from current source paths.
 last_reviewed: 2026-08-22
 revision: 1
+study:
+  deck: A current, deliberately bounded working study of the open-source local coding agent and the responsibilities its public repository summary does and does not establish.
+  evidence_boundary: This page is current at the recorded repository pin, but its source inspection is README-level. Unknown internal paths stay unknown rather than inheriting claims from older or adjacent Codex products.
+  system_boundary:
+    - The inspected official repository presents Codex as a coding agent that runs locally in a developer's terminal and working directory.
+    - Local execution makes workspace identity, sandboxing, approvals, and project checks important harness boundaries, but the current source record does not yet map their complete implementation.
+    - The developer and repository policy remain responsible for review, protected merge, deployment, and product acceptance.
+  mechanism_notes:
+    - title: Local work is still governed work
+      body: Running on a developer machine does not collapse identity, permission, or acceptance into the model loop. The working directory and admitted task are part of the effective system.
+    - title: Current does not mean complete
+      body: The repository pin and release identity are current, while compaction, resume, multi-agent, capability binding, and effect recovery remain scheduled for path-level inspection.
+    - title: External checks remain real owners
+      body: A coding agent can produce a change and run project commands. CI, code review, protected merge, deployment gates, and the product owner retain distinct closure responsibilities.
+  failure_boundary:
+    - This working study does not claim a complete internal control, compaction, recovery, or multi-agent architecture.
+    - Local execution alone does not prove least privilege, data custody, or safe external effects.
+    - Project-specific correctness and product acceptance remain outside the inspected repository summary.
+  retrieval_check: A Codex run changes the intended files and reports that tests passed. Which responsibilities remain external? Name at least review, protected merge, deployment admission, and product acceptance, and do not treat local execution as proof of any one of them.
+  refresh_target: Deep-inspection backlog includes compaction, resume, multi-agent, approvals and sandbox, and ambiguous-effect behavior.
+  adopt_adapt_reject:
+    adopt: Adopt the local developer-workspace boundary and preserve repository checks as explicit evidence rather than model assertions.
+    adapt: Adapt the coding loop through project-specific capability, identity, sandbox, and protected-delivery policies after deeper source inspection.
+    reject: Reject the inference that local execution or a passing project command establishes least privilege, safe deployment, or product acceptance.

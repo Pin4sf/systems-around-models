@@ -9,7 +9,7 @@
   "dossierStatus": "deep-dive-needed",
   "evidenceGrade": "FD",
   "evidenceFidelity": "working-profile",
-  "contentHash": "sha256-5181a1e659e8303c217576e6045fd7e5b4d001d2bb708cb38345702e0cbca810",
+  "contentHash": "sha256-a1de9f5e84c4d210d9cf7b4eb76099d214cc9b27978d04d5b2fe2ddc7aed5de7",
   "sourceIds": [
     "source-architecture-openai-codex"
   ],

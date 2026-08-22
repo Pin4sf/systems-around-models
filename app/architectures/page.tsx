@@ -45,11 +45,7 @@ export default async function ArchitecturesPage() {
     sectionAnchor: "method-title",
     claimId: "architecture-comparison",
   });
-  const studySlugs = new Set(listArchitectureStudies().map((study) => {
-    const record = content.architectures.get(study.architectureId);
-    if (!record) throw new Error(`Missing architecture study record: ${study.architectureId}`);
-    return record.slug;
-  }));
+  const studySlugs = new Set(listArchitectureStudies(content.architectures).map((record) => record.slug));
 
   return (
     <article className="architecture-reader">

@@ -286,8 +286,27 @@ main {
 .architecture-study__mechanisms span { color: var(--ink-muted); font-size: .7rem; }
 .architecture-study__mechanisms h3 { margin: 1.5rem 0 .75rem; font-size: 1.35rem; line-height: 1.2; }
 .architecture-study__mechanisms p { margin: 0; color: var(--ink-muted); font-size: .92rem; }
+.architecture-study__lifecycle { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: 1px; margin: 2rem 0 0; padding: 1px; background: var(--rule); list-style: none; }
+.architecture-study__lifecycle li { padding: 1.25rem; background: var(--paper); }
+.architecture-study__lifecycle span, .architecture-study__lifecycle > li > p:first-of-type { color: var(--ink-muted); font-size: .68rem; }
+.architecture-study__lifecycle h3 { margin: 1rem 0 .5rem; font-size: 1.2rem; line-height: 1.2; }
+.architecture-study__lifecycle p { margin: .5rem 0 0; font-size: .85rem; }
+.architecture-study__contract, .architecture-study__dispositions { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; margin: 2rem 0; padding: 1px; background: var(--rule); }
+.architecture-study__contract div, .architecture-study__dispositions div { padding: 1.25rem; background: var(--paper); }
+.architecture-study__contract dt, .architecture-study__dispositions dt { color: var(--evidence); font-family: var(--font-interface), Arial, sans-serif; font-size: .72rem; font-weight: 750; letter-spacing: .05em; text-transform: uppercase; }
+.architecture-study__contract dd, .architecture-study__dispositions dd { margin: .55rem 0 0; font-size: .9rem; }
+.architecture-study__dispositions { grid-template-columns: repeat(3, 1fr); }
+.architecture-study__dispositions div:last-child dt { color: var(--correction); }
 .architecture-study__retrieval { padding: clamp(2rem, 5vw, 4rem); border-left: .3rem solid var(--gold); background: var(--paper-deep); }
 .architecture-study__sources { padding-top: 2rem; border-top: 1px solid var(--ink); }
+
+.native-architecture { margin: 2rem 0 0; padding: 1.25rem; border: 1px solid var(--rule); background: var(--paper); }
+.native-architecture__lane, .native-architecture__ownership { display: grid; gap: .5rem; align-items: stretch; }
+.native-architecture__lane { grid-template-columns: repeat(5, 1fr); }
+.native-architecture__ownership { grid-template-columns: repeat(4, 1fr); margin-top: .75rem; padding-top: .75rem; border-top: 1px dashed var(--rule); }
+.native-architecture :is(span, strong) { position: relative; padding: .75rem; border-top: .2rem solid var(--evidence); font-family: var(--font-interface), Arial, sans-serif; font-size: .7rem; line-height: 1.35; }
+.native-architecture__ownership :is(span, strong) { border-top-color: var(--gold); }
+.native-architecture figcaption { margin-top: 1rem; color: var(--ink-muted); font-family: var(--font-interface), Arial, sans-serif; font-size: .7rem; }
 
 .course-part__status { display: inline-block; margin-left: .4rem; color: var(--ink-muted); font-size: .62rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
 
@@ -1087,7 +1106,7 @@ main {
   .architecture-band__lesson, .architecture-band__lesson details { grid-column: auto; }
   .architecture-study__hero h1 { font-size: clamp(3rem, 15vw, 4.8rem); }
   .architecture-study__section--topology, .architecture-study__retrieval { margin-inline: -1.25rem; padding-inline: 1.25rem; }
-  .architecture-study__mechanisms, .learning-diagram__progression, .learning-diagram__chain, .learning-diagram__surfaces, .learning-diagram__handoff { grid-template-columns: 1fr; }
+  .architecture-study__mechanisms, .architecture-study__contract, .architecture-study__dispositions, .native-architecture__lane, .native-architecture__ownership, .learning-diagram__progression, .learning-diagram__chain, .learning-diagram__surfaces, .learning-diagram__handoff { grid-template-columns: 1fr; }
   .learning-diagram__chain > *:not(:last-child)::after { right: auto; bottom: -.7rem; left: .75rem; content: "↓"; }
 
   .study-guide-footer {

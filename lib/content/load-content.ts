@@ -163,6 +163,20 @@ function revisionFromYaml(value: unknown, repositoryRoot: string, filename: stri
 
 function architectureFromYaml(value: unknown, repositoryRoot: string, filename: string): ArchitectureRecord {
   const raw = value as Record<string, unknown>;
+  const rawStudy = raw.study as Record<string, unknown> | undefined;
+  const study = rawStudy ? {
+    ...rawStudy,
+    evidenceBoundary: rawStudy.evidence_boundary,
+    systemBoundary: rawStudy.system_boundary,
+    mechanismNotes: Array.isArray(rawStudy.mechanism_notes)
+      ? rawStudy.mechanism_notes.map((note) => ({ ...(note as Record<string, unknown>) }))
+      : rawStudy.mechanism_notes,
+    failureBoundary: rawStudy.failure_boundary,
+    retrievalCheck: rawStudy.retrieval_check,
+    refreshTarget: rawStudy.refresh_target,
+    nativeDiagram: rawStudy.native_diagram,
+    adoptAdaptReject: rawStudy.adopt_adapt_reject,
+  } : undefined;
   const topologySteps = Array.isArray(raw.topology_steps)
     ? raw.topology_steps.map((step) => {
         const item = step as Record<string, unknown>;
@@ -195,6 +209,7 @@ function architectureFromYaml(value: unknown, repositoryRoot: string, filename: 
     sourceIds: raw.source_ids,
     inspectedVersion: raw.inspected_version,
     lastReviewed: raw.last_reviewed,
+    study,
   });
   if (!result.success) {
     throw recordError(repositoryRoot, filename, result.error.issues.map((issue) => issue.message).join("; "));
