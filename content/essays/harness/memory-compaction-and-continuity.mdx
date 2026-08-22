@@ -1,0 +1,67 @@
+---
+slug: memory-compaction-and-continuity
+title: Memory, Compaction, and Continuity
+description: How runtime memory preserves useful continuity without turning summaries, retrieved notes, or prior model output into authority.
+sequence: Harness Engineering
+sequence_position: 12
+revision: 1
+authors:
+  - Systems Around Models
+published_at: 2026-08-22
+substantively_revised_at: 2026-08-22
+reading_time_source: 10 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-memory-anthropic-context-engineering
+  - source-memory-memgpt
+revision_id: revision-memory-compaction-continuity-001
+previous_essay_slug: loops-workflows-graphs-and-delegation
+---
+
+## Memory is governed continuity
+
+Memory lets a later decision benefit from earlier work. It can preserve user-confirmed facts, outcomes, preferences, unresolved commitments, environment knowledge, or procedural lessons. The engineering challenge is not merely storing material; it is deciding what may be captured, believed, retrieved, corrected, forgotten, and allowed to influence.
+
+<MemoryLifecycle />
+
+Keep canonical records separate from memory projections. A task event, user statement, or provider receipt may be authoritative within its contract. A summary or embedding-derived result is a lossy view over such material and should retain its provenance.
+
+## Capture does not create belief
+
+Candidate memories can come from explicit user input, completed work, observations, or model proposals. Assign each a source, subject, timestamp, scope, confidence or review status, retention class, and correction path. User statements should outrank behavioral inference about the user.
+
+Sensitive material needs an explicit purpose and permission boundary. A system should remain useful without coercing optional context, and deleting a canonical record should trigger deletion or rebuilding of its projections where policy requires it.
+
+## Retrieve for a decision
+
+Similarity is only one retrieval signal. Select memory for the choice at hand: current objective, identity, time, environment, authority, recency, contradiction status, and expected utility all matter. Return a small attributed packet rather than an undifferentiated history.
+
+Retrieved memory is input, not command. A note that once said “publish automatically” cannot expand the authority of a new run. Current admission and locked policy remain in control.
+
+## Compact without manufacturing certainty
+
+Compaction reduces working history when the context window, latency, or attention budget becomes constrained. A useful compacted packet preserves objective, locked constraints, durable decisions, confirmed progress, unresolved ambiguity, open effects, evidence pointers, and the next safe action.
+
+Record what was omitted and the source boundary of the summary. Contradictions should remain visible. If detail can be retrieved later, store a pointer instead of a confident paraphrase. The goal is continuity, not a polished story.
+
+## Correct and forget as first-class operations
+
+New evidence may supersede a memory, narrow its scope, or show it was wrong. Append the correction, link the affected projections, and prevent superseded material from silently winning retrieval. Forgetting may mean expiry, user-directed deletion, policy retention, compaction, or removal of a derived view; name which operation occurred.
+
+Evaluate the lifecycle, not just retrieval relevance. Test capture precision, attribution, contradiction handling, decision usefulness, deletion propagation, authority non-amplification, and behavior after compaction or restart.
+
+## Failure boundary
+
+Memory fails when inference becomes identity, summaries erase uncertainty, retrieval leaks across users or tasks, old preferences override current instructions, deletion leaves searchable projections, or compacted context omits the one unresolved effect that made retry unsafe.
+
+## Retrieval check
+
+A prior summary says an email was sent, but the durable run journal says delivery is unresolved and the user has since revoked messaging access. What may be retrieved, what outranks what, and what is the next safe transition? Identify the correction and forgetting operations required after reconciliation.
+
+## Sources and further reading
+
+- [Effective Context Engineering for AI Agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) — context selection and compaction patterns.
+- [MemGPT: Towards LLMs as Operating Systems](https://arxiv.org/abs/2310.08560) — a public virtual-context architecture spanning constrained model context and external memory.
+- [Memory Engineering: A Practical Study Guide](/fieldbook/memory-engineering-study-guide) — the connected full lifecycle course.
+

@@ -4,7 +4,7 @@ const progression = [
 ] as const;
 
 function Diagram({ name, children }: { name: string; children: ReactNode }) {
-  return <figure className="learning-diagram" role="img" aria-label={name}>{children}</figure>;
+  return <figure className="learning-diagram" aria-label={name}>{children}</figure>;
 }
 
 export function HarnessProgression() {
@@ -21,5 +21,29 @@ export function SurfaceMap() {
 
 export function HarnessHandoff() {
   return <Diagram name="From development evidence to product admission"><div className="learning-diagram__handoff"><div><strong>Developer harness</strong><span>code · tests · traces · artifact</span></div><span aria-hidden="true">→ typed handoff →</span><div><strong>Product runtime</strong><span>admission · authority · effects · recovery</span></div></div><figcaption>A merged artifact is evidence for admission; it is not proof that a product capability is safe or complete.</figcaption></Diagram>;
+}
+
+export function ContextAssembly() {
+  return <Diagram name="Context assembly as a compiled artifact"><div className="learning-diagram__chain"><span>Locked policy</span><span>Task</span><span>Current state</span><span>Retrieved context</span><strong>Run input</strong></div><figcaption>Context is selected, ordered, bounded, and attributed for this run; it is not a transcript dump.</figcaption></Diagram>;
+}
+
+export function CapabilityBinding() {
+  return <Diagram name="Capability binding across four states"><dl className="learning-diagram__surfaces"><div><dt>Unavailable</dt><dd>No adapter</dd></div><div><dt>Discoverable</dt><dd>Known, not granted</dd></div><div><dt>Bound</dt><dd>Granted for this run</dd></div><div><dt>Invoked</dt><dd>Attempt recorded</dd></div></dl><figcaption>A tool name in a prompt does not prove that the capability exists, is authorized, or was successfully used.</figcaption></Diagram>;
+}
+
+export function CustodyBoundary() {
+  return <Diagram name="Environment custody boundary"><div className="learning-diagram__handoff"><div><strong>Harness policy</strong><span>identity · scope · budget · approval</span></div><span aria-hidden="true">→ bounded execution →</span><div><strong>Environment</strong><span>files · network · credentials · effects</span></div></div><figcaption>Isolation limits reach; custody determines whose resources may be changed and who remains accountable.</figcaption></Diagram>;
+}
+
+export function StateLayers() {
+  return <Diagram name="Facts, snapshots, and derived views"><dl className="learning-diagram__surfaces"><div><dt>Facts</dt><dd>Append-only events</dd></div><div><dt>Snapshots</dt><dd>Recovery accelerators</dd></div><div><dt>Views</dt><dd>Rebuildable projections</dd></div><div><dt>Receipts</dt><dd>External observations</dd></div></dl><figcaption>Replay begins from durable facts; snapshots and views are useful only while their provenance remains intact.</figcaption></Diagram>;
+}
+
+export function ControlStructures() {
+  return <Diagram name="Control structures and stop policies"><dl className="learning-diagram__surfaces"><div><dt>Loop</dt><dd>Repeat until stop</dd></div><div><dt>Workflow</dt><dd>Known stages</dd></div><div><dt>Graph</dt><dd>Conditional transitions</dd></div><div><dt>Delegation</dt><dd>Typed child contract</dd></div></dl><figcaption>Choose the smallest structure that can express the work, its recovery boundary, and its stop condition.</figcaption></Diagram>;
+}
+
+export function MemoryLifecycle() {
+  return <Diagram name="Memory lifecycle through continuity"><div className="learning-diagram__chain"><span>Capture</span><span>Qualify</span><span>Store</span><span>Retrieve</span><strong>Correct or forget</strong></div><figcaption>Compaction produces a bounded continuity input; it does not turn remembered material into authority.</figcaption></Diagram>;
 }
 import type { ReactNode } from "react";

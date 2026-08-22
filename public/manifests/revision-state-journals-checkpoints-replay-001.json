@@ -1,13 +1,13 @@
 {
-  "id": "revision-developer-product-harnesses-001",
-  "essaySlug": "developer-and-product-runtime-harnesses",
+  "id": "revision-state-journals-checkpoints-replay-001",
+  "essaySlug": "state-journals-checkpoints-and-replay",
   "revision": 1,
   "publishedAt": "2026-08-22",
   "substantivelyRevisedAt": "2026-08-22",
-  "summary": "Initial public revision of the developer and product runtime harness handoff chapter.",
+  "summary": "Initial public revision of the state, journals, checkpoints, and replay chapter.",
   "affectedClaimIds": [],
   "correctionDisposition": "publication",
-  "contentHash": "sha256-517674e077dd3cbf6bcb4297e5bbde18e0410501287b159fc90669def970e083",
+  "contentHash": "sha256-8395ccf43167d6a519c3509f393a68d411cc51818debc2a0f9dbac39dd081ffa",
   "sourceIds": [
     "source-anthropic-effective-long-running-harnesses",
     "source-harness-engineering-fieldbook-v1"

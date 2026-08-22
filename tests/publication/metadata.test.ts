@@ -15,6 +15,12 @@ const releasedChapterPaths = [
   "/fieldbook/twelve-recurring-failure-classes",
   "/fieldbook/four-surface-classes",
   "/fieldbook/developer-and-product-runtime-harnesses",
+  "/fieldbook/instructions-and-context-assembly",
+  "/fieldbook/tools-capability-manifests-and-binding",
+  "/fieldbook/environments-sandboxes-and-custody",
+  "/fieldbook/state-journals-checkpoints-and-replay",
+  "/fieldbook/loops-workflows-graphs-and-delegation",
+  "/fieldbook/memory-compaction-and-continuity",
 ];
 
 afterEach(() => {

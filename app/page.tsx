@@ -1,8 +1,15 @@
 import Link from "next/link";
 import { SystemTrace } from "@/components/diagrams/system-trace";
 import { harnessChapterCount, harnessCourse } from "@/lib/study-guide/harness-course";
+import { loadContent } from "@/lib/content/load-content";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const content = await loadContent();
+  const releasedHarnessChapters = new Map(
+    [...content.essays.values()]
+      .filter((essay) => essay.status === "public" && essay.sequence === "Harness Engineering" && essay.sequencePosition > 1)
+      .map((essay) => [essay.sequencePosition - 1, essay]),
+  );
   return (
     <article className="homepage">
       <header className="homepage__hero prose">
@@ -83,8 +90,10 @@ export default function HomePage() {
               <ol start={part.chapters[0]?.number}>
                 {part.chapters.map((chapter) => (
                   <li key={chapter.number}>
-                    {chapter.href ? (
-                      <Link href={chapter.href}>{chapter.title}</Link>
+                    {releasedHarnessChapters.has(chapter.number) ? (
+                      <Link href={`/fieldbook/${releasedHarnessChapters.get(chapter.number)?.slug}`}>
+                        {releasedHarnessChapters.get(chapter.number)?.title}
+                      </Link>
                     ) : (
                       <span>{chapter.title} <small className="course-part__status interface-text">Coming next</small></span>
                     )}

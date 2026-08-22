@@ -1,0 +1,66 @@
+---
+slug: loops-workflows-graphs-and-delegation
+title: Loops, Workflows, Graphs, and Delegation
+description: A responsibility-led guide to choosing control structures, defining stop policies, and delegating work without losing authority or proof.
+sequence: Harness Engineering
+sequence_position: 11
+revision: 1
+authors:
+  - Systems Around Models
+published_at: 2026-08-22
+substantively_revised_at: 2026-08-22
+reading_time_source: 9 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-anthropic-effective-long-running-harnesses
+revision_id: revision-control-structures-delegation-001
+previous_essay_slug: state-journals-checkpoints-and-replay
+next_essay_slug: memory-compaction-and-continuity
+---
+
+## Choose control from the shape of the work
+
+A loop repeatedly chooses the next action. A workflow follows known stages. A graph makes conditional transitions explicit. Delegation creates another actor with a bounded subtask. These are control structures, not maturity levels; each is appropriate under different pressures.
+
+<ControlStructures />
+
+Start with the smallest structure that can represent the work, its recovery points, and its completion rule. Additional orchestration creates more state, more transitions, and more opportunities for split authority.
+
+## Loops handle local uncertainty
+
+A model-tool loop works well when the next step depends on the latest observation and the task can stop under a compact policy. The harness still owns iteration and budget limits, allowed actions, cancellation, and the evidence required before exit. “Let the model decide when done” is not a stop policy.
+
+Make the loop emit structured progress: current hypothesis, selected action, observation, remaining budget, and next decision. This turns repetition into an inspectable process rather than a long conversational blur.
+
+## Workflows and graphs expose transitions
+
+Use a workflow when stages are known and valuable to audit: admit, plan, implement, verify, review, release. Use a graph when branches, joins, interruption, or re-entry are central. Nodes should describe responsibilities; edges should name the conditions and evidence that authorize movement.
+
+A graph does not make execution durable by itself. Checkpoint persistence, effect reconciliation, concurrency control, and migration of in-flight state remain separate contracts. Drawing a retry edge does not make the repeated effect safe.
+
+## Delegation needs a typed child contract
+
+Delegate when independent work can proceed with a narrower context and capability set. A child contract should include objective, input artifacts, authority ceiling, environment, budget, expected output, evidence, stop condition, and return protocol. The parent retains responsibility for integrating and verifying the result.
+
+Completion claims from a child are data. Accept them only after inspecting the promised artifact or validation output. Cancellation must propagate, and late child results must be fenced so they cannot overwrite a newer parent decision.
+
+## Stop policies are part of architecture
+
+Every control structure needs terminal and non-terminal exits: completed with proof, blocked on a named dependency, cancelled, budget exhausted, ambiguous effect awaiting reconciliation, or failed with recoverable state. A maximum iteration count is a safety brake, not a definition of success.
+
+Define progress separately from activity. Ten tool calls may produce no new evidence. One decisive observation may close the loop.
+
+## Failure boundary
+
+Control systems fail through endless motion, hidden branch state, retry storms, orphaned children, duplicated work, and false parent closure. Complexity itself becomes a failure when a graph is harder to reconstruct than the problem it models.
+
+## Retrieval check
+
+A task has a known review stage but an uncertain implementation path, while two source inspections can run independently. Assign loop, workflow, graph, and delegation only where each earns its cost. Then write the parent’s acceptance rule for the two delegated inspections.
+
+## Sources and further reading
+
+- [Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents) — first-party examples of staged, multi-session coding work and progress artifacts.
+- [State, Journals, Checkpoints, and Replay](/fieldbook/state-journals-checkpoints-and-replay) — the durable substrate required by any recoverable control structure.
+

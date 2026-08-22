@@ -1,0 +1,64 @@
+---
+slug: environments-sandboxes-and-custody
+title: Environments, Sandboxes, and Custody
+description: Why isolation, resource ownership, identity, and effect custody are separate contracts in an agent runtime.
+sequence: Harness Engineering
+sequence_position: 9
+revision: 1
+authors:
+  - Systems Around Models
+published_at: 2026-08-22
+substantively_revised_at: 2026-08-22
+reading_time_source: 8 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-memory-nist-agent-hijacking-evaluations
+revision_id: revision-environments-sandboxes-custody-001
+previous_essay_slug: tools-capability-manifests-and-binding
+next_essay_slug: state-journals-checkpoints-and-replay
+---
+
+## An environment is where consequences become possible
+
+The environment is the concrete world a run can observe and change: a repository, browser, container, database, device, tenant, or external account. A sandbox limits reach inside that world. Custody answers the harder question: whose resources are present, under whose identity, and who is accountable for changes.
+
+<CustodyBoundary />
+
+These contracts must be named independently. A container can isolate processes while exposing the wrong repository. A browser profile can be technically sandboxed while logged into a personal account. Strong process isolation does not repair incorrect custody.
+
+This chapter is a proposed design model, not a claim that one reference implementation enforces every control below. The model combines ordinary systems-security boundaries with public guidance to evaluate agent hijacking against explicit, realistic threat models.
+
+## Resolve the target before execution
+
+Admission should resolve an explicit environment identity: tenant, repository and revision, workspace, account, region, device, or dataset. Record how it was selected. Avoid deriving a consequential target from a current directory, recently focused window, or default credential when the user’s intent names something else.
+
+The environment record should also name ownership and retention: who may read it, who may mutate it, how long temporary artifacts survive, and which data must never cross into model context or logs.
+
+## Isolation is one layer of policy
+
+Filesystem and process isolation constrain local damage. Network policy constrains destinations. Credential brokerage constrains identities and scopes. Resource budgets constrain time, compute, and storage. Approval gates constrain selected transitions. None of these layers should be treated as a synonym for the others.
+
+Use the narrowest environment that still supports the task. Read-only mounts are preferable during discovery. Temporary worktrees or disposable containers are useful when changes must be reversible. Production effects need separate credentials and admission even if identical code ran successfully in a test sandbox.
+
+## Carry custody across handoffs
+
+Delegation and external tools create custody transfers. A child run should receive an explicit subset of the parent’s environment and authority, not ambient access to everything the parent can reach. Artifacts returning from the child need identity, provenance, and validation before the parent treats them as trusted state.
+
+Cleanup is also part of custody. The harness should know which temporary resources it created, which must be retained for evidence, and which must be removed or handed to an owner. “The process exited” does not prove that a cloud resource, file lock, browser session, or credential lease was released.
+
+## Failure boundary
+
+Environment control fails when isolation is strong but the target is wrong; when a sandbox shares a secret-bearing home directory; when an ephemeral runner destroys the only recovery evidence; or when a delegated process retains authority after cancellation. Another failure is quiet escape through logs, caches, clipboard state, or generated artifacts even though the primary filesystem is restricted.
+
+Test both containment and custody. Ask not only “can the process reach outside?” but “did we give it the correct inside?”
+
+## Retrieval check
+
+A coding run operates in a disposable container with no outbound network, but the mounted directory is the user’s primary checkout and the token inside it can write to production. Which properties are isolated, and which custody boundaries are broken? Redesign the environment without assuming the container itself is sufficient.
+
+## Sources and further reading
+
+- [Strengthening AI Agent Hijacking Evaluations](https://www.nist.gov/news-events/news/2025/01/technical-blog-strengthening-ai-agent-hijacking-evaluations) — official public guidance on explicit threat models and adversarial agent evaluation.
+- [Tools, Capability Manifests, and Binding](/fieldbook/tools-capability-manifests-and-binding) — the action contract that must be reconciled with environment custody.
+- [Four Surface Classes](/fieldbook/four-surface-classes) — a mutation model for deciding which environment surfaces may change.

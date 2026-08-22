@@ -3,6 +3,25 @@
   "validationSchemaVersion": "publication-v2",
   "revisions": [
     {
+      "id": "revision-control-structures-delegation-001",
+      "essaySlug": "loops-workflows-graphs-and-delegation",
+      "revision": 1,
+      "publishedAt": "2026-08-22",
+      "substantivelyRevisedAt": "2026-08-22",
+      "summary": "Initial public revision of the loops, workflows, graphs, and delegation chapter.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-6fbd2832897c0a3746b42acaa094aaa91895e2fda381a2ccec26c0d4a1012b79",
+      "sourceIds": [
+        "source-anthropic-effective-long-running-harnesses",
+        "source-harness-engineering-fieldbook-v1"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-anthropic-effective-long-running-harnesses": "2026-08-22"
+      }
+    },
+    {
       "id": "revision-developer-product-harnesses-001",
       "essaySlug": "developer-and-product-runtime-harnesses",
       "revision": 1,
@@ -11,7 +30,7 @@
       "summary": "Initial public revision of the developer and product runtime harness handoff chapter.",
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-336c95104da7aab454aaf4f605300c1345d70c2485d422ef5390bf852f853881",
+      "contentHash": "sha256-517674e077dd3cbf6bcb4297e5bbde18e0410501287b159fc90669def970e083",
       "sourceIds": [
         "source-anthropic-effective-long-running-harnesses",
         "source-harness-engineering-fieldbook-v1"
@@ -19,6 +38,25 @@
       "sourceValidationDates": {
         "source-harness-engineering-fieldbook-v1": "2026-08-21",
         "source-anthropic-effective-long-running-harnesses": "2026-08-22"
+      }
+    },
+    {
+      "id": "revision-environments-sandboxes-custody-001",
+      "essaySlug": "environments-sandboxes-and-custody",
+      "revision": 1,
+      "publishedAt": "2026-08-22",
+      "substantivelyRevisedAt": "2026-08-22",
+      "summary": "Initial public revision of the environments, sandboxes, and custody chapter.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-f32b3a11ebd6e6d7331443015cd75d5df300ed011c4e5d95a5bb7e04d26bd4cf",
+      "sourceIds": [
+        "source-harness-engineering-fieldbook-v1",
+        "source-memory-nist-agent-hijacking-evaluations"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-memory-nist-agent-hijacking-evaluations": "2026-08-22"
       }
     },
     {
@@ -124,6 +162,46 @@
       }
     },
     {
+      "id": "revision-instructions-context-assembly-001",
+      "essaySlug": "instructions-and-context-assembly",
+      "revision": 1,
+      "publishedAt": "2026-08-22",
+      "substantivelyRevisedAt": "2026-08-22",
+      "summary": "Initial public revision of the instructions and context assembly chapter.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-2e592b5a4fbd7832c10c509c4a0eaf1060c5c674f9ebd82fa08bb5482f2c7dc3",
+      "sourceIds": [
+        "source-harness-engineering-fieldbook-v1",
+        "source-memory-anthropic-context-engineering"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-memory-anthropic-context-engineering": "2026-08-22"
+      }
+    },
+    {
+      "id": "revision-memory-compaction-continuity-001",
+      "essaySlug": "memory-compaction-and-continuity",
+      "revision": 1,
+      "publishedAt": "2026-08-22",
+      "substantivelyRevisedAt": "2026-08-22",
+      "summary": "Initial public revision of the memory, compaction, and continuity chapter.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-bb060fdebb98d8a2abaecb9785d4882934e8bfcba5f709a69ed244f61ddeb76a",
+      "sourceIds": [
+        "source-harness-engineering-fieldbook-v1",
+        "source-memory-anthropic-context-engineering",
+        "source-memory-memgpt"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-memory-anthropic-context-engineering": "2026-08-22",
+        "source-memory-memgpt": "2026-08-22"
+      }
+    },
+    {
       "id": "revision-memory-engineering-study-guide-001",
       "essaySlug": "memory-engineering-study-guide",
       "revision": 1,
@@ -164,6 +242,44 @@
         "source-memory-pm-bench": "2026-08-22",
         "source-memory-owasp-memory-attack-surface": "2026-08-22",
         "source-memory-nist-agent-hijacking-evaluations": "2026-08-22"
+      }
+    },
+    {
+      "id": "revision-state-journals-checkpoints-replay-001",
+      "essaySlug": "state-journals-checkpoints-and-replay",
+      "revision": 1,
+      "publishedAt": "2026-08-22",
+      "substantivelyRevisedAt": "2026-08-22",
+      "summary": "Initial public revision of the state, journals, checkpoints, and replay chapter.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-8395ccf43167d6a519c3509f393a68d411cc51818debc2a0f9dbac39dd081ffa",
+      "sourceIds": [
+        "source-anthropic-effective-long-running-harnesses",
+        "source-harness-engineering-fieldbook-v1"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-anthropic-effective-long-running-harnesses": "2026-08-22"
+      }
+    },
+    {
+      "id": "revision-tools-capability-binding-001",
+      "essaySlug": "tools-capability-manifests-and-binding",
+      "revision": 1,
+      "publishedAt": "2026-08-22",
+      "substantivelyRevisedAt": "2026-08-22",
+      "summary": "Initial public revision of the tools, capability manifests, and binding chapter.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-af5e631dca69d55c11e2321b252e3c2410abb5a259f52db06f6565665f84173b",
+      "sourceIds": [
+        "source-earendil-what-is-a-harness",
+        "source-harness-engineering-fieldbook-v1"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-earendil-what-is-a-harness": "2026-08-21"
       }
     },
     {
@@ -523,5 +639,5 @@
       }
     }
   ],
-  "buildId": "sha256-b15f037c02f8f90add7fceebfe01e32ae935c1788f59702b0d92751544f3d701"
+  "buildId": "sha256-6d73e4c92530f87ad0e3aedeeeb21ccc72ec4ed89924d461d0ac781a6af29f4a"
 }

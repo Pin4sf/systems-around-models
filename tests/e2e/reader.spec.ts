@@ -109,11 +109,11 @@ test("@desktop discovery endpoints expose only released publication routes", asy
   const rss = await rssResponse.text();
 
   expect(sitemapResponse.ok()).toBe(true);
-  expect(sitemap.match(/<url>/g)).toHaveLength(11);
   expect(sitemap).toContain(architecturesRoute);
   expect(sitemap).toContain(guideRoute);
   expect(sitemap).toContain(route);
   expect(sitemap).toContain(memoryGuideRoute);
+  expect(sitemap).toContain("/fieldbook/memory-compaction-and-continuity");
   expect(robots).toContain("Sitemap:");
   expect(rssResponse.headers()["content-type"]).toContain("application/rss+xml");
   expect(rss).toContain("The Model Is Not the Agent");

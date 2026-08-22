@@ -30,8 +30,8 @@ it("presents a simple study-guide navigation", () => {
   expect(screen.queryByText(/forthcoming/i)).not.toBeInTheDocument();
 });
 
-it("offers architecture comparison as a first-class study path", () => {
-  render(<HomePage />);
+it("offers architecture comparison as a first-class study path", async () => {
+  render(await HomePage());
 
   expect(screen.getByRole("heading", { name: "Study the machinery around models." })).toBeInTheDocument();
   expect(screen.getByRole("link", { name: "Explore architectures" })).toHaveAttribute(
@@ -41,8 +41,8 @@ it("offers architecture comparison as a first-class study path", () => {
   expect(screen.getByRole("heading", { name: "Three ways into the field" })).toBeInTheDocument();
 });
 
-it("offers the released Memory companion as ordinary reading", () => {
-  render(<HomePage />);
+it("offers the released Memory companion as ordinary reading", async () => {
+  render(await HomePage());
 
   expect(
     screen.getByRole("heading", { name: "Memory Engineering: a practical companion guide" }),
@@ -54,8 +54,8 @@ it("offers the released Memory companion as ordinary reading", () => {
   expect(screen.queryByText(/evidence badge|revision panel|source drawer/i)).not.toBeInTheDocument();
 });
 
-it("leads readers into a complete harness-engineering course map", () => {
-  render(<HomePage />);
+it("leads readers into a complete harness-engineering course map", async () => {
+  render(await HomePage());
 
   expect(
     screen.getByRole("heading", {
@@ -80,9 +80,16 @@ it("leads readers into a complete harness-engineering course map", () => {
     ["The H0→H9 progression", "/fieldbook/the-h0-to-h9-progression"],
     ["Twelve recurring failure classes", "/fieldbook/twelve-recurring-failure-classes"],
     ["Four surface classes", "/fieldbook/four-surface-classes"],
-    ["Developer harnesses and product-runtime harnesses", "/fieldbook/developer-and-product-runtime-harnesses"],
+    ["Developer and Product-Runtime Harnesses", "/fieldbook/developer-and-product-runtime-harnesses"],
+    ["Instructions and context assembly", "/fieldbook/instructions-and-context-assembly"],
+    ["Tools, capability manifests, and binding", "/fieldbook/tools-capability-manifests-and-binding"],
+    ["Environments, sandboxes, and custody", "/fieldbook/environments-sandboxes-and-custody"],
+    ["State, journals, checkpoints, and replay", "/fieldbook/state-journals-checkpoints-and-replay"],
+    ["Loops, workflows, graphs, and delegation", "/fieldbook/loops-workflows-graphs-and-delegation"],
+    ["Memory, compaction, and continuity", "/fieldbook/memory-compaction-and-continuity"],
   ]) {
-    expect(screen.getByRole("link", { name: new RegExp(name) })).toHaveAttribute("href", href);
+    expect(screen.getByRole("link", { name: new RegExp(name, "i") })).toHaveAttribute("href", href);
   }
-  expect(screen.getAllByText("Coming next")).toHaveLength(35);
+  expect(screen.getByText("Identity, authority, and admission").closest("li"))
+    .toHaveTextContent("Coming next");
 });
