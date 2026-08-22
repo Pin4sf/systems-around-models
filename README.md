@@ -4,7 +4,9 @@ A practical, independent study guide to the systems surrounding AI models: harne
 
 ## Current status
 
-The public study hub now includes the complete **Harness Engineering** and **Memory Engineering** short guides, the first deeper chapter (“The Model Is Not the Agent”), and **The Big Agent Harness Architecture Comparison** at `/architectures`. The architecture reader compares eight source-pinned working profiles through one shared registry, normalized responsibility topologies, a wide matrix, and an anchored gallery.
+The public study hub now includes the complete **Harness Engineering** and **Memory Engineering** short guides, Harness Chapters 1–5, and **The Big Agent Harness Architecture Comparison** at `/architectures`. The architecture reader compares nine source-pinned profiles through one shared registry, normalized responsibility topologies, a wide matrix, and an anchored gallery. OpenAI Codex and DeepSeek Harness/Cordis have extended study pages; their visible evidence boundaries and the maintained refresh queue distinguish a current working study from an implementation-pinned dossier that trails upstream.
+
+The editorial refresh queue is maintained in [`docs/editorial/publication-refresh-queue.md`](docs/editorial/publication-refresh-queue.md).
 
 The production contract is in [`docs/design/2026-08-21-reading-portal-design.md`](docs/design/2026-08-21-reading-portal-design.md).
 
