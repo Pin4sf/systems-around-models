@@ -8,26 +8,26 @@ summary: An agentic terminal coding product that places an interactive model loo
 primary_job: Help a developer inspect, change, and reason about a codebase from the terminal.
 teaching_question: What changes when a coding harness is a cohesive product rather than a loop library?
 coordination_shape: iterative-loop
-control_owner: The Claude Code product mediates the interactive coding loop and tool use.
-context_model: Repository context, instructions, conversation state, and tool results feed the run.
-state_model: Product-managed session continuity exists, while exact internal ownership is not fully public.
-authority_boundary: The product mediates terminal and repository actions under user-facing permissions.
-recovery_model: Session continuation is product-managed; exact crash semantics need a deeper public dossier.
-verification_model: Tests and repository inspection can provide evidence, but project acceptance remains external.
+control_owner: The public source establishes an agentic product surface, not its complete internal control loop.
+context_model: The documented surface accepts natural-language work and understands the user's codebase.
+state_model: Durable session state and its internal owner are not established by the current public source.
+authority_boundary: Exact tool binding and permission enforcement are not established by the current public source.
+recovery_model: Interruption and crash recovery semantics are not established by the current public source.
+verification_model: Git workflow support is documented, while project acceptance remains external.
 transferable_lesson: A frontier coding harness is an integrated product boundary, not merely a model-tool loop.
 deliberate_omissions:
   - It does not own the repository's definition of done or protected merge policy.
 topology_steps:
   - { stage: admit, label: Admit, ownership: owned, description: The product accepts an interactive coding request from the developer. }
   - { stage: assemble, label: Assemble, ownership: owned, description: The product builds model context from the conversation and codebase. }
-  - { stage: bind, label: Bind, ownership: owned, description: The product mediates the tools available for repository and terminal work. }
-  - { stage: run, label: Run, ownership: owned, description: The product coordinates model calls and tool results in an agentic loop. }
-  - { stage: recover, label: Recover, ownership: not-established, description: Session continuity is product-managed but complete crash semantics are not established here. }
+  - { stage: bind, label: Bind, ownership: not-established, description: Complete tool binding and permission enforcement are not established here. }
+  - { stage: run, label: Run, ownership: owned, description: The product executes coding tasks through its documented agentic surface. }
+  - { stage: recover, label: Recover, ownership: not-established, description: Session continuation and complete crash semantics are not established here. }
   - { stage: verify-close, label: Verify and close, ownership: external, description: Repository checks and human review remain final arbiters of completion. }
 lifecycle_trace:
   - { order: 1, label: Read task and repository, owner: Claude Code, outcome: Working context is assembled for the coding request. }
-  - { order: 2, label: Act through tools, owner: Claude Code, outcome: Repository or terminal observations re-enter the model loop. }
-  - { order: 3, label: Present result, owner: Claude Code, outcome: The developer receives a result to inspect and accept. }
+  - { order: 2, label: Execute coding task, owner: Claude Code, outcome: The product works against the codebase through its agentic surface. }
+  - { order: 3, label: Present result, owner: Claude Code plus developer, outcome: The developer receives a result to inspect and accept. }
 evidence_grade: FD
 evidence_fidelity: first-party-documented
 dossier_status: deep-dive-needed

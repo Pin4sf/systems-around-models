@@ -9,7 +9,7 @@
   "dossierStatus": "deep-dive-needed",
   "evidenceGrade": "FD",
   "evidenceFidelity": "first-party-documented",
-  "contentHash": "sha256-bc9822f2ba234272975e72247ae8de9cb80a915c6bdc94666bf4c317c1be4d5c",
+  "contentHash": "sha256-0e812f875052c921e242b88469ed6e3471e35d68905886038e58bfa16ca744f5",
   "sourceIds": [
     "source-architecture-claude-code"
   ],

@@ -164,6 +164,15 @@ test("@desktop print and reduced-motion modes preserve the guide without motion"
   expect(traceColor).toBe("rgb(0, 0, 0)");
 });
 
+test("@desktop print preserves architecture sources and expanded URLs", async ({ page }) => {
+  await page.goto(architecturesRoute);
+  await page.emulateMedia({ media: "print" });
+  const source = page.getByRole("link", { name: "Claude Code repository" });
+  await expect(source).toBeVisible();
+  const afterContent = await source.evaluate((element) => getComputedStyle(element, "::after").content);
+  expect(afterContent).toContain("github.com/anthropics/claude-code");
+});
+
 test("@mobile reader preserves one prose column and native navigation drawers", async ({
   page,
 }) => {

@@ -236,7 +236,7 @@ main {
 .topology-step--owned { border-top-color: var(--evidence); }
 .topology-step--delegated { border-top-color: var(--gold); }
 .topology-step--external { border-top-style: dashed; }
-.topology-step--not-established { border-top-style: dotted; opacity: .72; }
+.topology-step--not-established { border-top-style: dotted; }
 .topology-step strong, .topology-step span { display: block; }
 .topology-step strong { font-family: var(--font-interface), Arial, sans-serif; font-size: .8rem; }
 .topology-step__owner { margin: .35rem 0 .8rem; color: var(--ink-muted); font-family: var(--font-trace), monospace; font-size: .64rem; text-transform: uppercase; }
@@ -1178,6 +1178,21 @@ main {
     font-family: var(--font-trace), monospace;
     font-size: 0.72em;
     overflow-wrap: anywhere;
+  }
+
+  .architecture-reader a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-family: var(--font-trace), monospace;
+    font-size: .72em;
+    overflow-wrap: anywhere;
+  }
+
+  .architecture-band__lesson details > :not(summary) {
+    display: block !important;
+  }
+
+  .architecture-band__lesson details::details-content {
+    content-visibility: visible !important;
   }
 
   .system-trace,

@@ -32,7 +32,9 @@ export default async function ArchitecturesPage() {
   const content = await loadContent();
   const baseline = content.architectures.get("architecture-baseline-harness");
   const lesson = content.lessons.get("lesson-how-to-compare-agent-systems");
-  if (!baseline || !lesson) throw new Error("Missing public architecture baseline or comparison lesson");
+  if (!baseline || baseline.status !== "public" || !lesson || lesson.status !== "public") {
+    throw new Error("Missing public architecture baseline or comparison lesson");
+  }
   const records = [...content.architectures.values()]
     .filter((record) => record.status === "public" && record.recordKind === "system")
     .sort((left, right) => left.productClass.localeCompare(right.productClass) || left.name.localeCompare(right.name));

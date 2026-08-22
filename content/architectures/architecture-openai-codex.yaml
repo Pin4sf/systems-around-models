@@ -4,30 +4,30 @@ name: OpenAI Codex
 record_kind: system
 product_class: frontier-coding-harness
 status: public
-summary: An open-source terminal coding agent organized around a local workspace, model-driven actions, sandboxing, and user approval.
+summary: An open-source coding agent documented as running locally on the developer's computer.
 primary_job: Carry out coding work inside a developer-controlled local workspace.
 teaching_question: How can a coding loop make execution boundaries and approvals explicit?
 coordination_shape: iterative-loop
-control_owner: The Codex host loop coordinates model turns, tools, sandbox policy, and approvals.
-context_model: Instructions, repository state, conversation history, and tool observations form each turn.
-state_model: Sessions and repository changes preserve useful continuity across the coding task.
-authority_boundary: Sandbox and approval policy constrain which local actions the agent may perform.
-recovery_model: Session continuation is supported, while external side-effect reconciliation remains task-specific.
-verification_model: The agent can run checks and inspect diffs; human or repository policy owns acceptance.
+control_owner: The public README establishes a local coding agent, not its complete internal control loop.
+context_model: The documented surface places the coding agent on the developer's local computer.
+state_model: Session durability and its internal owner are not established by the current inspected path.
+authority_boundary: Sandbox, approval, and capability-binding semantics require a deeper source inspection.
+recovery_model: Session recovery and external-effect reconciliation require a deeper source inspection.
+verification_model: Project checks, review, and acceptance remain outside the documented repository summary.
 transferable_lesson: Execution safety becomes a first-class harness responsibility when the agent acts locally.
 deliberate_omissions:
   - Codex does not replace project-specific review, CI, protected merge, or product acceptance.
 topology_steps:
-  - { stage: admit, label: Admit, ownership: owned, description: The host accepts a task under configured sandbox and approval policy. }
-  - { stage: assemble, label: Assemble, ownership: owned, description: The host assembles instructions, conversation state, and repository context. }
-  - { stage: bind, label: Bind, ownership: owned, description: The host exposes bounded terminal and workspace capabilities. }
-  - { stage: run, label: Run, ownership: owned, description: The model and tools iterate against the local working directory. }
-  - { stage: recover, label: Recover, ownership: owned, description: Session state can continue work, subject to the persisted task context. }
-  - { stage: verify-close, label: Verify and close, ownership: delegated, description: Codex can gather checks while project policy and the developer decide closure. }
+  - { stage: admit, label: Admit, ownership: owned, description: The product accepts a coding request on the developer's computer. }
+  - { stage: assemble, label: Assemble, ownership: not-established, description: Complete context assembly is not established by the current inspected path. }
+  - { stage: bind, label: Bind, ownership: not-established, description: Tool binding, sandbox, and approval semantics need deeper source inspection. }
+  - { stage: run, label: Run, ownership: owned, description: The documented coding agent runs locally on the developer's computer. }
+  - { stage: recover, label: Recover, ownership: not-established, description: Session and effect recovery are not established by the current inspected path. }
+  - { stage: verify-close, label: Verify and close, ownership: external, description: Project checks, policy, and the developer decide closure. }
 lifecycle_trace:
-  - { order: 1, label: Enter governed workspace, owner: Codex host, outcome: The task receives an execution and approval boundary. }
-  - { order: 2, label: Iterate on code, owner: Codex loop, outcome: Tool observations and edits advance the task. }
-  - { order: 3, label: Check and hand back, owner: Codex plus developer, outcome: Evidence is presented for review and acceptance. }
+  - { order: 1, label: Receive local task, owner: Codex, outcome: A coding request enters the local agent surface. }
+  - { order: 2, label: Perform coding work, owner: Codex, outcome: The local coding agent advances the requested work. }
+  - { order: 3, label: Review outcome, owner: Developer, outcome: The result remains subject to project checks and acceptance. }
 evidence_grade: FD
 evidence_fidelity: working-profile
 dossier_status: deep-dive-needed

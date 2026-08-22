@@ -244,7 +244,7 @@
       "dossierStatus": "deep-dive-needed",
       "evidenceGrade": "FD",
       "evidenceFidelity": "first-party-documented",
-      "contentHash": "sha256-bc9822f2ba234272975e72247ae8de9cb80a915c6bdc94666bf4c317c1be4d5c",
+      "contentHash": "sha256-0e812f875052c921e242b88469ed6e3471e35d68905886038e58bfa16ca744f5",
       "sourceIds": [
         "source-architecture-claude-code"
       ],
@@ -362,7 +362,7 @@
       "dossierStatus": "deep-dive-needed",
       "evidenceGrade": "FD",
       "evidenceFidelity": "working-profile",
-      "contentHash": "sha256-1dd2711587812b3db85c51138a25da9a3b3f9d0caf1218a42c4927d29a696ba0",
+      "contentHash": "sha256-5181a1e659e8303c217576e6045fd7e5b4d001d2bb708cb38345702e0cbca810",
       "sourceIds": [
         "source-architecture-openai-codex"
       ],
@@ -420,5 +420,5 @@
       }
     }
   ],
-  "buildId": "sha256-24f67d074d26196a23228df7aac079d10b6bc8cd36355afb5b9baf085054466e"
+  "buildId": "sha256-927f743ca44799233788898f66477ac62fbe3c015d3d463fe09ac1b94e8df505"
 }

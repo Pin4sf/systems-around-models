@@ -9,6 +9,7 @@ describe("architecture study registry", () => {
 
     expect(architectures.get("architecture-baseline-harness")).toMatchObject({
       recordKind: "synthetic-baseline",
+      status: "public",
       evidenceGrade: undefined,
     });
     expect(publicSystems.map((record) => record.name)).toEqual(

@@ -36,7 +36,9 @@ it("does not assign an unknown recovery path to an unnamed delegate", async () =
   for (const slug of ["claude-code", "gemini-cli", "openhands"]) {
     const profile = document.querySelector(`#system-${slug}`);
     expect(profile).not.toBeNull();
-    expect(within(profile as HTMLElement).getByText("not established", { selector: ".topology-step__owner" })).toBeInTheDocument();
+    const recovery = [...(profile as HTMLElement).querySelectorAll(".topology-step")]
+      .find((step) => step.querySelector("strong")?.textContent === "Recover");
+    expect(recovery).toHaveTextContent("not established");
   }
 });
 
