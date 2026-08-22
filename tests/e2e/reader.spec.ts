@@ -2,6 +2,7 @@ import { expect, test } from "@playwright/test";
 
 const route = "/fieldbook/the-model-is-not-the-agent";
 const guideRoute = "/fieldbook/harness-engineering-study-guide";
+const memoryGuideRoute = "/fieldbook/memory-engineering-study-guide";
 
 test("@desktop homepage leads to a complete readable Harness Engineering guide", async ({ page }) => {
   await page.goto("/");
@@ -13,6 +14,21 @@ test("@desktop homepage leads to a complete readable Harness Engineering guide",
   await expect(page.getByText(/Complete short course/)).toBeVisible();
   await expect(page.getByRole("heading", { name: "7. Learn by building and breaking" })).toBeVisible();
   await expect(page.getByRole("group", { name: /evidence/i })).toHaveCount(0);
+});
+
+test("@desktop homepage exposes the released Memory companion without a card grid", async ({ page }) => {
+  await page.goto("/");
+  await expect(
+    page.getByRole("heading", { name: "Memory Engineering: a practical companion guide" }),
+  ).toBeVisible();
+  await expect(page.getByRole("link", { name: "Read the Memory guide" })).toHaveAttribute(
+    "href",
+    memoryGuideRoute,
+  );
+  await expect(page.getByRole("link", { name: "Memory guide", exact: true })).toHaveAttribute(
+    "href",
+    memoryGuideRoute,
+  );
 });
 
 test("@desktop reader exposes a simple chapter and ordinary study navigation", async ({
@@ -92,12 +108,15 @@ test("@desktop discovery endpoints expose only released publication routes", asy
   const rss = await rssResponse.text();
 
   expect(sitemapResponse.ok()).toBe(true);
-  expect(sitemap.match(/<url>/g)).toHaveLength(3);
+  expect(sitemap.match(/<url>/g)).toHaveLength(4);
   expect(sitemap).toContain(guideRoute);
   expect(sitemap).toContain(route);
+  expect(sitemap).toContain(memoryGuideRoute);
   expect(robots).toContain("Sitemap:");
   expect(rssResponse.headers()["content-type"]).toContain("application/rss+xml");
   expect(rss).toContain("The Model Is Not the Agent");
+  expect(rss).toContain("Memory Engineering: A Practical Study Guide");
+  expect(rss).toContain("revision-memory-engineering-study-guide-001");
   expect(rss).toContain("revision-fieldbook-essay-001");
 });
 
@@ -139,6 +158,19 @@ test("@mobile reader preserves one prose column and native navigation drawers", 
   expect(proseFitsViewport).toBe(true);
 });
 
+test("@mobile Memory reader preserves one prose column and truthful guide navigation", async ({ page }) => {
+  await page.goto(memoryGuideRoute);
+  await expect(
+    page.getByRole("heading", { name: "Memory Engineering: A Practical Study Guide" }),
+  ).toBeVisible();
+  await expect(page.getByRole("button", { name: "Open chapters" })).toBeVisible();
+  const gridColumnCount = await page.locator(".article-reader").evaluate((element) =>
+    getComputedStyle(element).gridTemplateColumns.split(" ").length,
+  );
+  expect(gridColumnCount).toBe(1);
+  await expect(page.getByText(/Chapter 1 of 40|H0→H9 progression/)).toHaveCount(0);
+});
+
 test("@nojs reader keeps the lesson, sources, and ordinary navigation visible", async ({ page }) => {
   await page.goto(guideRoute);
   await expect(
@@ -160,4 +192,17 @@ test("@nojs reader keeps the lesson, sources, and ordinary navigation visible", 
     page.getByRole("link", { name: "Previous: Course overview" }),
   ).toBeVisible();
   await expect(page.getByRole("link", { name: "Next: The Model Is Not the Agent" })).toBeVisible();
+});
+
+test("@nojs Memory reader keeps the complete lesson, sources, and correction path visible", async ({
+  page,
+}) => {
+  await page.goto(memoryGuideRoute);
+  await expect(
+    page.getByRole("heading", { name: "Memory Engineering: A Practical Study Guide" }),
+  ).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Sources and next reading" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "MemGPT" }).first()).toBeVisible();
+  await expect(page.getByRole("link", { name: "Suggest a correction" })).toBeVisible();
+  await expect(page.getByText(/Chapter 1 of 40|H0→H9 progression/)).toHaveCount(0);
 });

@@ -12,7 +12,8 @@ export function PublicationShell({ children }: { children: ReactNode }) {
           Systems Around Models
         </Link>
         <nav aria-label="Publication">
-          <Link href="/fieldbook/harness-engineering-study-guide">Study guide</Link>
+          <Link href="/fieldbook/harness-engineering-study-guide">Harness guide</Link>
+          <Link href="/fieldbook/memory-engineering-study-guide">Memory guide</Link>
           <Link href="/#chapters">Curriculum</Link>
           <Link href="/fieldbook/the-model-is-not-the-agent">First chapter</Link>
         </nav>

@@ -14,9 +14,13 @@ it("presents a simple study-guide navigation", () => {
     screen.getByRole("navigation", { name: "Publication" }),
   ).toBeInTheDocument();
   expect(screen.queryByText(/Waldo/i)).not.toBeInTheDocument();
-  expect(screen.getByRole("link", { name: "Study guide" })).toHaveAttribute(
+  expect(screen.getByRole("link", { name: "Harness guide" })).toHaveAttribute(
     "href",
     "/fieldbook/harness-engineering-study-guide",
+  );
+  expect(screen.getByRole("link", { name: "Memory guide" })).toHaveAttribute(
+    "href",
+    "/fieldbook/memory-engineering-study-guide",
   );
   expect(screen.getByRole("link", { name: "Curriculum" })).toHaveAttribute("href", "/#chapters");
   expect(screen.getByRole("link", { name: "First chapter" })).toHaveAttribute(
@@ -24,6 +28,19 @@ it("presents a simple study-guide navigation", () => {
     "/fieldbook/the-model-is-not-the-agent",
   );
   expect(screen.queryByText(/forthcoming/i)).not.toBeInTheDocument();
+});
+
+it("offers the released Memory companion as ordinary reading", () => {
+  render(<HomePage />);
+
+  expect(
+    screen.getByRole("heading", { name: "Memory Engineering: a practical companion guide" }),
+  ).toBeInTheDocument();
+  expect(screen.getByRole("link", { name: "Read the Memory guide" })).toHaveAttribute(
+    "href",
+    "/fieldbook/memory-engineering-study-guide",
+  );
+  expect(screen.queryByText(/evidence badge|revision panel|source drawer/i)).not.toBeInTheDocument();
 });
 
 it("leads readers into a complete harness-engineering course map", () => {

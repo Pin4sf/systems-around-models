@@ -67,6 +67,46 @@
         "source-langchain-anatomy-agent-harness": "2026-08-22",
         "source-humanlayer-12-factor-agents": "2026-08-22"
       }
+    },
+    {
+      "id": "revision-memory-engineering-study-guide-001",
+      "essaySlug": "memory-engineering-study-guide",
+      "revision": 1,
+      "publishedAt": "2026-08-22",
+      "substantivelyRevisedAt": "2026-08-22",
+      "summary": "Initial public edition of the complete short Memory Engineering study guide.",
+      "affectedClaimIds": [
+        "claim-memory-authority-non-amplification",
+        "claim-memory-canonical-projections",
+        "claim-memory-forgetting-contracts",
+        "claim-memory-lifecycle-evaluation",
+        "claim-memory-lifecycle-not-storage",
+        "claim-memory-prospective-eligibility"
+      ],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-d2210855bfd51d823275454d8a625f9e4cd2e20973db9b5fc7f66f67f598c050",
+      "sourceIds": [
+        "source-memory-anthropic-context-engineering",
+        "source-memory-karpathy-llm-wiki",
+        "source-memory-locomo",
+        "source-memory-longmemeval",
+        "source-memory-memgpt",
+        "source-memory-memoryagentbench",
+        "source-memory-nist-agent-hijacking-evaluations",
+        "source-memory-owasp-memory-attack-surface",
+        "source-memory-pm-bench"
+      ],
+      "sourceValidationDates": {
+        "source-memory-memgpt": "2026-08-22",
+        "source-memory-anthropic-context-engineering": "2026-08-22",
+        "source-memory-karpathy-llm-wiki": "2026-08-22",
+        "source-memory-locomo": "2026-08-22",
+        "source-memory-longmemeval": "2026-08-22",
+        "source-memory-memoryagentbench": "2026-08-22",
+        "source-memory-pm-bench": "2026-08-22",
+        "source-memory-owasp-memory-attack-surface": "2026-08-22",
+        "source-memory-nist-agent-hijacking-evaluations": "2026-08-22"
+      }
     }
   ],
   "sources": [
@@ -91,6 +131,42 @@
       "lastValidated": "2026-08-22"
     },
     {
+      "id": "source-memory-anthropic-context-engineering",
+      "lastValidated": "2026-08-22"
+    },
+    {
+      "id": "source-memory-karpathy-llm-wiki",
+      "lastValidated": "2026-08-22"
+    },
+    {
+      "id": "source-memory-locomo",
+      "lastValidated": "2026-08-22"
+    },
+    {
+      "id": "source-memory-longmemeval",
+      "lastValidated": "2026-08-22"
+    },
+    {
+      "id": "source-memory-memgpt",
+      "lastValidated": "2026-08-22"
+    },
+    {
+      "id": "source-memory-memoryagentbench",
+      "lastValidated": "2026-08-22"
+    },
+    {
+      "id": "source-memory-nist-agent-hijacking-evaluations",
+      "lastValidated": "2026-08-22"
+    },
+    {
+      "id": "source-memory-owasp-memory-attack-surface",
+      "lastValidated": "2026-08-22"
+    },
+    {
+      "id": "source-memory-pm-bench",
+      "lastValidated": "2026-08-22"
+    },
+    {
       "id": "source-rasa-why-agents-fail",
       "lastValidated": "2026-08-22"
     },
@@ -103,5 +179,5 @@
       "lastValidated": "2026-08-22"
     }
   ],
-  "buildId": "sha256-db38fb331bdf099bedf35421bf53aa834232dcf2df30c6cb517ecf286ff9d9b2"
+  "buildId": "sha256-16bf093980db985e95efc2e614b64673e9f9b2075114a43d0d483eb4ca6f7daa"
 }
