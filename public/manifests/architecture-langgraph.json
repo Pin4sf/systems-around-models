@@ -7,6 +7,8 @@
   "lastReviewed": "2026-08-22",
   "inspectedVersion": "f09cfe8ffc1eeffd68f4b628ed69c30f7cad229f",
   "dossierStatus": "refresh-needed",
+  "evidenceGrade": "FD",
+  "evidenceFidelity": "working-profile",
   "contentHash": "sha256-66e11edd49fcd2e57f1bfe35ad82b38ceb5ad5376f10a4d1f103238eededaeb5",
   "sourceIds": [
     "source-architecture-langgraph",

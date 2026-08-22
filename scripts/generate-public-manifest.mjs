@@ -100,6 +100,8 @@ export async function generatePublicManifest(root = process.cwd()) {
       lastReviewed: metadata.last_reviewed,
       inspectedVersion: metadata.inspected_version,
       dossierStatus: metadata.dossier_status,
+      evidenceGrade: metadata.evidence_grade,
+      evidenceFidelity: metadata.evidence_fidelity,
       contentHash: sha256(source),
       sourceIds: [...metadata.source_ids].sort(),
       sourceValidationDates: sourceValidationDates(metadata.source_ids),

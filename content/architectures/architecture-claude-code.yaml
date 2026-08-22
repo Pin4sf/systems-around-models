@@ -22,7 +22,7 @@ topology_steps:
   - { stage: assemble, label: Assemble, ownership: owned, description: The product builds model context from the conversation and codebase. }
   - { stage: bind, label: Bind, ownership: owned, description: The product mediates the tools available for repository and terminal work. }
   - { stage: run, label: Run, ownership: owned, description: The product coordinates model calls and tool results in an agentic loop. }
-  - { stage: recover, label: Recover, ownership: delegated, description: Session continuity is product-managed but complete crash semantics are not established here. }
+  - { stage: recover, label: Recover, ownership: not-established, description: Session continuity is product-managed but complete crash semantics are not established here. }
   - { stage: verify-close, label: Verify and close, ownership: external, description: Repository checks and human review remain final arbiters of completion. }
 lifecycle_trace:
   - { order: 1, label: Read task and repository, owner: Claude Code, outcome: Working context is assembled for the coding request. }

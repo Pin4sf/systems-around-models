@@ -4,6 +4,7 @@ import { ArchitectureGallery } from "@/components/architectures/architecture-gal
 import { NormalizedTopology } from "@/components/architectures/normalized-topology";
 import { loadContent } from "@/lib/content/load-content";
 import { canonicalUrl } from "@/lib/publication/site-url";
+import { createCorrectionUrl } from "@/components/article/evidence-badge";
 
 export const metadata: Metadata = {
   title: "The Big Agent Harness Architecture Comparison",
@@ -35,6 +36,12 @@ export default async function ArchitecturesPage() {
   const records = [...content.architectures.values()]
     .filter((record) => record.status === "public" && record.recordKind === "system")
     .sort((left, right) => left.productClass.localeCompare(right.productClass) || left.name.localeCompare(right.name));
+  const correctionUrl = createCorrectionUrl({
+    route: "/architectures",
+    revisionId: `${lesson.id}@${lesson.revision}`,
+    sectionAnchor: "method-title",
+    claimId: "architecture-comparison",
+  });
 
   return (
     <article className="architecture-reader">
@@ -96,7 +103,7 @@ export default async function ArchitecturesPage() {
         <h2 id="method-title">Boundaries before features</h2>
         <p>{lesson.problem} {lesson.mechanism} {lesson.failureBoundary}</p>
         <p>The first edition favors major, instructive systems with official public sources. Profiles marked “deep dive needed” are useful working maps, not final dossiers; their open questions are preserved inside each profile.</p>
-        <p><a href="mailto:corrections@systemsaroundmodels.com?subject=Architecture%20comparison%20correction">Report a correction</a></p>
+        <p><a href={correctionUrl}>Suggest a correction</a></p>
       </section>
     </article>
   );

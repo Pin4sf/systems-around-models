@@ -22,7 +22,7 @@ topology_steps:
   - { stage: assemble, label: Assemble, ownership: owned, description: Task and runtime events become model-visible context. }
   - { stage: bind, label: Bind, ownership: owned, description: The runtime exposes development tools through the contained workspace. }
   - { stage: run, label: Run, ownership: owned, description: Agent decisions and environment actions advance through the controller. }
-  - { stage: recover, label: Recover, ownership: delegated, description: Deployment and runtime configuration determine durable recovery guarantees. }
+  - { stage: recover, label: Recover, ownership: not-established, description: Deployment and runtime configuration determine durable recovery guarantees. }
   - { stage: verify-close, label: Verify and close, ownership: external, description: Tests may run inside the workspace while acceptance remains project-owned. }
 lifecycle_trace:
   - { order: 1, label: Create workspace, owner: OpenHands platform, outcome: The task receives an execution environment. }

@@ -24,7 +24,7 @@ export function ArchitectureGallery({
             <h3>{record.name}</h3>
             <p>{record.primaryJob}</p>
             <p className="architecture-band__version interface-text">
-              Inspected {record.inspectedVersion.slice(0, 12)} · {record.dossierStatus.replaceAll("-", " ")}
+              Inspected {record.inspectedVersion.slice(0, 12)} · {record.evidenceGrade} · {record.dossierStatus.replaceAll("-", " ")}
             </p>
           </header>
 
@@ -64,6 +64,7 @@ export function ArchitectureGallery({
                 })}
               </ul>
               <p>{record.unknowns.join(" ")}</p>
+              <p className="interface-text">Evidence: {record.evidenceGrade} · {record.evidenceFidelity.replaceAll("-", " ")}</p>
             </details>
           </footer>
         </article>

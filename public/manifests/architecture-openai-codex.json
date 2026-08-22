@@ -7,6 +7,8 @@
   "lastReviewed": "2026-08-22",
   "inspectedVersion": "343074d4207d572809bd8cea15f4be1d09d98e0b",
   "dossierStatus": "deep-dive-needed",
+  "evidenceGrade": "FD",
+  "evidenceFidelity": "working-profile",
   "contentHash": "sha256-1dd2711587812b3db85c51138a25da9a3b3f9d0caf1218a42c4927d29a696ba0",
   "sourceIds": [
     "source-architecture-openai-codex"

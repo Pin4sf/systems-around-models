@@ -7,6 +7,8 @@
   "lastReviewed": "2026-08-22",
   "inspectedVersion": "87fd37aab68c7bdd0d66fe63751553756f6af3e5",
   "dossierStatus": "refresh-needed",
+  "evidenceGrade": "FD",
+  "evidenceFidelity": "working-profile",
   "contentHash": "sha256-8ecac016567479c1b644818c4af62fba268091e9365ef7bc0228e15120c4f7ae",
   "sourceIds": [
     "source-architecture-letta",

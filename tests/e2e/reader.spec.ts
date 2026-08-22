@@ -253,5 +253,8 @@ test("@nojs architecture profiles preserve native disclosure and ordinary source
   const disclosure = page.getByText("Trace, sources, and current unknowns").first();
   await disclosure.click();
   await expect(page.getByRole("link", { name: "Claude Code repository" })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Report a correction" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Suggest a correction" })).toHaveAttribute(
+    "href",
+    /github\.com\/Pin4sf\/systems-around-models\/issues\/new/,
+  );
 });

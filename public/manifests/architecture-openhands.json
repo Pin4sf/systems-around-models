@@ -7,7 +7,9 @@
   "lastReviewed": "2026-08-22",
   "inspectedVersion": "4bf8dd3aaf1217916b2ce8a6f9168fa7633a26f8",
   "dossierStatus": "refresh-needed",
-  "contentHash": "sha256-e141a1781b88c9cc18cc059f29e63a2f8d2592ea82a2f93ec45ea810cb833d4d",
+  "evidenceGrade": "FD",
+  "evidenceFidelity": "working-profile",
+  "contentHash": "sha256-3e40a8fe4b08c255708e0d4f4730dda7d846c4c3172251b5200fccc74292b50b",
   "sourceIds": [
     "source-architecture-openhands"
   ],

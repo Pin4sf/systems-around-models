@@ -7,7 +7,9 @@
   "lastReviewed": "2026-08-22",
   "inspectedVersion": "5411f113cafae26161b4969b0237b8e1e024e2c2",
   "dossierStatus": "deep-dive-needed",
-  "contentHash": "sha256-72713964cca91080d038d49a195269ba83eec7f5b98915718e8ff8341afcc688",
+  "evidenceGrade": "FD",
+  "evidenceFidelity": "working-profile",
+  "contentHash": "sha256-78facc8793ed056ab81b82670482b65f98b559ef9b7ed138c476b9763f5a6d55",
   "sourceIds": [
     "source-architecture-gemini-cli"
   ],

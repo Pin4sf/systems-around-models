@@ -14,6 +14,7 @@ export function ArchitectureComparison({ records }: { records: ArchitectureRecor
             <th scope="col">Authority</th>
             <th scope="col">Recovery</th>
             <th scope="col">Verification</th>
+            <th scope="col">Deliberate omission</th>
           </tr>
         </thead>
         <tbody>
@@ -30,6 +31,7 @@ export function ArchitectureComparison({ records }: { records: ArchitectureRecor
               <td>{record.authorityBoundary}</td>
               <td>{record.recoveryModel}</td>
               <td>{record.verificationModel}</td>
+              <td>{record.deliberateOmissions.join(" ")}</td>
             </tr>
           ))}
         </tbody>

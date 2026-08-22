@@ -101,6 +101,8 @@ describe("deterministic public build manifest", () => {
         id: "architecture-openai-codex",
         slug: "openai-codex",
         revision: 1,
+        evidenceGrade: "FD",
+        evidenceFidelity: "working-profile",
         sourceIds: ["source-architecture-openai-codex"],
         contentHash: expect.stringMatching(/^sha256-[a-f0-9]{64}$/),
       }),

@@ -22,7 +22,7 @@ topology_steps:
   - { stage: assemble, label: Assemble, ownership: owned, description: Project context and conversation are compiled for the model. }
   - { stage: bind, label: Bind, ownership: owned, description: Built-in and configured extension tools form the capability surface. }
   - { stage: run, label: Run, ownership: owned, description: The CLI iterates model responses and tool results. }
-  - { stage: recover, label: Recover, ownership: delegated, description: Session continuity exists but complete interruption recovery needs deeper verification. }
+  - { stage: recover, label: Recover, ownership: not-established, description: Session continuity exists but complete interruption recovery needs deeper verification. }
   - { stage: verify-close, label: Verify and close, ownership: external, description: Project checks and human review remain outside universal CLI closure. }
 lifecycle_trace:
   - { order: 1, label: Load project context, owner: Gemini CLI, outcome: A project-scoped request is assembled. }

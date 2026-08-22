@@ -21,12 +21,23 @@ it("renders one semantic comparison and gallery from the public cohort", async (
   expect(within(table).getByText("OpenAI Codex")).toBeInTheDocument();
   expect(within(table).getByText("Letta")).toBeInTheDocument();
   expect(within(table).getByText("Graphiti")).toBeInTheDocument();
+  expect(within(table).getByRole("columnheader", { name: "Deliberate omission" })).toBeInTheDocument();
   expect(document.querySelectorAll("article[id^='system-']")).toHaveLength(8);
   expect(screen.getByRole("link", { name: "OpenAI Codex profile" })).toHaveAttribute(
     "href",
     "#system-openai-codex",
   );
   expect(screen.queryByText(/rank|winner|score/i)).not.toBeInTheDocument();
+});
+
+it("does not assign an unknown recovery path to an unnamed delegate", async () => {
+  render(await ArchitecturesPage());
+
+  for (const slug of ["claude-code", "gemini-cli", "openhands"]) {
+    const profile = document.querySelector(`#system-${slug}`);
+    expect(profile).not.toBeNull();
+    expect(within(profile as HTMLElement).getByText("not established", { selector: ".topology-step__owner" })).toBeInTheDocument();
+  }
 });
 
 it("keeps research machinery quiet while preserving visible limits", async () => {
