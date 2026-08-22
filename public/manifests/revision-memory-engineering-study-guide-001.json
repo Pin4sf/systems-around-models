@@ -8,7 +8,10 @@
   "affectedClaimIds": [
     "claim-memory-authority-non-amplification",
     "claim-memory-canonical-projections",
+    "claim-memory-capture-not-belief",
+    "claim-memory-decision-scoped-retrieval",
     "claim-memory-forgetting-contracts",
+    "claim-memory-function-before-database",
     "claim-memory-lifecycle-evaluation",
     "claim-memory-lifecycle-not-storage",
     "claim-memory-prospective-eligibility"

@@ -1,0 +1,11 @@
+id: claim-memory-function-before-database
+statement: Memory function, query shape, and held-out failures should determine whether a system needs files, records, indexes, or more structure; builders should begin with canonical records and deterministic retrieval.
+label: proposed
+scope: Memory Engineering study guide
+source_ids:
+  - source-memory-memgpt
+  - source-memory-anthropic-context-engineering
+falsifiers:
+  - A design that chooses storage before defining the decision, query, and failure shape consistently produces better governable memory systems across comparable tasks.
+last_reviewed: 2026-08-22
+revision: 1

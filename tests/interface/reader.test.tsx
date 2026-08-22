@@ -98,6 +98,13 @@ describe("flagship fieldbook reader", () => {
     expect(
       screen.getByRole("navigation", { name: "Memory Engineering guide" }),
     ).toBeInTheDocument();
+    const sequenceNavigation = screen.getByRole("navigation", {
+      name: "Memory Engineering guide",
+    });
+    expect(
+      within(sequenceNavigation).getByRole("link", { name: "Memory guide overview" }),
+    ).toHaveAttribute("href", "/#memory-guide-title");
+    expect(screen.getByRole("button", { name: "Open Memory guide" })).toBeInTheDocument();
     const article = screen.getByRole("article");
     expect(
       within(article)

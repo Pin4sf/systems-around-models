@@ -163,7 +163,11 @@ test("@mobile Memory reader preserves one prose column and truthful guide naviga
   await expect(
     page.getByRole("heading", { name: "Memory Engineering: A Practical Study Guide" }),
   ).toBeVisible();
-  await expect(page.getByRole("button", { name: "Open chapters" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Open Memory guide" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Memory guide overview" }).first()).toHaveAttribute(
+    "href",
+    "/#memory-guide-title",
+  );
   const gridColumnCount = await page.locator(".article-reader").evaluate((element) =>
     getComputedStyle(element).gridTemplateColumns.split(" ").length,
   );

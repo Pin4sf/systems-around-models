@@ -13,15 +13,17 @@
 > correction path. The primary release now includes a complete short Harness
 > Engineering guide, with detailed chapters as optional deeper reading.
 >
-> For the 2026-08-22 Harness study-guide release, this amendment also
+> **Superseded — 2026-08-22 Harness-only study-guide release:** This amendment
+> formerly also
 > supersedes the earlier first-release product clauses in Sections 1, 2, 5,
 > 15, and 16 that require a Fieldbook identity, a simultaneous Memory track,
 > visible claim inspection, evidence drawers, revision panels, or explicit
-> evidence-badge acceptance. Memory Engineering and gallery work remain future
-> projects. The current acceptance contract is: a complete Harness short
+> evidence-badge acceptance. Its historical acceptance contract was: a complete Harness short
 > course; truthful curriculum and detailed-chapter status; ordinary public
 > sources with complete backstage manifests; one quiet article-level correction
-> path; and responsive, static, private-corpus-independent reading.
+> path; and responsive, static, private-corpus-independent reading. The later
+> “one complete Memory guide, same simple reader” amendment supersedes the
+> Harness-only scope and releases the complete Memory Engineering short guide.
 
 ## 1. Product decision
 

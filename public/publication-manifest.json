@@ -78,7 +78,10 @@
       "affectedClaimIds": [
         "claim-memory-authority-non-amplification",
         "claim-memory-canonical-projections",
+        "claim-memory-capture-not-belief",
+        "claim-memory-decision-scoped-retrieval",
         "claim-memory-forgetting-contracts",
+        "claim-memory-function-before-database",
         "claim-memory-lifecycle-evaluation",
         "claim-memory-lifecycle-not-storage",
         "claim-memory-prospective-eligibility"
@@ -179,5 +182,5 @@
       "lastValidated": "2026-08-22"
     }
   ],
-  "buildId": "sha256-16bf093980db985e95efc2e614b64673e9f9b2075114a43d0d483eb4ca6f7daa"
+  "buildId": "sha256-082cc57a3efd26f816a8068e92aa35fda2982fa7c1143b3d7a0922484ff5e35c"
 }
