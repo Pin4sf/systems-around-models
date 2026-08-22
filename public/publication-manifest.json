@@ -3,6 +3,25 @@
   "validationSchemaVersion": "publication-v2",
   "revisions": [
     {
+      "id": "revision-developer-product-harnesses-001",
+      "essaySlug": "developer-and-product-runtime-harnesses",
+      "revision": 1,
+      "publishedAt": "2026-08-22",
+      "substantivelyRevisedAt": "2026-08-22",
+      "summary": "Initial public revision of the developer and product runtime harness handoff chapter.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-336c95104da7aab454aaf4f605300c1345d70c2485d422ef5390bf852f853881",
+      "sourceIds": [
+        "source-anthropic-effective-long-running-harnesses",
+        "source-harness-engineering-fieldbook-v1"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-anthropic-effective-long-running-harnesses": "2026-08-22"
+      }
+    },
+    {
       "id": "revision-fieldbook-essay-001",
       "essaySlug": "the-model-is-not-the-agent",
       "revision": 1,
@@ -18,7 +37,7 @@
         "claim-system-trace-responsibility-checklist"
       ],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-d41e5dc591e0a52e02fa6ed87d1f8e32a308b4a452af4568c312dc9d2570d746",
+      "contentHash": "sha256-b0691c0e89908884ef39f95309522dbeda5e95fb00aa2ac97cf48d075745d3bb",
       "sourceIds": [
         "source-earendil-what-is-a-harness",
         "source-harness-engineering-fieldbook-v1"
@@ -26,6 +45,42 @@
       "sourceValidationDates": {
         "source-earendil-what-is-a-harness": "2026-08-21",
         "source-harness-engineering-fieldbook-v1": "2026-08-21"
+      }
+    },
+    {
+      "id": "revision-four-surface-classes-001",
+      "essaySlug": "four-surface-classes",
+      "revision": 1,
+      "publishedAt": "2026-08-22",
+      "substantivelyRevisedAt": "2026-08-22",
+      "summary": "Initial public revision of the four harness authority surface classes.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-8eb9fc97791bbcbfa907b2e9da0976c31aa07bac0288471a9a39b3231482713b",
+      "sourceIds": [
+        "source-harness-engineering-fieldbook-v1"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21"
+      }
+    },
+    {
+      "id": "revision-h0-to-h9-progression-001",
+      "essaySlug": "the-h0-to-h9-progression",
+      "revision": 1,
+      "publishedAt": "2026-08-22",
+      "substantivelyRevisedAt": "2026-08-22",
+      "summary": "Initial public revision of the H0 to H9 diagnostic progression chapter.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-96812ad90879231c9c974215916a18e11da4ac5dd118d4ca2afa8dab996b94db",
+      "sourceIds": [
+        "source-harness-engineering-fieldbook-v1",
+        "source-rasa-why-agents-fail"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-rasa-why-agents-fail": "2026-08-22"
       }
     },
     {
@@ -110,6 +165,25 @@
         "source-memory-owasp-memory-attack-surface": "2026-08-22",
         "source-memory-nist-agent-hijacking-evaluations": "2026-08-22"
       }
+    },
+    {
+      "id": "revision-twelve-failure-classes-001",
+      "essaySlug": "twelve-recurring-failure-classes",
+      "revision": 1,
+      "publishedAt": "2026-08-22",
+      "substantivelyRevisedAt": "2026-08-22",
+      "summary": "Initial public revision of the twelve recurring harness failure classes.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-48b7ece1f34412e55adc080652fd1c295efa22d59d4b3c2e9611d52cdc21bf68",
+      "sourceIds": [
+        "source-harness-engineering-fieldbook-v1",
+        "source-rasa-why-agents-fail"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-rasa-why-agents-fail": "2026-08-22"
+      }
     }
   ],
   "sources": [
@@ -120,6 +194,14 @@
     {
       "id": "source-architecture-claude-code",
       "lastValidated": "2026-08-22"
+    },
+    {
+      "id": "source-architecture-cordis",
+      "lastValidated": "2026-08-16"
+    },
+    {
+      "id": "source-architecture-deepseek-harness",
+      "lastValidated": "2026-08-16"
     },
     {
       "id": "source-architecture-gemini-cli",
@@ -250,6 +332,27 @@
       ],
       "sourceValidationDates": {
         "source-architecture-claude-code": "2026-08-22"
+      }
+    },
+    {
+      "id": "architecture-deepseek-harness",
+      "slug": "deepseek-harness-cordis",
+      "recordKind": "system",
+      "productClass": "frontier-coding-harness",
+      "revision": 1,
+      "lastReviewed": "2026-08-22",
+      "inspectedVersion": "47f943859bef60e4160492346772ded9b24f765a",
+      "dossierStatus": "refresh-needed",
+      "evidenceGrade": "IP",
+      "evidenceFidelity": "implementation-pinned",
+      "contentHash": "sha256-dd56214692f1a942e986cf2fe887c735254a751a4fd9cdab727a45c9894e9b28",
+      "sourceIds": [
+        "source-architecture-cordis",
+        "source-architecture-deepseek-harness"
+      ],
+      "sourceValidationDates": {
+        "source-architecture-deepseek-harness": "2026-08-16",
+        "source-architecture-cordis": "2026-08-16"
       }
     },
     {
@@ -420,5 +523,5 @@
       }
     }
   ],
-  "buildId": "sha256-927f743ca44799233788898f66477ac62fbe3c015d3d463fe09ac1b94e8df505"
+  "buildId": "sha256-557fb9f0e362ee7df5d72d56e3c95adc3c63c630d8a2c4fc1f61e8547e70e8cc"
 }

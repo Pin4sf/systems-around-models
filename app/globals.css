@@ -269,6 +269,49 @@ main {
 .architecture-band__trace p { margin: .5rem 0 0; }
 .architecture-method { padding: clamp(2rem, 5vw, 4rem); border-left: .3rem solid var(--gold); background: var(--paper-deep); }
 
+.architecture-band__study-link { color: var(--evidence); font-size: .78rem; font-weight: 750; letter-spacing: .04em; text-transform: uppercase; }
+
+.architecture-study { display: grid; gap: clamp(4rem, 9vw, 7rem); max-width: 82rem; margin-inline: auto; padding-bottom: 4rem; }
+.architecture-study__hero { max-width: 76rem; padding-top: clamp(1rem, 4vw, 4rem); }
+.architecture-study__hero h1 { max-width: 14ch; margin: 0; font-size: clamp(3.4rem, 8vw, 7.2rem); font-weight: 600; letter-spacing: -.055em; line-height: .94; }
+.architecture-study__deck { max-width: 56ch; margin: 2rem 0 0; color: var(--ink-muted); font-size: clamp(1.25rem, 1.05rem + .8vw, 1.75rem); line-height: 1.45; }
+.architecture-study__pin { margin: 1.5rem 0 0; overflow-wrap: anywhere; color: var(--ink-muted); font-size: .7rem; letter-spacing: .04em; text-transform: uppercase; }
+.architecture-study__boundary { max-width: 70ch; margin: 2rem 0 0; padding: 1.25rem 1.5rem; border-left: .25rem solid var(--evidence); background: var(--evidence-wash); font-size: .92rem; }
+.architecture-study__refresh { max-width: 76ch; margin: 1rem 0 0; color: var(--correction); font-size: .72rem; font-weight: 700; }
+.architecture-study__section { scroll-margin-top: 2rem; }
+.architecture-study__section h2 { max-width: 17ch; margin: 0 0 1.5rem; font-size: clamp(2.25rem, 5vw, 4.3rem); font-weight: 600; letter-spacing: -.045em; line-height: 1; }
+.architecture-study__section--topology { padding: clamp(2rem, 5vw, 4rem); border-block: 1px solid var(--rule); background: var(--paper-deep); }
+.architecture-study__mechanisms { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; padding: 1px; background: var(--rule); }
+.architecture-study__mechanisms article { padding: clamp(1.25rem, 3vw, 2rem); background: var(--paper); }
+.architecture-study__mechanisms span { color: var(--ink-muted); font-size: .7rem; }
+.architecture-study__mechanisms h3 { margin: 1.5rem 0 .75rem; font-size: 1.35rem; line-height: 1.2; }
+.architecture-study__mechanisms p { margin: 0; color: var(--ink-muted); font-size: .92rem; }
+.architecture-study__retrieval { padding: clamp(2rem, 5vw, 4rem); border-left: .3rem solid var(--gold); background: var(--paper-deep); }
+.architecture-study__sources { padding-top: 2rem; border-top: 1px solid var(--ink); }
+
+.course-part__status { display: inline-block; margin-left: .4rem; color: var(--ink-muted); font-size: .62rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+
+.learning-diagram { margin: 2.5rem 0; padding: clamp(1.25rem, 4vw, 2.25rem); border-block: 1px solid var(--rule); background: var(--paper-deep); }
+.learning-diagram figcaption { margin-top: 1.25rem; color: var(--ink-muted); font-family: var(--font-interface), Arial, sans-serif; font-size: .72rem; line-height: 1.5; }
+.learning-diagram__progression { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; margin: 0; padding: 1px; background: var(--rule); list-style: none; }
+.learning-diagram__progression li { min-width: 0; padding: .85rem; background: var(--paper); }
+.learning-diagram__progression strong, .learning-diagram__progression span { display: block; }
+.learning-diagram__progression strong { color: var(--evidence); font-family: var(--font-trace), monospace; font-size: .72rem; }
+.learning-diagram__progression span { margin-top: .5rem; font-family: var(--font-interface), Arial, sans-serif; font-size: .72rem; line-height: 1.35; }
+.learning-diagram__chain { display: grid; grid-template-columns: repeat(5, 1fr); align-items: stretch; gap: .5rem; }
+.learning-diagram__chain > * { position: relative; padding: 1rem .75rem; border-top: .2rem solid var(--rule); background: var(--paper); font-family: var(--font-interface), Arial, sans-serif; font-size: .72rem; }
+.learning-diagram__chain > *:not(:last-child)::after { position: absolute; right: -.45rem; content: "→"; color: var(--ink-muted); }
+.learning-diagram__chain strong { border-color: var(--correction); color: var(--correction); }
+.learning-diagram__surfaces { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; margin: 0; padding: 1px; background: var(--rule); }
+.learning-diagram__surfaces div { padding: 1rem; background: var(--paper); }
+.learning-diagram__surfaces dt { color: var(--evidence); font-family: var(--font-interface), Arial, sans-serif; font-size: .8rem; font-weight: 750; text-transform: uppercase; }
+.learning-diagram__surfaces dd { margin: .35rem 0 0; font-size: .85rem; }
+.learning-diagram__handoff { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: center; }
+.learning-diagram__handoff div { padding: 1.25rem; background: var(--paper); }
+.learning-diagram__handoff strong, .learning-diagram__handoff span { display: block; }
+.learning-diagram__handoff strong { font-family: var(--font-interface), Arial, sans-serif; }
+.learning-diagram__handoff div span { margin-top: .5rem; color: var(--ink-muted); font-family: var(--font-trace), monospace; font-size: .68rem; }
+
 .system-trace {
   width: 100%;
   padding-block: clamp(2rem, 4vw, 3.5rem);
@@ -1042,6 +1085,10 @@ main {
   .topology-step:not(:last-child)::after { top: auto; right: auto; bottom: -.75rem; left: .9rem; content: "↓"; }
   .architecture-band, .architecture-band__lesson { grid-template-columns: 1fr; }
   .architecture-band__lesson, .architecture-band__lesson details { grid-column: auto; }
+  .architecture-study__hero h1 { font-size: clamp(3rem, 15vw, 4.8rem); }
+  .architecture-study__section--topology, .architecture-study__retrieval { margin-inline: -1.25rem; padding-inline: 1.25rem; }
+  .architecture-study__mechanisms, .learning-diagram__progression, .learning-diagram__chain, .learning-diagram__surfaces, .learning-diagram__handoff { grid-template-columns: 1fr; }
+  .learning-diagram__chain > *:not(:last-child)::after { right: auto; bottom: -.7rem; left: .75rem; content: "↓"; }
 
   .study-guide-footer {
     align-items: flex-start;

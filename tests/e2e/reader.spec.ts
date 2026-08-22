@@ -109,7 +109,7 @@ test("@desktop discovery endpoints expose only released publication routes", asy
   const rss = await rssResponse.text();
 
   expect(sitemapResponse.ok()).toBe(true);
-  expect(sitemap.match(/<url>/g)).toHaveLength(5);
+  expect(sitemap.match(/<url>/g)).toHaveLength(11);
   expect(sitemap).toContain(architecturesRoute);
   expect(sitemap).toContain(guideRoute);
   expect(sitemap).toContain(route);
@@ -122,7 +122,7 @@ test("@desktop discovery endpoints expose only released publication routes", asy
   expect(rss).toContain("revision-fieldbook-essay-001");
 });
 
-test("@desktop architecture field map compares and links eight source-backed profiles without JavaScript", async ({ page }) => {
+test("@desktop architecture field map compares nine profiles and opens extended studies without JavaScript", async ({ page }) => {
   const javascriptRequests: string[] = [];
   page.on("request", (request) => {
     if (request.resourceType() === "script" || /\.js(?:\?|$)/i.test(request.url())) javascriptRequests.push(request.url());
@@ -131,11 +131,13 @@ test("@desktop architecture field map compares and links eight source-backed pro
 
   await expect(page.getByRole("heading", { name: "Many harnesses, different jobs." })).toBeVisible();
   await expect(page.getByRole("table", { name: "Agent architecture comparison" })).toBeVisible();
-  await expect(page.locator("article[id^='system-']")).toHaveCount(8);
+  await expect(page.locator("article[id^='system-']")).toHaveCount(9);
   const codexLink = page.getByRole("link", { name: "OpenAI Codex profile" });
-  await expect(codexLink).toHaveAttribute("href", "#system-openai-codex");
+  await expect(codexLink).toHaveAttribute("href", "/architectures/openai-codex");
   await codexLink.click();
-  await expect(page.locator("#system-openai-codex")).toBeInViewport();
+  await expect(page).toHaveURL(/\/architectures\/openai-codex$/);
+  await expect(page.getByRole("heading", { name: "System boundary" })).toBeVisible();
+  await page.goBack();
   const tableContained = await page.locator(".comparison-table-well").evaluate((element) =>
     element.scrollWidth >= element.clientWidth && element.getBoundingClientRect().right <= window.innerWidth,
   );

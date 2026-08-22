@@ -5,6 +5,7 @@ import { NormalizedTopology } from "@/components/architectures/normalized-topolo
 import { loadContent } from "@/lib/content/load-content";
 import { canonicalUrl } from "@/lib/publication/site-url";
 import { createCorrectionUrl } from "@/components/article/evidence-badge";
+import { listArchitectureStudies } from "@/lib/study-guide/architecture-study-registry";
 
 export const metadata: Metadata = {
   title: "The Big Agent Harness Architecture Comparison",
@@ -44,6 +45,11 @@ export default async function ArchitecturesPage() {
     sectionAnchor: "method-title",
     claimId: "architecture-comparison",
   });
+  const studySlugs = new Set(listArchitectureStudies().map((study) => {
+    const record = content.architectures.get(study.architectureId);
+    if (!record) throw new Error(`Missing architecture study record: ${study.architectureId}`);
+    return record.slug;
+  }));
 
   return (
     <article className="architecture-reader">
@@ -53,7 +59,7 @@ export default async function ArchitecturesPage() {
         <p className="architecture-hero__deck">
           A field map of where real agent systems place control, state, authority, recovery, and proof—compared on common responsibilities, not a leaderboard.
         </p>
-        <p className="architecture-hero__meta interface-text">First public edition · 8 source-pinned working profiles · 1 shared comparison grammar</p>
+        <p className="architecture-hero__meta interface-text">First public edition · 9 source-pinned profiles · 2 extended studies · 1 shared comparison grammar</p>
         <nav className="architecture-jump interface-text" aria-label="On this page">
           <a href="#baseline">Learn the baseline</a>
           <a href="#comparison">Compare systems</a>
@@ -88,7 +94,7 @@ export default async function ArchitecturesPage() {
           <h2 id="comparison-title">Read across, not down</h2>
           <p>The table asks the same questions of every system. A narrow memory layer can therefore be studied honestly beside a coding harness without pretending they are substitutes.</p>
         </div>
-        <ArchitectureComparison records={records} />
+        <ArchitectureComparison records={records} studySlugs={studySlugs} />
       </section>
 
       <section className="architecture-section architecture-section--wide" id="gallery" aria-labelledby="gallery-title">
@@ -97,7 +103,7 @@ export default async function ArchitecturesPage() {
           <h2 id="gallery-title">See each system in its own shape</h2>
           <p>This is a working field map. Each profile uses the same visual grammar, but unsupported responsibilities remain external, delegated, or explicitly unestablished.</p>
         </div>
-        <ArchitectureGallery records={records} sources={content.sources} />
+        <ArchitectureGallery records={records} sources={content.sources} studySlugs={studySlugs} />
       </section>
 
       <section className="architecture-method prose" aria-labelledby="method-title">

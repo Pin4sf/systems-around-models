@@ -1,0 +1,75 @@
+---
+slug: four-surface-classes
+title: Four Surface Classes
+description: A practical model for deciding what a harness may edit, what must remain invariant, what history survives, and what stays human-controlled.
+sequence: Harness Engineering
+sequence_position: 5
+revision: 1
+authors:
+  - Systems Around Models
+published_at: 2026-08-22
+substantively_revised_at: 2026-08-22
+reading_time_source: 9 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+revision_id: revision-four-surface-classes-001
+previous_essay_slug: twelve-recurring-failure-classes
+next_essay_slug: developer-and-product-runtime-harnesses
+---
+
+## Classify change before granting it
+
+An agent system contains instructions, code, state, evidence, policy, and decisions. Treating all of them as editable text creates a quiet authority bug: the executor can change the rule used to judge its own execution. Four surface classes make that boundary discussable.
+
+<SurfaceMap />
+
+The classes are about mutation rights and preserved history. They do not dictate one storage technology.
+
+## Locked surfaces
+
+Locked surfaces carry invariants the current run must not rewrite: evaluator contracts, hard permission ceilings, effect-identity rules, schema boundaries, or protected release policy. “Locked” is scoped. A human-reviewed software release may change the evaluator in a later version, but the run being evaluated cannot change it mid-judgment.
+
+Use deterministic enforcement where possible: signed configuration, separate credentials, schema validation, protected branches, or a process boundary. A sentence saying “do not edit this” is useful context, not a lock.
+
+## Editable surfaces
+
+Editable surfaces are the workspace of learning: plans, hypotheses, drafts, derived views, temporary context, and implementation under test. They should be easy to revise because correction is the point.
+
+Editability does not mean consequence-free. Record the owner, scope, and current version. A plan can change without rewriting the task’s authority. A derived memory can be rebuilt without silently altering the canonical record from which it came.
+
+## Append-only surfaces
+
+Append-only surfaces preserve sequence: events, approvals, effect intents, checkpoints, test evidence, and correction history. New information can qualify an older event without pretending it never happened. This is valuable for replay, audit, and incident reconstruction.
+
+Append-only does not mean immortal. Retention, compaction, redaction, and deletion can still be governed operations. The invariant is that an ordinary executor cannot silently rewrite history. Privacy and legal deletion requirements outrank a simplistic desire to retain every trace forever.
+
+## Human-controlled surfaces
+
+Human-controlled surfaces hold choices that remain with the authorized person or organization: accepting an outcome, expanding a permission boundary, publishing externally, spending money, or deciding whether a consequential ambiguity may be resolved by another attempt.
+
+A human-controlled surface can be supported by automation. The harness may assemble evidence, explain alternatives, and stage a reversible action. It should not manufacture consent from inactivity or infer authority from technical capability.
+
+## Apply the science loop without moving the judge
+
+The four surfaces support a disciplined improvement cycle:
+
+1. Keep the evaluation contract and authority ceiling locked for the run.
+2. Change one editable hypothesis or implementation surface.
+3. Append the resulting trace and evidence.
+4. Ask the authorized owner to accept, reject, or revise the change.
+5. Promote a new locked version only through a separate review path.
+
+This separation prevents a seductive failure mode: a system “improves” by making its test easier. If an evaluator must change, treat that as its own hypothesis with its own evidence and approval.
+
+## Retrieval check
+
+Classify each artifact: a run plan, a production credential ceiling, a provider receipt, and the decision to publish. The expected starting point is editable, locked, append-only, and human-controlled. Then name one exception that would force a more precise contract—for example, a receipt containing personal data that must later be redacted under a governed process.
+
+If two surfaces share one database table, explain why that does not make them the same class. The class follows mutation authority and history, not storage location.
+
+## Sources and further reading
+
+- [Harness Engineering Study Guide](/fieldbook/harness-engineering-study-guide) — the compact responsibility map behind this surface model.
+- [Twelve Recurring Failure Classes](/fieldbook/twelve-recurring-failure-classes) — failure patterns that reveal why authority and history need separate surfaces.
+

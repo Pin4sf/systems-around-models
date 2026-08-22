@@ -1,0 +1,37 @@
+{
+  "id": "revision-h0-to-h9-progression-001",
+  "essaySlug": "the-h0-to-h9-progression",
+  "revision": 1,
+  "publishedAt": "2026-08-22",
+  "substantivelyRevisedAt": "2026-08-22",
+  "summary": "Initial public revision of the H0 to H9 diagnostic progression chapter.",
+  "affectedClaimIds": [],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-96812ad90879231c9c974215916a18e11da4ac5dd118d4ca2afa8dab996b94db",
+  "sourceIds": [
+    "source-harness-engineering-fieldbook-v1",
+    "source-rasa-why-agents-fail"
+  ],
+  "sourceValidationDates": {
+    "source-harness-engineering-fieldbook-v1": "2026-08-21",
+    "source-rasa-why-agents-fail": "2026-08-22"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-rasa-why-agents-fail",
+      "title": "Why Agents Fail",
+      "canonicalUrl": "https://github.com/RasaHQ/why-agents-fail",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "MIT"
+    }
+  ]
+}

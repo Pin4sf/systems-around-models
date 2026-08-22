@@ -1,0 +1,39 @@
+{
+  "id": "architecture-deepseek-harness",
+  "slug": "deepseek-harness-cordis",
+  "recordKind": "system",
+  "productClass": "frontier-coding-harness",
+  "revision": 1,
+  "lastReviewed": "2026-08-22",
+  "inspectedVersion": "47f943859bef60e4160492346772ded9b24f765a",
+  "dossierStatus": "refresh-needed",
+  "evidenceGrade": "IP",
+  "evidenceFidelity": "implementation-pinned",
+  "contentHash": "sha256-dd56214692f1a942e986cf2fe887c735254a751a4fd9cdab727a45c9894e9b28",
+  "sourceIds": [
+    "source-architecture-cordis",
+    "source-architecture-deepseek-harness"
+  ],
+  "sourceValidationDates": {
+    "source-architecture-deepseek-harness": "2026-08-16",
+    "source-architecture-cordis": "2026-08-16"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-architecture-cordis",
+      "title": "Cordis repository",
+      "canonicalUrl": "https://github.com/cordiverse/cordis/tree/8cc9e33fab69e2d0476d126baaf2acb24e6a6ab4",
+      "lastValidated": "2026-08-16",
+      "licenseStatus": "MIT"
+    },
+    {
+      "id": "source-architecture-deepseek-harness",
+      "title": "DeepSeek Harness repository",
+      "canonicalUrl": "https://github.com/deepseek-ai/deepseek-harness/tree/47f943859bef60e4160492346772ded9b24f765a",
+      "lastValidated": "2026-08-16",
+      "licenseStatus": "MIT"
+    }
+  ]
+}

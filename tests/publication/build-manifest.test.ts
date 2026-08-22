@@ -174,8 +174,12 @@ describe("deterministic public build manifest", () => {
     expect((await generate(root)).code).toBe(0);
     const second = await readFile(manifestPath, "utf8");
     expect(JSON.parse(second).buildId).not.toBe(JSON.parse(first).buildId);
-    expect(JSON.parse(second).revisions[0].contentHash).not.toBe(
-      JSON.parse(first).revisions[0].contentHash,
+    const firstRevision = JSON.parse(first).revisions.find(
+      (revision: { id: string }) => revision.id === "revision-fieldbook-essay-001",
     );
+    const secondRevision = JSON.parse(second).revisions.find(
+      (revision: { id: string }) => revision.id === "revision-fieldbook-essay-001",
+    );
+    expect(secondRevision.contentHash).not.toBe(firstRevision.contentHash);
   });
 });

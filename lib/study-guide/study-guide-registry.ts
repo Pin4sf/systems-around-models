@@ -19,6 +19,42 @@ type StudyGuideEntry = {
   finalLabel?: string;
 };
 
+const releasedHarnessChapters = [
+  ["the-model-is-not-the-agent", "The Model Is Not the Agent"],
+  ["the-h0-to-h9-progression", "The H0→H9 Progression"],
+  ["twelve-recurring-failure-classes", "Twelve Recurring Failure Classes"],
+  ["four-surface-classes", "Four Surface Classes"],
+  ["developer-and-product-runtime-harnesses", "Developer and Product-Runtime Harnesses"],
+] as const;
+
+function harnessChapterItems(currentSlug?: string): SequenceItem[] {
+  return releasedHarnessChapters.map(([slug, label], index) => currentSlug === slug
+    ? { kind: "current", eyebrow: `Chapter ${index + 1} of 40`, label }
+    : { kind: "link", eyebrow: `Chapter ${index + 1} of 40`, label, href: `/fieldbook/${slug}` });
+}
+
+function harnessChapterEntry(slug: string, sourcePath: string, finalLabel?: string): StudyGuideEntry {
+  const chapterIndex = releasedHarnessChapters.findIndex(([chapterSlug]) => chapterSlug === slug);
+  return {
+    sourcePath,
+    readerPosition: `Chapter ${chapterIndex + 1} of 40`,
+    sequenceName: "Harness Engineering",
+    navigation: {
+      label: "Harness Engineering chapters",
+      mobileLabel: "Harness Engineering chapter list",
+      drawerLabel: "Open chapters",
+      overview: { label: "Course overview", href: "/#chapters" },
+      items: [
+        { kind: "link", label: "Course overview", href: "/#chapters" },
+        { kind: "link", eyebrow: "Short course", label: "Harness Engineering Study Guide", href: "/fieldbook/harness-engineering-study-guide" },
+        ...harnessChapterItems(slug),
+        ...(finalLabel ? [{ kind: "forthcoming", eyebrow: "Coming next", label: finalLabel } as const] : []),
+      ],
+    },
+    finalLabel,
+  };
+}
+
 const studyGuideRegistry: Record<string, StudyGuideEntry> = {
   "harness-engineering-study-guide": {
     sourcePath: "harness/harness-engineering-study-guide.mdx",
@@ -32,38 +68,19 @@ const studyGuideRegistry: Record<string, StudyGuideEntry> = {
       items: [
         { kind: "link", label: "Course overview", href: "/#chapters" },
         { kind: "current", eyebrow: "Short course", label: "Harness Engineering Study Guide" },
-        {
-          kind: "link",
-          eyebrow: "Chapter 1 of 40",
-          label: "The Model Is Not the Agent",
-          href: "/fieldbook/the-model-is-not-the-agent",
-        },
+        ...harnessChapterItems(),
       ],
     },
   },
-  "the-model-is-not-the-agent": {
-    sourcePath: "harness/the-model-is-not-the-agent.mdx",
-    readerPosition: "Chapter 1 of 40",
-    sequenceName: "Harness Engineering",
-    navigation: {
-      label: "Harness Engineering chapters",
-      mobileLabel: "Harness Engineering chapter list",
-      drawerLabel: "Open chapters",
-      overview: { label: "Course overview", href: "/#chapters" },
-      items: [
-        { kind: "link", label: "Course overview", href: "/#chapters" },
-        {
-          kind: "link",
-          eyebrow: "Short course",
-          label: "Harness Engineering Study Guide",
-          href: "/fieldbook/harness-engineering-study-guide",
-        },
-        { kind: "current", eyebrow: "Chapter 1 of 40", label: "The Model Is Not the Agent" },
-        { kind: "forthcoming", eyebrow: "Up next", label: "The H0→H9 progression" },
-      ],
-    },
-    finalLabel: "The H0→H9 progression",
-  },
+  "the-model-is-not-the-agent": harnessChapterEntry("the-model-is-not-the-agent", "harness/the-model-is-not-the-agent.mdx"),
+  "the-h0-to-h9-progression": harnessChapterEntry("the-h0-to-h9-progression", "harness/the-h0-to-h9-progression.mdx"),
+  "twelve-recurring-failure-classes": harnessChapterEntry("twelve-recurring-failure-classes", "harness/twelve-recurring-failure-classes.mdx"),
+  "four-surface-classes": harnessChapterEntry("four-surface-classes", "harness/four-surface-classes.mdx"),
+  "developer-and-product-runtime-harnesses": harnessChapterEntry(
+    "developer-and-product-runtime-harnesses",
+    "harness/developer-and-product-runtime-harnesses.mdx",
+    "Instructions and context assembly",
+  ),
   "memory-engineering-study-guide": {
     sourcePath: "memory/memory-engineering-study-guide.mdx",
     readerPosition: "Complete short course",

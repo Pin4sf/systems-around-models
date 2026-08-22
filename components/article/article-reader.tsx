@@ -8,6 +8,7 @@ import {
   SequenceNavigation,
 } from "@/components/article/sequence-navigation";
 import { SystemTrace } from "@/components/diagrams/system-trace";
+import { FailureChain, HarnessHandoff, HarnessProgression, SurfaceMap } from "@/components/diagrams/harness-learning-diagrams";
 import type { EssayMetadata, RevisionRecord } from "@/lib/content/schema";
 import { compilePublicMdx } from "@/lib/content/compile-public-mdx";
 import { slugifyHeading } from "@/lib/content/slugify";
@@ -59,6 +60,10 @@ export async function ArticleReader({
       h2: Heading,
       EvidenceBadge: HiddenPublicationNote,
       SystemTrace: ArticleSystemTrace,
+      HarnessProgression,
+      FailureChain,
+      SurfaceMap,
+      HarnessHandoff,
     },
   });
 

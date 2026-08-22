@@ -193,12 +193,27 @@ describe("flagship fieldbook reader", () => {
     expect(metadata.description).toMatch(/model, harness, environment, and authority/i);
   });
 
-  it("does not advertise an unreleased next chapter", async () => {
+  it("links the first released chapter to the next released chapter", async () => {
     await renderReader();
 
-    expect(document.querySelector('a[rel="next"]')).not.toBeInTheDocument();
-    expect(screen.getAllByText(/The H0→H9 progression/).length)
-      .toBeGreaterThan(0);
+    expect(screen.getByRole("link", { name: "Next: The H0→H9 Progression" })).toHaveAttribute(
+      "href",
+      "/fieldbook/the-h0-to-h9-progression",
+    );
+  });
+
+  it.each([
+    ["the-h0-to-h9-progression", "The H0→H9 Progression", "Harness progression from H0 to H9"],
+    ["twelve-recurring-failure-classes", "Twelve Recurring Failure Classes", "Failure chain from request to false closure"],
+    ["four-surface-classes", "Four Surface Classes", "Four authority surfaces"],
+    ["developer-and-product-runtime-harnesses", "Developer and Product-Runtime Harnesses", "From development evidence to product admission"],
+  ])("publishes %s with a retrieval diagram and check", async (chapterSlug, title, diagramName) => {
+    const page = await ArticlePage({ params: Promise.resolve({ slug: chapterSlug }) });
+    render(page);
+
+    expect(screen.getByRole("heading", { name: title, level: 1 })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: diagramName })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Retrieval check", level: 2 })).toBeInTheDocument();
   });
 
   it("derives next-link semantics from the released essay sequence", async () => {

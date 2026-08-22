@@ -1,6 +1,6 @@
 import type { ArchitectureRecord } from "@/lib/content/schema";
 
-export function ArchitectureComparison({ records }: { records: ArchitectureRecord[] }) {
+export function ArchitectureComparison({ records, studySlugs }: { records: ArchitectureRecord[]; studySlugs?: Set<string> }) {
   return (
     <div className="comparison-table-well" tabIndex={0} aria-label="Scrollable comparison table">
       <table className="architecture-comparison" aria-label="Agent architecture comparison">
@@ -21,7 +21,7 @@ export function ArchitectureComparison({ records }: { records: ArchitectureRecor
           {records.map((record) => (
             <tr key={record.id}>
               <th scope="row">
-                <a href={`#system-${record.slug}`} aria-label={`${record.name} profile`}>
+                <a href={studySlugs?.has(record.slug) ? `/architectures/${record.slug}` : `#system-${record.slug}`} aria-label={`${record.name} profile`}>
                   {record.name}
                 </a>
               </th>

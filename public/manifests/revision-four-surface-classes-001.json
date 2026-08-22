@@ -1,0 +1,28 @@
+{
+  "id": "revision-four-surface-classes-001",
+  "essaySlug": "four-surface-classes",
+  "revision": 1,
+  "publishedAt": "2026-08-22",
+  "substantivelyRevisedAt": "2026-08-22",
+  "summary": "Initial public revision of the four harness authority surface classes.",
+  "affectedClaimIds": [],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-8eb9fc97791bbcbfa907b2e9da0976c31aa07bac0288471a9a39b3231482713b",
+  "sourceIds": [
+    "source-harness-engineering-fieldbook-v1"
+  ],
+  "sourceValidationDates": {
+    "source-harness-engineering-fieldbook-v1": "2026-08-21"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    }
+  ]
+}

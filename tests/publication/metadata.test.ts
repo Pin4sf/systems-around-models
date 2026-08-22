@@ -10,6 +10,12 @@ const canonicalSite = "https://fieldbook.example";
 const chapterPath = "/fieldbook/the-model-is-not-the-agent";
 const guidePath = "/fieldbook/harness-engineering-study-guide";
 const memoryGuidePath = "/fieldbook/memory-engineering-study-guide";
+const releasedChapterPaths = [
+  "/fieldbook/the-h0-to-h9-progression",
+  "/fieldbook/twelve-recurring-failure-classes",
+  "/fieldbook/four-surface-classes",
+  "/fieldbook/developer-and-product-runtime-harnesses",
+];
 
 afterEach(() => {
   vi.unstubAllEnvs();
@@ -117,9 +123,12 @@ describe("publication discovery endpoints", () => {
     expect(entries.map((entry) => entry.url)).toEqual([
       `${canonicalSite}/`,
       `${canonicalSite}/architectures`,
+      `${canonicalSite}/architectures/deepseek-harness-cordis`,
+      `${canonicalSite}/architectures/openai-codex`,
       `${canonicalSite}${guidePath}`,
       `${canonicalSite}${memoryGuidePath}`,
       `${canonicalSite}${chapterPath}`,
+      ...releasedChapterPaths.map((path) => `${canonicalSite}${path}`),
     ]);
   });
 

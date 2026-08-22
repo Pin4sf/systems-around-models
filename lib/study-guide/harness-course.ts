@@ -18,10 +18,10 @@ export const harnessCourse: CoursePart[] = [
     description: "Define the harness boundary, learn the H0→H9 progression, and diagnose recurring failure classes.",
     chapters: [
       { number: 1, title: "Model, agent, harness, environment, and platform", href: "/fieldbook/the-model-is-not-the-agent" },
-      { number: 2, title: "The H0→H9 progression" },
-      { number: 3, title: "Twelve recurring failure classes" },
-      { number: 4, title: "Four surface classes" },
-      { number: 5, title: "Developer harnesses and product-runtime harnesses" },
+      { number: 2, title: "The H0→H9 progression", href: "/fieldbook/the-h0-to-h9-progression" },
+      { number: 3, title: "Twelve recurring failure classes", href: "/fieldbook/twelve-recurring-failure-classes" },
+      { number: 4, title: "Four surface classes", href: "/fieldbook/four-surface-classes" },
+      { number: 5, title: "Developer harnesses and product-runtime harnesses", href: "/fieldbook/developer-and-product-runtime-harnesses" },
     ],
   },
   {

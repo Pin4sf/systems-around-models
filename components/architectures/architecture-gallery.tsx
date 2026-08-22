@@ -10,9 +10,11 @@ const classLabels: Record<ArchitectureRecord["productClass"], string> = {
 export function ArchitectureGallery({
   records,
   sources,
+  studySlugs,
 }: {
   records: ArchitectureRecord[];
   sources: Map<string, SourceRecord>;
+  studySlugs?: Set<string>;
 }) {
   return (
     <div className="architecture-gallery">
@@ -42,6 +44,7 @@ export function ArchitectureGallery({
 
           <footer className="architecture-band__lesson">
             <p><strong>Transferable lesson</strong> {record.transferableLesson}</p>
+            {studySlugs?.has(record.slug) ? <p><a className="architecture-band__study-link interface-text" href={`/architectures/${record.slug}`}>Read the architecture study</a></p> : null}
             <div>
               <strong>Deliberately leaves out</strong>
               <ul>{record.deliberateOmissions.map((item) => <li key={item}>{item}</li>)}</ul>

@@ -22,9 +22,10 @@ describe("architecture study registry", () => {
         "Letta",
         "Mem0",
         "Graphiti",
+        "DeepSeek Harness and Cordis",
       ]),
     );
-    expect(publicSystems).toHaveLength(8);
+    expect(publicSystems).toHaveLength(9);
     publicSystems.forEach((record) => {
       expect(record.sourceIds.length).toBeGreaterThan(0);
       expect(record.topologySteps.length).toBeGreaterThanOrEqual(3);

@@ -76,4 +76,13 @@ it("leads readers into a complete harness-engineering course map", () => {
   expect(screen.queryByText("Twelve labs and a capstone")).not.toBeInTheDocument();
   expect(screen.queryByText("Evidence before confidence")).not.toBeInTheDocument();
   expect(screen.queryByText("Corrections stay visible")).not.toBeInTheDocument();
+  for (const [name, href] of [
+    ["The H0→H9 progression", "/fieldbook/the-h0-to-h9-progression"],
+    ["Twelve recurring failure classes", "/fieldbook/twelve-recurring-failure-classes"],
+    ["Four surface classes", "/fieldbook/four-surface-classes"],
+    ["Developer harnesses and product-runtime harnesses", "/fieldbook/developer-and-product-runtime-harnesses"],
+  ]) {
+    expect(screen.getByRole("link", { name: new RegExp(name) })).toHaveAttribute("href", href);
+  }
+  expect(screen.getAllByText("Coming next")).toHaveLength(35);
 });

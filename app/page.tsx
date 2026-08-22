@@ -83,7 +83,11 @@ export default function HomePage() {
               <ol start={part.chapters[0]?.number}>
                 {part.chapters.map((chapter) => (
                   <li key={chapter.number}>
-                    {chapter.href ? <Link href={chapter.href}>{chapter.title}</Link> : chapter.title}
+                    {chapter.href ? (
+                      <Link href={chapter.href}>{chapter.title}</Link>
+                    ) : (
+                      <span>{chapter.title} <small className="course-part__status interface-text">Coming next</small></span>
+                    )}
                   </li>
                 ))}
               </ol>
