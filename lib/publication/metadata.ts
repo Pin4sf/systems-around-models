@@ -5,6 +5,25 @@ import { canonicalUrl, resolveSiteUrl } from "@/lib/publication/site-url";
 export const publicationTitle = "Systems Around Models";
 export const publicationDescription =
   "A practical study guide to the harnesses, memory, environments, authority, recovery, and verification that turn model responses into reliable work.";
+export const publicationTagline = "The agent systems fieldbook";
+export const authorName = "Shivansh Fulper";
+export const authorUrl = "https://shivanshfulper.com";
+export const authorRole = "Founder and AI systems researcher";
+export const authorSameAs = [
+  authorUrl,
+  "https://github.com/Pin4sf",
+  "https://www.linkedin.com/in/shivansh-fulper/",
+];
+export const publicationKeywords = [
+  "agent systems",
+  "AI agent architecture",
+  "agent harness engineering",
+  "AI memory engineering",
+  "reliable AI agents",
+  "AI agent security",
+  "agent evaluation",
+  "long-running agents",
+];
 const socialImage = {
   url: "/social/systems-around-models.png",
   width: 1200,
@@ -18,9 +37,28 @@ export function buildHomeMetadata(): Metadata {
     title: publicationTitle,
     description: publicationDescription,
     applicationName: publicationTitle,
-    authors: [{ name: publicationTitle }],
-    creator: publicationTitle,
-    publisher: publicationTitle,
+    authors: [{ name: authorName, url: authorUrl }],
+    creator: authorName,
+    publisher: authorName,
+    keywords: publicationKeywords,
+    category: "technology",
+    referrer: "origin-when-cross-origin",
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
+      },
+    },
+    manifest: "/manifest.webmanifest",
+    icons: {
+      icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+      shortcut: "/icon.svg",
+    },
     alternates: {
       canonical: "/",
       types: {
@@ -55,7 +93,11 @@ export function buildArticleMetadata(
   return {
     title: `${essay.title} | ${publicationTitle}`,
     description: essay.description,
-    authors: essay.authors.map((name) => ({ name })),
+    authors: [{ name: authorName, url: authorUrl }],
+    creator: authorName,
+    publisher: authorName,
+    keywords: publicationKeywords,
+    category: essay.sequence,
     alternates: { canonical: route },
     openGraph: {
       type: "article",
@@ -64,7 +106,7 @@ export function buildArticleMetadata(
       title: essay.title,
       description: essay.description,
       url,
-      authors: essay.authors,
+      authors: [authorName],
       publishedTime: revision.publishedAt,
       modifiedTime: revision.substantivelyRevisedAt,
       images: [socialImage],
@@ -77,7 +119,55 @@ export function buildArticleMetadata(
     },
     other: {
       "article:revision": revision.id,
+      citation_title: essay.title,
+      citation_author: authorName,
+      citation_publication_date: revision.publishedAt,
+      citation_public_url: url,
     },
+  };
+}
+
+export function buildHomeJsonLd() {
+  const url = canonicalUrl("/");
+  const websiteId = `${url}#website`;
+  const authorId = `${authorUrl}/#person`;
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": websiteId,
+        url,
+        name: publicationTitle,
+        alternateName: publicationTagline,
+        description: publicationDescription,
+        inLanguage: "en",
+        author: { "@id": authorId },
+        publisher: { "@id": authorId },
+      },
+      {
+        "@type": "Person",
+        "@id": authorId,
+        name: authorName,
+        url: authorUrl,
+        jobTitle: authorRole,
+        sameAs: authorSameAs,
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": `${url}#fieldbook`,
+        url,
+        name: publicationTitle,
+        description: publicationDescription,
+        isPartOf: { "@id": websiteId },
+        author: { "@id": authorId },
+        about: publicationKeywords.slice(0, 6).map((name) => ({
+          "@type": "Thing",
+          name,
+        })),
+      },
+    ],
   };
 }
 
@@ -93,13 +183,24 @@ export function buildArticleJsonLd(
     description: essay.description,
     datePublished: revision.publishedAt,
     dateModified: revision.substantivelyRevisedAt,
-    author: essay.authors.map((name) => ({
-      "@type": name === publicationTitle ? "Organization" : "Person",
-      name,
-    })),
+    author: [{
+      "@type": "Person",
+      name: authorName,
+      url: authorUrl,
+      sameAs: authorSameAs,
+    }],
     publisher: {
-      "@type": "Organization",
+      "@type": "Person",
+      name: authorName,
+      url: authorUrl,
+    },
+    image: canonicalUrl(socialImage.url),
+    articleSection: essay.sequence,
+    keywords: publicationKeywords.join(", "),
+    isPartOf: {
+      "@type": "WebSite",
       name: publicationTitle,
+      url: canonicalUrl("/"),
     },
     mainEntityOfPage: url,
     url,

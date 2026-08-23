@@ -76,7 +76,8 @@ test("@desktop reader exposes a simple chapter and ordinary study navigation", a
   await expect(page.getByRole("navigation", { name: "On this page" })).toBeVisible();
   await expect(page.getByRole("button", { name: "Open chapters" })).toBeHidden();
 
-  await expect(page.getByText("Chapter 1 of 40").first()).toBeVisible();
+  await expect(page.getByText("Chapter 1", { exact: true }).first()).toBeVisible();
+  await expect(page.getByText(/Chapter 1 of 40/)).toHaveCount(0);
   await expect(page.getByRole("group", { name: /evidence/i })).toHaveCount(0);
   expect(javascriptRequests).toEqual([]);
 

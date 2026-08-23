@@ -105,6 +105,18 @@ describe("release review assets", () => {
     });
   });
 
+  it("ships the system-orbit brand mark as the favicon and manifest icon", async () => {
+    const [icon, manifest] = await Promise.all([
+      repositoryFile("app/icon.svg"),
+      repositoryFile("app/manifest.ts"),
+    ]);
+
+    expect(icon).toContain("Systems Around Models");
+    expect(icon).toContain("#28513d");
+    expect(manifest).toContain('src: "/icon.svg"');
+    expect(buildHomeMetadata().icons).toMatchObject({ shortcut: "/icon.svg" });
+  });
+
   it("keeps the share-card trace aligned with the canonical end-to-end trace", async () => {
     const svg = await repositoryFile("assets/social/systems-around-models.svg");
     const labels = [

@@ -10,6 +10,10 @@ it("presents a simple study-guide navigation", () => {
   );
 
   expect(screen.getByText("Systems Around Models")).toBeInTheDocument();
+  expect(screen.getByRole("link", { name: "By Shivansh Fulper · Portfolio" })).toHaveAttribute(
+    "href",
+    "https://shivanshfulper.com",
+  );
   expect(
     screen.getByRole("navigation", { name: "Publication" }),
   ).toBeInTheDocument();
@@ -34,6 +38,7 @@ it("offers architecture comparison as a first-class study path", async () => {
   render(await HomePage());
 
   expect(screen.getByRole("heading", { name: "Study the machinery around models." })).toBeInTheDocument();
+  expect(screen.getByText("The agent systems fieldbook")).toBeInTheDocument();
   expect(screen.getByRole("link", { name: "Explore architectures" })).toHaveAttribute(
     "href",
     "/architectures",

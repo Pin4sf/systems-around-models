@@ -37,7 +37,12 @@ describe("flagship fieldbook reader", () => {
     expect(
       screen.getByRole("navigation", { name: "Harness Engineering chapters" }),
     ).toBeInTheDocument();
-    expect(screen.getAllByText("Chapter 1 of 40").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Chapter 1").length).toBeGreaterThan(0);
+    expect(screen.queryByText(/Chapter 1 of 40/)).not.toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Shivansh Fulper" })).toHaveAttribute(
+      "href",
+      "https://shivanshfulper.com",
+    );
     expect(screen.queryByRole("group", { name: /evidence/i })).not.toBeInTheDocument();
     expect(screen.queryByRole("link", { name: /Challenge this/i })).not.toBeInTheDocument();
     expect(screen.queryByText(/Article revision record/i)).not.toBeInTheDocument();
@@ -133,7 +138,7 @@ describe("flagship fieldbook reader", () => {
     );
     expect(screen.queryByText("Evidence grade")).not.toBeInTheDocument();
     expect(screen.queryByRole("group", { name: /evidence/i })).not.toBeInTheDocument();
-    expect(screen.queryByText(/Chapter 1 of 40|H0→H9 progression/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Chapter 1|H0→H9 progression/)).not.toBeInTheDocument();
   });
 
   it("uses durable heading anchors and ordinary source links", async () => {

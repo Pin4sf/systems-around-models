@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { buildHomeMetadata } from "@/lib/publication/metadata";
+import { buildHomeJsonLd, buildHomeMetadata } from "@/lib/publication/metadata";
 import { resolveSiteUrl } from "@/lib/publication/site-url";
 import { generateMetadata, buildArticleStructuredData } from "@/app/fieldbook/[slug]/page";
 import sitemap from "@/app/sitemap";
@@ -94,6 +94,11 @@ describe("canonical publication metadata", () => {
     expect(home.title).toBe("Systems Around Models");
     expect(home.description).not.toBe(chapter.description);
     expect(home.alternates?.canonical).toBe("/");
+    expect(home.authors).toEqual([
+      { name: "Shivansh Fulper", url: "https://shivanshfulper.com" },
+    ]);
+    expect(home.keywords).toContain("agent harness engineering");
+    expect(home.robots).toMatchObject({ index: true, follow: true });
     expect(chapter.title).toBe("The Model Is Not the Agent | Systems Around Models");
     expect(chapter.alternates?.canonical).toBe(chapterPath);
     expect(chapter.openGraph).toMatchObject({
@@ -121,8 +126,45 @@ describe("canonical publication metadata", () => {
       mainEntityOfPage: `${canonicalSite}${chapterPath}`,
     });
     expect(structuredData.author).toEqual([
-      { "@type": "Organization", name: "Systems Around Models" },
+      expect.objectContaining({
+        "@type": "Person",
+        name: "Shivansh Fulper",
+        url: "https://shivanshfulper.com",
+      }),
     ]);
+    expect(structuredData).toMatchObject({
+      image: `${canonicalSite}/social/systems-around-models.png`,
+      articleSection: "Harness Engineering",
+      publisher: {
+        "@type": "Person",
+        name: "Shivansh Fulper",
+        url: "https://shivanshfulper.com",
+      },
+    });
+  });
+
+  it("publishes a connected WebSite, author, and fieldbook graph for answer engines", () => {
+    vi.stubEnv("SITE_URL", canonicalSite);
+    const structuredData = buildHomeJsonLd();
+
+    expect(structuredData["@graph"]).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        "@type": "WebSite",
+        name: "Systems Around Models",
+        author: { "@id": "https://shivanshfulper.com/#person" },
+      }),
+      expect.objectContaining({
+        "@type": "Person",
+        name: "Shivansh Fulper",
+        url: "https://shivanshfulper.com",
+      }),
+      expect.objectContaining({
+        "@type": "CollectionPage",
+        about: expect.arrayContaining([
+          { "@type": "Thing", name: "agent harness engineering" },
+        ]),
+      }),
+    ]));
   });
 });
 
