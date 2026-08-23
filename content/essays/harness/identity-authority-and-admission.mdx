@@ -1,0 +1,69 @@
+---
+slug: identity-authority-and-admission
+title: Identity, Authority, and Admission
+description: How a harness turns an untrusted request into a bounded run with an explicit principal, delegated authority, resource scope, and proof obligation.
+sequence: Harness Engineering
+sequence_position: 13
+revision: 1
+authors:
+  - Systems Around Models
+published_at: 2026-08-23
+substantively_revised_at: 2026-08-23
+reading_time_source: 9 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-memory-nist-agent-hijacking-evaluations
+revision_id: revision-identity-authority-admission-001
+previous_essay_slug: memory-compaction-and-continuity
+next_essay_slug: leases-fencing-cancellation-and-budgets
+---
+
+## A request is not yet a run
+
+A message, scheduled event, webhook, or delegated task can describe desired work without proving who may authorize it. Admission is the boundary that resolves that uncertainty. It binds a principal, an acting identity, a purpose, a resource scope, a capability set, the evaluated policy version, a budget, and the evidence required for completion into one run contract.
+
+<AdmissionBoundary />
+
+This chapter presents a proposed systems pattern rather than a claim about one universal implementation. Its purpose is to make authority inspectable before a model or tool can convert language into effects.
+
+## Separate principal, actor, and subject
+
+The principal grants authority. The actor performs the work. The subject is the person or resource the work concerns. They may be the same entity, but a harness should not assume that they are.
+
+A user can authorize an agent to update the user's calendar. A background worker can execute that authorized operation. A meeting guest can be affected by it without having granted the worker general access. Keeping these identities distinct prevents a delegated runtime from quietly inheriting the authority of every person mentioned in context.
+
+Authentication establishes an identity under a named mechanism. It does not establish every action that identity may take. Authorization evaluates the requested capability against current policy, consent, environment, and resource scope.
+
+## Admit capabilities, not vague roles
+
+Broad labels such as “assistant,” “admin,” or “research agent” hide the actual impact surface. Prefer grants that name an operation and its boundary: read these records, create one draft, send to these recipients after approval, or spend up to this amount before a deadline.
+
+Bind grants to the run when possible. Record who issued them, when they expire, whether they may be delegated, which environment they apply to, which policy version admitted them, and which approvals remain outstanding. Tool availability should be derived from admitted capabilities, not from a prompt that merely says a tool exists.
+
+Admission can fail closed with a useful explanation: identity unresolved, subject mismatch, grant absent, resource outside scope, approval stale, or proof contract impossible. That is a product state, not an exceptional crash.
+
+## Bind completion before execution
+
+Authority says what may be attempted. A completion contract says what counts as done. For an external effect, that may require a provider receipt plus a later observation. For analysis, it may require named sources and a reproducible artifact. For a destructive change, it may require a human checkpoint.
+
+Defining proof during admission prevents the harness from accepting fluent output as closure. It also gives cancellation and recovery code a concrete target: if proof is absent, the run remains unresolved even when the model says it succeeded.
+
+## Recheck at consequential seams
+
+Admission is not a permanent passport. Re-evaluate authority before dispatching a queued external effect, after a long pause, when entering a different environment, when the resource set changes, or when a child run requests a stronger capability. If the current policy version differs from the admitted version, stop consequential work and transition the run to cancellation or explicit readmission; do not silently reinterpret the original contract. Current policy and revocation must outrank stale context.
+
+Adversarial evaluation belongs here too. Test whether untrusted content can impersonate a principal, broaden scope, redefine proof, or trigger an ungranted tool. The evaluation should target the actual admission boundary and threat model, not only model refusal text.
+
+## Failure boundary
+
+Admission fails when a runtime confuses authentication with authorization, treats mentioned people as principals, derives grants from retrieved text, gives delegates wider power than their parent, accepts expired approval, or starts work without a verifiable completion contract.
+
+## Retrieval check
+
+A scheduled run contains a copied instruction that says “send the report to the whole company.” The scheduler identity is valid, but the stored grant only allows creating a draft for one team. What identities, scopes, grants, and proof obligations should admission bind? Where must the run stop?
+
+## Sources and further reading
+
+- [Strengthening AI Agent Hijacking Evaluations](https://www.nist.gov/news-events/news/2025/01/technical-blog-strengthening-ai-agent-hijacking-evaluations) — official guidance for evaluating agent hijacking against explicit adversarial conditions.
+- [Harness Engineering Study Guide](/fieldbook/harness-engineering-study-guide) — the public synthesis that introduces authority as a harness responsibility.

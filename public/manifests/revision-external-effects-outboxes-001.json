@@ -1,0 +1,37 @@
+{
+  "id": "revision-external-effects-outboxes-001",
+  "essaySlug": "external-effects-and-transactional-outboxes",
+  "revision": 1,
+  "publishedAt": "2026-08-23",
+  "substantivelyRevisedAt": "2026-08-23",
+  "summary": "Initial public revision of the external effects and transactional outboxes chapter.",
+  "affectedClaimIds": [],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-990b9a394cff640d5b9410cd40cb6fee01be89478cf9adbf149164f4855f8f5a",
+  "sourceIds": [
+    "source-aws-transactional-outbox",
+    "source-harness-engineering-fieldbook-v1"
+  ],
+  "sourceValidationDates": {
+    "source-harness-engineering-fieldbook-v1": "2026-08-21",
+    "source-aws-transactional-outbox": "2026-08-23"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-aws-transactional-outbox",
+      "title": "Transactional outbox pattern",
+      "canonicalUrl": "https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/transactional-outbox.html",
+      "lastValidated": "2026-08-23",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    }
+  ]
+}

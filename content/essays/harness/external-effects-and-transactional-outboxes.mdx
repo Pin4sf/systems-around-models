@@ -1,0 +1,71 @@
+---
+slug: external-effects-and-transactional-outboxes
+title: External Effects and Transactional Outboxes
+description: How durable effect intents separate planning from dispatch and make consequential actions recoverable, inspectable, and verifiable.
+sequence: Harness Engineering
+sequence_position: 15
+revision: 1
+authors:
+  - Systems Around Models
+published_at: 2026-08-23
+substantively_revised_at: 2026-08-23
+reading_time_source: 9 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-aws-transactional-outbox
+revision_id: revision-external-effects-outboxes-001
+previous_essay_slug: leases-fencing-cancellation-and-budgets
+next_essay_slug: ambiguity-idempotency-and-recovery
+---
+
+## Effects deserve their own lifecycle
+
+Changing a local plan is not the same as sending a message, moving money, publishing a page, deleting a file, or altering another system. External effects cross an authority and recovery boundary. They need durable identity, explicit admission, controlled dispatch, and evidence from the world.
+
+<EffectOutbox />
+
+Model output should propose an effect, not perform it implicitly. The harness converts an admitted proposal into a typed intent containing the operation, normalized parameters, principal, subject, resource scope, approval state, idempotency key, budget charge, expiry, and required evidence.
+
+## Commit intent with local state
+
+The dual-write problem appears when a runtime marks a task ready or complete in its database and separately calls an external provider. A crash between those actions can lose the effect or repeat it.
+
+The transactional outbox pattern records the local transition and effect intent in one durable transaction. A dispatcher later claims committed intents and calls the adapter. This does not make the external system part of the local transaction. It ensures the system can discover what it intended to do after a restart.
+
+An outbox record should move through named states such as pending, authorized, dispatched, observed, verified, rejected, expired, or ambiguous. Preserve attempts and receipts append-only; derive the current view from them.
+
+## Re-authorize at dispatch
+
+Time can pass between intent creation and dispatch. Approval may be revoked, credentials rotated, the target changed, or the deadline exceeded. The dispatcher should recheck current authority, policy, fencing token, and budget before crossing the boundary.
+
+Adapters should accept typed requests and return typed observations. Do not let free-form text choose hidden provider options. Redact credentials from prompts, logs, and receipts while retaining enough identifiers to investigate what occurred.
+
+## Delivery is not verification
+
+A successful HTTP response may prove only that a provider accepted a request. A queue acknowledgement may prove only that another component took custody. Define the evidence needed for the user-visible claim.
+
+For some effects, provider acceptance is sufficient. Others require reading the resulting object, receiving a delivery event, or asking a human to confirm. Keep “dispatched,” “observed,” and “verified” distinct so the interface cannot collapse transport success into outcome success.
+
+The dispatcher can retry delivery, but the recovery policy belongs to the effect type. Idempotency keys, provider lookup, reconciliation, expiry, and escalation determine whether another attempt is safe.
+
+When automated delivery exhausts its retry policy, move the intent to a durable dead-letter state rather than dropping it or marking the task failed-and-closed. Name the owner responsible for reconciliation, expose the unresolved effect to the user, preserve the last evidence and next permitted transition, and require fresh authority before manual redelivery.
+
+## Keep irreversible work narrow
+
+Prefer staged effects: draft before send, preview before publish, soft delete before purge, authorization before capture. The smaller the irreversible seam, the more of the workflow can be retried safely.
+
+Record the effect type's reversibility, compensation path, and human checkpoint. Compensation is a new effect with its own authority and evidence; it is not a time machine that erases the first action.
+
+## Failure boundary
+
+Effect handling fails when model text directly triggers providers, local completion is committed before durable intent, dispatch ignores revocation, receipts leak secrets, a provider acknowledgement is presented as final outcome, or retry policy is shared across operations with different consequences.
+
+## Retrieval check
+
+A run records “newsletter ready” and crashes before the provider response is saved. The outbox contains a dispatched intent with a stable key, but the local article state still says pending. Which facts should recovery inspect, which transition is unsafe, and what evidence would permit verification?
+
+## Sources and further reading
+
+- [Transactional outbox pattern](https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/transactional-outbox.html) — official AWS guidance on recording a database update and outbox event together before separate delivery.
+- [Harness Engineering Study Guide](/fieldbook/harness-engineering-study-guide) — the public synthesis connecting reliable effects to agent harness design.

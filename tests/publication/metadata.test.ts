@@ -21,6 +21,11 @@ const releasedChapterPaths = [
   "/fieldbook/state-journals-checkpoints-and-replay",
   "/fieldbook/loops-workflows-graphs-and-delegation",
   "/fieldbook/memory-compaction-and-continuity",
+  "/fieldbook/identity-authority-and-admission",
+  "/fieldbook/leases-fencing-cancellation-and-budgets",
+  "/fieldbook/external-effects-and-transactional-outboxes",
+  "/fieldbook/ambiguity-idempotency-and-recovery",
+  "/fieldbook/security-credentials-supply-chain-and-revocation",
 ];
 
 afterEach(() => {

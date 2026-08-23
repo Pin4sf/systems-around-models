@@ -1,0 +1,37 @@
+{
+  "id": "revision-ambiguity-idempotency-recovery-001",
+  "essaySlug": "ambiguity-idempotency-and-recovery",
+  "revision": 1,
+  "publishedAt": "2026-08-23",
+  "substantivelyRevisedAt": "2026-08-23",
+  "summary": "Initial public revision of the ambiguity, idempotency, and recovery chapter.",
+  "affectedClaimIds": [],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-be851a36ac9e116d9c92bbe6bbb5258652e49a2a9d121752d66b92dc75a9310d",
+  "sourceIds": [
+    "source-aws-making-retries-safe",
+    "source-harness-engineering-fieldbook-v1"
+  ],
+  "sourceValidationDates": {
+    "source-harness-engineering-fieldbook-v1": "2026-08-21",
+    "source-aws-making-retries-safe": "2026-08-23"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-aws-making-retries-safe",
+      "title": "Making retries safe with idempotent APIs",
+      "canonicalUrl": "https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/",
+      "lastValidated": "2026-08-23",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    }
+  ]
+}

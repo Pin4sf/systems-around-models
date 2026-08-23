@@ -213,6 +213,11 @@ describe("flagship fieldbook reader", () => {
     ["state-journals-checkpoints-and-replay", "State, Journals, Checkpoints, and Replay", "Facts, snapshots, and derived views"],
     ["loops-workflows-graphs-and-delegation", "Loops, Workflows, Graphs, and Delegation", "Control structures and stop policies"],
     ["memory-compaction-and-continuity", "Memory, Compaction, and Continuity", "Memory lifecycle through continuity"],
+    ["identity-authority-and-admission", "Identity, Authority, and Admission", "Admission binds identity, authority, and proof"],
+    ["leases-fencing-cancellation-and-budgets", "Leases, Fencing, Cancellation, and Budgets", "Lease handoff with fencing token"],
+    ["external-effects-and-transactional-outboxes", "External Effects and Transactional Outboxes", "Transactional outbox effect lifecycle"],
+    ["ambiguity-idempotency-and-recovery", "Ambiguity, Idempotency, and Recovery", "Ambiguous effect reconciliation"],
+    ["security-credentials-supply-chain-and-revocation", "Security, Credentials, Supply Chain, and Revocation", "Revocation propagation across active surfaces"],
   ])("publishes %s with a retrieval diagram and check", async (chapterSlug, title, diagramName) => {
     const page = await ArticlePage({ params: Promise.resolve({ slug: chapterSlug }) });
     render(page);
