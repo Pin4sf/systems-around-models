@@ -1,0 +1,86 @@
+---
+slug: twelve-recurring-failure-classes
+title: Twelve Recurring Failure Classes
+description: A failure-led field guide for tracing agent incidents across context, capability, state, effects, authority, and closure.
+sequence: Harness Engineering
+sequence_position: 4
+revision: 1
+authors:
+  - Systems Around Models
+published_at: 2026-08-22
+substantively_revised_at: 2026-08-22
+reading_time_source: 12 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-rasa-why-agents-fail
+revision_id: revision-twelve-failure-classes-001
+previous_essay_slug: the-h0-to-h9-progression
+next_essay_slug: four-surface-classes
+---
+
+## Read incidents as chains
+
+An agent incident rarely belongs to one sentence. A weak input can select the wrong capability; the capability can act in an uncertain environment; state can be lost before reconciliation; an unrelated check can then close the work. The model’s last visible message is only the easiest event to quote.
+
+<FailureChain />
+
+The twelve classes below are diagnostic prompts, not an exhaustive taxonomy. Several can appear in one incident. The point is to name the owning contract early enough to test it.
+
+## Context failures
+
+**1. Context omission.** Required evidence or instruction never entered the model-visible context. The system may produce a fluent answer to a different problem. Inspect the context compiler and its inputs before blaming reasoning.
+
+**2. Context rot.** Repeated summaries, stale state, or accumulated tool output displaces the facts the task still depends on. A larger window can delay the failure without defining what deserves to survive.
+
+## Capability and environment failures
+
+**3. Tool ambiguity.** Names, schemas, or results do not make the capability contract clear. Two similar tools may differ in scope; a success-shaped response may hide a partial effect. Test selection and result interpretation separately.
+
+**4. Capability overexposure.** The run receives more power than the task needs. Even correct planning then has an unnecessarily large blast radius. Bind tools and credentials per job, not per installation.
+
+**5. Environment drift.** The same instruction reaches a different repository, account, dependency set, or runtime than the one that was evaluated. Record identity and version as execution inputs.
+
+## State and control failures
+
+**6. State loss.** A restart forgets intent, completed steps, approvals, or uncertain effects. Resuming from prose alone can repeat work that already crossed an external boundary.
+
+**7. Doom loop.** The controller repeats a failing transition without learning, changing evidence, or exhausting a bounded budget. Count attempts by intent and failure class, not just raw tool calls.
+
+## Effect failures
+
+**8. Duplicate effect.** A retry repeats one intended write because the first result was unknown rather than failed. Stable effect identities and provider reconciliation are stronger than a prompt asking the model to be careful.
+
+**9. Silent partial success.** Some outputs commit while others fail, yet the run reports one binary status. Preserve per-effect state and expose the unresolved remainder.
+
+## Evidence and authority failures
+
+**10. Self-verification.** The maker judges its own output from the same context and assumptions. Independent checks need a distinct contract, not merely a second pass by the same loop.
+
+**11. Authority confusion.** Ability to execute is treated as permission to decide. A system may be allowed to draft, test, or stage without being allowed to publish, charge, merge, or accept.
+
+**12. False closure.** Work is declared done because the process stopped or an easy check passed. Closure requires evidence tied to the intended outcome and an authorized owner of that outcome.
+
+## Turn a class into a test
+
+A label only helps if it changes the investigation. For each suspected class, preserve four things:
+
+- the observation, stated without an explanation;
+- the contract believed to own it;
+- a falsifier that would move the investigation elsewhere;
+- the smallest replay or fixture that can reproduce the boundary.
+
+Suppose a coding run reports success after changing the wrong package. “Environment drift” predicts that the recorded working directory, repository identity, or dependency state differs from the admitted target. If those identities match, the hypothesis weakens and context omission or tool ambiguity becomes more plausible. That is better than adding generic instructions and hoping the symptom disappears.
+
+Failures should also remain visible after repair. A regression test, trace assertion, schema, or conformance check preserves more learning than an incident note alone. The note explains why the boundary matters; enforcement tells the next run when it crosses it.
+
+## Retrieval check
+
+A provider times out after a write. The run restarts, repeats the write, checks only that the local test suite passes, and closes the task. Name at least four classes in the chain. A strong answer includes state loss, duplicate effect, self-verification, and false closure; capability overexposure or authority confusion may also apply depending on how the write was admitted.
+
+Then state the first deterministic artifact you would inspect. “The model response” is not enough: choose the effect-intent record, provider receipt, execution identity, or verification contract and say why.
+
+## Sources and further reading
+
+- [Why Agents Fail](https://github.com/RasaHQ/why-agents-fail) — twelve failure-led lessons around an evolving reference agent.
+- [The H0→H9 Progression](/fieldbook/the-h0-to-h9-progression) — a companion ladder for locating the shallowest owning responsibility.

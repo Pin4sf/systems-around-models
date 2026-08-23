@@ -1,0 +1,37 @@
+{
+  "id": "revision-instructions-context-assembly-001",
+  "essaySlug": "instructions-and-context-assembly",
+  "revision": 1,
+  "publishedAt": "2026-08-22",
+  "substantivelyRevisedAt": "2026-08-22",
+  "summary": "Initial public revision of the instructions and context assembly chapter.",
+  "affectedClaimIds": [],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-227e374bb8e5ede0918703222bef53dbb7829071ea3aaf57b9bb4349df4e4975",
+  "sourceIds": [
+    "source-harness-engineering-fieldbook-v1",
+    "source-memory-anthropic-context-engineering"
+  ],
+  "sourceValidationDates": {
+    "source-harness-engineering-fieldbook-v1": "2026-08-21",
+    "source-memory-anthropic-context-engineering": "2026-08-22"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-memory-anthropic-context-engineering",
+      "title": "Effective Context Engineering for AI Agents",
+      "canonicalUrl": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "all-rights-reserved"
+    }
+  ]
+}

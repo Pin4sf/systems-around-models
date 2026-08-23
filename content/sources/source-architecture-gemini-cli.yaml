@@ -1,0 +1,24 @@
+id: source-architecture-gemini-cli
+title: Gemini CLI repository
+author: Google
+canonical_url: https://github.com/google-gemini/gemini-cli
+published_at: 2025-04-17
+retrieved_at: 2026-08-22
+repository_commit: 5411f113cafae26161b4969b0237b8e1e024e2c2
+inspected_paths:
+  - README.md
+source_type: first-party-repository
+basis: Commit-pinned inspection of the official public repository README and its documented open terminal-agent surface.
+license_status: Apache-2.0
+evidence_grade: FD
+observed_mechanisms:
+  - description: The repository presents Gemini CLI as an open-source terminal agent with built-in tools and extensibility.
+    evidence_grade: FD
+    basis: The official README documents the terminal interface, tools, and extension-facing capabilities.
+author_reported_claims: []
+unknowns:
+  - The first profile does not yet establish complete session recovery and end-to-end outcome verification semantics.
+falsifiers:
+  - A deeper source inspection shows that a responsibility attributed to the CLI belongs only to an external service.
+last_validated: 2026-08-22
+correction_ledger_status: reviewed

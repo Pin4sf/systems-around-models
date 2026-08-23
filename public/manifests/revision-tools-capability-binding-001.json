@@ -1,0 +1,37 @@
+{
+  "id": "revision-tools-capability-binding-001",
+  "essaySlug": "tools-capability-manifests-and-binding",
+  "revision": 1,
+  "publishedAt": "2026-08-22",
+  "substantivelyRevisedAt": "2026-08-22",
+  "summary": "Initial public revision of the tools, capability manifests, and binding chapter.",
+  "affectedClaimIds": [],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-431a68344d77d227643823be854c9d97d22ad0e3048d34953b1605cb1224d51d",
+  "sourceIds": [
+    "source-earendil-what-is-a-harness",
+    "source-harness-engineering-fieldbook-v1"
+  ],
+  "sourceValidationDates": {
+    "source-harness-engineering-fieldbook-v1": "2026-08-21",
+    "source-earendil-what-is-a-harness": "2026-08-21"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-earendil-what-is-a-harness",
+      "title": "What is a Harness?",
+      "canonicalUrl": "https://earendil.com/posts/what-is-a-harness/",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "unknown"
+    },
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+id: architecture-claude-code
+slug: claude-code
+name: Claude Code
+record_kind: system
+product_class: frontier-coding-harness
+status: public
+summary: An agentic terminal coding product that places an interactive model loop beside a developer's codebase and git workflow.
+primary_job: Help a developer inspect, change, and reason about a codebase from the terminal.
+teaching_question: What changes when a coding harness is a cohesive product rather than a loop library?
+coordination_shape: iterative-loop
+control_owner: The public source establishes an agentic product surface, not its complete internal control loop.
+context_model: The documented surface accepts natural-language work and understands the user's codebase.
+state_model: Durable session state and its internal owner are not established by the current public source.
+authority_boundary: Exact tool binding and permission enforcement are not established by the current public source.
+recovery_model: Interruption and crash recovery semantics are not established by the current public source.
+verification_model: Git workflow support is documented, while project acceptance remains external.
+transferable_lesson: A frontier coding harness is an integrated product boundary, not merely a model-tool loop.
+deliberate_omissions:
+  - It does not own the repository's definition of done or protected merge policy.
+topology_steps:
+  - { stage: admit, label: Admit, ownership: owned, description: The product accepts an interactive coding request from the developer. }
+  - { stage: assemble, label: Assemble, ownership: owned, description: The product builds model context from the conversation and codebase. }
+  - { stage: bind, label: Bind, ownership: not-established, description: Complete tool binding and permission enforcement are not established here. }
+  - { stage: run, label: Run, ownership: owned, description: The product executes coding tasks through its documented agentic surface. }
+  - { stage: recover, label: Recover, ownership: not-established, description: Session continuation and complete crash semantics are not established here. }
+  - { stage: verify-close, label: Verify and close, ownership: external, description: Repository checks and human review remain final arbiters of completion. }
+lifecycle_trace:
+  - { order: 1, label: Read task and repository, owner: Claude Code, outcome: Working context is assembled for the coding request. }
+  - { order: 2, label: Execute coding task, owner: Claude Code, outcome: The product works against the codebase through its agentic surface. }
+  - { order: 3, label: Present result, owner: Claude Code plus developer, outcome: The developer receives a result to inspect and accept. }
+evidence_grade: FD
+evidence_fidelity: first-party-documented
+dossier_status: deep-dive-needed
+source_ids:
+  - source-architecture-claude-code
+inspected_version: 16440d0f6ee8c47f34169687044b89eafa8b0f8d
+unknowns:
+  - Complete proprietary runtime internals, effect reconciliation, and recovery semantics are not public in this source pin.
+last_reviewed: 2026-08-22
+revision: 1

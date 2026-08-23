@@ -1,0 +1,37 @@
+{
+  "id": "revision-twelve-failure-classes-001",
+  "essaySlug": "twelve-recurring-failure-classes",
+  "revision": 1,
+  "publishedAt": "2026-08-22",
+  "substantivelyRevisedAt": "2026-08-22",
+  "summary": "Initial public revision of the twelve recurring harness failure classes.",
+  "affectedClaimIds": [],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-7a8dc0cba647f5818ae98e875e82961b1200123c2a5f12c49f8026908970361f",
+  "sourceIds": [
+    "source-harness-engineering-fieldbook-v1",
+    "source-rasa-why-agents-fail"
+  ],
+  "sourceValidationDates": {
+    "source-harness-engineering-fieldbook-v1": "2026-08-21",
+    "source-rasa-why-agents-fail": "2026-08-22"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-rasa-why-agents-fail",
+      "title": "Why Agents Fail",
+      "canonicalUrl": "https://github.com/RasaHQ/why-agents-fail",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "MIT"
+    }
+  ]
+}

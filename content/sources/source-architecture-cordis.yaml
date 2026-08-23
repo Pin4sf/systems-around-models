@@ -1,0 +1,27 @@
+id: source-architecture-cordis
+title: Cordis repository
+author: Cordiverse
+canonical_url: https://github.com/cordiverse/cordis/tree/8cc9e33fab69e2d0476d126baaf2acb24e6a6ab4
+published_at: 2026-08-13
+retrieved_at: 2026-08-16
+repository_commit: 8cc9e33fab69e2d0476d126baaf2acb24e6a6ab4
+inspected_paths:
+  - README.md
+  - LICENSE
+  - packages/core/src
+source_type: first-party-repository
+basis: Commit-pinned inspection of the public composition kernel, including contexts, services, fibers, and effect disposal.
+license_status: MIT
+evidence_grade: IP
+observed_mechanisms:
+  - description: Plugin registrations are owned by lifecycle fibers and their disposal effects unwind in reverse order when the owner unloads.
+    evidence_grade: IP
+    basis: The inspected core lifecycle and effect implementation tracks registrations and inverse cleanup by owner.
+author_reported_claims:
+  - Cordis describes itself as an IoC container for building scalable applications through plugin composition.
+unknowns:
+  - Reversible registration cannot prove that a plugin's inverse is semantically complete or that external effects are reversible.
+falsifiers:
+  - The pinned implementation does not associate registered effects with lifecycle ownership and disposal.
+last_validated: 2026-08-16
+correction_ledger_status: reviewed

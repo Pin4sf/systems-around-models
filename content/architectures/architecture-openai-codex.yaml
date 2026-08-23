@@ -1,0 +1,64 @@
+id: architecture-openai-codex
+slug: openai-codex
+name: OpenAI Codex
+record_kind: system
+product_class: frontier-coding-harness
+status: public
+summary: An open-source coding agent documented as running locally on the developer's computer.
+primary_job: Carry out coding work inside a developer-controlled local workspace.
+teaching_question: How can a coding loop make execution boundaries and approvals explicit?
+coordination_shape: iterative-loop
+control_owner: The public README establishes a local coding agent, not its complete internal control loop.
+context_model: The documented surface places the coding agent on the developer's local computer.
+state_model: Session durability and its internal owner are not established by the current inspected path.
+authority_boundary: Sandbox, approval, and capability-binding semantics require a deeper source inspection.
+recovery_model: Session recovery and external-effect reconciliation require a deeper source inspection.
+verification_model: Project checks, review, and acceptance remain outside the documented repository summary.
+transferable_lesson: Execution safety becomes a first-class harness responsibility when the agent acts locally.
+deliberate_omissions:
+  - Codex does not replace project-specific review, CI, protected merge, or product acceptance.
+topology_steps:
+  - { stage: admit, label: Admit, ownership: owned, description: The product accepts a coding request on the developer's computer. }
+  - { stage: assemble, label: Assemble, ownership: not-established, description: Complete context assembly is not established by the current inspected path. }
+  - { stage: bind, label: Bind, ownership: not-established, description: Tool binding, sandbox, and approval semantics need deeper source inspection. }
+  - { stage: run, label: Run, ownership: owned, description: The documented coding agent runs locally on the developer's computer. }
+  - { stage: recover, label: Recover, ownership: not-established, description: Session and effect recovery are not established by the current inspected path. }
+  - { stage: verify-close, label: Verify and close, ownership: external, description: Project checks, policy, and the developer decide closure. }
+lifecycle_trace:
+  - { order: 1, label: Receive local task, owner: Codex, outcome: A coding request enters the local agent surface. }
+  - { order: 2, label: Perform coding work, owner: Codex, outcome: The local coding agent advances the requested work. }
+  - { order: 3, label: Review outcome, owner: Developer, outcome: The result remains subject to project checks and acceptance. }
+evidence_grade: FD
+evidence_fidelity: working-profile
+dossier_status: deep-dive-needed
+source_ids:
+  - source-architecture-openai-codex
+inspected_version: 343074d4207d572809bd8cea15f4be1d09d98e0b
+unknowns:
+  - A deeper dossier should map compaction, resume, multi-agent, and ambiguous-effect behavior from current source paths.
+last_reviewed: 2026-08-22
+revision: 1
+study:
+  deck: A current, deliberately bounded working study of the open-source local coding agent and the responsibilities its public repository summary does and does not establish.
+  evidence_boundary: This page is current at the recorded repository pin, but its source inspection is README-level. Unknown internal paths stay unknown rather than inheriting claims from older or adjacent Codex products.
+  system_boundary:
+    - The inspected official repository presents Codex as a coding agent that runs locally in a developer's terminal and working directory.
+    - Local execution makes workspace identity, sandboxing, approvals, and project checks important harness boundaries, but the current source record does not yet map their complete implementation.
+    - The developer and repository policy remain responsible for review, protected merge, deployment, and product acceptance.
+  mechanism_notes:
+    - title: Local work is still governed work
+      body: Running on a developer machine does not collapse identity, permission, or acceptance into the model loop. The working directory and admitted task are part of the effective system.
+    - title: Current does not mean complete
+      body: The repository pin and release identity are current, while compaction, resume, multi-agent, capability binding, and effect recovery remain scheduled for path-level inspection.
+    - title: External checks remain real owners
+      body: A coding agent can produce a change and run project commands. CI, code review, protected merge, deployment gates, and the product owner retain distinct closure responsibilities.
+  failure_boundary:
+    - This working study does not claim a complete internal control, compaction, recovery, or multi-agent architecture.
+    - Local execution alone does not prove least privilege, data custody, or safe external effects.
+    - Project-specific correctness and product acceptance remain outside the inspected repository summary.
+  retrieval_check: A Codex run changes the intended files and reports that tests passed. Which responsibilities remain external? Name at least review, protected merge, deployment admission, and product acceptance, and do not treat local execution as proof of any one of them.
+  refresh_target: Deep-inspection backlog includes compaction, resume, multi-agent, approvals and sandbox, and ambiguous-effect behavior.
+  adopt_adapt_reject:
+    adopt: Adopt the local developer-workspace boundary and preserve repository checks as explicit evidence rather than model assertions.
+    adapt: Adapt the coding loop through project-specific capability, identity, sandbox, and protected-delivery policies after deeper source inspection.
+    reject: Reject the inference that local execution or a passing project command establishes least privilege, safe deployment, or product acceptance.

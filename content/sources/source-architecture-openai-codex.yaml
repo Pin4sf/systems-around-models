@@ -1,0 +1,24 @@
+id: source-architecture-openai-codex
+title: OpenAI Codex repository
+author: OpenAI
+canonical_url: https://github.com/openai/codex
+published_at: 2025-04-13
+retrieved_at: 2026-08-22
+repository_commit: 343074d4207d572809bd8cea15f4be1d09d98e0b
+inspected_paths:
+  - README.md
+source_type: first-party-repository
+basis: Commit-pinned inspection of the official public repository README and its documented terminal agent boundary.
+license_status: Apache-2.0
+evidence_grade: FD
+observed_mechanisms:
+  - description: The repository presents Codex as a local coding agent that runs in a terminal against a working directory.
+    evidence_grade: FD
+    basis: The official README documents the terminal interface, installation, and local coding-agent role.
+author_reported_claims: []
+unknowns:
+  - This first profile does not yet map every internal recovery, compaction, and verification path.
+falsifiers:
+  - A deeper source inspection contradicts the responsibility boundary used in the public profile.
+last_validated: 2026-08-22
+correction_ledger_status: reviewed

@@ -1,0 +1,79 @@
+---
+slug: the-h0-to-h9-progression
+title: The H0→H9 Progression
+description: A diagnostic ladder for adding harness responsibilities only when a simpler system can no longer contain the observed failure.
+sequence: Harness Engineering
+sequence_position: 3
+revision: 1
+authors:
+  - Systems Around Models
+published_at: 2026-08-22
+substantively_revised_at: 2026-08-22
+reading_time_source: 11 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-rasa-why-agents-fail
+revision_id: revision-h0-to-h9-progression-001
+previous_essay_slug: the-model-is-not-the-agent
+next_essay_slug: twelve-recurring-failure-classes
+---
+
+## A ladder, not a maturity score
+
+The H0→H9 progression is a way to locate responsibility. It begins with a model response and adds one system concern at a time: context, capabilities, environment, durable state, orchestration, memory, reliable effects, evidence, and evaluation. The levels are not a leaderboard. A narrow extraction task may be well designed at H1. A payment-changing product can remain unsafe even when it contains mechanisms from H8.
+
+<HarnessProgression />
+
+Use the shallowest level that explains the failure. Adding memory to a tool-schema bug makes the system larger without making the contract clearer. Adding a multi-agent graph to a missing permission check spreads the same defect across more executors.
+
+## H0 to H3: from response to situated action
+
+**H0 — Model response.** The system sends input and receives generated output. This is enough when the output itself is the product and no durable or external effect follows. The key question is whether the response satisfies the requested form and content.
+
+**H1 — Instructions and context.** The response now depends on what the harness selected, ordered, omitted, or compressed. A failure may come from missing evidence, conflicting instructions, or stale context rather than model capability. The relevant artifact is the compiled context, not merely the final prompt string.
+
+**H2 — Tools and binding.** The model can propose or invoke capabilities. Schemas, descriptions, result shapes, and error semantics become part of behavior. A tool that exists but is bound with an ambiguous contract is not a reliable capability.
+
+**H3 — Environment, identity, and permission.** An action runs somewhere, as someone, against particular data and credentials. “The tool call succeeded” is too small a claim if the wrong repository, tenant, account, or sandbox received it. Admission and custody enter the design here.
+
+## H4 to H6: from a loop to continuity
+
+**H4 — Durable state and interruption.** Work may outlive one process or context window. The harness records intent, progress, checkpoints, and the facts needed to resume. Recovery is not simply replay: an interrupted action may already have changed the world.
+
+**H5 — Bounded orchestration.** Control can branch, loop, delegate, or wait. Budgets, cancellation, ownership, and stopping rules must be explicit. More agents do not remove responsibility; they create more handoff seams where it can be lost.
+
+**H6 — Memory.** Selected information may influence future work beyond the current run. Memory introduces provenance, correction, retrieval, expiry, and deletion questions. It should enter only when durable cross-run continuity is part of the job—not as a general remedy for weak context assembly.
+
+## H7 to H9: from action to justified improvement
+
+**H7 — Reliable effects.** The system changes an external world where timeouts, retries, duplicate requests, and partial results matter. Effect identifiers, idempotency, reconciliation, leases, and revocation become first-class. “No response” must remain distinct from “no effect.”
+
+**H8 — Evidence and completion.** Execution is separated from proof, verification, acceptance, and closure. Evidence must correspond to the intended outcome. A model that made the change cannot be the sole authority that the change is correct.
+
+**H9 — Evaluation and evolution.** The model-and-harness configuration is evaluated under representative work and injected failure. Changes are promoted through an external contract. A self-improving system must not silently rewrite the judge that decides whether its improvement counts.
+
+## Diagnose before you climb
+
+When a run fails, write the smallest falsifiable hypothesis about the owning level. If the compiled context omitted the target file, inspect H1 before changing the model. If the external provider committed during a timeout, inspect H7 before strengthening the system prompt. If the run produced an artifact but no authorized owner accepted it, inspect H8.
+
+A useful escalation rule is:
+
+1. Name the observed failure.
+2. Identify the shallowest responsibility that could have prevented or exposed it.
+3. State what evidence would falsify that diagnosis.
+4. Add the smallest deterministic mechanism that changes the result.
+5. Re-run the failure and one adjacent case.
+
+The progression is successful when it helps a team stop adding machinery. The goal is not H9. The goal is a system whose responsibilities are proportionate to the work it is allowed to perform.
+
+## Retrieval check
+
+For a run that wrote to the wrong customer account, which level owns the first investigation? Start at H3: environment, identity, and permission. If the identity was correct but an uncertain timeout caused a duplicate write, move to H7. If both writes were prevented but the system still declared success from an unrelated test, investigate H8.
+
+Before continuing, explain in one sentence why adding memory would not repair any of those three failures.
+
+## Sources and further reading
+
+- [Why Agents Fail](https://github.com/RasaHQ/why-agents-fail) — a public, failure-led course that motivates diagnosis across context, state, verification, and observability.
+- [Harness Engineering Study Guide](/fieldbook/harness-engineering-study-guide) — the compact course that introduces the responsibilities expanded here.

@@ -14,7 +14,7 @@
     "claim-system-trace-responsibility-checklist"
   ],
   "correctionDisposition": "publication",
-  "contentHash": "sha256-d41e5dc591e0a52e02fa6ed87d1f8e32a308b4a452af4568c312dc9d2570d746",
+  "contentHash": "sha256-b0691c0e89908884ef39f95309522dbeda5e95fb00aa2ac97cf48d075745d3bb",
   "sourceIds": [
     "source-earendil-what-is-a-harness",
     "source-harness-engineering-fieldbook-v1"
@@ -23,8 +23,8 @@
     "source-earendil-what-is-a-harness": "2026-08-21",
     "source-harness-engineering-fieldbook-v1": "2026-08-21"
   },
-  "schemaVersion": 1,
-  "validationSchemaVersion": "publication-v1",
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
   "sources": [
     {
       "id": "source-earendil-what-is-a-harness",

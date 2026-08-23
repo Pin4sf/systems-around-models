@@ -1,0 +1,30 @@
+{
+  "id": "architecture-gemini-cli",
+  "slug": "gemini-cli",
+  "recordKind": "system",
+  "productClass": "frontier-coding-harness",
+  "revision": 1,
+  "lastReviewed": "2026-08-22",
+  "inspectedVersion": "5411f113cafae26161b4969b0237b8e1e024e2c2",
+  "dossierStatus": "deep-dive-needed",
+  "evidenceGrade": "FD",
+  "evidenceFidelity": "working-profile",
+  "contentHash": "sha256-78facc8793ed056ab81b82670482b65f98b559ef9b7ed138c476b9763f5a6d55",
+  "sourceIds": [
+    "source-architecture-gemini-cli"
+  ],
+  "sourceValidationDates": {
+    "source-architecture-gemini-cli": "2026-08-22"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-architecture-gemini-cli",
+      "title": "Gemini CLI repository",
+      "canonicalUrl": "https://github.com/google-gemini/gemini-cli",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "Apache-2.0"
+    }
+  ]
+}

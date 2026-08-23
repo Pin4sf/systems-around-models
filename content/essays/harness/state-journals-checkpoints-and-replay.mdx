@@ -1,0 +1,61 @@
+---
+slug: state-journals-checkpoints-and-replay
+title: State, Journals, Checkpoints, and Replay
+description: How durable facts, recovery snapshots, derived views, and external receipts support interruption without rewriting history.
+sequence: Harness Engineering
+sequence_position: 10
+revision: 1
+authors:
+  - Systems Around Models
+published_at: 2026-08-22
+substantively_revised_at: 2026-08-22
+reading_time_source: 9 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-anthropic-effective-long-running-harnesses
+revision_id: revision-state-journals-checkpoints-replay-001
+previous_essay_slug: environments-sandboxes-and-custody
+next_essay_slug: loops-workflows-graphs-and-delegation
+---
+
+## Durable state begins with facts
+
+An agent runtime needs to survive model calls, process exits, provider errors, and human pauses. The safest base is a journal of facts: admitted, capability-bound, step-started, effect-intended, receipt-observed, checkpoint-written, cancelled, verified, or closed. Current state is a projection over those facts.
+
+<StateLayers />
+
+This separation lets the system reconstruct what it knew at a point in time. It also preserves disagreement: a later reconciliation can qualify an ambiguous receipt without deleting the earlier uncertainty.
+
+## Checkpoints accelerate recovery
+
+A checkpoint captures enough derived state to resume without replaying an entire history. It may include the current plan, completed steps, open effects, budgets, context lineage, selected artifacts, and next legal transitions. It should record the journal position and schema version from which it was built.
+
+A checkpoint is not canonical truth. If it conflicts with later durable facts, rebuild it. Treat it like a cache with recovery value, not a magical serialized mind.
+
+## Make replay safe at boundaries
+
+Pure computation can usually replay. External effects cannot be assumed replayable. Before an effect, persist a stable intent identity and the information needed to reconcile. After an effect, persist the provider receipt or the fact that the outcome is unknown. On recovery, inspect before repeating.
+
+Replay also needs deterministic ordering. Record parent-child relationships, sequence numbers, or causal identifiers so concurrent events do not become an arbitrary narrative. If two workers can advance the same run, use leases or fencing so a stale worker cannot commit late success over a newer decision.
+
+## Separate views from facts
+
+Dashboards, summaries, open-loop lists, and model-ready context are derived views. They should be rebuildable and should expose their freshness when it matters. A green card is not proof; it is a projection whose supporting events and evaluator result must remain reachable.
+
+This makes corrections less destructive. Correct the fact through a new governed event, rebuild the affected views, and retain the lineage explaining why the visible state changed.
+
+## Failure boundary
+
+State systems fail when the only record lives in model context, a checkpoint overwrites unresolved facts, event handlers are not idempotent, schema drift makes old events unreadable, or recovery blindly repeats external effects. They also fail when a journal retains sensitive content without a deletion or redaction contract.
+
+Run crash tests at each transition. A useful invariant is that restart produces either the same next legal action or a visible reconciliation state—never an invented completion.
+
+## Retrieval check
+
+A worker records “send started,” the provider times out, and the process crashes before storing a receipt. After restart, which facts are canonical, what may a checkpoint contribute, and what must happen before another send? Explain why replaying the handler from its first line is unsafe.
+
+## Sources and further reading
+
+- [Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents) — first-party guidance on progress artifacts and usable state across sessions.
+- [Environments, Sandboxes, and Custody](/fieldbook/environments-sandboxes-and-custody) — the resource boundary that durable state must continue to identify.

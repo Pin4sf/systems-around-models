@@ -1,0 +1,24 @@
+id: source-architecture-letta
+title: Letta repository
+author: Letta
+canonical_url: https://github.com/letta-ai/letta
+published_at: 2023-10-11
+retrieved_at: 2026-08-22
+repository_commit: 87fd37aab68c7bdd0d66fe63751553756f6af3e5
+inspected_paths:
+  - README.md
+source_type: first-party-repository
+basis: Commit-pinned inspection of the official public repository README and its documented stateful-agent platform boundary.
+license_status: Apache-2.0
+evidence_grade: FD
+observed_mechanisms:
+  - description: The repository presents a platform for stateful agents with persistent memory and server-managed agent state.
+    evidence_grade: FD
+    basis: The official README describes the stateful-agent focus, memory role, and server and client surfaces.
+author_reported_claims: []
+unknowns:
+  - This first profile does not yet trace every memory mutation, archival, and correction path through current code.
+falsifiers:
+  - A current implementation inspection shows that durable state or memory ownership sits outside the profiled boundary.
+last_validated: 2026-08-22
+correction_ledger_status: reviewed

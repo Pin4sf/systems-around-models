@@ -62,6 +62,7 @@ async function productionHtmlFixture() {
   fixtureRoots.push(root);
   await Promise.all([
     write(root, "server/app/index.html", "<main>Homepage</main>"),
+    write(root, "server/app/architectures.html", "<main>Architectures</main>"),
     write(root, "server/app/fieldbook/the-model-is-not-the-agent.html", "<main>Chapter</main>"),
     write(root, "server/app/_not-found.html", "<main>Not found</main>"),
     write(root, "server/pages/404.html", "<main>404</main>"),
@@ -85,7 +86,7 @@ describe("representative route JavaScript budget", () => {
     expect(result.stderr).toContain("No production HTML documents found");
   });
 
-  it("requires the homepage, chapter, and not-found production documents", async () => {
+  it("requires the homepage, architectures, chapter, and not-found production documents", async () => {
     const root = await productionHtmlFixture();
     await rm(path.join(root, "server", "app", "_not-found.html"));
 
@@ -98,6 +99,7 @@ describe("representative route JavaScript budget", () => {
 
   it.each([
     ["homepage", "server/app/index.html"],
+    ["architectures", "server/app/architectures.html"],
     ["chapter", "server/app/fieldbook/the-model-is-not-the-agent.html"],
     ["not-found", "server/app/_not-found.html"],
     ["404", "server/pages/404.html"],

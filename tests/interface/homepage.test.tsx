@@ -14,24 +14,35 @@ it("presents a simple study-guide navigation", () => {
     screen.getByRole("navigation", { name: "Publication" }),
   ).toBeInTheDocument();
   expect(screen.queryByText(/Waldo/i)).not.toBeInTheDocument();
-  expect(screen.getByRole("link", { name: "Harness guide" })).toHaveAttribute(
+  expect(screen.getByRole("link", { name: "Harness" })).toHaveAttribute(
     "href",
     "/fieldbook/harness-engineering-study-guide",
   );
-  expect(screen.getByRole("link", { name: "Memory guide" })).toHaveAttribute(
+  expect(screen.getByRole("link", { name: "Memory" })).toHaveAttribute(
     "href",
     "/fieldbook/memory-engineering-study-guide",
   );
-  expect(screen.getByRole("link", { name: "Curriculum" })).toHaveAttribute("href", "/#chapters");
-  expect(screen.getByRole("link", { name: "First chapter" })).toHaveAttribute(
+  expect(screen.getByRole("link", { name: "Architectures" })).toHaveAttribute(
     "href",
-    "/fieldbook/the-model-is-not-the-agent",
+    "/architectures",
   );
+  expect(screen.getByRole("link", { name: "Start here" })).toHaveAttribute("href", "/");
   expect(screen.queryByText(/forthcoming/i)).not.toBeInTheDocument();
 });
 
-it("offers the released Memory companion as ordinary reading", () => {
-  render(<HomePage />);
+it("offers architecture comparison as a first-class study path", async () => {
+  render(await HomePage());
+
+  expect(screen.getByRole("heading", { name: "Study the machinery around models." })).toBeInTheDocument();
+  expect(screen.getByRole("link", { name: "Explore architectures" })).toHaveAttribute(
+    "href",
+    "/architectures",
+  );
+  expect(screen.getByRole("heading", { name: "Three ways into the field" })).toBeInTheDocument();
+});
+
+it("offers the released Memory companion as ordinary reading", async () => {
+  render(await HomePage());
 
   expect(
     screen.getByRole("heading", { name: "Memory Engineering: a practical companion guide" }),
@@ -43,16 +54,16 @@ it("offers the released Memory companion as ordinary reading", () => {
   expect(screen.queryByText(/evidence badge|revision panel|source drawer/i)).not.toBeInTheDocument();
 });
 
-it("leads readers into a complete harness-engineering course map", () => {
-  render(<HomePage />);
+it("leads readers into a complete harness-engineering course map", async () => {
+  render(await HomePage());
 
   expect(
     screen.getByRole("heading", {
-      name: "Harness Engineering, from first principles.",
+      name: "Study the machinery around models.",
       level: 1,
     }),
   ).toBeInTheDocument();
-  expect(screen.getByRole("link", { name: "Start reading" })).toHaveAttribute(
+  expect(screen.getByRole("link", { name: "Start with Harness Engineering" })).toHaveAttribute(
     "href",
     "/fieldbook/harness-engineering-study-guide",
   );
@@ -65,4 +76,20 @@ it("leads readers into a complete harness-engineering course map", () => {
   expect(screen.queryByText("Twelve labs and a capstone")).not.toBeInTheDocument();
   expect(screen.queryByText("Evidence before confidence")).not.toBeInTheDocument();
   expect(screen.queryByText("Corrections stay visible")).not.toBeInTheDocument();
+  for (const [name, href] of [
+    ["The H0→H9 progression", "/fieldbook/the-h0-to-h9-progression"],
+    ["Twelve recurring failure classes", "/fieldbook/twelve-recurring-failure-classes"],
+    ["Four surface classes", "/fieldbook/four-surface-classes"],
+    ["Developer and Product-Runtime Harnesses", "/fieldbook/developer-and-product-runtime-harnesses"],
+    ["Instructions and context assembly", "/fieldbook/instructions-and-context-assembly"],
+    ["Tools, capability manifests, and binding", "/fieldbook/tools-capability-manifests-and-binding"],
+    ["Environments, sandboxes, and custody", "/fieldbook/environments-sandboxes-and-custody"],
+    ["State, journals, checkpoints, and replay", "/fieldbook/state-journals-checkpoints-and-replay"],
+    ["Loops, workflows, graphs, and delegation", "/fieldbook/loops-workflows-graphs-and-delegation"],
+    ["Memory, compaction, and continuity", "/fieldbook/memory-compaction-and-continuity"],
+  ]) {
+    expect(screen.getByRole("link", { name: new RegExp(name, "i") })).toHaveAttribute("href", href);
+  }
+  expect(screen.getByText("Identity, authority, and admission").closest("li"))
+    .toHaveTextContent("Coming next");
 });

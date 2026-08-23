@@ -1,0 +1,37 @@
+{
+  "id": "revision-state-journals-checkpoints-replay-001",
+  "essaySlug": "state-journals-checkpoints-and-replay",
+  "revision": 1,
+  "publishedAt": "2026-08-22",
+  "substantivelyRevisedAt": "2026-08-22",
+  "summary": "Initial public revision of the state, journals, checkpoints, and replay chapter.",
+  "affectedClaimIds": [],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-845da58ffa09bddacb832b0c1f521472ee28079a065e0ac969d1730499a4fef5",
+  "sourceIds": [
+    "source-anthropic-effective-long-running-harnesses",
+    "source-harness-engineering-fieldbook-v1"
+  ],
+  "sourceValidationDates": {
+    "source-harness-engineering-fieldbook-v1": "2026-08-21",
+    "source-anthropic-effective-long-running-harnesses": "2026-08-22"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-anthropic-effective-long-running-harnesses",
+      "title": "Effective harnesses for long-running agents",
+      "canonicalUrl": "https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    }
+  ]
+}

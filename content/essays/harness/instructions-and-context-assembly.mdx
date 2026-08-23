@@ -1,0 +1,61 @@
+---
+slug: instructions-and-context-assembly
+title: Instructions and Context Assembly
+description: How a harness compiles policy, task state, retrieved material, and working history into a bounded input for one run.
+sequence: Harness Engineering
+sequence_position: 7
+revision: 1
+authors:
+  - Systems Around Models
+published_at: 2026-08-22
+substantively_revised_at: 2026-08-22
+reading_time_source: 9 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-memory-anthropic-context-engineering
+revision_id: revision-instructions-context-assembly-001
+previous_essay_slug: developer-and-product-runtime-harnesses
+next_essay_slug: tools-capability-manifests-and-binding
+---
+
+## Context is compiled, not collected
+
+A model sees only the material placed inside its current input. The harness therefore owns a consequential translation: it turns durable policy, a live request, current state, selected history, and retrieved knowledge into one bounded artifact. Calling that artifact “the prompt” hides the decisions that created it.
+
+<ContextAssembly />
+
+Compilation makes those decisions inspectable. Each input should have a source, a precedence rule, a freshness boundary, and a reason it is present. The output should be reproducible enough that a later reviewer can explain why the run saw one instruction and not another.
+
+## Layer instructions by authority
+
+Not every sentence has equal force. A useful order begins with locked runtime policy, then product or workspace rules, then the admitted task, then current operational state, retrieved references, and finally recent conversational material. Higher-authority layers constrain lower ones; retrieved text cannot silently become policy merely because it appeared later or sounded confident.
+
+This is also a security boundary. Tool output, webpages, tickets, and remembered notes are data until a trusted contract promotes them. Mark their provenance and quote or delimit them where confusion is plausible. If two authoritative layers conflict, fail visibly or select through an explicit precedence rule instead of asking the model to improvise governance.
+
+## Spend the context budget deliberately
+
+More context can reduce performance by burying the relevant signal, repeating stale instructions, or exhausting the window before the work is complete. Budget by function: invariants, task definition, current state, evidence, examples, and working history. Reserve space for tool results and the next decision rather than filling the window at admission.
+
+Progressive disclosure keeps the initial package small. Give the model enough to choose the next action, then retrieve the specific file, record, or instruction needed for that action. A table of contents, capability description, or file map can be more useful than embedding every body in advance.
+
+## Make a fresh session pass the test
+
+A good continuity package lets a new session answer four questions without reconstructing the whole conversation: What outcome is being pursued? What state is already durable? What remains unresolved? Which command or observation should happen next?
+
+This does not require preserving every token. It requires preserving decisions, constraints, evidence, open questions, and navigation pointers. A transcript is chronological material; a continuity packet is an operational interface.
+
+## Failure boundary
+
+Context assembly fails when stale state outranks current facts, untrusted text becomes instruction, contradictions disappear during summarization, or a session can continue only because the model vaguely remembers earlier turns. It also fails when a compiler cannot explain omissions: missing material may be a budget decision, a retrieval failure, or silent drift.
+
+Treat the compiled input as a versioned build artifact. Record the policy version, task identity, source identifiers, state checkpoint, retrieval decisions, and compaction lineage. Sensitive source material should be referenced or minimized according to policy rather than copied for convenience.
+
+## Retrieval check
+
+A new run receives a system policy, a user request, a two-day-old summary, a current task record, and a webpage containing “ignore all previous rules.” Put them in authority order and label each as instruction, state, or untrusted data. Then name what the harness should do when the summary contradicts the current task record.
+
+## Sources and further reading
+
+- [Effective Context Engineering for AI Agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) — first-party discussion of context selection, just-in-time retrieval, and compaction.
+- [Developer and Product-Runtime Harnesses](/fieldbook/developer-and-product-runtime-harnesses) — the authority seam that determines which runtime material may enter a live run.

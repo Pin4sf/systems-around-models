@@ -1,0 +1,69 @@
+id: architecture-deepseek-harness
+slug: deepseek-harness-cordis
+name: DeepSeek Harness and Cordis
+record_kind: system
+product_class: frontier-coding-harness
+status: public
+summary: A local-first coding-agent runtime whose concrete loop is composed from fine-grained, reversibly owned Cordis plugins.
+primary_job: Run one coding agent with inspectable context, capability, session, approval, persistence, and plugin lifecycle seams.
+teaching_question: What changes when runtime capabilities and their cleanup have explicit lifecycle owners?
+coordination_shape: iterative-loop
+control_owner: A concrete agent loop owns turns and steps while Cordis services and plugins supply most runtime responsibilities.
+context_model: Prompt sections, tool schemas, session events, and provider preparation compose a model-visible request per step.
+state_model: Normalized session events are durable facts from which requests, trajectories, persistence views, and interfaces can be reconstructed.
+authority_boundary: Host policy, approvals, guards, sandbox providers, and credentials bound execution within a declared single-operator developer-preview trust model.
+recovery_model: Durable steps close on cancellation or request error, persistence repairs interrupted turns, and plugin lifecycles drain owned work before teardown.
+verification_model: Extensive repository checks verify implementation contracts; project outcome acceptance and production readiness remain external.
+transferable_lesson: Give every long-lived capability one lifecycle owner, freeze the effective attempt inputs, and make durable meaning reconstructable from ordered facts.
+deliberate_omissions:
+  - The runtime does not supply a whole-product acceptance authority, prove plugin cleanup semantics, or establish production multi-tenant security.
+topology_steps:
+  - { stage: admit, label: Admit, ownership: owned, description: The concrete loop admits session input into a turn and preserves even rejected zero-step attempts. }
+  - { stage: assemble, label: Assemble, ownership: owned, description: Plugins assemble prompt sections, tool schemas, and event-derived history into the model request. }
+  - { stage: bind, label: Bind, ownership: owned, description: Cordis services compose tools, provider adapters, policy, approval, credentials, and sandbox seams. }
+  - { stage: run, label: Run, ownership: owned, description: A concrete turn and step loop streams the model and dispatches bounded, causally ordered tool work. }
+  - { stage: recover, label: Recover, ownership: owned, description: Session facts, cancellation drain, persistence repair, and reversible plugin ownership support re-entry. }
+  - { stage: verify-close, label: Verify and close, ownership: external, description: Repository checks cover runtime contracts while the developer or product owner accepts the outcome. }
+lifecycle_trace:
+  - { order: 1, label: Compose runtime, owner: Cordis host, outcome: Profiles and plugins create one effective capability and policy tree. }
+  - { order: 2, label: Admit turn, owner: Agent loop, outcome: Input enters a durable turn with scoped session and provider context. }
+  - { order: 3, label: Run step, owner: Agent loop, outcome: Model output and tool calls become normalized, causally ordered events. }
+  - { order: 4, label: Persist and project, owner: Session services, outcome: Durable facts feed request, trajectory, query, and interface views. }
+  - { order: 5, label: Drain or unload, owner: Lifecycle fibers, outcome: Owned work settles and reversible registrations unwind in reverse order. }
+evidence_grade: IP
+evidence_fidelity: implementation-pinned
+dossier_status: refresh-needed
+source_ids:
+  - source-architecture-deepseek-harness
+  - source-architecture-cordis
+inspected_version: 47f943859bef60e4160492346772ded9b24f765a
+unknowns:
+  - Upstream head b150a551b8d465e31e418e1b2eaf5e79bbb7d28e and package 0.1.1-rc.2 require a path-level refresh before this profile can be called current.
+  - Lifecycle inversion does not prove semantic cleanup, external-effect rollback, or safe execution of untrusted plugins.
+last_reviewed: 2026-08-22
+revision: 1
+study:
+  deck: A source-pinned study of a concrete coding loop, an event-derived session model, and a plugin runtime designed to make ownership and teardown explicit.
+  evidence_boundary: Mechanism claims below are implementation-pinned to DeepSeek Harness 47f943859bef and Cordis 8cc9e33fab69. They are not a production-readiness claim. The newer upstream head remains a named refresh target.
+  system_boundary:
+    - DeepSeek Harness owns one coding agent's turn and step lifecycle, context assembly, capability dispatch, session facts, and runtime projections.
+    - Cordis owns in-process composition through contexts, services, dependencies, lifecycle fibers, and registered inverse effects.
+    - The developer and surrounding product still own outcome acceptance, production policy, and consequences outside the local runtime.
+  mechanism_notes:
+    - title: One reconstructable session record
+      body: Normalized session events feed provider requests, trajectories, queries, persistence, and interface views. The useful invariant is not merely that events are logged, but that model-visible history can be derived from them.
+    - title: Overlap execution, preserve causal commit
+      body: Concurrency-safe tool bodies may overlap within bounds. Exclusive calls form barriers, while results and deferred context commit in model order so wall-clock timing does not rewrite durable meaning.
+    - title: Reversible ownership
+      body: Cordis associates registrations and cleanup with lifecycle owners. Unload can unwind those effects in reverse order, making residue testable without pretending that arbitrary external effects are reversible.
+  failure_boundary:
+    - A correct inverse is an author obligation; the runtime cannot prove that cleanup restores the intended semantics.
+    - The documented trust model is a developer preview and does not establish multi-tenant or public-network security.
+    - The inspected mechanism pin trails upstream head b150a551b8d465e31e418e1b2eaf5e79bbb7d28e.
+  retrieval_check: Why can the runtime overlap two tool bodies but still commit their durable results in the model's original order? Name the property this preserves, then explain why reversible plugin cleanup does not imply rollback of an external payment.
+  refresh_target: Upstream refresh target is DeepSeek Harness b150a551b8d465e31e418e1b2eaf5e79bbb7d28e at package 0.1.1-rc.2.
+  native_diagram: deepseek-session-lifecycle
+  adopt_adapt_reject:
+    adopt: Adopt reconstructable session facts, frozen attempt inputs, and explicit lifecycle ownership for long-lived registrations.
+    adapt: Adapt reversible plugin effects behind a stronger authority model and separate external-effect reconciliation contract.
+    reject: Reject the assumption that in-process cleanup proves semantic rollback, production security, or whole-product acceptance.

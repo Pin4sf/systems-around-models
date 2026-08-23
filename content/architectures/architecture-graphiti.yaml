@@ -1,0 +1,40 @@
+id: architecture-graphiti
+slug: graphiti
+name: Graphiti
+record_kind: system
+product_class: memory-framework
+status: public
+summary: A temporal knowledge-graph layer that represents changing entities, relationships, and episodes for later agent retrieval.
+primary_job: Preserve changing knowledge with temporal structure for agent applications.
+teaching_question: When does temporal and relational memory justify a graph rather than a flat memory store?
+coordination_shape: memory-service
+control_owner: The calling application owns the run loop; Graphiti owns graph ingestion and retrieval operations.
+context_model: Search results and graph facts are returned for the caller to transform into model context.
+state_model: Episodes, entities, relationships, and temporal facts form the durable graph state.
+authority_boundary: The application decides which sources may enter memory and how retrieved facts influence action.
+recovery_model: Graph state persists independently; recovery of an interrupted agent run stays external.
+verification_model: Graph queries can surface provenance and time, but application outcomes require separate proof.
+transferable_lesson: Temporal truth and relational retrieval solve a different problem from conversation replay.
+deliberate_omissions:
+  - Graphiti does not own agent control flow, action permissions, or outcome closure.
+topology_steps:
+  - { stage: admit, label: Admit, ownership: external, description: The application decides which events and work may enter the system. }
+  - { stage: assemble, label: Assemble, ownership: delegated, description: Graphiti retrieves structured facts while the caller builds model context. }
+  - { stage: bind, label: Bind, ownership: external, description: The application owns non-memory tools and action permissions. }
+  - { stage: run, label: Run, ownership: external, description: The calling harness owns the model and tool loop. }
+  - { stage: recover, label: Recover, ownership: delegated, description: The graph persists knowledge but not the caller's complete run state. }
+  - { stage: verify-close, label: Verify and close, ownership: external, description: The caller verifies actions and accepts completion. }
+lifecycle_trace:
+  - { order: 1, label: Ingest episode, owner: Graphiti, outcome: An event is integrated into temporal graph state. }
+  - { order: 2, label: Reconcile graph, owner: Graphiti, outcome: Entities and relationships are updated with time-aware structure. }
+  - { order: 3, label: Retrieve facts, owner: Graphiti plus caller, outcome: The caller receives graph context for a decision. }
+evidence_grade: FD
+evidence_fidelity: working-profile
+dossier_status: deep-dive-needed
+source_ids:
+  - source-architecture-graphiti
+inspected_version: 993e081a6d7948a0d8851c12a5fbdbeb49fed862
+unknowns:
+  - A deeper dossier should test contradiction, invalidation, deletion, and provenance behavior against current implementation paths.
+last_reviewed: 2026-08-22
+revision: 1

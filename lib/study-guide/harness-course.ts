@@ -1,7 +1,6 @@
 export type CourseChapter = {
   number: number;
   title: string;
-  href?: string;
 };
 
 export type CoursePart = {
@@ -17,7 +16,7 @@ export const harnessCourse: CoursePart[] = [
     label: "Part I — Foundations",
     description: "Define the harness boundary, learn the H0→H9 progression, and diagnose recurring failure classes.",
     chapters: [
-      { number: 1, title: "Model, agent, harness, environment, and platform", href: "/fieldbook/the-model-is-not-the-agent" },
+      { number: 1, title: "Model, agent, harness, environment, and platform" },
       { number: 2, title: "The H0→H9 progression" },
       { number: 3, title: "Twelve recurring failure classes" },
       { number: 4, title: "Four surface classes" },

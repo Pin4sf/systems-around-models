@@ -1,0 +1,73 @@
+---
+slug: developer-and-product-runtime-harnesses
+title: Developer and Product-Runtime Harnesses
+description: How development automation hands typed evidence to a product runtime without collapsing build success into product safety or acceptance.
+sequence: Harness Engineering
+sequence_position: 6
+revision: 1
+authors:
+  - Systems Around Models
+published_at: 2026-08-22
+substantively_revised_at: 2026-08-22
+reading_time_source: 10 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-anthropic-effective-long-running-harnesses
+revision_id: revision-developer-product-harnesses-001
+previous_essay_slug: four-surface-classes
+next_essay_slug: instructions-and-context-assembly
+---
+
+## Two harnesses, one responsibility seam
+
+A developer harness helps create and inspect software. A product-runtime harness governs what happens when that software receives real work, real identity, real permissions, and real consequences. They can share mechanisms, but they do not share the same authority.
+
+<HarnessHandoff />
+
+The developer side may plan, edit files, run tests, recover a coding session, and produce a build artifact. The product side must admit a request, assemble user and environment context, bind scoped capabilities, preserve operational state, reconcile external effects, and decide what evidence can justify closure. Passing tests is important evidence at the seam. It is not a substitute for product admission or acceptance.
+
+## What the developer harness owns
+
+A development harness commonly owns repository discovery, workspace setup, instruction assembly, model and tool sessions, diffs, builds, tests, and review artifacts. For long-running work it may also preserve checkpoints and a typed handoff: target, branch, current state, touched files, evidence, unresolved items, and the next validation command.
+
+Its authority should remain bounded by the development job. A coding agent that can create a migration does not thereby receive authority to apply it to production data. A test that uses a mock credential does not prove the production credential is correctly scoped. A merged change says that one review process accepted an artifact; it does not prove every runtime condition the product will face.
+
+## What the product runtime owns
+
+The product harness begins where live admission begins. It identifies the requester and intended outcome, establishes policy, compiles current context, binds capabilities, runs within budgets, records effects, handles interruption, gathers evidence, and returns control to an authorized owner.
+
+Product concerns therefore include data custody, tenant isolation, credential scope, revocation, ambiguous external results, degraded providers, retention, observability, and user-visible recovery. These are not “deployment details” attached after the agent works. They define the agent that users actually experience.
+
+## Make the handoff typed
+
+The safest seam is an explicit contract rather than an ambient assumption. A product-admission package can include:
+
+- immutable artifact identity and source revision;
+- declared capabilities and required permissions;
+- conformance and security evidence with known gaps;
+- configuration schema and supported provider versions;
+- migration and rollback requirements;
+- operational budgets, recovery rules, and observability hooks;
+- the owner who may accept the release into each environment.
+
+The product runtime validates that package against its current locked policy. It does not trust “merged,” “green,” or “built by an agent” as universal proof. If a required property is missing, admission fails visibly or the capability remains disabled.
+
+## Share mechanisms without collapsing boundaries
+
+Both harnesses benefit from typed tools, durable state, structured events, bounded loops, independent verification, and explicit authority. Sharing those mechanisms can reduce drift. Their configurations and evaluators still answer different questions.
+
+A developer evaluator asks whether the artifact matches source and test contracts. A product evaluator asks whether live behavior respects identity, policy, data, effects, recovery, and the user’s intended outcome. One can inform the other without becoming it.
+
+This distinction also improves incident response. If the shipped artifact differs from the reviewed artifact, investigate the handoff and admission chain. If the artifact matches but live authority was too broad, investigate the product harness. If the developer test never represented the product condition, repair the evaluation contract on the appropriate side.
+
+## Retrieval check
+
+A coding agent produces a migration, the test suite passes, and the pull request merges. What has been established? At most: an identified artifact satisfied the development checks and review policy that actually ran. What remains unproved? Production identity, live-data compatibility, credential scope, migration recovery, observability, and authorized admission.
+
+Write the smallest typed handoff that would let a product runtime reject the migration before effect. It must name the artifact, target environment, required authority, evidence, rollback path, and admission owner.
+
+## Sources and further reading
+
+- [Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents) — first-party guidance on preserving progress and leaving usable state across coding sessions.
+- [Four Surface Classes](/fieldbook/four-surface-classes) — a mutation-and-authority model for the seam between development and runtime.

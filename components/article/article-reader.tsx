@@ -8,6 +8,18 @@ import {
   SequenceNavigation,
 } from "@/components/article/sequence-navigation";
 import { SystemTrace } from "@/components/diagrams/system-trace";
+import {
+  CapabilityBinding,
+  ContextAssembly,
+  ControlStructures,
+  CustodyBoundary,
+  FailureChain,
+  HarnessHandoff,
+  HarnessProgression,
+  MemoryLifecycle,
+  StateLayers,
+  SurfaceMap,
+} from "@/components/diagrams/harness-learning-diagrams";
 import type { EssayMetadata, RevisionRecord } from "@/lib/content/schema";
 import { compilePublicMdx } from "@/lib/content/compile-public-mdx";
 import { slugifyHeading } from "@/lib/content/slugify";
@@ -31,7 +43,7 @@ export async function ArticleReader({
   revision,
   releasedEssays,
 }: ArticleReaderProps) {
-  const guide = getStudyGuideEntryForEssay(essay);
+  const guide = getStudyGuideEntryForEssay(essay, releasedEssays);
 
   const source = await readFile(
     path.join(process.cwd(), "content", "essays", guide.sourcePath),
@@ -59,12 +71,22 @@ export async function ArticleReader({
       h2: Heading,
       EvidenceBadge: HiddenPublicationNote,
       SystemTrace: ArticleSystemTrace,
+      HarnessProgression,
+      FailureChain,
+      SurfaceMap,
+      HarnessHandoff,
+      ContextAssembly,
+      CapabilityBinding,
+      CustodyBoundary,
+      StateLayers,
+      ControlStructures,
+      MemoryLifecycle,
     },
   });
 
   return (
     <div className="article-reader">
-      <SequenceNavigation essay={essay} />
+      <SequenceNavigation essay={essay} releasedEssays={releasedEssays} />
       <article className="article-reader__article">
         <header className="article-reader__header">
           <p className="eyebrow interface-text">

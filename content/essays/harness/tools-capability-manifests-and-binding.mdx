@@ -1,0 +1,61 @@
+---
+slug: tools-capability-manifests-and-binding
+title: Tools, Capability Manifests, and Binding
+description: How a harness separates tool discovery, run-scoped authorization, invocation, and evidence instead of treating a function name as power.
+sequence: Harness Engineering
+sequence_position: 8
+revision: 1
+authors:
+  - Systems Around Models
+published_at: 2026-08-22
+substantively_revised_at: 2026-08-22
+reading_time_source: 9 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-earendil-what-is-a-harness
+revision_id: revision-tools-capability-binding-001
+previous_essay_slug: instructions-and-context-assembly
+next_essay_slug: environments-sandboxes-and-custody
+---
+
+## A tool description is not a capability
+
+Tools connect model output to deterministic operations, external systems, or human workflows. But four states are often collapsed into one word: a tool may be unavailable, discoverable, bound to this run, or actually invoked. Reliable systems keep those states distinct.
+
+<CapabilityBinding />
+
+A schema in model context establishes what the model may request. The dispatcher, identity provider, policy engine, and target system establish what can happen. The result establishes only what the adapter observed—not necessarily that the intended real-world effect completed.
+
+## Write a capability manifest
+
+A capability manifest is the runtime contract for one action family. It should name the operation, input and output schemas, required identity, permission scope, environment boundary, side-effect class, budget, timeout, retry policy, idempotency support, approval requirements, audit fields, and revocation path.
+
+This manifest belongs at the seam between selection and execution. Generate model-visible tool descriptions from the same validated record the dispatcher uses where possible. If prose says an argument is optional while the handler requires it, the harness has two tools with the same name—and one of them exists only in the model’s imagination.
+
+## Bind capabilities per run
+
+Discovery answers “what could this system support?” Binding answers “what may this admitted run use right now?” Bind after identity, task, target environment, and policy are known. Prefer narrow, expiring grants over ambient credentials inherited by every tool.
+
+A bound capability can still require a human-controlled transition. The model may prepare a payment, publication, or deletion without possessing authority to finalize it. Staging and committing are separate capabilities when their consequences differ.
+
+## Tool results are control flow
+
+A useful result is typed for the next decision. Distinguish validation failure, authorization denial, transient unavailability, rate limiting, successful read, confirmed effect, and ambiguous effect. Do not compress them all into `{ success: false }`, because each demands a different transition.
+
+Errors should say what is safe next. A denied call may invite a narrower request. An expired credential may require reauthorization. An ambiguous timeout should forbid blind retry until reconciliation. Redact secrets while preserving enough stable identifiers to investigate.
+
+## Failure boundary
+
+Capability systems fail when the prompt advertises what the dispatcher cannot perform, a broad credential silently substitutes for run-scoped authority, retries duplicate an effect, or tool output contains instructions that escape its data boundary. They also fail when revocation changes the policy but leaves already issued grants active.
+
+Test the negative space: missing adapter, denied scope, revoked grant, invalid schema, expired credential, timeout after submission, and a provider response that cannot confirm whether an effect occurred.
+
+## Retrieval check
+
+An agent can see a `send_message` schema and has a valid API token, but the run was admitted only to draft replies. Is messaging unavailable, discoverable, bound, or invokable? Describe the manifest and policy decision that let the model draft content while preventing delivery.
+
+## Sources and further reading
+
+- [What is a Harness?](https://earendil.com/posts/what-is-a-harness/) — a compact public introduction to tools, loops, instructions, and provider translation.
+- [Instructions and Context Assembly](/fieldbook/instructions-and-context-assembly) — why tool output remains attributed runtime data rather than higher-authority instruction.

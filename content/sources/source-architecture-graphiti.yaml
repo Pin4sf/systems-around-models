@@ -1,0 +1,24 @@
+id: source-architecture-graphiti
+title: Graphiti repository
+author: Zep
+canonical_url: https://github.com/getzep/graphiti
+published_at: 2024-08-08
+retrieved_at: 2026-08-22
+repository_commit: 993e081a6d7948a0d8851c12a5fbdbeb49fed862
+inspected_paths:
+  - README.md
+source_type: first-party-repository
+basis: Commit-pinned inspection of the official public repository README and its documented temporal knowledge-graph boundary.
+license_status: Apache-2.0
+evidence_grade: FD
+observed_mechanisms:
+  - description: The repository presents a temporal knowledge-graph system for ingesting changing facts and retrieving agent context.
+    evidence_grade: FD
+    basis: The official README documents episodic ingestion, temporal graph updates, and retrieval-facing use.
+author_reported_claims: []
+unknowns:
+  - This first profile does not establish application-level authority, execution, or outcome-closure behavior.
+falsifiers:
+  - Current source shows that temporal update or retrieval responsibilities materially differ from the public profile.
+last_validated: 2026-08-22
+correction_ledger_status: reviewed

@@ -1,0 +1,24 @@
+id: source-architecture-langgraph
+title: LangGraph repository
+author: LangChain
+canonical_url: https://github.com/langchain-ai/langgraph
+published_at: 2023-08-09
+retrieved_at: 2026-08-22
+repository_commit: f09cfe8ffc1eeffd68f4b628ed69c30f7cad229f
+inspected_paths:
+  - README.md
+source_type: first-party-repository
+basis: Commit-pinned inspection of the official public repository README and its documented resilient-agent runtime model.
+license_status: MIT
+evidence_grade: FD
+observed_mechanisms:
+  - description: The repository documents a graph runtime for durable execution, streaming, human interaction, and memory-aware agents.
+    evidence_grade: FD
+    basis: The official README names these runtime capabilities and distinguishes the orchestration layer from agent applications.
+author_reported_claims: []
+unknowns:
+  - Hosted platform responsibilities are not treated as identical to the open-source library in this first profile.
+falsifiers:
+  - Current source no longer supports the graph, persistence, and interrupt responsibility boundary shown here.
+last_validated: 2026-08-22
+correction_ledger_status: reviewed

@@ -3,10 +3,14 @@ import type { Dirent } from "node:fs";
 import path from "node:path";
 import { parse as parseYaml } from "yaml";
 import {
+  ArchitectureSchema,
+  type ArchitectureRecord,
   ClaimSchema,
   type ClaimRecord,
   EssayMetadataSchema,
   type EssayMetadata,
+  LessonSchema,
+  type LessonRecord,
   RevisionSchema,
   type RevisionRecord,
   SourceSchema,
@@ -18,6 +22,8 @@ type Registry = {
   claims: Map<string, ClaimRecord>;
   sources: Map<string, SourceRecord>;
   revisions: Map<string, RevisionRecord>;
+  architectures: Map<string, ArchitectureRecord>;
+  lessons: Map<string, LessonRecord>;
 };
 
 type LoadedRegistry = Registry & {
@@ -60,7 +66,7 @@ function resolveRecordPath(
 
 async function yamlRecords(
   repositoryRoot: string,
-  directory: "claims" | "sources" | "revisions",
+  directory: "claims" | "sources" | "revisions" | "architectures" | "lessons",
 ): Promise<Array<{ filename: string; value: unknown }>> {
   const contentRoot = path.resolve(repositoryRoot, CONTENT_DIRECTORY);
   const recordsDirectory = resolveRecordPath(repositoryRoot, directory, "");
@@ -69,6 +75,8 @@ async function yamlRecords(
   try {
     entries = await readdir(recordsDirectory, { withFileTypes: true });
   } catch (error) {
+    const code = error as NodeJS.ErrnoException;
+    if (code.code === "ENOENT" && ["architectures", "lessons"].includes(directory)) return [];
     const message = error instanceof Error ? error.message : "unable to read directory";
     throw new Error(`Invalid ${publicFilename(repositoryRoot, contentRoot)}/${directory}: ${message}`);
   }
@@ -153,6 +161,78 @@ function revisionFromYaml(value: unknown, repositoryRoot: string, filename: stri
   return result.data;
 }
 
+function architectureFromYaml(value: unknown, repositoryRoot: string, filename: string): ArchitectureRecord {
+  const raw = value as Record<string, unknown>;
+  const rawStudy = raw.study as Record<string, unknown> | undefined;
+  const study = rawStudy ? {
+    ...rawStudy,
+    evidenceBoundary: rawStudy.evidence_boundary,
+    systemBoundary: rawStudy.system_boundary,
+    mechanismNotes: Array.isArray(rawStudy.mechanism_notes)
+      ? rawStudy.mechanism_notes.map((note) => ({ ...(note as Record<string, unknown>) }))
+      : rawStudy.mechanism_notes,
+    failureBoundary: rawStudy.failure_boundary,
+    retrievalCheck: rawStudy.retrieval_check,
+    refreshTarget: rawStudy.refresh_target,
+    nativeDiagram: rawStudy.native_diagram,
+    adoptAdaptReject: rawStudy.adopt_adapt_reject,
+  } : undefined;
+  const topologySteps = Array.isArray(raw.topology_steps)
+    ? raw.topology_steps.map((step) => {
+        const item = step as Record<string, unknown>;
+        return { ...item };
+      })
+    : raw.topology_steps;
+  const lifecycleTrace = Array.isArray(raw.lifecycle_trace)
+    ? raw.lifecycle_trace.map((step) => ({ ...(step as Record<string, unknown>) }))
+    : raw.lifecycle_trace;
+  const result = ArchitectureSchema.safeParse({
+    ...raw,
+    recordKind: raw.record_kind,
+    productClass: raw.product_class,
+    primaryJob: raw.primary_job,
+    teachingQuestion: raw.teaching_question,
+    coordinationShape: raw.coordination_shape,
+    controlOwner: raw.control_owner,
+    contextModel: raw.context_model,
+    stateModel: raw.state_model,
+    authorityBoundary: raw.authority_boundary,
+    recoveryModel: raw.recovery_model,
+    verificationModel: raw.verification_model,
+    transferableLesson: raw.transferable_lesson,
+    deliberateOmissions: raw.deliberate_omissions,
+    topologySteps,
+    lifecycleTrace,
+    evidenceGrade: raw.evidence_grade,
+    evidenceFidelity: raw.evidence_fidelity,
+    dossierStatus: raw.dossier_status,
+    sourceIds: raw.source_ids,
+    inspectedVersion: raw.inspected_version,
+    lastReviewed: raw.last_reviewed,
+    study,
+  });
+  if (!result.success) {
+    throw recordError(repositoryRoot, filename, result.error.issues.map((issue) => issue.message).join("; "));
+  }
+  return result.data;
+}
+
+function lessonFromYaml(value: unknown, repositoryRoot: string, filename: string): LessonRecord {
+  const raw = value as Record<string, unknown>;
+  const result = LessonSchema.safeParse({
+    ...raw,
+    failureBoundary: raw.failure_boundary,
+    transferableLesson: raw.transferable_lesson,
+    architectureIds: raw.architecture_ids,
+    sourceIds: raw.source_ids,
+    lastReviewed: raw.last_reviewed,
+  });
+  if (!result.success) {
+    throw recordError(repositoryRoot, filename, result.error.issues.map((issue) => issue.message).join("; "));
+  }
+  return result.data;
+}
+
 function mapById<T extends { id: string }>(
   records: T[],
   repositoryRoot: string,
@@ -169,10 +249,12 @@ function mapById<T extends { id: string }>(
 }
 
 async function loadRegistry(repositoryRoot = process.cwd()): Promise<LoadedRegistry> {
-  const [claimValues, sourceValues, revisionValues] = await Promise.all([
+  const [claimValues, sourceValues, revisionValues, architectureValues, lessonValues] = await Promise.all([
     yamlRecords(repositoryRoot, "claims"),
     yamlRecords(repositoryRoot, "sources"),
     yamlRecords(repositoryRoot, "revisions"),
+    yamlRecords(repositoryRoot, "architectures"),
+    yamlRecords(repositoryRoot, "lessons"),
   ]);
   const parsedClaims = claimValues.map(({ filename, value }) =>
     claimFromYaml(value, repositoryRoot, filename),
@@ -195,9 +277,31 @@ async function loadRegistry(repositoryRoot = process.cwd()): Promise<LoadedRegis
     repositoryRoot,
     revisionValues.map(({ filename }) => filename),
   );
+  const parsedArchitectures = architectureValues.map(({ filename, value }) =>
+    architectureFromYaml(value, repositoryRoot, filename),
+  );
+  const architectures = mapById(
+    parsedArchitectures,
+    repositoryRoot,
+    architectureValues.map(({ filename }) => filename),
+  );
+  const parsedLessons = lessonValues.map(({ filename, value }) =>
+    lessonFromYaml(value, repositoryRoot, filename),
+  );
+  const lessons = mapById(
+    parsedLessons,
+    repositoryRoot,
+    lessonValues.map(({ filename }) => filename),
+  );
   const claimFilenames = new Map(parsedClaims.map((claim, index) => [claim.id, claimValues[index].filename]));
   const revisionFilenames = new Map(
     parsedRevisions.map((revision, index) => [revision.id, revisionValues[index].filename]),
+  );
+  const architectureFilenames = new Map(
+    parsedArchitectures.map((record, index) => [record.id, architectureValues[index].filename]),
+  );
+  const lessonFilenames = new Map(
+    parsedLessons.map((record, index) => [record.id, lessonValues[index].filename]),
   );
 
   for (const claim of claims.values()) {
@@ -223,7 +327,32 @@ async function loadRegistry(repositoryRoot = process.cwd()): Promise<LoadedRegis
     }
   }
 
-  return { claims, sources, revisions, revisionFilenames };
+  const architectureSlugs = new Set<string>();
+  for (const architecture of architectures.values()) {
+    const filename = architectureFilenames.get(architecture.id) ?? `content/architectures/${architecture.id}.yaml`;
+    if (architectureSlugs.has(architecture.slug)) {
+      throw recordError(repositoryRoot, filename, `duplicate architecture slug ${architecture.slug}`);
+    }
+    architectureSlugs.add(architecture.slug);
+    for (const sourceId of architecture.sourceIds) {
+      if (!sources.has(sourceId)) throw recordError(repositoryRoot, filename, `unresolved source identifier ${sourceId}`);
+    }
+  }
+  for (const lesson of lessons.values()) {
+    const filename = lessonFilenames.get(lesson.id) ?? `content/lessons/${lesson.id}.yaml`;
+    for (const sourceId of lesson.sourceIds) {
+      if (!sources.has(sourceId)) throw recordError(repositoryRoot, filename, `unresolved source identifier ${sourceId}`);
+    }
+    for (const architectureId of lesson.architectureIds) {
+      const architecture = architectures.get(architectureId);
+      if (!architecture) throw recordError(repositoryRoot, filename, `unresolved architecture identifier ${architectureId}`);
+      if (lesson.status === "public" && architecture.status !== "public") {
+        throw recordError(repositoryRoot, filename, `public lesson references draft architecture ${architectureId}`);
+      }
+    }
+  }
+
+  return { claims, sources, revisions, architectures, lessons, revisionFilenames };
 }
 
 export async function loadClaims(repositoryRoot = process.cwd()): Promise<Map<string, ClaimRecord>> {
@@ -236,6 +365,14 @@ export async function loadSources(repositoryRoot = process.cwd()): Promise<Map<s
 
 export async function loadRevisions(repositoryRoot = process.cwd()): Promise<Map<string, RevisionRecord>> {
   return (await loadRegistry(repositoryRoot)).revisions;
+}
+
+export async function loadArchitectures(repositoryRoot = process.cwd()): Promise<Map<string, ArchitectureRecord>> {
+  return (await loadRegistry(repositoryRoot)).architectures;
+}
+
+export async function loadLessons(repositoryRoot = process.cwd()): Promise<Map<string, LessonRecord>> {
+  return (await loadRegistry(repositoryRoot)).lessons;
 }
 
 function essayFromFrontmatter(value: unknown, repositoryRoot: string, filename: string): EssayMetadata {
@@ -467,6 +604,8 @@ export async function loadContent(repositoryRoot = process.cwd()): Promise<Conte
     claims: registry.claims,
     sources: registry.sources,
     revisions: registry.revisions,
+    architectures: registry.architectures,
+    lessons: registry.lessons,
     essays: essayRegistry.essays,
   };
 }

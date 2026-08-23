@@ -1,0 +1,41 @@
+id: architecture-langgraph
+slug: langgraph
+name: LangGraph
+record_kind: system
+product_class: general-agent-runtime
+status: public
+summary: A graph runtime for building stateful agent workflows with explicit transitions, persistence, interrupts, and replay-aware execution.
+primary_job: Make long-running agent control flow and state transitions explicit.
+teaching_question: When should an agent loop become a graph with named state and interrupts?
+coordination_shape: workflow-graph
+control_owner: The graph runtime owns node scheduling and transitions declared by the application.
+context_model: Application state is projected into the context consumed by each graph node.
+state_model: Checkpoints and thread-scoped state provide durable continuity across graph execution.
+authority_boundary: Application code defines nodes and tools; deployment policy controls their effective permissions.
+recovery_model: Persisted checkpoints support resume and replay, subject to replay-safe node and effect design.
+verification_model: The graph can route to validators, but it does not invent the application's acceptance criteria.
+transferable_lesson: Explicit control flow helps only when state ownership and side-effect semantics are equally explicit.
+deliberate_omissions:
+  - Graph structure alone does not make external side effects idempotent or outcomes correct.
+topology_steps:
+  - { stage: admit, label: Admit, ownership: delegated, description: The application decides which work enters a graph run. }
+  - { stage: assemble, label: Assemble, ownership: owned, description: Graph state is projected into the input for each scheduled node. }
+  - { stage: bind, label: Bind, ownership: delegated, description: Application nodes bind models and tools to graph transitions. }
+  - { stage: run, label: Run, ownership: owned, description: The runtime schedules nodes and transitions through declared graph state. }
+  - { stage: recover, label: Recover, ownership: owned, description: Checkpoints and interrupts provide a durable re-entry point. }
+  - { stage: verify-close, label: Verify and close, ownership: delegated, description: Application-defined validators and policy decide whether the graph may finish. }
+lifecycle_trace:
+  - { order: 1, label: Start thread, owner: Application plus LangGraph, outcome: Initial graph state is admitted and checkpointed. }
+  - { order: 2, label: Execute transitions, owner: LangGraph runtime, outcome: Nodes update state and select the next edge. }
+  - { order: 3, label: Interrupt or finish, owner: Runtime plus application, outcome: Work pauses for re-entry or reaches an application-defined terminal state. }
+evidence_grade: FD
+evidence_fidelity: working-profile
+dossier_status: refresh-needed
+source_ids:
+  - source-architecture-langgraph
+  - source-langchain-anatomy-agent-harness
+inspected_version: f09cfe8ffc1eeffd68f4b628ed69c30f7cad229f
+unknowns:
+  - The first profile does not treat open-source library and hosted platform operations as the same responsibility boundary.
+last_reviewed: 2026-08-22
+revision: 1

@@ -37,8 +37,8 @@
     "source-langchain-anatomy-agent-harness": "2026-08-22",
     "source-humanlayer-12-factor-agents": "2026-08-22"
   },
-  "schemaVersion": 1,
-  "validationSchemaVersion": "publication-v1",
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
   "sources": [
     {
       "id": "source-anthropic-effective-long-running-harnesses",

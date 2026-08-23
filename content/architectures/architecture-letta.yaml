@@ -1,0 +1,41 @@
+id: architecture-letta
+slug: letta
+name: Letta
+record_kind: system
+product_class: general-agent-runtime
+status: public
+summary: A stateful-agent platform that makes persistent agent state and memory central parts of the runtime rather than optional retrieval add-ons.
+primary_job: Keep an agent's state and memory available across interactions and applications.
+teaching_question: What changes when memory is part of the agent runtime's identity and state model?
+coordination_shape: durable-runtime
+control_owner: The Letta server mediates agent execution, persistent state, memory, and tool-facing behavior.
+context_model: Current messages and selected persistent memory are assembled into the agent's working context.
+state_model: Server-managed agent state and memory persist beyond a single model context window.
+authority_boundary: Agent tools and application permissions define effects outside the memory and runtime layer.
+recovery_model: Persistent server state provides re-entry, while effect recovery remains capability-specific.
+verification_model: The runtime can preserve and inspect state; application outcomes still require external validation.
+transferable_lesson: Memory architecture becomes clearer when durable identity, state, and context projection are separated.
+deliberate_omissions:
+  - Persistent memory does not by itself establish truth, permission, or outcome completion.
+topology_steps:
+  - { stage: admit, label: Admit, ownership: owned, description: The server resolves a request to a persistent agent identity. }
+  - { stage: assemble, label: Assemble, ownership: owned, description: Working messages and selected memory form model context. }
+  - { stage: bind, label: Bind, ownership: delegated, description: Application configuration supplies the agent's external tools and permissions. }
+  - { stage: run, label: Run, ownership: owned, description: The runtime coordinates model turns with state and memory updates. }
+  - { stage: recover, label: Recover, ownership: owned, description: Persistent agent state supports continuity across sessions and clients. }
+  - { stage: verify-close, label: Verify and close, ownership: external, description: Application policy must verify the real-world outcome of agent action. }
+lifecycle_trace:
+  - { order: 1, label: Resolve persistent agent, owner: Letta server, outcome: A request attaches to durable agent state. }
+  - { order: 2, label: Build context and act, owner: Letta runtime, outcome: Memory and messages influence the next model turn. }
+  - { order: 3, label: Persist updated state, owner: Letta server, outcome: Future interactions can resume from the revised agent state. }
+evidence_grade: FD
+evidence_fidelity: working-profile
+dossier_status: refresh-needed
+source_ids:
+  - source-architecture-letta
+  - source-memory-memgpt
+inspected_version: 87fd37aab68c7bdd0d66fe63751553756f6af3e5
+unknowns:
+  - A current source-level trace of memory mutation, archival, correction, and deletion remains to be completed.
+last_reviewed: 2026-08-22
+revision: 1

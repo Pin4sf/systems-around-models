@@ -2,8 +2,8 @@ import Link from "next/link";
 import type { EssayMetadata } from "@/lib/content/schema";
 import { getStudyGuideEntryForEssay } from "@/lib/study-guide/study-guide-registry";
 
-function SequenceLinks({ essay }: { essay: EssayMetadata }) {
-  const guide = getStudyGuideEntryForEssay(essay);
+function SequenceLinks({ essay, releasedEssays }: { essay: EssayMetadata; releasedEssays: EssayMetadata[] }) {
+  const guide = getStudyGuideEntryForEssay(essay, releasedEssays);
   return (
     <ol>
       {guide.navigation.items.map((item) => {
@@ -34,8 +34,8 @@ function SequenceLinks({ essay }: { essay: EssayMetadata }) {
   );
 }
 
-export function SequenceNavigation({ essay }: { essay: EssayMetadata }) {
-  const guide = getStudyGuideEntryForEssay(essay);
+export function SequenceNavigation({ essay, releasedEssays }: { essay: EssayMetadata; releasedEssays: EssayMetadata[] }) {
+  const guide = getStudyGuideEntryForEssay(essay, releasedEssays);
   return (
     <aside className="sequence-navigation interface-text">
       <nav
@@ -43,12 +43,12 @@ export function SequenceNavigation({ essay }: { essay: EssayMetadata }) {
         aria-label={guide.navigation.label}
       >
         <p className="eyebrow">{guide.sequenceName}</p>
-        <SequenceLinks essay={essay} />
+        <SequenceLinks essay={essay} releasedEssays={releasedEssays} />
       </nav>
       <details className="sequence-navigation__mobile">
         <summary role="button">{guide.navigation.drawerLabel}</summary>
         <div aria-label={guide.navigation.mobileLabel}>
-          <SequenceLinks essay={essay} />
+          <SequenceLinks essay={essay} releasedEssays={releasedEssays} />
         </div>
       </details>
     </aside>
@@ -61,7 +61,7 @@ type ArticlePagerProps = {
 };
 
 export function ArticlePager({ essay, releasedEssays }: ArticlePagerProps) {
-  const guide = getStudyGuideEntryForEssay(essay);
+  const guide = getStudyGuideEntryForEssay(essay, releasedEssays);
   const bySlug = new Map(releasedEssays.map((releasedEssay) => [releasedEssay.slug, releasedEssay]));
   const previous = essay.previousEssaySlug ? bySlug.get(essay.previousEssaySlug) : undefined;
   const next = essay.nextEssaySlug ? bySlug.get(essay.nextEssaySlug) : undefined;

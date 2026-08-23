@@ -1,0 +1,24 @@
+id: source-architecture-mem0
+title: Mem0 repository
+author: Mem0
+canonical_url: https://github.com/mem0ai/mem0
+published_at: 2023-06-20
+retrieved_at: 2026-08-22
+repository_commit: 9b565da8e3f1b05fc3ed80ac338e6bbb9622d4d7
+inspected_paths:
+  - README.md
+source_type: first-party-repository
+basis: Commit-pinned inspection of the official public repository README and its documented agent-memory layer boundary.
+license_status: Apache-2.0
+evidence_grade: FD
+observed_mechanisms:
+  - description: The repository presents a memory layer that stores and retrieves durable context for agent applications.
+    evidence_grade: FD
+    basis: The official README documents memory ingestion, retrieval, and use as a layer within a larger agent system.
+author_reported_claims: []
+unknowns:
+  - Managed and open-source behavior are not assumed to be identical beyond the documented public surface.
+falsifiers:
+  - A deeper source inspection contradicts the memory-service boundary or the deliberate omissions shown here.
+last_validated: 2026-08-22
+correction_ledger_status: reviewed

@@ -1,0 +1,30 @@
+{
+  "id": "architecture-openhands",
+  "slug": "openhands",
+  "recordKind": "system",
+  "productClass": "frontier-coding-harness",
+  "revision": 1,
+  "lastReviewed": "2026-08-22",
+  "inspectedVersion": "4bf8dd3aaf1217916b2ce8a6f9168fa7633a26f8",
+  "dossierStatus": "refresh-needed",
+  "evidenceGrade": "FD",
+  "evidenceFidelity": "working-profile",
+  "contentHash": "sha256-3e40a8fe4b08c255708e0d4f4730dda7d846c4c3172251b5200fccc74292b50b",
+  "sourceIds": [
+    "source-architecture-openhands"
+  ],
+  "sourceValidationDates": {
+    "source-architecture-openhands": "2026-08-22"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-architecture-openhands",
+      "title": "OpenHands repository",
+      "canonicalUrl": "https://github.com/OpenHands/OpenHands",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "MIT"
+    }
+  ]
+}
