@@ -9,14 +9,19 @@ import {
 } from "@/components/article/sequence-navigation";
 import { SystemTrace } from "@/components/diagrams/system-trace";
 import {
+  AdmissionBoundary,
+  AmbiguityRecovery,
   CapabilityBinding,
   ContextAssembly,
   ControlStructures,
   CustodyBoundary,
+  EffectOutbox,
   FailureChain,
   HarnessHandoff,
   HarnessProgression,
+  LeaseFencing,
   MemoryLifecycle,
+  RevocationPropagation,
   StateLayers,
   SurfaceMap,
 } from "@/components/diagrams/harness-learning-diagrams";
@@ -81,6 +86,11 @@ export async function ArticleReader({
       StateLayers,
       ControlStructures,
       MemoryLifecycle,
+      AdmissionBoundary,
+      LeaseFencing,
+      EffectOutbox,
+      AmbiguityRecovery,
+      RevocationPropagation,
     },
   });
 

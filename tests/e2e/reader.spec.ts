@@ -4,6 +4,9 @@ const route = "/fieldbook/the-model-is-not-the-agent";
 const guideRoute = "/fieldbook/harness-engineering-study-guide";
 const memoryGuideRoute = "/fieldbook/memory-engineering-study-guide";
 const architecturesRoute = "/architectures";
+const admissionRoute = "/fieldbook/identity-authority-and-admission";
+const effectsRoute = "/fieldbook/external-effects-and-transactional-outboxes";
+const securityRoute = "/fieldbook/security-credentials-supply-chain-and-revocation";
 
 test("@desktop homepage leads to a complete readable Harness Engineering guide", async ({ page }) => {
   await page.goto("/");
@@ -114,6 +117,7 @@ test("@desktop discovery endpoints expose only released publication routes", asy
   expect(sitemap).toContain(route);
   expect(sitemap).toContain(memoryGuideRoute);
   expect(sitemap).toContain("/fieldbook/memory-compaction-and-continuity");
+  expect(sitemap).toContain("/fieldbook/security-credentials-supply-chain-and-revocation");
   expect(robots).toContain("Sitemap:");
   expect(rssResponse.headers()["content-type"]).toContain("application/rss+xml");
   expect(rss).toContain("The Model Is Not the Agent");
@@ -175,6 +179,19 @@ test("@desktop print preserves architecture sources and expanded URLs", async ({
   expect(afterContent).toContain("github.com/anthropics/claude-code");
 });
 
+test("@desktop Reliable Action chapter preserves its diagram and navigation in print", async ({ page }) => {
+  await page.goto(admissionRoute);
+  await expect(page.getByRole("heading", { name: "Identity, Authority, and Admission" })).toBeVisible();
+  await expect(page.getByRole("figure", { name: "Admission binds identity, authority, and proof" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Next: Leases, Fencing, Cancellation, and Budgets" })).toBeVisible();
+
+  await page.emulateMedia({ media: "print", reducedMotion: "reduce" });
+  await expect(page.getByRole("navigation", { name: "On this page" })).toBeHidden();
+  await expect(page.getByRole("figure", { name: "Admission binds identity, authority, and proof" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Sources and further reading" })).toBeVisible();
+  await expect(page.locator(".study-guide-footer")).toBeVisible();
+});
+
 test("@mobile reader preserves one prose column and native navigation drawers", async ({
   page,
 }) => {
@@ -207,6 +224,26 @@ test("@mobile Memory reader preserves one prose column and truthful guide naviga
   );
   expect(gridColumnCount).toBe(1);
   await expect(page.getByText(/Chapter 1 of 40|H0→H9 progression/)).toHaveCount(0);
+});
+
+test("@mobile Reliable Action security chapter keeps the diagram and pager contained", async ({ page }) => {
+  await page.goto(securityRoute);
+  await expect(page.getByRole("heading", { name: "Security, Credentials, Supply Chain, and Revocation" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Open chapters" })).toBeVisible();
+  const diagram = page.getByRole("figure", { name: "Revocation propagation across active surfaces" });
+  await expect(diagram).toBeVisible();
+  const contentFits = await page.locator(".article-reader__prose").evaluate(
+    (element) => element.scrollWidth <= element.clientWidth,
+  );
+  const diagramFits = await diagram.evaluate(
+    (element) => element.getBoundingClientRect().right <= window.innerWidth,
+  );
+  expect(contentFits).toBe(true);
+  expect(diagramFits).toBe(true);
+  await expect(page.getByRole("link", { name: "Previous: Ambiguity, Idempotency, and Recovery" })).toBeVisible();
+  await expect(page.locator(".article-pager__forthcoming")).toContainText(
+    "Observability and trace reconstruction",
+  );
 });
 
 test("@mobile architecture field map keeps narrative contained and topology labels visible", async ({ page }) => {
@@ -257,6 +294,17 @@ test("@nojs Memory reader keeps the complete lesson, sources, and correction pat
   await expect(page.getByRole("link", { name: "MemGPT" }).first()).toBeVisible();
   await expect(page.getByRole("link", { name: "Suggest a correction" })).toBeVisible();
   await expect(page.getByText(/Chapter 1 of 40|H0→H9 progression/)).toHaveCount(0);
+});
+
+test("@nojs Reliable Action effect chapter preserves custody and ordinary navigation", async ({ page }) => {
+  await page.goto(effectsRoute);
+  await expect(page.getByRole("heading", { name: "External Effects and Transactional Outboxes" })).toBeVisible();
+  await expect(page.getByRole("figure", { name: "Transactional outbox effect lifecycle" })).toBeVisible();
+  await expect(page.getByText(/durable dead-letter state/)).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Sources and further reading" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Transactional outbox pattern" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Next: Ambiguity, Idempotency, and Recovery" })).toBeVisible();
+  await expect(page.getByRole("group", { name: /evidence/i })).toHaveCount(0);
 });
 
 test("@nojs architecture profiles preserve native disclosure and ordinary sources", async ({ page }) => {

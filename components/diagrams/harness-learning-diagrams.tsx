@@ -46,4 +46,24 @@ export function ControlStructures() {
 export function MemoryLifecycle() {
   return <Diagram name="Memory lifecycle through continuity"><div className="learning-diagram__chain"><span>Capture</span><span>Qualify</span><span>Store</span><span>Retrieve</span><strong>Correct or forget</strong></div><figcaption>Compaction produces a bounded continuity input; it does not turn remembered material into authority.</figcaption></Diagram>;
 }
+
+export function AdmissionBoundary() {
+  return <Diagram name="Admission binds identity, authority, and proof"><dl className="learning-diagram__surfaces"><div><dt>Identity</dt><dd>Principal and actor</dd></div><div><dt>Scope</dt><dd>Resource boundary</dd></div><div><dt>Grants</dt><dd>Run-scoped capabilities</dd></div><div><dt>Proof</dt><dd>Completion contract</dd></div></dl><figcaption>Admission turns a request into a bounded run only after identity, authority, scope, and required evidence are explicit.</figcaption></Diagram>;
+}
+
+export function LeaseFencing() {
+  return <Diagram name="Lease handoff with fencing token"><div className="learning-diagram__chain"><span>Worker A · token 17</span><span>Lease expires</span><span>Worker B · token 18</span><strong>Stale commit rejected</strong></div><figcaption>A lease limits how long a worker may act; the increasing fencing token prevents an expired worker from committing late.</figcaption></Diagram>;
+}
+
+export function EffectOutbox() {
+  return <Diagram name="Transactional outbox effect lifecycle"><div className="learning-diagram__chain"><span>Authorize</span><span>Persist intent</span><span>Dispatch</span><span>Observe</span><strong>Verify or reconcile</strong></div><figcaption>The durable effect intent and local state transition are recorded together before an external dispatcher acts.</figcaption></Diagram>;
+}
+
+export function AmbiguityRecovery() {
+  return <Diagram name="Ambiguous effect reconciliation"><div className="learning-diagram__chain"><span>Unknown result</span><span>Look up stable key</span><span>Compare the world</span><strong>Accept · retry · escalate</strong></div><figcaption>Recovery begins by learning what happened, not by assuming that a timeout means the effect did not occur.</figcaption></Diagram>;
+}
+
+export function RevocationPropagation() {
+  return <Diagram name="Revocation propagation across active surfaces"><dl className="learning-diagram__surfaces"><div><dt>Sessions</dt><dd>Reject new privileged turns</dd></div><div><dt>Queued effects</dt><dd>Re-authorize before dispatch</dd></div><div><dt>Delegates</dt><dd>Invalidate inherited grants</dd></div><div><dt>Credentials</dt><dd>Expire cached material</dd></div></dl><figcaption>Revocation is complete only when every active or deferred authority surface stops accepting the old grant.</figcaption></Diagram>;
+}
 import type { ReactNode } from "react";

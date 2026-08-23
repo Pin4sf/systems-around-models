@@ -1,0 +1,37 @@
+{
+  "id": "revision-identity-authority-admission-001",
+  "essaySlug": "identity-authority-and-admission",
+  "revision": 1,
+  "publishedAt": "2026-08-23",
+  "substantivelyRevisedAt": "2026-08-23",
+  "summary": "Initial public revision of the identity, authority, and admission chapter.",
+  "affectedClaimIds": [],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-b0b9f59331af3abd50da8564a7fd0546617eccad968c0c9be7fd1b6c7286d975",
+  "sourceIds": [
+    "source-harness-engineering-fieldbook-v1",
+    "source-memory-nist-agent-hijacking-evaluations"
+  ],
+  "sourceValidationDates": {
+    "source-harness-engineering-fieldbook-v1": "2026-08-21",
+    "source-memory-nist-agent-hijacking-evaluations": "2026-08-22"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-memory-nist-agent-hijacking-evaluations",
+      "title": "Strengthening AI Agent Hijacking Evaluations",
+      "canonicalUrl": "https://www.nist.gov/news-events/news/2025/01/technical-blog-strengthening-ai-agent-hijacking-evaluations",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "unknown"
+    }
+  ]
+}

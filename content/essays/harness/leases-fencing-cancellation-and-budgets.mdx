@@ -1,0 +1,69 @@
+---
+slug: leases-fencing-cancellation-and-budgets
+title: Leases, Fencing, Cancellation, and Budgets
+description: How time-bounded ownership, monotonic fencing, cooperative cancellation, and explicit budgets keep concurrent agent work governable.
+sequence: Harness Engineering
+sequence_position: 14
+revision: 1
+authors:
+  - Systems Around Models
+published_at: 2026-08-23
+substantively_revised_at: 2026-08-23
+reading_time_source: 9 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-anthropic-effective-long-running-harnesses
+revision_id: revision-leases-fencing-cancellation-budgets-001
+previous_essay_slug: identity-authority-and-admission
+next_essay_slug: external-effects-and-transactional-outboxes
+---
+
+## Ownership needs an expiry
+
+A long-running task can outlive a process, connection, model turn, or machine. If ownership is represented only by “worker A is running,” recovery may start worker B while A is merely slow. Both can then write progress or dispatch effects.
+
+A lease makes ownership temporary. The worker must renew it while healthy, and the system may reassign work after it expires. This is a proposed control pattern for agent runtimes; the cited long-running harness work supports durable handoffs, but does not itself establish the lease-and-fencing design described here.
+
+<LeaseFencing />
+
+## Expiry alone does not reject stale work
+
+An expired worker may wake after another worker has acquired the task. A lease check performed before the pause cannot protect the later commit. Pair the lease with a monotonically increasing fencing token issued on each acquisition.
+
+Every protected write or effect intent carries the current token. The receiving store rejects tokens older than the latest accepted value. Worker A can keep computing after token 17 expires, but it cannot commit once worker B owns token 18. Fencing moves safety from worker cooperation into the commit boundary.
+
+Use one ownership domain per independently recoverable unit. A global lease serializes unrelated work; an overly narrow lease lets coupled transitions diverge. The boundary should match the state and effects that must agree.
+
+## Cancellation is a state transition
+
+Cancellation should be durable, observable, and checked at defined seams. Record who requested it and why. Stop admitting new child work, prevent new effects, signal active adapters, and classify any operation that cannot be interrupted safely.
+
+“Cancelled” does not mean “nothing happened.” A provider request may already be in flight. The task can move to cancelling, then cancelled-with-no-effect, completed-before-cancellation, or unresolved-effect. The final state depends on evidence, not on when a button was clicked.
+
+Workers should reach safe checkpoints frequently enough for the product's risk and latency requirements. Forced termination may still be necessary, but recovery must assume it can leave partial local work or an ambiguous external result.
+
+## Budgets define permitted consumption
+
+Budgets are multidimensional: wall time, model tokens, tool calls, monetary spend, retries, child runs, external effects, and human attention. A harness should account for them centrally and expose remaining capacity to the control loop.
+
+Set both soft and hard limits. A soft limit can trigger compaction, a cheaper route, or a request for more authority. A hard limit stops admission of further work. A child run receives an allocation from its parent rather than a fresh unbounded budget.
+
+Budget exhaustion is not proof of completion or failure. It is a reasoned stop that preserves progress, unresolved effects, evidence pointers, and the next admissible action.
+
+## Test the race, not only the happy path
+
+Conformance tests should pause an old worker across lease expiry, start a replacement, then release both. Assert that only the current fencing token can commit. Test cancellation before dispatch, during an uninterruptible call, and after provider success but before receipt persistence. Test every budget at its boundary and verify that delegation cannot create capacity.
+
+## Failure boundary
+
+This control layer fails when leases never expire, renewal hides a deadlocked worker, stale owners can commit, cancellation is only an in-memory flag, budget counters reset on retry, or delegated runs mint authority and spend beyond their parent.
+
+## Retrieval check
+
+Worker A loses its connection after submitting a tool call. Its lease expires, worker B receives a higher fencing token, and then A returns with a success response. Which records may A still append? What must reject its commit? How should cancellation and the effect budget represent the unresolved call?
+
+## Sources and further reading
+
+- [Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents) — reported practices for durable progress and clean handoff across agent sessions.
+- [Harness Engineering Study Guide](/fieldbook/harness-engineering-study-guide) — the broader public synthesis; the lease-and-fencing contract here is a proposed extension.

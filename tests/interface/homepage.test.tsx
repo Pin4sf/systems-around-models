@@ -87,9 +87,14 @@ it("leads readers into a complete harness-engineering course map", async () => {
     ["State, journals, checkpoints, and replay", "/fieldbook/state-journals-checkpoints-and-replay"],
     ["Loops, workflows, graphs, and delegation", "/fieldbook/loops-workflows-graphs-and-delegation"],
     ["Memory, compaction, and continuity", "/fieldbook/memory-compaction-and-continuity"],
+    ["Identity, Authority, and Admission", "/fieldbook/identity-authority-and-admission"],
+    ["Leases, Fencing, Cancellation, and Budgets", "/fieldbook/leases-fencing-cancellation-and-budgets"],
+    ["External Effects and Transactional Outboxes", "/fieldbook/external-effects-and-transactional-outboxes"],
+    ["Ambiguity, Idempotency, and Recovery", "/fieldbook/ambiguity-idempotency-and-recovery"],
+    ["Security, Credentials, Supply Chain, and Revocation", "/fieldbook/security-credentials-supply-chain-and-revocation"],
   ]) {
     expect(screen.getByRole("link", { name: new RegExp(name, "i") })).toHaveAttribute("href", href);
   }
-  expect(screen.getByText("Identity, authority, and admission").closest("li"))
+  expect(screen.getByText("Observability and trace reconstruction").closest("li"))
     .toHaveTextContent("Coming next");
 });

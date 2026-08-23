@@ -1,0 +1,37 @@
+{
+  "id": "revision-leases-fencing-cancellation-budgets-001",
+  "essaySlug": "leases-fencing-cancellation-and-budgets",
+  "revision": 1,
+  "publishedAt": "2026-08-23",
+  "substantivelyRevisedAt": "2026-08-23",
+  "summary": "Initial public revision of the leases, fencing, cancellation, and budgets chapter.",
+  "affectedClaimIds": [],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-2bfdf1969c06aef442f54a518819491e7d73d756d2a37f29aa418753b8db97d2",
+  "sourceIds": [
+    "source-anthropic-effective-long-running-harnesses",
+    "source-harness-engineering-fieldbook-v1"
+  ],
+  "sourceValidationDates": {
+    "source-harness-engineering-fieldbook-v1": "2026-08-21",
+    "source-anthropic-effective-long-running-harnesses": "2026-08-22"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-anthropic-effective-long-running-harnesses",
+      "title": "Effective harnesses for long-running agents",
+      "canonicalUrl": "https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    }
+  ]
+}

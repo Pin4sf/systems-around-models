@@ -1,0 +1,23 @@
+id: source-aws-making-retries-safe
+title: Making retries safe with idempotent APIs
+author: Malcolm Featonby and Amazon Web Services
+canonical_url: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+published_at: 2021-01-15
+retrieved_at: 2026-08-23
+inspected_paths: []
+source_type: first-party-article
+basis: Direct reading of the Amazon Builders' Library article and AWS's dated 2021-01-15 publication announcement.
+license_status: all-rights-reserved
+evidence_grade: FD
+observed_mechanisms:
+  - description: A client supplies a unique request identifier so a service can recognize a retry and return a semantically equivalent result without repeating the side effect.
+    evidence_grade: FD
+    basis: The first-party article describes caller-provided identifiers, atomic server-side token handling, semantic equivalence, and late-arriving requests.
+author_reported_claims:
+  - Idempotent API contracts can reduce duplicate side effects while allowing clients to retry transient failures.
+unknowns:
+  - The article describes Amazon's design practice and does not establish a universal exactly-once guarantee for every provider or operation.
+falsifiers:
+  - AWS corrects or withdraws the article or its dated publication announcement.
+last_validated: 2026-08-23
+correction_ledger_status: reviewed

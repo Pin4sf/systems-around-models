@@ -1,0 +1,23 @@
+id: source-aws-transactional-outbox
+title: Transactional outbox pattern
+author: Amazon Web Services
+canonical_url: https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/transactional-outbox.html
+published_at: 2023-07-28
+retrieved_at: 2026-08-23
+inspected_paths: []
+source_type: first-party-article
+basis: Direct reading of AWS Prescriptive Guidance and its document history, which dates the guide's initial publication to 2023-07-28.
+license_status: all-rights-reserved
+evidence_grade: FD
+observed_mechanisms:
+  - description: An application records its state update and an outbox event in one transaction, then a separate processor delivers the event.
+    evidence_grade: FD
+    basis: The official pattern documentation describes both an outbox-table implementation and a change-data-capture implementation.
+author_reported_claims:
+  - The pattern addresses inconsistency created when a database update and an external notification are separate writes.
+unknowns:
+  - The guidance does not define an agent-specific authorization, verification, or recovery contract.
+falsifiers:
+  - AWS corrects or withdraws the documented pattern.
+last_validated: 2026-08-23
+correction_ledger_status: reviewed

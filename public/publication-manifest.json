@@ -3,6 +3,25 @@
   "validationSchemaVersion": "publication-v2",
   "revisions": [
     {
+      "id": "revision-ambiguity-idempotency-recovery-001",
+      "essaySlug": "ambiguity-idempotency-and-recovery",
+      "revision": 1,
+      "publishedAt": "2026-08-23",
+      "substantivelyRevisedAt": "2026-08-23",
+      "summary": "Initial public revision of the ambiguity, idempotency, and recovery chapter.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-be851a36ac9e116d9c92bbe6bbb5258652e49a2a9d121752d66b92dc75a9310d",
+      "sourceIds": [
+        "source-aws-making-retries-safe",
+        "source-harness-engineering-fieldbook-v1"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-aws-making-retries-safe": "2026-08-23"
+      }
+    },
+    {
       "id": "revision-control-structures-delegation-001",
       "essaySlug": "loops-workflows-graphs-and-delegation",
       "revision": 1,
@@ -57,6 +76,25 @@
       "sourceValidationDates": {
         "source-harness-engineering-fieldbook-v1": "2026-08-21",
         "source-memory-nist-agent-hijacking-evaluations": "2026-08-22"
+      }
+    },
+    {
+      "id": "revision-external-effects-outboxes-001",
+      "essaySlug": "external-effects-and-transactional-outboxes",
+      "revision": 1,
+      "publishedAt": "2026-08-23",
+      "substantivelyRevisedAt": "2026-08-23",
+      "summary": "Initial public revision of the external effects and transactional outboxes chapter.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-990b9a394cff640d5b9410cd40cb6fee01be89478cf9adbf149164f4855f8f5a",
+      "sourceIds": [
+        "source-aws-transactional-outbox",
+        "source-harness-engineering-fieldbook-v1"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-aws-transactional-outbox": "2026-08-23"
       }
     },
     {
@@ -162,6 +200,25 @@
       }
     },
     {
+      "id": "revision-identity-authority-admission-001",
+      "essaySlug": "identity-authority-and-admission",
+      "revision": 1,
+      "publishedAt": "2026-08-23",
+      "substantivelyRevisedAt": "2026-08-23",
+      "summary": "Initial public revision of the identity, authority, and admission chapter.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-b0b9f59331af3abd50da8564a7fd0546617eccad968c0c9be7fd1b6c7286d975",
+      "sourceIds": [
+        "source-harness-engineering-fieldbook-v1",
+        "source-memory-nist-agent-hijacking-evaluations"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-memory-nist-agent-hijacking-evaluations": "2026-08-22"
+      }
+    },
+    {
       "id": "revision-instructions-context-assembly-001",
       "essaySlug": "instructions-and-context-assembly",
       "revision": 1,
@@ -181,6 +238,25 @@
       }
     },
     {
+      "id": "revision-leases-fencing-cancellation-budgets-001",
+      "essaySlug": "leases-fencing-cancellation-and-budgets",
+      "revision": 1,
+      "publishedAt": "2026-08-23",
+      "substantivelyRevisedAt": "2026-08-23",
+      "summary": "Initial public revision of the leases, fencing, cancellation, and budgets chapter.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-2bfdf1969c06aef442f54a518819491e7d73d756d2a37f29aa418753b8db97d2",
+      "sourceIds": [
+        "source-anthropic-effective-long-running-harnesses",
+        "source-harness-engineering-fieldbook-v1"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-anthropic-effective-long-running-harnesses": "2026-08-22"
+      }
+    },
+    {
       "id": "revision-memory-compaction-continuity-001",
       "essaySlug": "memory-compaction-and-continuity",
       "revision": 1,
@@ -189,7 +265,7 @@
       "summary": "Initial public revision of the memory, compaction, and continuity chapter.",
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-16c2e224e7fa62c5d30e6f261156e1d946677c396e55dade7047ffa1e5a34f52",
+      "contentHash": "sha256-42d7cb4858feeb9f4b0504e09d9dad4e9016538274ccfd5cf670774b8ecae675",
       "sourceIds": [
         "source-harness-engineering-fieldbook-v1",
         "source-memory-anthropic-context-engineering",
@@ -242,6 +318,27 @@
         "source-memory-pm-bench": "2026-08-22",
         "source-memory-owasp-memory-attack-surface": "2026-08-22",
         "source-memory-nist-agent-hijacking-evaluations": "2026-08-22"
+      }
+    },
+    {
+      "id": "revision-security-supply-chain-revocation-001",
+      "essaySlug": "security-credentials-supply-chain-and-revocation",
+      "revision": 1,
+      "publishedAt": "2026-08-23",
+      "substantivelyRevisedAt": "2026-08-23",
+      "summary": "Initial public revision of the security, credentials, supply chain, and revocation chapter.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-92ca23ea408d62b548d4a4baeaed94227d0d4d34e500f038904a2ea14a990c11",
+      "sourceIds": [
+        "source-harness-engineering-fieldbook-v1",
+        "source-memory-nist-agent-hijacking-evaluations",
+        "source-memory-owasp-memory-attack-surface"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-memory-nist-agent-hijacking-evaluations": "2026-08-22",
+        "source-memory-owasp-memory-attack-surface": "2026-08-22"
       }
     },
     {
@@ -346,6 +443,14 @@
     {
       "id": "source-architecture-openhands",
       "lastValidated": "2026-08-22"
+    },
+    {
+      "id": "source-aws-making-retries-safe",
+      "lastValidated": "2026-08-23"
+    },
+    {
+      "id": "source-aws-transactional-outbox",
+      "lastValidated": "2026-08-23"
     },
     {
       "id": "source-earendil-what-is-a-harness",
@@ -639,5 +744,5 @@
       }
     }
   ],
-  "buildId": "sha256-d6564424e36840bb36fcd33c83c5ebf8b54eeed1b49d7c7befadfcfddc995285"
+  "buildId": "sha256-6f8a042649c913c8b70a63044f575d81132d70ec165942564ba3ec5cf555ec7b"
 }

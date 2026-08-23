@@ -1,0 +1,46 @@
+{
+  "id": "revision-security-supply-chain-revocation-001",
+  "essaySlug": "security-credentials-supply-chain-and-revocation",
+  "revision": 1,
+  "publishedAt": "2026-08-23",
+  "substantivelyRevisedAt": "2026-08-23",
+  "summary": "Initial public revision of the security, credentials, supply chain, and revocation chapter.",
+  "affectedClaimIds": [],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-92ca23ea408d62b548d4a4baeaed94227d0d4d34e500f038904a2ea14a990c11",
+  "sourceIds": [
+    "source-harness-engineering-fieldbook-v1",
+    "source-memory-nist-agent-hijacking-evaluations",
+    "source-memory-owasp-memory-attack-surface"
+  ],
+  "sourceValidationDates": {
+    "source-harness-engineering-fieldbook-v1": "2026-08-21",
+    "source-memory-nist-agent-hijacking-evaluations": "2026-08-22",
+    "source-memory-owasp-memory-attack-surface": "2026-08-22"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-memory-nist-agent-hijacking-evaluations",
+      "title": "Strengthening AI Agent Hijacking Evaluations",
+      "canonicalUrl": "https://www.nist.gov/news-events/news/2025/01/technical-blog-strengthening-ai-agent-hijacking-evaluations",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "unknown"
+    },
+    {
+      "id": "source-memory-owasp-memory-attack-surface",
+      "title": "Memory Is a Feature. It Is Also an Attack Surface",
+      "canonicalUrl": "https://genai.owasp.org/2026/05/13/memory-is-a-feature-it-is-also-an-attack-surface/",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "CC-BY-SA-4.0"
+    }
+  ]
+}
