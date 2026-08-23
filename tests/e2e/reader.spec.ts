@@ -7,6 +7,7 @@ const architecturesRoute = "/architectures";
 const admissionRoute = "/fieldbook/identity-authority-and-admission";
 const effectsRoute = "/fieldbook/external-effects-and-transactional-outboxes";
 const securityRoute = "/fieldbook/security-credentials-supply-chain-and-revocation";
+const siteOrigin = process.env.SITE_URL ?? "https://example.invalid";
 
 test("@desktop homepage leads to a complete readable Harness Engineering guide", async ({ page }) => {
   await page.goto("/");
@@ -52,7 +53,7 @@ test("@desktop reader exposes a simple chapter and ordinary study navigation", a
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", new RegExp(`${route}$`));
   await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
     "content",
-    "https://example.invalid/social/systems-around-models.png",
+    `${siteOrigin}/social/systems-around-models.png`,
   );
   const socialImage = await page.evaluate(async () => {
     const image = new Image();
