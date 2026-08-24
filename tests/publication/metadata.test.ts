@@ -95,7 +95,7 @@ describe("canonical publication metadata", () => {
     expect(home.description).not.toBe(chapter.description);
     expect(home.alternates?.canonical).toBe("/");
     expect(home.authors).toEqual([
-      { name: "Shivansh Fulper", url: "https://shivanshfulper.com" },
+      { name: "Shivansh Fulper", url: "https://shivansh-portfolio-one.vercel.app" },
     ]);
     expect(home.keywords).toContain("agent harness engineering");
     expect(home.robots).toMatchObject({ index: true, follow: true });
@@ -129,7 +129,7 @@ describe("canonical publication metadata", () => {
       expect.objectContaining({
         "@type": "Person",
         name: "Shivansh Fulper",
-        url: "https://shivanshfulper.com",
+        url: "https://shivansh-portfolio-one.vercel.app",
       }),
     ]);
     expect(structuredData).toMatchObject({
@@ -138,7 +138,7 @@ describe("canonical publication metadata", () => {
       publisher: {
         "@type": "Person",
         name: "Shivansh Fulper",
-        url: "https://shivanshfulper.com",
+        url: "https://shivansh-portfolio-one.vercel.app",
       },
     });
   });
@@ -151,12 +151,12 @@ describe("canonical publication metadata", () => {
       expect.objectContaining({
         "@type": "WebSite",
         name: "Systems Around Models",
-        author: { "@id": "https://shivanshfulper.com/#person" },
+        author: { "@id": "https://shivansh-portfolio-one.vercel.app/#person" },
       }),
       expect.objectContaining({
         "@type": "Person",
         name: "Shivansh Fulper",
-        url: "https://shivanshfulper.com",
+        url: "https://shivansh-portfolio-one.vercel.app",
       }),
       expect.objectContaining({
         "@type": "CollectionPage",

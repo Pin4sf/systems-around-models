@@ -41,7 +41,7 @@ describe("flagship fieldbook reader", () => {
     expect(screen.queryByText(/Chapter 1 of 40/)).not.toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Shivansh Fulper" })).toHaveAttribute(
       "href",
-      "https://shivanshfulper.com",
+      "https://shivansh-portfolio-one.vercel.app",
     );
     expect(screen.queryByRole("group", { name: /evidence/i })).not.toBeInTheDocument();
     expect(screen.queryByRole("link", { name: /Challenge this/i })).not.toBeInTheDocument();

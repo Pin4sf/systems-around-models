@@ -7,7 +7,7 @@ export const publicationDescription =
   "A practical study guide to the harnesses, memory, environments, authority, recovery, and verification that turn model responses into reliable work.";
 export const publicationTagline = "The agent systems fieldbook";
 export const authorName = "Shivansh Fulper";
-export const authorUrl = "https://shivanshfulper.com";
+export const authorUrl = "https://shivansh-portfolio-one.vercel.app";
 export const authorRole = "Founder and AI systems researcher";
 export const authorSameAs = [
   authorUrl,

@@ -12,7 +12,7 @@ it("presents a simple study-guide navigation", () => {
   expect(screen.getByText("Systems Around Models")).toBeInTheDocument();
   expect(screen.getByRole("link", { name: "By Shivansh Fulper · Portfolio" })).toHaveAttribute(
     "href",
-    "https://shivanshfulper.com",
+    "https://shivansh-portfolio-one.vercel.app",
   );
   expect(
     screen.getByRole("navigation", { name: "Publication" }),
