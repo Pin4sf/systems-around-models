@@ -7,6 +7,7 @@ const architecturesRoute = "/architectures";
 const admissionRoute = "/fieldbook/identity-authority-and-admission";
 const effectsRoute = "/fieldbook/external-effects-and-transactional-outboxes";
 const securityRoute = "/fieldbook/security-credentials-supply-chain-and-revocation";
+const openLoopsRoute = "/fieldbook/open-loops-and-re-entry";
 const siteOrigin = process.env.SITE_URL ?? "https://example.invalid";
 
 test("@desktop homepage leads to a complete readable Harness Engineering guide", async ({ page }) => {
@@ -120,12 +121,15 @@ test("@desktop discovery endpoints expose only released publication routes", asy
   expect(sitemap).toContain(memoryGuideRoute);
   expect(sitemap).toContain("/fieldbook/memory-compaction-and-continuity");
   expect(sitemap).toContain("/fieldbook/security-credentials-supply-chain-and-revocation");
+  expect(sitemap).toContain(openLoopsRoute);
   expect(robots).toContain("Sitemap:");
   expect(rssResponse.headers()["content-type"]).toContain("application/rss+xml");
   expect(rss).toContain("The Model Is Not the Agent");
   expect(rss).toContain("Memory Engineering: A Practical Study Guide");
   expect(rss).toContain("revision-memory-engineering-study-guide-001");
   expect(rss).toContain("revision-fieldbook-essay-001");
+  expect(rss).toContain("Open Loops and Re-entry");
+  expect(rss).toContain("revision-open-loops-re-entry-001");
 });
 
 test("@desktop architecture field map compares nine profiles and opens extended studies without JavaScript", async ({ page }) => {
@@ -243,9 +247,7 @@ test("@mobile Reliable Action security chapter keeps the diagram and pager conta
   expect(contentFits).toBe(true);
   expect(diagramFits).toBe(true);
   await expect(page.getByRole("link", { name: "Previous: Ambiguity, Idempotency, and Recovery" })).toBeVisible();
-  await expect(page.locator(".article-pager__forthcoming")).toContainText(
-    "Observability and trace reconstruction",
-  );
+  await expect(page.getByRole("link", { name: "Next: Observability and Trace Reconstruction" })).toBeVisible();
 });
 
 test("@mobile architecture field map keeps narrative contained and topology labels visible", async ({ page }) => {
@@ -307,6 +309,41 @@ test("@nojs Reliable Action effect chapter preserves custody and ordinary naviga
   await expect(page.getByRole("link", { name: "Transactional outbox pattern" })).toBeVisible();
   await expect(page.getByRole("link", { name: "Next: Ambiguity, Idempotency, and Recovery" })).toBeVisible();
   await expect(page.getByRole("group", { name: /evidence/i })).toHaveCount(0);
+});
+
+test("@nojs Evidence and Completion chapter preserves re-entry state and ordinary navigation", async ({ page }) => {
+  await page.goto(openLoopsRoute);
+  await expect(page.getByRole("heading", { name: "Open Loops and Re-entry" })).toBeVisible();
+  await expect(page.getByRole("figure", { name: "Open loop re-entry lifecycle" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Retrieval check" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Sources and further reading" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Previous: Evidence, Verification, Policy, Acceptance, and Closure" })).toBeVisible();
+  await expect(page.getByRole("group", { name: /evidence/i })).toHaveCount(0);
+});
+
+test("@mobile Evidence and Completion chapter keeps its diagram and prose contained", async ({ page }) => {
+  await page.goto(openLoopsRoute);
+  const diagram = page.getByRole("figure", { name: "Open loop re-entry lifecycle" });
+  await expect(diagram).toBeVisible();
+  const [contentFits, diagramFits] = await Promise.all([
+    page.locator(".article-reader__prose").evaluate(
+      (element) => element.scrollWidth <= element.clientWidth,
+    ),
+    diagram.evaluate(
+      (element) => element.getBoundingClientRect().right <= window.innerWidth,
+    ),
+  ]);
+  expect(contentFits).toBe(true);
+  expect(diagramFits).toBe(true);
+});
+
+test("@desktop print preserves Evidence and Completion sources and closure state", async ({ page }) => {
+  await page.goto(openLoopsRoute);
+  await page.emulateMedia({ media: "print", reducedMotion: "reduce" });
+  await expect(page.getByRole("navigation", { name: "On this page" })).toBeHidden();
+  await expect(page.getByRole("figure", { name: "Open loop re-entry lifecycle" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Sources and further reading" })).toBeVisible();
+  await expect(page.locator(".study-guide-footer")).toBeVisible();
 });
 
 test("@nojs architecture profiles preserve native disclosure and ordinary sources", async ({ page }) => {

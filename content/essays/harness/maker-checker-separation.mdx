@@ -1,0 +1,73 @@
+---
+slug: maker-checker-separation
+title: Maker/Checker Separation
+description: How to keep the system that produces work from silently defining, selecting, or rewriting the test that declares the work acceptable.
+sequence: Harness Engineering
+sequence_position: 19
+revision: 1
+authors:
+  - Systems Around Models
+published_at: 2026-08-24
+substantively_revised_at: 2026-08-24
+reading_time_source: 8 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-nist-ai-rmf-1
+  - source-llm-as-judge-mt-bench
+revision_id: revision-maker-checker-separation-001
+previous_essay_slug: observability-and-trace-reconstruction
+next_essay_slug: evidence-verification-policy-acceptance-and-closure
+---
+
+## Production and judgment are different jobs
+
+The component that proposes a plan, edits a file, or calls a tool is the maker. The component that decides whether the result satisfies a fixed contract is the checker. A reliable harness treats these as different responsibilities even when the same model family participates in both.
+
+<MakerCheckerSeparation />
+
+Separation matters because a maker has privileged context about its own intentions and a direct incentive to interpret ambiguous evidence as success. If it can also change the rubric, choose only favorable artifacts, or summarize away uncertainty, checking becomes another generation step rather than an independent constraint.
+
+## Lock the contract before execution
+
+Define acceptance conditions, prohibited states, required evidence, and allowed dispositions before the maker begins consequential work. Version the contract and bind that version to the attempt. During the run, the maker may discover that the contract is impossible or wrong, but it should raise that conflict rather than rewrite the test that will judge its work.
+
+A locked contract does not mean every criterion must be deterministic. It means the evaluation target is stable. A formatting check can be exact. A user-experience review may require judgment. A policy decision may require an authorized human. In each case, the maker knows what must be produced and who owns the decision.
+
+The [NIST AI Risk Management Framework](https://doi.org/10.6028/NIST.AI.100-1) separates governance, mapping, measurement, and management responsibilities across an AI system lifecycle. A harness can make that separation concrete at runtime by recording the contract, responsible role, evidence source, and decision for each attempt.
+
+## Give the checker canonical artifacts
+
+The checker should inspect the same repository state, test output, external receipt, trace, or user-visible result that another investigator could inspect later. Do not make the maker's prose summary the only input. Summaries can point to evidence; they cannot replace it.
+
+Bind artifacts to the attempt with stable identifiers, versions, hashes, or provider receipts. Record missing or inaccessible artifacts as a disposition, not as a reason to assume success. When the maker and checker disagree about what happened, preserve both observations and the evidence boundary.
+
+The checker also needs protection from irrelevant maker context. A fresh context containing the locked rubric and canonical artifacts can reduce anchoring on the maker's narrative. For high-consequence decisions, use a different model, a deterministic verifier, a specialized service, or an authorized person where that provides materially stronger independence.
+
+## Treat model judges as fallible instruments
+
+Using another model can be useful, but a second model is not automatically an independent checker. Shared training, prompts, tools, or context can reproduce the same error. A model may also prefer a response because of position, verbosity, or similarity to its own style.
+
+The paper [Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena](https://arxiv.org/abs/2306.05685) reports substantial agreement with human preferences in its evaluated settings while documenting position, verbosity, and self-enhancement biases. That makes model judges useful measurement instruments with known limits—not universal authorities for policy, factual correctness, or external effects.
+
+Strengthen a model checker with blinded ordering, repeated trials where appropriate, explicit rubrics, counterexample tests, calibration against human decisions, and a disposition that allows uncertainty. Never convert a preference score directly into authority to publish, spend money, disclose data, or close a user responsibility.
+
+## Return a typed disposition
+
+A useful checker returns more than pass or fail. It identifies the contract version, artifacts inspected, checks performed, result for each criterion, uncertainty, and a typed disposition such as confirmed, refuted, inconclusive, needs correction, needs escalation, or not authorized.
+
+The harness then decides what transition that disposition permits. A confirmed technical check may advance work to policy review. An inconclusive result may request new evidence. A correct result can still be blocked by policy. A failed check should preserve the failed artifact and feedback rather than inviting the maker to erase the attempt.
+
+## Failure boundary
+
+Maker/checker separation fails when the maker writes or edits its own rubric during the run, the checker sees only the maker's summary, the same context anchors both roles, a preference judge is treated as factual proof, disagreement is collapsed into a single score, or a checker disposition is allowed to exercise authority it does not own.
+
+## Retrieval check
+
+An agent changes an access-control rule and reports that all tests pass. It also generated the tests after making the change. Which contract should have been locked before execution, which canonical artifacts should an independent checker inspect, and which decisions still require policy or human authority even if every technical test passes?
+
+## Sources and further reading
+
+- [Artificial Intelligence Risk Management Framework (AI RMF 1.0)](https://doi.org/10.6028/NIST.AI.100-1) — NIST's lifecycle framework for governing, mapping, measuring, and managing AI risk.
+- [Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena](https://arxiv.org/abs/2306.05685) — the authors' evaluation of model judges, agreement, and systematic biases.
+- [Harness Engineering Study Guide](/fieldbook/harness-engineering-study-guide) — the publication synthesis connecting independent checking to evidence and closure.

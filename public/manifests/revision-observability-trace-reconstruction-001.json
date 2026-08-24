@@ -1,0 +1,37 @@
+{
+  "id": "revision-observability-trace-reconstruction-001",
+  "essaySlug": "observability-and-trace-reconstruction",
+  "revision": 1,
+  "publishedAt": "2026-08-24",
+  "substantivelyRevisedAt": "2026-08-24",
+  "summary": "Initial public revision of the observability and trace reconstruction chapter.",
+  "affectedClaimIds": [],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-aac6a46a91bd0cc358167a587922a8dabd7065f0ff8e166b36e109f7ebe564c8",
+  "sourceIds": [
+    "source-harness-engineering-fieldbook-v1",
+    "source-w3c-trace-context"
+  ],
+  "sourceValidationDates": {
+    "source-harness-engineering-fieldbook-v1": "2026-08-21",
+    "source-w3c-trace-context": "2026-08-24"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-w3c-trace-context",
+      "title": "Trace Context",
+      "canonicalUrl": "https://www.w3.org/TR/2021/REC-trace-context-1-20211123/",
+      "lastValidated": "2026-08-24",
+      "licenseStatus": "unknown"
+    }
+  ]
+}

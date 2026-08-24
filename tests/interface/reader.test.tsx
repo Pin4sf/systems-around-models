@@ -223,6 +223,10 @@ describe("flagship fieldbook reader", () => {
     ["external-effects-and-transactional-outboxes", "External Effects and Transactional Outboxes", "Transactional outbox effect lifecycle"],
     ["ambiguity-idempotency-and-recovery", "Ambiguity, Idempotency, and Recovery", "Ambiguous effect reconciliation"],
     ["security-credentials-supply-chain-and-revocation", "Security, Credentials, Supply Chain, and Revocation", "Revocation propagation across active surfaces"],
+    ["observability-and-trace-reconstruction", "Observability and Trace Reconstruction", "Trace reconstruction from request to decision"],
+    ["maker-checker-separation", "Maker/Checker Separation", "Maker and checker separation"],
+    ["evidence-verification-policy-acceptance-and-closure", "Evidence, Verification, Policy, Acceptance, and Closure", "Completion ledger from evidence to closure"],
+    ["open-loops-and-re-entry", "Open Loops and Re-entry", "Open loop re-entry lifecycle"],
   ])("publishes %s with a retrieval diagram and check", async (chapterSlug, title, diagramName) => {
     const page = await ArticlePage({ params: Promise.resolve({ slug: chapterSlug }) });
     render(page);
@@ -234,6 +238,19 @@ describe("flagship fieldbook reader", () => {
     expect(diagram.querySelector("figcaption")).toHaveTextContent(/\S/);
     expect(diagram.textContent?.length).toBeGreaterThan(60);
     expect(screen.getByRole("heading", { name: "Retrieval check", level: 2 })).toBeInTheDocument();
+  });
+
+  it.each([
+    ["observability-and-trace-reconstruction", "Trace reconstruction from request to decision", "ol"],
+    ["maker-checker-separation", "Maker and checker separation", "dl"],
+    ["evidence-verification-policy-acceptance-and-closure", "Completion ledger from evidence to closure", "ol"],
+    ["open-loops-and-re-entry", "Open loop re-entry lifecycle", "ol"],
+  ])("gives the %s diagram native %s semantics", async (chapterSlug, diagramName, semanticTag) => {
+    const page = await ArticlePage({ params: Promise.resolve({ slug: chapterSlug }) });
+    render(page);
+
+    expect(screen.getByRole("figure", { name: diagramName }).querySelector(semanticTag))
+      .toBeInTheDocument();
   });
 
   it("derives next-link semantics from the released essay sequence", async () => {

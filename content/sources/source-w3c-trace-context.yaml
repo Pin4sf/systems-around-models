@@ -1,0 +1,23 @@
+id: source-w3c-trace-context
+title: Trace Context
+author: W3C Distributed Tracing Working Group
+canonical_url: https://www.w3.org/TR/2021/REC-trace-context-1-20211123/
+published_at: 2021-11-23
+retrieved_at: 2026-08-24
+inspected_paths: []
+source_type: first-party-article
+basis: Direct reading of the dated W3C Recommendation and its standardized traceparent and tracestate propagation model.
+license_status: unknown
+evidence_grade: FD
+observed_mechanisms:
+  - description: Trace context propagates a shared request identifier across participating distributed-system components.
+    evidence_grade: FD
+    basis: The Recommendation specifies interoperable traceparent and tracestate fields for distributed tracing.
+author_reported_claims:
+  - Shared trace identifiers allow trace data from multiple providers and components to be correlated.
+unknowns:
+  - The Recommendation defines propagation fields, not the application-level events needed to explain an agent run.
+falsifiers:
+  - W3C withdraws or supersedes the Recommendation with incompatible trace propagation semantics.
+last_validated: 2026-08-24
+correction_ledger_status: reviewed

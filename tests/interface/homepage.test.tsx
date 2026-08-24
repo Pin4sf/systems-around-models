@@ -97,9 +97,13 @@ it("leads readers into a complete harness-engineering course map", async () => {
     ["External Effects and Transactional Outboxes", "/fieldbook/external-effects-and-transactional-outboxes"],
     ["Ambiguity, Idempotency, and Recovery", "/fieldbook/ambiguity-idempotency-and-recovery"],
     ["Security, Credentials, Supply Chain, and Revocation", "/fieldbook/security-credentials-supply-chain-and-revocation"],
+    ["Observability and Trace Reconstruction", "/fieldbook/observability-and-trace-reconstruction"],
+    ["Maker/Checker Separation", "/fieldbook/maker-checker-separation"],
+    ["Evidence, Verification, Policy, Acceptance, and Closure", "/fieldbook/evidence-verification-policy-acceptance-and-closure"],
+    ["Open Loops and Re-entry", "/fieldbook/open-loops-and-re-entry"],
   ]) {
     expect(screen.getByRole("link", { name: new RegExp(name, "i") })).toHaveAttribute("href", href);
   }
-  expect(screen.getByText("Observability and trace reconstruction").closest("li"))
+  expect(screen.getByText("Anthropic long-running harnesses").closest("li"))
     .toHaveTextContent("Coming next");
 });

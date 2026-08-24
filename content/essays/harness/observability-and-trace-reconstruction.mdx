@@ -1,0 +1,79 @@
+---
+slug: observability-and-trace-reconstruction
+title: Observability and Trace Reconstruction
+description: How an agent harness records enough causal, authority, effect, and decision context to reconstruct a run without storing hidden reasoning.
+sequence: Harness Engineering
+sequence_position: 18
+revision: 1
+authors:
+  - Systems Around Models
+published_at: 2026-08-24
+substantively_revised_at: 2026-08-24
+reading_time_source: 9 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-w3c-trace-context
+revision_id: revision-observability-trace-reconstruction-001
+previous_essay_slug: security-credentials-supply-chain-and-revocation
+next_essay_slug: maker-checker-separation
+---
+
+## Observability should explain a run
+
+A dashboard can report that an agent run lasted forty seconds, called three tools, and ended successfully while still leaving the important questions unanswered. What did the model actually receive? Which capabilities were bound? What changed in the world? Which evidence justified the final state? Why did the harness stop?
+
+Observability earns its place when an operator can reconstruct the causal path from admitted request to final decision. This requires more than logs. It requires linked records with stable identities and explicit boundaries.
+
+<TraceReconstruction />
+
+The [W3C Trace Context Recommendation](https://www.w3.org/TR/2021/REC-trace-context-1-20211123/) standardizes identifiers that let distributed components correlate one request. That solves an important plumbing problem. An agent harness must add semantic records above that layer: work and attempt identity, effective context, capability grants, tool intent, external effect, evidence, policy decision, and closure state.
+
+## Record the effective run, not the intended one
+
+Configuration files describe what a system might do. A reconstruction needs what this attempt actually used. Record the model and harness versions, the admitted policy version, references to assembled context, the effective capability manifest, environment identity, budget, lease or fencing facts, and any approval that widened authority.
+
+Record references rather than copying sensitive payloads into every trace. Context documents, credentials, private tool output, and evidence artifacts should remain in protected stores with access-controlled identifiers. The trace can preserve hashes, versions, redaction facts, and custody without becoming a second ungoverned database.
+
+Tool activity should distinguish intent, invocation, result, and observed effect. A tool response that says “sent” is not the same as a provider receipt, and neither proves that the intended recipient accepted the message. Keep these facts separate so later reconciliation is possible.
+
+## Link live work to durable facts
+
+Use a work identifier for the user-visible responsibility and an attempt identifier for each bounded execution. Child runs, retries, approvals, outbox records, external receipts, verifier decisions, and human interventions should link back to both where relevant.
+
+This makes discontinuity visible. A retry can share the work identifier while receiving a new attempt identifier and a new authority snapshot. A delayed effect can link to the originating attempt while recording the policy version checked at dispatch. A human correction can supersede a state without erasing the earlier fact.
+
+For a concise live view, show the current phase, owner, authority, last consequential transition, outstanding ambiguity, and safe next action. Preserve the fuller investigator trace behind access control. The two views serve different jobs; compressing the investigator record into the live summary destroys evidence, while exposing every protected detail in the live view creates a privacy and security risk.
+
+## Reconstruct decisions without hidden reasoning
+
+An auditable harness does not need private chain-of-thought. It needs causal facts and externally stated rationale: which contract applied, which evidence was inspected, which checks ran, what disposition each checker returned, what uncertainty remained, who had authority to accept, and what transition followed.
+
+This is both safer and more useful. Hidden reasoning is not a stable execution interface, and storing it can expose sensitive material without making the system reproducible. A typed decision record—inputs, rule or rubric version, result, confidence boundary, and next transition—supports review without pretending to reveal the model's internal process.
+
+Protect trace integrity as well as confidentiality. Append-only event facts, signed receipts where appropriate, monotonic sequence numbers, and explicit correction records make silent rewriting harder. Role-based views and retention rules should decide who can inspect content, metadata, and redaction history.
+
+## Run the reconstruction test
+
+Take a completed or failed attempt and ask an investigator who did not watch it live to answer five questions:
+
+1. What was requested and admitted?
+2. What context, policy, model, environment, and capabilities were effective?
+3. Which actions were attempted, and what effects were observed?
+4. Which evidence and decisions produced the final state?
+5. What remains unresolved, and what is the next safe action?
+
+If any answer depends on a chat summary, an operator's memory, or an unlinked vendor console, the trace is incomplete. If the answer requires reading secrets or unrelated user data, the trace boundary is too broad.
+
+## Failure boundary
+
+Observability fails when identifiers do not cross service boundaries, retries overwrite earlier attempts, intended configuration is mistaken for effective configuration, tool claims are mistaken for observed effects, summaries replace canonical artifacts, redaction destroys necessary provenance, or traces collect more private content than the investigation requires.
+
+## Retrieval check
+
+A run used a newer capability manifest than the one stored in its work record, retried after a timeout, and later received a provider receipt. The live dashboard says “completed.” Which identifiers and versioned facts would you need to reconstruct the first bad transition, determine whether the retry duplicated an effect, and name the next safe action without exposing raw credentials or hidden reasoning?
+
+## Sources and further reading
+
+- [Trace Context](https://www.w3.org/TR/2021/REC-trace-context-1-20211123/) — the W3C Recommendation for propagating interoperable trace identifiers across distributed components.
+- [Harness Engineering Study Guide](/fieldbook/harness-engineering-study-guide) — the publication synthesis connecting trace reconstruction to admission, effects, evidence, and closure.

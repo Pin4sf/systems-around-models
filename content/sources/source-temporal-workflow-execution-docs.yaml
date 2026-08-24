@@ -1,0 +1,26 @@
+id: source-temporal-workflow-execution-docs
+title: Temporal Workflow Execution and Event History documentation
+author: Temporal Technologies
+canonical_url: https://github.com/temporalio/documentation/tree/053c35af7e9ead0a7714d01612576bba14f0fcc1/docs/encyclopedia/workflow/workflow-execution
+published_at: 2026-08-21
+retrieved_at: 2026-08-24
+repository_commit: 053c35af7e9ead0a7714d01612576bba14f0fcc1
+inspected_paths:
+  - docs/encyclopedia/workflow/workflow-execution/event.mdx
+  - docs/encyclopedia/workflow/workflow-execution/workflow-execution.mdx
+source_type: first-party-repository
+basis: Direct inspection of the official Temporal documentation repository at the named commit and paths; published_at records that repository snapshot's commit date.
+license_status: MIT
+evidence_grade: FD
+observed_mechanisms:
+  - description: Workflow Event History is a persisted append-only event log used to reconstruct execution state through replay.
+    evidence_grade: FD
+    basis: The pinned event-history and workflow-execution documentation describes persisted history, replay, and recovery behavior.
+author_reported_claims:
+  - Durable workflow state can be reconstructed from Event History after worker or process failure.
+unknowns:
+  - The documentation does not define user-facing ownership, cue quality, dismissal, or conscious-release semantics for open loops.
+falsifiers:
+  - A later pinned Temporal implementation or documentation correction contradicts the described event-history and replay behavior.
+last_validated: 2026-08-24
+correction_ledger_status: reviewed

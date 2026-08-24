@@ -79,6 +79,25 @@
       }
     },
     {
+      "id": "revision-evidence-verification-policy-acceptance-closure-001",
+      "essaySlug": "evidence-verification-policy-acceptance-and-closure",
+      "revision": 1,
+      "publishedAt": "2026-08-24",
+      "substantivelyRevisedAt": "2026-08-24",
+      "summary": "Initial public revision of the evidence, verification, policy, acceptance, and closure chapter.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-7b12335922fd7c64586b78297c210e41c3fd6fa1eb21e446ac6386ad01ed407c",
+      "sourceIds": [
+        "source-harness-engineering-fieldbook-v1",
+        "source-nist-ai-rmf-1"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-nist-ai-rmf-1": "2026-08-24"
+      }
+    },
+    {
       "id": "revision-external-effects-outboxes-001",
       "essaySlug": "external-effects-and-transactional-outboxes",
       "revision": 1,
@@ -257,6 +276,27 @@
       }
     },
     {
+      "id": "revision-maker-checker-separation-001",
+      "essaySlug": "maker-checker-separation",
+      "revision": 1,
+      "publishedAt": "2026-08-24",
+      "substantivelyRevisedAt": "2026-08-24",
+      "summary": "Initial public revision of the maker and checker separation chapter.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-cfdec6d92861fb93ecf3f8076fc825a763912030f3f51cfef957aef467aaed67",
+      "sourceIds": [
+        "source-harness-engineering-fieldbook-v1",
+        "source-llm-as-judge-mt-bench",
+        "source-nist-ai-rmf-1"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-nist-ai-rmf-1": "2026-08-24",
+        "source-llm-as-judge-mt-bench": "2026-08-24"
+      }
+    },
+    {
       "id": "revision-memory-compaction-continuity-001",
       "essaySlug": "memory-compaction-and-continuity",
       "revision": 1,
@@ -321,6 +361,44 @@
       }
     },
     {
+      "id": "revision-observability-trace-reconstruction-001",
+      "essaySlug": "observability-and-trace-reconstruction",
+      "revision": 1,
+      "publishedAt": "2026-08-24",
+      "substantivelyRevisedAt": "2026-08-24",
+      "summary": "Initial public revision of the observability and trace reconstruction chapter.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-aac6a46a91bd0cc358167a587922a8dabd7065f0ff8e166b36e109f7ebe564c8",
+      "sourceIds": [
+        "source-harness-engineering-fieldbook-v1",
+        "source-w3c-trace-context"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-w3c-trace-context": "2026-08-24"
+      }
+    },
+    {
+      "id": "revision-open-loops-re-entry-001",
+      "essaySlug": "open-loops-and-re-entry",
+      "revision": 1,
+      "publishedAt": "2026-08-24",
+      "substantivelyRevisedAt": "2026-08-24",
+      "summary": "Initial public revision of the open loops and re-entry chapter.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-6a99d1bb123d983fcaf5f01c5f30c6d41352e2e2b387cb89bcfdc7554375cc75",
+      "sourceIds": [
+        "source-harness-engineering-fieldbook-v1",
+        "source-temporal-workflow-execution-docs"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-temporal-workflow-execution-docs": "2026-08-24"
+      }
+    },
+    {
       "id": "revision-security-supply-chain-revocation-001",
       "essaySlug": "security-credentials-supply-chain-and-revocation",
       "revision": 1,
@@ -329,7 +407,7 @@
       "summary": "Initial public revision of the security, credentials, supply chain, and revocation chapter.",
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-92ca23ea408d62b548d4a4baeaed94227d0d4d34e500f038904a2ea14a990c11",
+      "contentHash": "sha256-ec581fafccdf2cd61a1318e172fc70097258ad9cfff5d34e3119d67c90a33e27",
       "sourceIds": [
         "source-harness-engineering-fieldbook-v1",
         "source-memory-nist-agent-hijacking-evaluations",
@@ -469,6 +547,10 @@
       "lastValidated": "2026-08-22"
     },
     {
+      "id": "source-llm-as-judge-mt-bench",
+      "lastValidated": "2026-08-24"
+    },
+    {
       "id": "source-memory-anthropic-context-engineering",
       "lastValidated": "2026-08-22"
     },
@@ -505,8 +587,20 @@
       "lastValidated": "2026-08-22"
     },
     {
+      "id": "source-nist-ai-rmf-1",
+      "lastValidated": "2026-08-24"
+    },
+    {
       "id": "source-rasa-why-agents-fail",
       "lastValidated": "2026-08-22"
+    },
+    {
+      "id": "source-temporal-workflow-execution-docs",
+      "lastValidated": "2026-08-24"
+    },
+    {
+      "id": "source-w3c-trace-context",
+      "lastValidated": "2026-08-24"
     },
     {
       "id": "source-walkinglabs-awesome-harness-engineering",
@@ -744,5 +838,5 @@
       }
     }
   ],
-  "buildId": "sha256-6f8a042649c913c8b70a63044f575d81132d70ec165942564ba3ec5cf555ec7b"
+  "buildId": "sha256-90df233a0f1647c9005b171c01452e3dbd8d37acab7cdf6c91fe6150efc8cff2"
 }

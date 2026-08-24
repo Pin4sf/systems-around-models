@@ -26,6 +26,10 @@ const releasedChapterPaths = [
   "/fieldbook/external-effects-and-transactional-outboxes",
   "/fieldbook/ambiguity-idempotency-and-recovery",
   "/fieldbook/security-credentials-supply-chain-and-revocation",
+  "/fieldbook/observability-and-trace-reconstruction",
+  "/fieldbook/maker-checker-separation",
+  "/fieldbook/evidence-verification-policy-acceptance-and-closure",
+  "/fieldbook/open-loops-and-re-entry",
 ];
 
 afterEach(() => {
@@ -143,6 +147,32 @@ describe("canonical publication metadata", () => {
     });
   });
 
+  it("publishes canonical metadata and Article JSON-LD for the latest released chapter", async () => {
+    vi.stubEnv("SITE_URL", canonicalSite);
+    const latestSlug = "open-loops-and-re-entry";
+    const latestPath = `/fieldbook/${latestSlug}`;
+    const [metadata, structuredData] = await Promise.all([
+      generateMetadata({ params: Promise.resolve({ slug: latestSlug }) }),
+      buildArticleStructuredData(latestSlug),
+    ]);
+
+    expect(metadata.title).toBe("Open Loops and Re-entry | Systems Around Models");
+    expect(metadata.alternates?.canonical).toBe(latestPath);
+    expect(metadata.openGraph).toMatchObject({
+      type: "article",
+      publishedTime: "2026-08-24",
+      modifiedTime: "2026-08-24",
+      url: `${canonicalSite}${latestPath}`,
+    });
+    expect(structuredData).toMatchObject({
+      "@type": "Article",
+      headline: "Open Loops and Re-entry",
+      datePublished: "2026-08-24",
+      dateModified: "2026-08-24",
+      mainEntityOfPage: `${canonicalSite}${latestPath}`,
+    });
+  });
+
   it("publishes a connected WebSite, author, and fieldbook graph for answer engines", () => {
     vi.stubEnv("SITE_URL", canonicalSite);
     const structuredData = buildHomeJsonLd();
@@ -199,6 +229,9 @@ describe("publication discovery endpoints", () => {
     expect(body).toContain(`<link>${canonicalSite}${memoryGuidePath}</link>`);
     expect(body).toContain("revision-memory-engineering-study-guide-001");
     expect(body).toContain("revision-fieldbook-essay-001");
+    expect(body).toContain("<title>Open Loops and Re-entry</title>");
+    expect(body).toContain(`<link>${canonicalSite}/fieldbook/open-loops-and-re-entry</link>`);
+    expect(body).toContain("revision-open-loops-re-entry-001");
   });
 
   it("points crawlers at the canonical sitemap", () => {

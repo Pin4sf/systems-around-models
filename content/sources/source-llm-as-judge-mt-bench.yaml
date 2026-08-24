@@ -1,0 +1,23 @@
+id: source-llm-as-judge-mt-bench
+title: Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena
+author: Lianmin Zheng et al.
+canonical_url: https://arxiv.org/abs/2306.05685
+published_at: 2023-06-09
+retrieved_at: 2026-08-24
+inspected_paths: []
+source_type: first-party-article
+basis: Direct reading of the authors' dated paper describing LLM judge agreement, limitations, and bias experiments.
+license_status: unknown
+evidence_grade: FD
+observed_mechanisms:
+  - description: The evaluation tests model judges against human preferences and examines position, verbosity, and self-enhancement biases.
+    evidence_grade: FD
+    basis: The paper reports these experiments and limitations directly.
+author_reported_claims:
+  - Strong model judges can approximate human preference in the evaluated settings while retaining systematic biases.
+unknowns:
+  - Preference agreement does not establish checker independence or correctness for consequential agent effects.
+falsifiers:
+  - The paper is withdrawn or its reported judge-bias experiments are corrected as invalid.
+last_validated: 2026-08-24
+correction_ledger_status: reviewed
