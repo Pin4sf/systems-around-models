@@ -11,8 +11,10 @@ inspected_paths:
   - libs/langgraph/langgraph/types.py
   - libs/langgraph/langgraph/pregel/main.py
   - libs/langgraph/tests/test_subgraph_persistence_async.py
+  - libs/checkpoint/langgraph/checkpoint/memory/__init__.py
+  - libs/checkpoint/README.md
 source_type: first-party-repository
-basis: Commit-pinned inspection of LangGraph 1.2.9 source, package metadata, interrupt implementation, runtime entry point, and persistence tests.
+basis: Commit-pinned inspection of LangGraph 1.2.9 source, package metadata, interrupt implementation, runtime entry point, in-memory checkpointer, checkpoint documentation, and persistence tests.
 license_status: MIT
 evidence_grade: IP
 observed_mechanisms:

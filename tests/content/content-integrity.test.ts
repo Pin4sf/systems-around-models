@@ -322,7 +322,7 @@ describe("public content registry", () => {
     const firstEssay = `${validEssayWithRevision.replace(
       "revision_id: revision-valid",
       "revision_id: revision-valid\nnext_essay_slug: second-essay",
-    )}\n## First section\n\n[Second](/fieldbook/second-essay#second-section)\n`;
+    )}\n## First section\n\n[Second](/fieldbook/second-essay#second-section)\n\n[Architectures](/architectures)\n`;
     const secondEssay = `${validEssayWithRevision
       .replaceAll("valid-essay", "second-essay")
       .replace("sequence_position: 1", "sequence_position: 2")

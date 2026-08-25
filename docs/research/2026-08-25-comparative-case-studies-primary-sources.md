@@ -19,7 +19,7 @@ This note records the source boundary for Harness Engineering Chapters 21–24. 
 ## LangGraph durable state and interrupts
 
 - Canonical source: [LangGraph 1.2.9](https://github.com/langchain-ai/langgraph/tree/95af6a00718588e7b7ce17310e8006d267896a77), release commit `95af6a00718588e7b7ce17310e8006d267896a77`, published 2026-07-10.
-- Inspected paths: `README.md`, `libs/langgraph/pyproject.toml`, `libs/langgraph/langgraph/types.py`, `libs/langgraph/langgraph/pregel/main.py`, and `libs/langgraph/tests/test_subgraph_persistence_async.py`.
+- Inspected paths: `README.md`, `libs/langgraph/pyproject.toml`, `libs/langgraph/langgraph/types.py`, `libs/langgraph/langgraph/pregel/main.py`, `libs/langgraph/tests/test_subgraph_persistence_async.py`, `libs/checkpoint/langgraph/checkpoint/memory/__init__.py`, and `libs/checkpoint/README.md`.
 - Evidence used: implementation-pinned graph execution, checkpointer, thread, persistence, and interrupt behavior.
 - Boundary retained: the open-source Python library, checkpoint packages, separately versioned SDK, and hosted platform are distinct editions and responsibility surfaces. Checkpoint durability does not establish external-effect idempotency, current authorization, or owner acceptance.
 

@@ -567,7 +567,7 @@ function validateUnifiedIntegrity(
   for (const essay of essays.values()) {
     const filename = essayFilenames.get(essay.slug) ?? `content/essays/${essay.slug}.mdx`;
     for (const href of internalEssayLinks(essaySources.get(essay.slug) ?? "")) {
-      if (href.startsWith("/manifests/") || href === "/") continue;
+      if (href.startsWith("/manifests/") || href === "/" || href === "/architectures") continue;
       let targetSlug = essay.slug;
       let fragment: string | undefined;
       if (href.startsWith("#")) {
