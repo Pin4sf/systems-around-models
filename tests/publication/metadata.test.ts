@@ -117,6 +117,22 @@ describe("canonical publication metadata", () => {
     });
   });
 
+  it("publishes the repository crosswalk as a substantive guide revision", async () => {
+    vi.stubEnv("SITE_URL", canonicalSite);
+    const guide = await generateMetadata({
+      params: Promise.resolve({ slug: "harness-engineering-study-guide" }),
+    });
+
+    expect(guide.openGraph).toMatchObject({
+      publishedTime: "2026-08-22",
+      modifiedTime: "2026-08-25",
+      url: `${canonicalSite}${guidePath}`,
+    });
+    expect(guide.other?.["article:revision"]).toBe(
+      "revision-harness-engineering-study-guide-002",
+    );
+  });
+
   it("builds Article JSON-LD from the canonical essay and revision", async () => {
     vi.stubEnv("SITE_URL", canonicalSite);
     const structuredData = await buildArticleStructuredData(

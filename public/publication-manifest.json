@@ -246,6 +246,51 @@
         "source-walkinglabs-learn-harness-engineering"
       ],
       "sourceValidationDates": {
+        "source-anthropic-effective-long-running-harnesses": "2026-08-25",
+        "source-earendil-what-is-a-harness": "2026-08-21",
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-humanlayer-12-factor-agents": "2026-08-22",
+        "source-langchain-anatomy-agent-harness": "2026-08-22",
+        "source-rasa-why-agents-fail": "2026-08-22",
+        "source-walkinglabs-awesome-harness-engineering": "2026-08-22",
+        "source-walkinglabs-learn-harness-engineering": "2026-08-22"
+      }
+    },
+    {
+      "id": "revision-harness-engineering-study-guide-002",
+      "essaySlug": "harness-engineering-study-guide",
+      "revision": 2,
+      "publishedAt": "2026-08-22",
+      "substantivelyRevisedAt": "2026-08-25",
+      "summary": "Added a commit-pinned ten-repository crosswalk that teaches mechanism transfer through explicit authority, evidence, licensing, and failure boundaries.",
+      "affectedClaimIds": [
+        "claim-architecture-selection-responsibilities",
+        "claim-harness-capability-configuration",
+        "claim-harness-failure-injection-learning-method"
+      ],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-5335df701fa92463f2efe5395fa87c5af6152acb8f433af4c125e949bdf29db4",
+      "sourceIds": [
+        "source-agentmemory-runtime",
+        "source-ai-boost-awesome-harness-engineering",
+        "source-ai-job-search-workflow",
+        "source-anthropic-agent-skills-repository",
+        "source-anthropic-effective-long-running-harnesses",
+        "source-architecture-openhands",
+        "source-browser-use-runtime",
+        "source-community-cybersecurity-skills",
+        "source-diagram-design-skill",
+        "source-earendil-what-is-a-harness",
+        "source-harness-engineering-fieldbook-v1",
+        "source-humanlayer-12-factor-agents",
+        "source-langchain-anatomy-agent-harness",
+        "source-openviking-context-database",
+        "source-rasa-why-agents-fail",
+        "source-scientific-agent-skills",
+        "source-walkinglabs-awesome-harness-engineering",
+        "source-walkinglabs-learn-harness-engineering"
+      ],
+      "sourceValidationDates": {
         "source-earendil-what-is-a-harness": "2026-08-21",
         "source-harness-engineering-fieldbook-v1": "2026-08-21",
         "source-walkinglabs-learn-harness-engineering": "2026-08-22",
@@ -253,7 +298,17 @@
         "source-rasa-why-agents-fail": "2026-08-22",
         "source-anthropic-effective-long-running-harnesses": "2026-08-25",
         "source-langchain-anatomy-agent-harness": "2026-08-22",
-        "source-humanlayer-12-factor-agents": "2026-08-22"
+        "source-humanlayer-12-factor-agents": "2026-08-22",
+        "source-openviking-context-database": "2026-08-25",
+        "source-agentmemory-runtime": "2026-08-25",
+        "source-anthropic-agent-skills-repository": "2026-08-25",
+        "source-diagram-design-skill": "2026-08-25",
+        "source-scientific-agent-skills": "2026-08-25",
+        "source-ai-boost-awesome-harness-engineering": "2026-08-25",
+        "source-community-cybersecurity-skills": "2026-08-25",
+        "source-ai-job-search-workflow": "2026-08-25",
+        "source-architecture-openhands": "2026-08-25",
+        "source-browser-use-runtime": "2026-08-25"
       }
     },
     {
@@ -555,6 +610,22 @@
   ],
   "sources": [
     {
+      "id": "source-agentmemory-runtime",
+      "lastValidated": "2026-08-25"
+    },
+    {
+      "id": "source-ai-boost-awesome-harness-engineering",
+      "lastValidated": "2026-08-25"
+    },
+    {
+      "id": "source-ai-job-search-workflow",
+      "lastValidated": "2026-08-25"
+    },
+    {
+      "id": "source-anthropic-agent-skills-repository",
+      "lastValidated": "2026-08-25"
+    },
+    {
       "id": "source-anthropic-effective-long-running-harnesses",
       "lastValidated": "2026-08-25"
     },
@@ -596,7 +667,7 @@
     },
     {
       "id": "source-architecture-openhands",
-      "lastValidated": "2026-08-22"
+      "lastValidated": "2026-08-25"
     },
     {
       "id": "source-aws-making-retries-safe",
@@ -607,7 +678,19 @@
       "lastValidated": "2026-08-23"
     },
     {
+      "id": "source-browser-use-runtime",
+      "lastValidated": "2026-08-25"
+    },
+    {
+      "id": "source-community-cybersecurity-skills",
+      "lastValidated": "2026-08-25"
+    },
+    {
       "id": "source-cursor-continually-improving-agent-harness",
+      "lastValidated": "2026-08-25"
+    },
+    {
+      "id": "source-diagram-design-skill",
       "lastValidated": "2026-08-25"
     },
     {
@@ -675,8 +758,16 @@
       "lastValidated": "2026-08-24"
     },
     {
+      "id": "source-openviking-context-database",
+      "lastValidated": "2026-08-25"
+    },
+    {
       "id": "source-rasa-why-agents-fail",
       "lastValidated": "2026-08-22"
+    },
+    {
+      "id": "source-scientific-agent-skills",
+      "lastValidated": "2026-08-25"
     },
     {
       "id": "source-temporal-workflow-execution-docs",
@@ -877,18 +968,18 @@
       "slug": "openhands",
       "recordKind": "system",
       "productClass": "frontier-coding-harness",
-      "revision": 1,
-      "lastReviewed": "2026-08-22",
-      "inspectedVersion": "4bf8dd3aaf1217916b2ce8a6f9168fa7633a26f8",
+      "revision": 2,
+      "lastReviewed": "2026-08-25",
+      "inspectedVersion": "150e76046db026dd944df0506642dc9b7b99391e",
       "dossierStatus": "refresh-needed",
       "evidenceGrade": "FD",
       "evidenceFidelity": "working-profile",
-      "contentHash": "sha256-3e40a8fe4b08c255708e0d4f4730dda7d846c4c3172251b5200fccc74292b50b",
+      "contentHash": "sha256-1322aca94b9a9a02f0980a0c1556c8ed44b724009884309887fefb7bfad473c1",
       "sourceIds": [
         "source-architecture-openhands"
       ],
       "sourceValidationDates": {
-        "source-architecture-openhands": "2026-08-22"
+        "source-architecture-openhands": "2026-08-25"
       }
     }
   ],
@@ -922,5 +1013,5 @@
       }
     }
   ],
-  "buildId": "sha256-875f7987e692fe7aabbb7242092e4ac874658258162dd00e27a0967b229b82c9"
+  "buildId": "sha256-5e7f89820cb153644d3cf3c3a18cf195a864b6d85d85fd4921a60f1b972c6576"
 }

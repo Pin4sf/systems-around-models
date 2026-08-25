@@ -1,0 +1,25 @@
+id: source-ai-job-search-workflow
+title: AI Job Search repository
+author: Mads Lorentzen
+canonical_url: https://github.com/MadsLorentzen/ai-job-search/tree/e2c311a5b40512daf79a04b22c96d7e049afc745
+published_at: 2026-03-18
+retrieved_at: 2026-08-25
+repository_commit: e2c311a5b40512daf79a04b22c96d7e049afc745
+inspected_paths:
+  - README.md
+  - LICENSE
+source_type: first-party-repository
+basis: Commit-pinned inspection of the official repository README and MIT license for its documented drafting, review, artifact-checking, and application-state workflow.
+license_status: MIT
+evidence_grade: FD
+observed_mechanisms:
+  - description: The repository documents separate drafting and review stages plus PDF compilation, visual inspection, text-layer checks, and application tracking.
+    evidence_grade: FD
+    basis: The pinned README describes the workflow stages and artifact checks.
+author_reported_claims: []
+unknowns:
+  - The inspected workflow does not itself establish that an application is truthful, accepted by an employer, or authorized for automatic external submission.
+falsifiers:
+  - The pinned README does not document separate review, PDF generation, artifact checks, or application state.
+last_validated: 2026-08-25
+correction_ledger_status: reviewed

@@ -276,6 +276,8 @@ test("@nojs reader keeps the lesson, sources, and ordinary navigation visible", 
   await expect(page.getByText(/You can read this page in one sitting/)).toBeVisible();
   await expect(page.getByRole("list", { name: "Agent system trace" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Sources and next reading" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Repository crosswalk: ten boundary tests" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Community Cybersecurity Skills" })).toBeVisible();
   await expect(page.getByRole("link", { name: "What is a Harness?" }).first()).toBeVisible();
   const correction = page.getByRole("link", { name: "Suggest a correction" });
   const correctionBody = new URL(await correction.getAttribute("href") ?? "").searchParams.get(

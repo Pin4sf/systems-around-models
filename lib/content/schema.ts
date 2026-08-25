@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { isCanonicalSourceUrl, isSourceLicenseStatus } from "./publication-values.mjs";
 
 export const EvidenceLabel = z.enum([
   "observed",
@@ -12,6 +13,8 @@ export const EvidenceGrade = z.enum(["IP", "FD", "FL", "W"]);
 
 const Identifier = (prefix: string) => z.string().regex(new RegExp(`^${prefix}-[a-z0-9-]+$`));
 const DateString = z.iso.date();
+const CanonicalSourceUrl = z.string().refine(isCanonicalSourceUrl, "invalid canonical source URL");
+const SourceLicenseStatus = z.string().refine(isSourceLicenseStatus, "invalid source license status");
 
 export const ClaimSchema = z.object({
   id: Identifier("claim"),
@@ -34,10 +37,7 @@ export const SourceSchema = z.object({
   id: Identifier("source"),
   title: z.string().min(3),
   author: z.string().min(2),
-  canonicalUrl: z.union([
-    z.url(),
-    z.string().regex(/^\/manifests\/[a-z0-9-]+\.json$/),
-  ]),
+  canonicalUrl: CanonicalSourceUrl,
   publishedAt: DateString,
   retrievedAt: DateString,
   repositoryCommit: z.string().regex(/^[a-f0-9]{7,40}$/).optional(),
@@ -50,15 +50,7 @@ export const SourceSchema = z.object({
     "publication-synthesis",
   ]),
   basis: z.string().min(20),
-  licenseStatus: z.enum([
-    "MIT",
-    "Apache-2.0",
-    "CC0-1.0",
-    "CC-BY-4.0",
-    "CC-BY-SA-4.0",
-    "all-rights-reserved",
-    "unknown",
-  ]),
+  licenseStatus: SourceLicenseStatus,
   evidenceGrade: EvidenceGrade,
   observedMechanisms: z.array(SourceMechanismSchema),
   authorReportedClaims: z.array(z.string().min(10)),
@@ -66,6 +58,14 @@ export const SourceSchema = z.object({
   falsifiers: z.array(z.string().min(10)),
   lastValidated: DateString,
   correctionLedgerStatus: z.enum(["not-reviewed", "reviewed", "needs-update"]),
+});
+
+const RevisionSourceSnapshotSchema = z.object({
+  id: Identifier("source"),
+  title: z.string().min(3),
+  canonicalUrl: CanonicalSourceUrl,
+  lastValidated: DateString,
+  licenseStatus: SourceLicenseStatus,
 });
 
 export const RevisionSchema = z.object({
@@ -77,6 +77,20 @@ export const RevisionSchema = z.object({
   summary: z.string().min(20),
   affectedClaimIds: z.array(Identifier("claim")),
   correctionDisposition: z.enum(["publication", "accepted", "qualified", "rejected", "unresolved"]),
+  contentHash: z.string().regex(/^sha256-[a-f0-9]{64}$/).optional(),
+  sourceSnapshots: z.array(RevisionSourceSnapshotSchema).min(1).optional(),
+}).superRefine((record, context) => {
+  if (Boolean(record.contentHash) !== Boolean(record.sourceSnapshots)) {
+    context.addIssue({
+      code: "custom",
+      path: ["contentHash"],
+      message: "historical revision content and source snapshots must be supplied together",
+    });
+  }
+  const ids = record.sourceSnapshots?.map((source) => source.id) ?? [];
+  if (new Set(ids).size !== ids.length) {
+    context.addIssue({ code: "custom", path: ["sourceSnapshots"], message: "snapshot source identifiers must be unique" });
+  }
 });
 
 export const EssayMetadataSchema = z.object({

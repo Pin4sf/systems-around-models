@@ -1,0 +1,25 @@
+id: source-scientific-agent-skills
+title: Scientific Agent Skills repository
+author: K-Dense AI
+canonical_url: https://github.com/K-Dense-AI/scientific-agent-skills/tree/36d8f13a1e754618794bf42f417884940077b4ae
+published_at: 2025-10-19
+retrieved_at: 2026-08-25
+repository_commit: 36d8f13a1e754618794bf42f417884940077b4ae
+inspected_paths:
+  - README.md
+  - LICENSE.md
+source_type: first-party-repository
+basis: Commit-pinned inspection of the official repository README and MIT license for its documented domain-skill packages, checks, and execution warnings.
+license_status: MIT
+evidence_grade: FD
+observed_mechanisms:
+  - description: The repository documents a catalog of scientific skill packages with structural checks and agent-plugin installation paths.
+    evidence_grade: FD
+    basis: The pinned README describes the catalog structure, validation automation, and supported installation surfaces.
+author_reported_claims: []
+unknowns:
+  - Catalog inclusion does not establish the scientific validity, safety, data rights, credential scope, or current behavior of each skill and external database.
+falsifiers:
+  - The pinned README does not document domain skill packages, validation checks, or its warning that installed skills can execute code and influence agents.
+last_validated: 2026-08-25
+correction_ledger_status: reviewed

@@ -28,14 +28,14 @@
     "source-walkinglabs-learn-harness-engineering"
   ],
   "sourceValidationDates": {
+    "source-anthropic-effective-long-running-harnesses": "2026-08-25",
     "source-earendil-what-is-a-harness": "2026-08-21",
     "source-harness-engineering-fieldbook-v1": "2026-08-21",
-    "source-walkinglabs-learn-harness-engineering": "2026-08-22",
-    "source-walkinglabs-awesome-harness-engineering": "2026-08-22",
-    "source-rasa-why-agents-fail": "2026-08-22",
-    "source-anthropic-effective-long-running-harnesses": "2026-08-25",
+    "source-humanlayer-12-factor-agents": "2026-08-22",
     "source-langchain-anatomy-agent-harness": "2026-08-22",
-    "source-humanlayer-12-factor-agents": "2026-08-22"
+    "source-rasa-why-agents-fail": "2026-08-22",
+    "source-walkinglabs-awesome-harness-engineering": "2026-08-22",
+    "source-walkinglabs-learn-harness-engineering": "2026-08-22"
   },
   "schemaVersion": 2,
   "validationSchemaVersion": "publication-v2",

@@ -1,0 +1,11 @@
+id: revision-harness-engineering-study-guide-002
+target_slug: harness-engineering-study-guide
+revision: 2
+published_at: 2026-08-22
+substantively_revised_at: 2026-08-25
+summary: Added a commit-pinned ten-repository crosswalk that teaches mechanism transfer through explicit authority, evidence, licensing, and failure boundaries.
+affected_claim_ids:
+  - claim-architecture-selection-responsibilities
+  - claim-harness-capability-configuration
+  - claim-harness-failure-injection-learning-method
+correction_disposition: publication

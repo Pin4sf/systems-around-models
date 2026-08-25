@@ -1,0 +1,25 @@
+id: source-agentmemory-runtime
+title: AgentMemory repository
+author: Rohit Ghiya
+canonical_url: https://github.com/rohitg00/agentmemory/tree/e04ba88819c365c9acf9d6661ea802143e728bd6
+published_at: 2026-02-25
+retrieved_at: 2026-08-25
+repository_commit: e04ba88819c365c9acf9d6661ea802143e728bd6
+inspected_paths:
+  - README.md
+  - LICENSE
+source_type: first-party-repository
+basis: Commit-pinned inspection of the official repository README and Apache license for its documented persistent-memory adapters and integration boundary.
+license_status: Apache-2.0
+evidence_grade: FD
+observed_mechanisms:
+  - description: The repository documents a local persistent-memory runtime with hooks and MCP-based integrations for coding agents.
+    evidence_grade: FD
+    basis: The pinned README describes the runtime and its adapter surfaces.
+author_reported_claims: []
+unknowns:
+  - The inspected documentation does not establish cross-tenant isolation, identity collision handling, correction authority, or the validity of reported benchmark results.
+falsifiers:
+  - The pinned README does not document persistent memory or the named hook and MCP integration surfaces.
+last_validated: 2026-08-25
+correction_ledger_status: reviewed

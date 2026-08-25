@@ -3,12 +3,47 @@ import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { parse as parseYaml } from "yaml";
+import {
+  isCanonicalSourceUrl,
+  isIsoDate,
+  isSourceId,
+  isSourceLicenseStatus,
+} from "../lib/content/publication-values.mjs";
 
 const schemaVersion = 2;
 const validationSchemaVersion = "publication-v2";
 
 function sha256(contents) {
   return `sha256-${createHash("sha256").update(contents).digest("hex")}`;
+}
+
+function historicalSourceSnapshot(revision) {
+  if (!/^sha256-[a-f0-9]{64}$/.test(revision.content_hash ?? "") || !Array.isArray(revision.sources) || revision.sources.length === 0) {
+    throw new Error(`Historical revision ${revision.id} is missing its frozen content and source snapshot`);
+  }
+  const sourceDetails = revision.sources.map((source) => {
+    if (
+      !isSourceId(source?.id) ||
+      typeof source?.title !== "string" || source.title.trim().length < 3 ||
+      typeof source?.canonical_url !== "string" || !isCanonicalSourceUrl(source.canonical_url) ||
+      typeof source?.last_validated !== "string" || !isIsoDate(source.last_validated) ||
+      !isSourceLicenseStatus(source?.license_status)
+    ) {
+      throw new Error(`Historical revision ${revision.id} contains an invalid source snapshot`);
+    }
+    return {
+      id: source.id,
+      title: source.title,
+      canonicalUrl: source.canonical_url,
+      lastValidated: source.last_validated,
+      licenseStatus: source.license_status,
+    };
+  });
+  const sourceIds = sourceDetails.map((source) => source.id);
+  if (new Set(sourceIds).size !== sourceIds.length) {
+    throw new Error(`Historical revision ${revision.id} contains duplicate source snapshots`);
+  }
+  return { sourceDetails, sourceIds };
 }
 
 async function filesRecursively(directory, extension) {
@@ -58,9 +93,28 @@ export async function generatePublicManifest(root = process.cwd()) {
     id: source.id,
     lastValidated: source.last_validated,
   })).sort((left, right) => left.id.localeCompare(right.id));
+  const frozenRevisionSources = new Map();
   const revisionRecords = revisions.map((revision) => {
     const essay = essays.find(({ metadata }) => metadata.revision_id === revision.id);
-    if (!essay) throw new Error(`No essay resolves revision ${revision.id}`);
+    if (!essay) {
+      const { sourceDetails, sourceIds } = historicalSourceSnapshot(revision);
+      frozenRevisionSources.set(revision.id, sourceDetails);
+      return {
+        id: revision.id,
+        essaySlug: revision.target_slug,
+        revision: revision.revision,
+        publishedAt: revision.published_at,
+        substantivelyRevisedAt: revision.substantively_revised_at,
+        summary: revision.summary,
+        affectedClaimIds: [...revision.affected_claim_ids].sort(),
+        correctionDisposition: revision.correction_disposition,
+        contentHash: revision.content_hash,
+        sourceIds: [...sourceIds].sort(),
+        sourceValidationDates: Object.fromEntries(
+          sourceDetails.map((source) => [source.id, source.lastValidated]),
+        ),
+      };
+    }
     return {
       id: revision.id,
       essaySlug: essay.metadata.slug,
@@ -137,7 +191,7 @@ export async function generatePublicManifest(root = process.cwd()) {
     `${JSON.stringify(manifest, null, 2)}\n`,
   );
   await Promise.all(revisionRecords.map(async (revision) => {
-    const sourceDetails = revision.sourceIds.map((id) => {
+    const sourceDetails = frozenRevisionSources.get(revision.id) ?? revision.sourceIds.map((id) => {
       const source = sourceRecords.find((record) => record.id === id);
       return {
         id,

@@ -1,0 +1,25 @@
+id: source-ai-boost-awesome-harness-engineering
+title: AI Boost Awesome Harness Engineering repository
+author: AI Boost
+canonical_url: https://github.com/ai-boost/awesome-harness-engineering/tree/f5e17c351cf05e3b611275e20aef3c7797e04d83
+published_at: 2026-03-29
+retrieved_at: 2026-08-25
+repository_commit: f5e17c351cf05e3b611275e20aef3c7797e04d83
+inspected_paths:
+  - README.md
+  - LICENSE
+source_type: first-party-repository
+basis: Commit-pinned inspection of the repository README and CC0 license for its curated harness-engineering category map and discovery boundary.
+license_status: CC0-1.0
+evidence_grade: FD
+observed_mechanisms:
+  - description: The repository organizes links across context, tools, skills, permissions, memory, orchestration, verification, observability, security, and evaluation.
+    evidence_grade: FD
+    basis: The pinned README exposes the curated taxonomy and linked-resource structure.
+author_reported_claims: []
+unknowns:
+  - Inclusion in the list does not verify a linked mechanism, establish endorsement, or replace inspection of each primary source.
+falsifiers:
+  - The pinned README does not contain the named harness-engineering categories or curated linked-resource structure.
+last_validated: 2026-08-25
+correction_ledger_status: reviewed

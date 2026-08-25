@@ -4,37 +4,38 @@ name: OpenHands
 record_kind: system
 product_class: frontier-coding-harness
 status: public
-summary: An open software-agent platform that joins an agent controller to a contained development workspace and interactive product surface.
-primary_job: Give software agents a workspace in which to inspect, change, and run code.
-teaching_question: What becomes explicit when the execution environment is a named platform component?
+summary: A public Agent Canvas control surface that makes its separation from the agent server, client, automation service, and sandbox explicit.
+primary_job: Give users an interactive surface for conversations, terminals, browser and file views, settings, backends, and automations.
+teaching_question: What becomes explicit when the interface, execution runtime, client, automation service, and sandbox are separate modules?
 coordination_shape: durable-runtime
-control_owner: The agent runtime coordinates model decisions and actions inside the workspace.
-context_model: Task, event history, repository observations, and tool results feed the agent.
-state_model: Runtime events and workspace state divide conversational continuity from execution state.
-authority_boundary: The contained workspace bounds many actions, while integrations can extend effects beyond it.
-recovery_model: Durable task and workspace behavior depends on the selected runtime and deployment path.
-verification_model: The agent can exercise code in its environment; external review still owns final acceptance.
-transferable_lesson: Environment containment is an architectural responsibility, not a property of the model.
+control_owner: Agent Canvas mediates user interaction while the selected external agent server owns model decisions and actions.
+context_model: The Canvas presents conversation and tool events received through a client; runtime context assembly belongs to the agent server and SDK.
+state_model: Interface and session state are distinct from server execution state, workspace state, and scheduled automation state.
+authority_boundary: Backend selection and integrations can widen custody and effects beyond the Canvas; the interface does not itself establish sandbox or credential policy.
+recovery_model: Durable execution and workspace recovery are not established by this Canvas source and depend on the selected server, automation, and deployment path.
+verification_model: The Canvas can present events and artifacts for review; the executing runtime provides checks while the project owner retains acceptance.
+transferable_lesson: A product interface, agent runtime, client, automation service, and sandbox are distinct responsibility and custody surfaces.
 deliberate_omissions:
-  - A contained workspace does not prove that a software task meets its external acceptance criteria.
+  - The Agent Canvas source does not establish the implementation guarantees of the separate runtime or sandbox.
 topology_steps:
-  - { stage: admit, label: Admit, ownership: owned, description: The platform receives a software task and creates an agent workspace. }
-  - { stage: assemble, label: Assemble, ownership: owned, description: Task and runtime events become model-visible context. }
-  - { stage: bind, label: Bind, ownership: owned, description: The runtime exposes development tools through the contained workspace. }
-  - { stage: run, label: Run, ownership: owned, description: Agent decisions and environment actions advance through the controller. }
+  - { stage: admit, label: Admit, ownership: delegated, description: The Canvas submits the task through a client to the selected agent server. }
+  - { stage: assemble, label: Assemble, ownership: external, description: The agent server and SDK assemble model-visible task and runtime context. }
+  - { stage: bind, label: Bind, ownership: external, description: The external runtime binds tools, integrations, credentials, and sandbox access. }
+  - { stage: run, label: Run, ownership: external, description: The external agent server executes decisions and environment actions while Canvas presents events. }
   - { stage: recover, label: Recover, ownership: not-established, description: Deployment and runtime configuration determine durable recovery guarantees. }
-  - { stage: verify-close, label: Verify and close, ownership: external, description: Tests may run inside the workspace while acceptance remains project-owned. }
+  - { stage: verify-close, label: Verify and close, ownership: delegated, description: Canvas presents checks and artifacts while project acceptance remains user-owned. }
 lifecycle_trace:
-  - { order: 1, label: Create workspace, owner: OpenHands platform, outcome: The task receives an execution environment. }
-  - { order: 2, label: Drive agent events, owner: Agent runtime, outcome: Actions and observations advance the software task. }
-  - { order: 3, label: Inspect outcome, owner: User or evaluator, outcome: Workspace changes and checks are reviewed for acceptance. }
+  - { order: 1, label: Select backend, owner: User and Agent Canvas, outcome: A client and execution authority are chosen. }
+  - { order: 2, label: Submit task, owner: Agent Canvas and client, outcome: The selected agent server receives the conversation request. }
+  - { order: 3, label: Execute work, owner: Agent server and sandbox, outcome: External runtime modules produce actions, events, and artifacts. }
+  - { order: 4, label: Inspect outcome, owner: User or evaluator, outcome: Presented events, artifacts, and checks are reviewed for acceptance. }
 evidence_grade: FD
 evidence_fidelity: working-profile
 dossier_status: refresh-needed
 source_ids:
   - source-architecture-openhands
-inspected_version: 4bf8dd3aaf1217916b2ce8a6f9168fa7633a26f8
+inspected_version: 150e76046db026dd944df0506642dc9b7b99391e
 unknowns:
-  - The relation between current Agent Canvas surfaces and underlying runtime boundaries needs a dedicated current deep dive.
-last_reviewed: 2026-08-22
-revision: 1
+  - The implementation guarantees of the SDK and agent server, TypeScript client, automation service, and sandbox need separate current deep dives.
+last_reviewed: 2026-08-25
+revision: 2

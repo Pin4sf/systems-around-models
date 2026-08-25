@@ -1,0 +1,28 @@
+id: source-openviking-context-database
+title: OpenViking repository
+author: Volcengine
+canonical_url: https://github.com/volcengine/OpenViking/tree/7ee75611212a1fe502da037b59afa04cbcf5e2ed
+published_at: 2026-01-05
+retrieved_at: 2026-08-25
+repository_commit: 7ee75611212a1fe502da037b59afa04cbcf5e2ed
+inspected_paths:
+  - README.md
+  - LICENSE
+source_type: first-party-repository
+basis: Commit-pinned inspection of the official repository README and AGPL license for its documented context-database and retrieval boundaries.
+license_status: AGPL-3.0
+evidence_grade: FD
+observed_mechanisms:
+  - description: The repository documents a viking URI namespace that organizes resources, memories, and skills for retrieval.
+    evidence_grade: FD
+    basis: The pinned README describes the addressable context filesystem and its resource families.
+  - description: The repository documents progressively loaded abstract, overview, and detail layers plus a visible retrieval path.
+    evidence_grade: FD
+    basis: The pinned README names the L0, L1, and L2 layers and observable retrieval trajectory.
+author_reported_claims: []
+unknowns:
+  - The inspected documentation does not establish admission, correction, deletion, tenant isolation, or authority semantics for every captured memory.
+falsifiers:
+  - The pinned README does not contain the named URI organization, tiered loading, or retrieval-path descriptions.
+last_validated: 2026-08-25
+correction_ledger_status: reviewed

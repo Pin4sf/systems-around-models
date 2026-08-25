@@ -3,27 +3,27 @@
   "slug": "openhands",
   "recordKind": "system",
   "productClass": "frontier-coding-harness",
-  "revision": 1,
-  "lastReviewed": "2026-08-22",
-  "inspectedVersion": "4bf8dd3aaf1217916b2ce8a6f9168fa7633a26f8",
+  "revision": 2,
+  "lastReviewed": "2026-08-25",
+  "inspectedVersion": "150e76046db026dd944df0506642dc9b7b99391e",
   "dossierStatus": "refresh-needed",
   "evidenceGrade": "FD",
   "evidenceFidelity": "working-profile",
-  "contentHash": "sha256-3e40a8fe4b08c255708e0d4f4730dda7d846c4c3172251b5200fccc74292b50b",
+  "contentHash": "sha256-1322aca94b9a9a02f0980a0c1556c8ed44b724009884309887fefb7bfad473c1",
   "sourceIds": [
     "source-architecture-openhands"
   ],
   "sourceValidationDates": {
-    "source-architecture-openhands": "2026-08-22"
+    "source-architecture-openhands": "2026-08-25"
   },
   "schemaVersion": 2,
   "validationSchemaVersion": "publication-v2",
   "sources": [
     {
       "id": "source-architecture-openhands",
-      "title": "OpenHands repository",
-      "canonicalUrl": "https://github.com/OpenHands/OpenHands",
-      "lastValidated": "2026-08-22",
+      "title": "OpenHands Agent Canvas repository",
+      "canonicalUrl": "https://github.com/OpenHands/OpenHands/tree/150e76046db026dd944df0506642dc9b7b99391e",
+      "lastValidated": "2026-08-25",
       "licenseStatus": "MIT"
     }
   ]

@@ -4,12 +4,12 @@ title: "Harness Engineering: A Practical Study Guide"
 description: A readable introduction to the systems around AI models, from context and tools to durable state, recovery, verification, and completion.
 sequence: Harness Engineering
 sequence_position: 1
-revision: 1
+revision: 2
 authors:
   - Systems Around Models
 published_at: 2026-08-22
-substantively_revised_at: 2026-08-22
-reading_time_source: 24 minute editorial estimate
+substantively_revised_at: 2026-08-25
+reading_time_source: 29 minute editorial estimate
 status: public
 source_manifest_ids:
   - source-earendil-what-is-a-harness
@@ -20,7 +20,17 @@ source_manifest_ids:
   - source-anthropic-effective-long-running-harnesses
   - source-langchain-anatomy-agent-harness
   - source-humanlayer-12-factor-agents
-revision_id: revision-harness-engineering-study-guide-001
+  - source-openviking-context-database
+  - source-agentmemory-runtime
+  - source-anthropic-agent-skills-repository
+  - source-diagram-design-skill
+  - source-scientific-agent-skills
+  - source-ai-boost-awesome-harness-engineering
+  - source-community-cybersecurity-skills
+  - source-ai-job-search-workflow
+  - source-architecture-openhands
+  - source-browser-use-runtime
+revision_id: revision-harness-engineering-study-guide-002
 next_essay_slug: the-model-is-not-the-agent
 ---
 
@@ -232,6 +242,29 @@ Evaluation should use the **model-and-harness configuration** as the unit. If yo
 
 When the harness learns from failures, keep the improvement loop separate from its judge. A proposed prompt change, tool policy, or recovery rule should enter a registry with a motivating incident, expected benefit, failure mode, test fixture, owner, and retirement condition. Promote it gradually. Do not let the system rewrite the evaluation that declares the change successful.
 
+## Repository crosswalk: ten boundary tests
+
+A repository is evidence of a mechanism, not proof of production safety, product reliability, or fitness for your use case. Read each system at the seam where it hands responsibility to somebody else.
+
+The ten repositories in this crosswalk are not one leaderboard and should not become ten copied architectures. They are useful because each makes a different harness boundary visible:
+
+<dl className="repository-crosswalk">
+  <div><dt>OpenViking · context database</dt><dd><strong>Inspect:</strong> addressable resources, memories, and skills; tiered context loading; retrieval paths. <strong>Transfer:</strong> make context navigable and disclose why an item was retrieved. <strong>Do not infer:</strong> automatic capture establishes truth, authority, correction, or deletion. Its AGPL license also matters before reuse.</dd></div>
+  <div><dt>AgentMemory · memory runtime</dt><dd><strong>Inspect:</strong> the adapters and hooks that move observations into persistent memory. <strong>Transfer:</strong> treat capture as a typed interface with provenance. <strong>Do not infer:</strong> convenient ingestion resolves identity collisions, tenant scope, correction, or benchmark validity.</dd></div>
+  <div><dt>Anthropic Skills · capability packages</dt><dd><strong>Inspect:</strong> self-contained instruction, script, and resource folders loaded for a task. <strong>Transfer:</strong> version and test the exact package you expose. <strong>Do not infer:</strong> a discoverable skill is authorized to run. Licensing also varies by directory.</dd></div>
+  <div><dt>Diagram Design · verification artifact</dt><dd><strong>Inspect:</strong> semantic diagram patterns, static output, and accessible SVG structure. <strong>Transfer:</strong> make system explanations inspectable without animation or proprietary viewers. <strong>Do not infer:</strong> a correct-looking diagram proves the runtime behaves that way.</dd></div>
+  <div><dt>Scientific Agent Skills · domain catalog</dt><dd><strong>Inspect:</strong> domain-specific packages, validation automation, and installation warnings. <strong>Transfer:</strong> record provenance, version, code execution, network, credential, and reviewer requirements per skill. <strong>Do not infer:</strong> catalog size or database coverage establishes scientific validity.</dd></div>
+  <div><dt>AI Boost Awesome Harness Engineering · discovery map</dt><dd><strong>Inspect:</strong> the category map across context, tools, permissions, state, verification, observability, and security. <strong>Transfer:</strong> use curated lists to find questions and primary sources. <strong>Do not infer:</strong> inclusion is mechanism evidence or endorsement. This is separate from the Walking Labs list cited elsewhere in this guide.</dd></div>
+  <div><dt>Community Cybersecurity Skills · security capability catalog</dt><dd><strong>Inspect:</strong> structured security workflows and framework mappings. <strong>Transfer:</strong> require target authorization, sandboxing, audit, and version pins before execution. <strong>Do not infer:</strong> framework mapping makes a skill safe or validated. Despite the repository name used in the original roundup, it is community-maintained, not an official Anthropic repository.</dd></div>
+  <div><dt>AI Job Search · bounded whole-product workflow</dt><dd><strong>Inspect:</strong> drafter-reviewer separation, document compilation, visual checks, text-layer checks, and application state. <strong>Transfer:</strong> verify the exported artifact, not only the draft. <strong>Do not infer:</strong> a prepared application is authorized to be submitted; owner approval and the external effect remain separate.</dd></div>
+  <div><dt>OpenHands · control surface and runtime split</dt><dd><strong>Inspect:</strong> the boundary Agent Canvas draws between its user interface and the separate SDK/server, client, automation, and sandbox responsibilities. <strong>Transfer:</strong> name which module owns presentation, execution, environment, and custody. <strong>Do not infer:</strong> the Canvas repository proves runtime recovery, sandbox policy, or project acceptance.</dd></div>
+  <div><dt>Browser Use · browser execution boundary</dt><dd><strong>Inspect:</strong> browser actions, sessions, custom tools, and the split between local library and hosted service. <strong>Transfer:</strong> treat credentials, authenticated sessions, site policy, and confirmation as explicit authority boundaries. <strong>Do not infer:</strong> a click, form fill, or DOM state proves the intended business outcome.</dd></div>
+</dl>
+
+**Crosswalk exercise:** choose one repository and map each important responsibility as **owned**, **delegated**, **external**, or **not established**. Then inject one seam failure: retrieve a stale memory, deny a skill, corrupt a generated artifact, lose a browser response after submission, or restart the software worker. Record which source can establish what happened and who may decide the next action.
+
+The strongest next deep-dive candidates are OpenHands and Browser Use because their runtime seams need implementation-level inspection. OpenViking deserves a refreshed public memory dossier, while AI Job Search is a useful bounded workflow case. The skill catalogs are better studied together as a supply-chain and authority lab than treated as four complete agent architectures.
+
 ## A compact design worksheet
 
 Before implementing an agent system, answer these questions in plain language:
@@ -262,5 +295,15 @@ This short guide is a synthesis of a larger working manuscript and its source-in
 - [Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents) by Anthropic — practical patterns for progress files, scoped tasks, and resumable work.
 - [The anatomy of an agent harness](https://www.langchain.com/blog/the-anatomy-of-an-agent-harness) by LangChain — a runtime-oriented breakdown of common components.
 - [12-Factor Agents](https://github.com/humanlayer/12-factor-agents) by HumanLayer — principles for composable, production-oriented agent software.
+- [OpenViking](https://github.com/volcengine/OpenViking/tree/7ee75611212a1fe502da037b59afa04cbcf5e2ed) — an addressable, tiered context database; inspect its retrieval and memory boundaries before transferring the pattern.
+- [AgentMemory](https://github.com/rohitg00/agentmemory/tree/e04ba88819c365c9acf9d6661ea802143e728bd6) — a persistent memory runtime whose adapters make capture, scoping, and correction useful review seams.
+- [Anthropic Skills](https://github.com/anthropics/skills/tree/3b3fad96af16a10759d930941b4520ba0c40edae) — official examples of packaged instructions, scripts, and resources with per-directory licensing boundaries.
+- [Diagram Design](https://github.com/cathrynlavery/diagram-design/tree/4faae6696c2953b59dee2b89ad89c688f80c3a67) — an editorial diagram skill that makes static, semantic, accessible output part of the artifact contract.
+- [Scientific Agent Skills](https://github.com/K-Dense-AI/scientific-agent-skills/tree/36d8f13a1e754618794bf42f417884940077b4ae) — a domain skill catalog useful for studying provenance, validation, and code-execution boundaries.
+- [AI Boost Awesome Harness Engineering](https://github.com/ai-boost/awesome-harness-engineering/tree/f5e17c351cf05e3b611275e20aef3c7797e04d83) — a curated discovery map, distinct from the Walking Labs repository above.
+- [Community Cybersecurity Skills](https://github.com/mukul975/Anthropic-Cybersecurity-Skills/tree/1b3f6b2286981381a5cc0566551ef3bb6bc38383) — a community-maintained security skill catalog, not an Anthropic-maintained source.
+- [AI Job Search](https://github.com/MadsLorentzen/ai-job-search/tree/e2c311a5b40512daf79a04b22c96d7e049afc745) — a bounded document-and-review workflow with explicit artifact checks.
+- [OpenHands](https://github.com/OpenHands/OpenHands/tree/150e76046db026dd944df0506642dc9b7b99391e) — the Agent Canvas control surface, whose architecture explicitly delegates execution and automation responsibilities to separate modules.
+- [Browser Use](https://github.com/browser-use/browser-use/tree/9a2db2d2db42c6f68a871f011b3b25fdcaa71847) — a browser automation library whose sessions and external effects expose authority and reconciliation seams.
 
 For the deeper version of the boundary argument, [read the full first chapter](/fieldbook/the-model-is-not-the-agent).

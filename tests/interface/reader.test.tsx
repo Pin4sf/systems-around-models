@@ -88,6 +88,31 @@ describe("flagship fieldbook reader", () => {
     );
   });
 
+  it("turns ten agent repositories into a source-pinned boundary exercise", async () => {
+    const page = await ArticlePage({ params: Promise.resolve({ slug: guideSlug }) });
+    render(page);
+
+    expect(
+      screen.getByRole("heading", { name: "Repository crosswalk: ten boundary tests", level: 2 }),
+    ).toBeInTheDocument();
+    for (const linkName of [
+      "OpenViking",
+      "AgentMemory",
+      "Anthropic Skills",
+      "Diagram Design",
+      "Scientific Agent Skills",
+      "AI Boost Awesome Harness Engineering",
+      "Community Cybersecurity Skills",
+      "AI Job Search",
+      "OpenHands",
+      "Browser Use",
+    ]) {
+      expect(screen.getByRole("link", { name: linkName })).toBeInTheDocument();
+    }
+    expect(screen.getByText(/repository is evidence of a mechanism, not proof of production safety/i))
+      .toBeInTheDocument();
+  });
+
   it("registers the Memory Engineering guide as a static public route", async () => {
     await expect(generateStaticParams()).resolves.toContainEqual({ slug: memoryGuideSlug });
   });

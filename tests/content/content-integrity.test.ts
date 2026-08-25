@@ -96,7 +96,7 @@ describe("public content registry", () => {
       .map((sourceId) => content.sources.get(sourceId)?.canonicalUrl)
       .filter((url): url is string => Boolean(url?.startsWith("http")));
 
-    expect(namedExternalUrls).toHaveLength(7);
+    expect(namedExternalUrls).toHaveLength(17);
     expect(registeredUrls).toEqual(expect.arrayContaining(namedExternalUrls));
   });
 
