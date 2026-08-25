@@ -3,20 +3,20 @@
   "slug": "deepseek-harness-cordis",
   "recordKind": "system",
   "productClass": "frontier-coding-harness",
-  "revision": 1,
-  "lastReviewed": "2026-08-22",
-  "inspectedVersion": "47f943859bef60e4160492346772ded9b24f765a",
-  "dossierStatus": "refresh-needed",
+  "revision": 2,
+  "lastReviewed": "2026-08-26",
+  "inspectedVersion": "b150a551b8d465e31e418e1b2eaf5e79bbb7d28e",
+  "dossierStatus": "ready",
   "evidenceGrade": "IP",
   "evidenceFidelity": "implementation-pinned",
-  "contentHash": "sha256-eb79337270b6e46526f666603f6c70fa5b1a8ab78ad0154e4ec4ed0c26d12f7e",
+  "contentHash": "sha256-3f417f04654a5c1ab254b2f46bf9b7bdad839783ea9fa52cc32eb53a8f275d23",
   "sourceIds": [
     "source-architecture-cordis",
     "source-architecture-deepseek-harness"
   ],
   "sourceValidationDates": {
-    "source-architecture-deepseek-harness": "2026-08-16",
-    "source-architecture-cordis": "2026-08-16"
+    "source-architecture-deepseek-harness": "2026-08-26",
+    "source-architecture-cordis": "2026-08-26"
   },
   "schemaVersion": 2,
   "validationSchemaVersion": "publication-v2",
@@ -25,14 +25,14 @@
       "id": "source-architecture-cordis",
       "title": "Cordis repository",
       "canonicalUrl": "https://github.com/cordiverse/cordis/tree/8cc9e33fab69e2d0476d126baaf2acb24e6a6ab4",
-      "lastValidated": "2026-08-16",
+      "lastValidated": "2026-08-26",
       "licenseStatus": "MIT"
     },
     {
       "id": "source-architecture-deepseek-harness",
       "title": "DeepSeek Harness repository",
-      "canonicalUrl": "https://github.com/deepseek-ai/deepseek-harness/tree/47f943859bef60e4160492346772ded9b24f765a",
-      "lastValidated": "2026-08-16",
+      "canonicalUrl": "https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e",
+      "lastValidated": "2026-08-26",
       "licenseStatus": "MIT"
     }
   ]

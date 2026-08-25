@@ -80,6 +80,9 @@ describe("deterministic public build manifest", () => {
             "source-langchain-anatomy-agent-harness",
             "source-humanlayer-12-factor-agents",
           ]),
+          sourceValidationDates: expect.objectContaining({
+            "source-anthropic-effective-long-running-harnesses": "2026-08-22",
+          }),
         }),
         expect.objectContaining({
           id: "revision-harness-engineering-study-guide-002",
@@ -124,6 +127,29 @@ describe("deterministic public build manifest", () => {
             "source-agentmemory-runtime",
           ]),
         }),
+        expect.objectContaining({
+          id: "revision-qm-scoped-resources-and-leased-runs-001",
+          essaySlug: "qm-scoped-resources-and-leased-runs",
+          sourceIds: expect.arrayContaining(["source-qm-agent-runtime"]),
+        }),
+        expect.objectContaining({
+          id: "revision-cloudflare-think-and-agents-001",
+          essaySlug: "cloudflare-think-and-agents",
+          sourceIds: expect.arrayContaining(["source-cloudflare-think-agents"]),
+        }),
+        expect.objectContaining({
+          id: "revision-deepseek-harness-and-cordis-001",
+          essaySlug: "deepseek-harness-and-cordis",
+          sourceIds: expect.arrayContaining([
+            "source-architecture-deepseek-harness",
+            "source-architecture-cordis",
+          ]),
+        }),
+        expect.objectContaining({
+          id: "revision-drover-fleet-custody-and-evidence-001",
+          essaySlug: "drover-fleet-custody-and-evidence",
+          sourceIds: expect.arrayContaining(["source-drover-fleet-runtime"]),
+        }),
       ]),
     });
     expect(manifest.architectures).toEqual(expect.arrayContaining([
@@ -139,6 +165,20 @@ describe("deterministic public build manifest", () => {
       expect.objectContaining({
         id: "architecture-mem0",
         slug: "mem0",
+      }),
+      expect.objectContaining({
+        id: "architecture-langgraph",
+        slug: "langgraph",
+        revision: 2,
+        inspectedVersion: "95af6a00718588e7b7ce17310e8006d267896a77",
+        evidenceGrade: "IP",
+        evidenceFidelity: "implementation-pinned",
+      }),
+      expect.objectContaining({
+        id: "architecture-deepseek-harness",
+        revision: 2,
+        inspectedVersion: "b150a551b8d465e31e418e1b2eaf5e79bbb7d28e",
+        dossierStatus: "ready",
       }),
     ]));
     expect(manifest.lessons).toEqual(expect.arrayContaining([
@@ -160,6 +200,18 @@ describe("deterministic public build manifest", () => {
       expect.objectContaining({
         id: "source-memory-memgpt",
         lastValidated: "2026-08-22",
+      }),
+      expect.objectContaining({
+        id: "source-qm-agent-runtime",
+        lastValidated: "2026-08-26",
+      }),
+      expect.objectContaining({
+        id: "source-cloudflare-think-agents",
+        lastValidated: "2026-08-26",
+      }),
+      expect.objectContaining({
+        id: "source-drover-fleet-runtime",
+        lastValidated: "2026-08-26",
       }),
     ]));
     await expect(
@@ -195,6 +247,18 @@ describe("deterministic public build manifest", () => {
     await expect(
       readFile(path.join(root, "public", "manifests", "architecture-openai-codex.json"), "utf8"),
     ).resolves.toContain('"slug": "openai-codex"');
+    await expect(
+      readFile(path.join(root, "public", "manifests", "architecture-langgraph.json"), "utf8"),
+    ).resolves.toContain('"revision": 2');
+    await expect(
+      readFile(path.join(root, "public", "manifests", "architecture-deepseek-harness.json"), "utf8"),
+    ).resolves.toContain('"inspectedVersion": "b150a551b8d465e31e418e1b2eaf5e79bbb7d28e"');
+    await expect(
+      readFile(
+        path.join(root, "public", "manifests", "revision-qm-scoped-resources-and-leased-runs-001.json"),
+        "utf8",
+      ),
+    ).resolves.toContain("d931fe963de3ac20b9a7526ea9a4873c0d8ed18e");
   });
 
   it("is stable for identical content and changes its hashes when essay content changes", async () => {
@@ -253,6 +317,40 @@ describe("deterministic public build manifest", () => {
     const after = JSON.parse(await readFile(historicalPath, "utf8"));
     expect(after.sources).toEqual(before.sources);
     expect(after.sourceValidationDates).toEqual(before.sourceValidationDates);
+  });
+
+  it("keeps a frozen revision date unchanged when the same source is revalidated", async () => {
+    const root = await manifestFixture();
+    expect((await generate(root)).code).toBe(0);
+    const historicalPath = path.join(
+      root,
+      "public",
+      "manifests",
+      "revision-harness-engineering-study-guide-001.json",
+    );
+    const sourcePath = path.join(
+      root,
+      "content",
+      "sources",
+      "source-anthropic-effective-long-running-harnesses.yaml",
+    );
+    const source = await readFile(sourcePath, "utf8");
+    await writeFile(
+      sourcePath,
+      source.replace("last_validated: 2026-08-25", "last_validated: 2026-08-26"),
+    );
+
+    expect((await generate(root)).code).toBe(0);
+    const historical = JSON.parse(await readFile(historicalPath, "utf8"));
+    expect(historical.sourceValidationDates[
+      "source-anthropic-effective-long-running-harnesses"
+    ]).toBe("2026-08-22");
+    expect(historical.sources).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        id: "source-anthropic-effective-long-running-harnesses",
+        lastValidated: "2026-08-22",
+      }),
+    ]));
   });
 
   it("rejects a historical revision with a malformed frozen snapshot", async () => {

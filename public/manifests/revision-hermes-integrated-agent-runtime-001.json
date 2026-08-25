@@ -7,7 +7,7 @@
   "summary": "Initial public revision of the Hermes integrated agent runtime case study.",
   "affectedClaimIds": [],
   "correctionDisposition": "publication",
-  "contentHash": "sha256-4fce1564f719e726c40175373e32c1ae99bcd6c0f2a066005d38e57d6fb2d4cc",
+  "contentHash": "sha256-b4ae31fb62c1fc11883eafe62af867cd9ba197591bdd3b531f87b973f5a6d7a2",
   "sourceIds": [
     "source-harness-engineering-fieldbook-v1",
     "source-hermes-agent-runtime"

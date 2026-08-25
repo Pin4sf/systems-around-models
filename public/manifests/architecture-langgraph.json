@@ -3,13 +3,13 @@
   "slug": "langgraph",
   "recordKind": "system",
   "productClass": "general-agent-runtime",
-  "revision": 1,
+  "revision": 2,
   "lastReviewed": "2026-08-25",
   "inspectedVersion": "95af6a00718588e7b7ce17310e8006d267896a77",
   "dossierStatus": "refresh-needed",
   "evidenceGrade": "IP",
   "evidenceFidelity": "implementation-pinned",
-  "contentHash": "sha256-3bc0d41af7e7f9144c91da892f287e040836db4b8f74a4c7a7de09a6c525f908",
+  "contentHash": "sha256-af841960d5b6e9581e06e362a27542f1f96db34c3dce90dbc3b76537a60e420d",
   "sourceIds": [
     "source-architecture-langgraph",
     "source-langchain-anatomy-agent-harness"

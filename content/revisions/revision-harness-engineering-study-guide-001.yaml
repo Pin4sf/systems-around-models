@@ -16,7 +16,7 @@ affected_claim_ids:
 correction_disposition: publication
 content_hash: sha256-a261feaa38335c81871d6422e6f8946d33ca8d579f697197413980f3da43297a
 sources:
-  - { id: source-anthropic-effective-long-running-harnesses, title: Effective harnesses for long-running agents, canonical_url: https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents, last_validated: 2026-08-25, license_status: all-rights-reserved }
+  - { id: source-anthropic-effective-long-running-harnesses, title: Effective harnesses for long-running agents, canonical_url: https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents, last_validated: 2026-08-22, license_status: all-rights-reserved }
   - { id: source-earendil-what-is-a-harness, title: What is a Harness?, canonical_url: https://earendil.com/posts/what-is-a-harness/, last_validated: 2026-08-21, license_status: unknown }
   - { id: source-harness-engineering-fieldbook-v1, title: "The Agent Systems Fieldbook — Harness Engineering, version 1", canonical_url: /manifests/revision-fieldbook-essay-001.json, last_validated: 2026-08-21, license_status: all-rights-reserved }
   - { id: source-humanlayer-12-factor-agents, title: 12-Factor Agents, canonical_url: https://github.com/humanlayer/12-factor-agents, last_validated: 2026-08-22, license_status: Apache-2.0 }

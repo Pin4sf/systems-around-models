@@ -101,6 +101,22 @@ export function HermesRuntimeSeams() {
   return <Diagram name="Hermes integrated runtime seams"><dl className="learning-diagram__surfaces"><div><dt>Context</dt><dd>Prompt assembly and compression</dd></div><div><dt>Continuity</dt><dd>Memory and session history</dd></div><div><dt>Capability</dt><dd>Tool registry and skills</dd></div><div><dt>Presence</dt><dd>Gateway, channels, and schedules</dd></div></dl><figcaption>An integrated runtime makes seams easier to inspect, but breadth alone does not establish tenant isolation, consent, or exactly-once effects.</figcaption></Diagram>;
 }
 
+export function QmResourceGovernance() {
+  return <Diagram name="QM resource governance boundary"><dl className="learning-diagram__surfaces"><div><dt>Principal</dt><dd>Person or shared-room membership</dd></div><div><dt>Resource</dt><dd>File, skill, deployment, cron, or credential</dd></div><div><dt>Run</dt><dd>Lease, heartbeat, attempt, and tool records</dd></div><div><dt>Evidence</dt><dd>Audit record, not preventive control</dd></div></dl><figcaption>QM composes identity, scope, policy, and leased execution; those records do not by themselves prove cross-scope isolation or a human outcome.</figcaption></Diagram>;
+}
+
+export function CloudflareDurableTurn() {
+  return <Diagram name="Cloudflare durable turn lifecycle"><ol className="learning-diagram__chain"><li>Route to a Durable Object</li><li>Persist submission and session state</li><li>Run or resume bounded work</li><li>Stream or replay delivery</li><li>Expose completion or recovery failure</li></ol><figcaption>Durable acceptance and recovery preserve runtime work; stable effect keys and application authorization are still separate contracts.</figcaption></Diagram>;
+}
+
+export function DeepSeekOrderedSession() {
+  return <Diagram name="DeepSeek ordered session lifecycle"><ol className="learning-diagram__chain"><li>Append turn and step facts</li><li>Assemble one effective request</li><li>Overlap eligible tool bodies</li><li>Commit results in model order</li><li>Repair an interrupted event tail</li></ol><figcaption>Ordered session facts support reconstruction, while Cordis lifecycle cleanup remains bounded to registered in-process effects.</figcaption></Diagram>;
+}
+
+export function DroverFleetPlanes() {
+  return <Diagram name="Drover fleet custody and evidence planes"><dl className="learning-diagram__surfaces"><div><dt>Command</dt><dd>Fleet API routes work</dd></div><div><dt>Custody</dt><dd>Host daemon owns local processes</dd></div><div><dt>Facts</dt><dd>Normalized append-oriented evidence</dd></div><div><dt>Projections</dt><dd>Replaceable views with provenance</dd></div></dl><figcaption>Fleet coordination stays truthful when host custody, durable facts, and rebuildable projections remain distinct.</figcaption></Diagram>;
+}
+
 export const harnessLearningComponents = {
   HarnessProgression,
   FailureChain,
@@ -125,4 +141,8 @@ export const harnessLearningComponents = {
   CursorHarnessEvaluation,
   LangGraphDurableInterrupt,
   HermesRuntimeSeams,
+  QmResourceGovernance,
+  CloudflareDurableTurn,
+  DeepSeekOrderedSession,
+  DroverFleetPlanes,
 };

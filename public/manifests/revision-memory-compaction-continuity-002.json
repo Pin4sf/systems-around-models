@@ -11,7 +11,7 @@
     "claim-memory-forgetting-contracts"
   ],
   "correctionDisposition": "publication",
-  "contentHash": "sha256-27185e79a9357db07c7a78897db57694e4eec4223a966b285863c4f8de68dca0",
+  "contentHash": "sha256-ea4b68d0deeab4b2105ed92801e63c6787d96b765a6c02213baf2056e32617f2",
   "sourceIds": [
     "source-agentmemory-runtime",
     "source-harness-engineering-fieldbook-v1",

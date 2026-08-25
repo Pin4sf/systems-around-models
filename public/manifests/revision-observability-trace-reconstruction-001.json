@@ -7,7 +7,7 @@
   "summary": "Initial public revision of the observability and trace reconstruction chapter.",
   "affectedClaimIds": [],
   "correctionDisposition": "publication",
-  "contentHash": "sha256-aac6a46a91bd0cc358167a587922a8dabd7065f0ff8e166b36e109f7ebe564c8",
+  "contentHash": "sha256-25d2efb1280e5f9f4439828a8f3eb26ef4142183eb982484fdb2bfe0e6ac9a25",
   "sourceIds": [
     "source-harness-engineering-fieldbook-v1",
     "source-w3c-trace-context"

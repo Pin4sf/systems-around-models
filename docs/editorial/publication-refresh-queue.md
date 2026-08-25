@@ -1,6 +1,6 @@
 # Publication refresh queue
 
-Last updated: 2026-08-25
+Last updated: 2026-08-26
 
 This is the maintained operational list for material that can ship from current evidence and material that still needs source work. Readiness describes the publication record, not the quality or maturity of the named system.
 
@@ -8,17 +8,16 @@ This is the maintained operational list for material that can ship from current 
 
 | Artifact | Public state | Evidence boundary | Next update |
 |---|---|---|---|
-| Harness Chapters 1–24 | Released | Original clean-room chapters grounded in the source manifests named in each article | Review corrections and reader feedback before revision 2; edit Chapters 25–28 as the next curriculum batch |
+| Harness Chapters 1–28 | Released | Clean-room chapters grounded in the release-pinned source manifests named in each article | Review corrections and reader feedback before revision 2; edit Chapters 29–32 as the next curriculum batch |
 | OpenAI Codex architecture study | Released working study | Current official pin `343074d4207d572809bd8cea15f4be1d09d98e0b`; README-level inspection | Inspect app-server, thread/session state, compaction, sandbox and approvals, interruption, recovery, and review paths |
-| DeepSeek Harness and Cordis architecture study | Released, refresh due | Mechanisms pinned to Harness `47f943859bef60e4160492346772ded9b24f765a` and Cordis `8cc9e33fab69e2d0476d126baaf2acb24e6a6ab4` | Reinspect changed paths at Harness `b150a551b8d465e31e418e1b2eaf5e79bbb7d28e` and package `0.1.1-rc.2` |
+| DeepSeek Harness and Cordis architecture study | Released, refreshed | Mechanisms pinned to Harness `dsh-v0.1.1-rc.2` at `b150a551b8d465e31e418e1b2eaf5e79bbb7d28e`, vendored `@deepseek-ai/cordis` `4.0.1`, and standalone Cordis `8cc9e33fab69e2d0476d126baaf2acb24e6a6ab4` | Recheck the developer-preview line when a newer package or tag appears; retain the cleanup and external-effect proof limits |
 
 ## Next research queue
 
-1. Refresh DeepSeek Harness at the named current head while retaining Cordis proof limits and release-provenance unknowns.
-2. Expand Codex from a current working study into an implementation-pinned dossier; do not upgrade its evidence label before the source paths are inspected.
-3. Extend the LangGraph architecture dossier beyond the inspected Python 1.2.9 core, keeping checkpoint packages, SDK, and hosted platform as separate editions and responsibility boundaries.
-4. Refresh Claude Code only from official sources; leaked or reconstructed internals remain discovery input, not publication evidence.
-5. Refresh the memory-system cohort in this order: Mem0 edition split, Cognee convergence correction, Letta/MemGPT/Letta Code boundaries, then Graphiti/Zep.
+1. Expand Codex from a current working study into an implementation-pinned dossier; do not upgrade its evidence label before the source paths are inspected.
+2. Extend the LangGraph architecture dossier beyond the inspected Python 1.2.9 core, keeping checkpoint packages, SDK, and hosted platform as separate editions and responsibility boundaries.
+3. Refresh Claude Code only from official sources; leaked or reconstructed internals remain discovery input, not publication evidence.
+4. Refresh the memory-system cohort in this order: Mem0 edition split, Cognee convergence correction, Letta/MemGPT/Letta Code boundaries, then Graphiti/Zep.
 
 ## Mandatory correction gate
 

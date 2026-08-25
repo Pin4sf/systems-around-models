@@ -7,7 +7,7 @@
   "summary": "Initial public revision of the Cursor model and harness evaluation case study.",
   "affectedClaimIds": [],
   "correctionDisposition": "publication",
-  "contentHash": "sha256-b7b308056c136841c33db302786aa71a897a350532b52c9e376d80dffc25bd8f",
+  "contentHash": "sha256-eee3e5c9422145a15508709e0f3c00086ac14d62002f403e52cbe4775c02e0a8",
   "sourceIds": [
     "source-cursor-continually-improving-agent-harness",
     "source-harness-engineering-fieldbook-v1"

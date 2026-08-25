@@ -7,7 +7,7 @@
   "summary": "Initial public revision of the environments, sandboxes, and custody chapter.",
   "affectedClaimIds": [],
   "correctionDisposition": "publication",
-  "contentHash": "sha256-f32b3a11ebd6e6d7331443015cd75d5df300ed011c4e5d95a5bb7e04d26bd4cf",
+  "contentHash": "sha256-09f45a79080e617191d1cc39c47ddb1b8878a3ffddb8e297cd5afe28a37e5cfa",
   "sourceIds": [
     "source-harness-engineering-fieldbook-v1",
     "source-memory-nist-agent-hijacking-evaluations"

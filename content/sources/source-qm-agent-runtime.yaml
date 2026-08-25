@@ -1,0 +1,37 @@
+id: source-qm-agent-runtime
+title: QM v0.1.5 repository release
+author: YC Software
+canonical_url: https://github.com/yc-software/qm/tree/d931fe963de3ac20b9a7526ea9a4873c0d8ed18e
+published_at: 2026-08-17
+retrieved_at: 2026-08-26
+repository_commit: d931fe963de3ac20b9a7526ea9a4873c0d8ed18e
+inspected_paths:
+  - README.md
+  - SECURITY.md
+  - LICENSE
+  - src/acl/resource-ref.ts
+  - src/acl/acl-store.ts
+  - src/security/security-posture.ts
+  - src/policy/command-policy.ts
+  - src/runs/postgres-run-store.ts
+  - src/admin/postgres-audit-log.ts
+source_type: first-party-repository
+basis: Commit-pinned inspection of the v0.1.5 release and current primary documentation for scoped resources, policy floors, credentials, leased runs, and audit records.
+license_status: MIT
+evidence_grade: IP
+observed_mechanisms:
+  - description: Resource references and audience-aware grants keep people, shared rooms, and scope-owned files, skills, deployments, crons, and credentials distinct.
+    evidence_grade: IP
+    basis: The inspected ACL, resource-reference, membership, and publication-audience paths implement typed resources and scope-aware resolution.
+  - description: The Postgres run store models queued, running, and terminal work with leases, heartbeats, attempts, deduplication, and per-session running constraints.
+    evidence_grade: IP
+    basis: The inspected run-store implementation records leased execution and indexed tool-call history.
+author_reported_claims:
+  - QM describes itself as a multiplayer agent harness for work whose adapters drive one shared runtime core.
+unknowns:
+  - The project explicitly remains early experimental software for authenticated members of one organization rather than a hardened public or multi-tenant boundary.
+  - Current main reports CLI version 0.1.6 but no matching release or npm package was observed, so this record remains release-pinned to v0.1.5.
+falsifiers:
+  - A supported topology permits an unauthorized cross-scope read or a recovered lease duplicates a non-idempotent external effect.
+last_validated: 2026-08-26
+correction_ledger_status: reviewed

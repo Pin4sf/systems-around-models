@@ -11,7 +11,7 @@
     "claim-harness-failure-injection-learning-method"
   ],
   "correctionDisposition": "publication",
-  "contentHash": "sha256-5335df701fa92463f2efe5395fa87c5af6152acb8f433af4c125e949bdf29db4",
+  "contentHash": "sha256-07f0459dad4178c17a53bede3f2d906f2717fde9b248c3f2d65c35af1a35403b",
   "sourceIds": [
     "source-agentmemory-runtime",
     "source-ai-boost-awesome-harness-engineering",

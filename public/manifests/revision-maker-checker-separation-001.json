@@ -7,7 +7,7 @@
   "summary": "Initial public revision of the maker and checker separation chapter.",
   "affectedClaimIds": [],
   "correctionDisposition": "publication",
-  "contentHash": "sha256-cfdec6d92861fb93ecf3f8076fc825a763912030f3f51cfef957aef467aaed67",
+  "contentHash": "sha256-52d1b94a384f47e1fda05bd0b6c1408fd098f351601665ae5fac67c55989362f",
   "sourceIds": [
     "source-harness-engineering-fieldbook-v1",
     "source-llm-as-judge-mt-bench",

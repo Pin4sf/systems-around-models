@@ -7,7 +7,7 @@
   "summary": "Initial public revision of the external effects and transactional outboxes chapter.",
   "affectedClaimIds": [],
   "correctionDisposition": "publication",
-  "contentHash": "sha256-990b9a394cff640d5b9410cd40cb6fee01be89478cf9adbf149164f4855f8f5a",
+  "contentHash": "sha256-500ab4478e202315a20450eec6c00c86f79be8f0750bf8cc471e3fbf7db12f1c",
   "sourceIds": [
     "source-aws-transactional-outbox",
     "source-harness-engineering-fieldbook-v1"

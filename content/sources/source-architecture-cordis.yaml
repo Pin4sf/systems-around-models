@@ -3,7 +3,7 @@ title: Cordis repository
 author: Cordiverse
 canonical_url: https://github.com/cordiverse/cordis/tree/8cc9e33fab69e2d0476d126baaf2acb24e6a6ab4
 published_at: 2026-08-13
-retrieved_at: 2026-08-16
+retrieved_at: 2026-08-26
 repository_commit: 8cc9e33fab69e2d0476d126baaf2acb24e6a6ab4
 inspected_paths:
   - README.md
@@ -14,14 +14,15 @@ basis: Commit-pinned inspection of the public composition kernel, including cont
 license_status: MIT
 evidence_grade: IP
 observed_mechanisms:
-  - description: Plugin registrations are owned by lifecycle fibers and their disposal effects unwind in reverse order when the owner unloads.
+  - description: Plugin registrations are owned by lifecycle fibers; disposers unwind in reverse order within one effect chain while top-level effect wrappers may unload concurrently.
     evidence_grade: IP
     basis: The inspected core lifecycle and effect implementation tracks registrations and inverse cleanup by owner.
 author_reported_claims:
   - Cordis describes itself as an IoC container for building scalable applications through plugin composition.
 unknowns:
   - Reversible registration cannot prove that a plugin's inverse is semantically complete or that external effects are reversible.
+  - Standalone cordis 4.0.0-rc.8 is related evidence but is not the vendored @deepseek-ai/cordis 4.0.1 artifact used by current DeepSeek Harness.
 falsifiers:
   - The pinned implementation does not associate registered effects with lifecycle ownership and disposal.
-last_validated: 2026-08-16
+last_validated: 2026-08-26
 correction_ledger_status: reviewed

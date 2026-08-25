@@ -7,7 +7,7 @@
   "summary": "Initial public revision of the twelve recurring harness failure classes.",
   "affectedClaimIds": [],
   "correctionDisposition": "publication",
-  "contentHash": "sha256-7a8dc0cba647f5818ae98e875e82961b1200123c2a5f12c49f8026908970361f",
+  "contentHash": "sha256-31a434e1dded083af4086dba1c218e8522bb2292803d5437f4f86efd9a6ead69",
   "sourceIds": [
     "source-harness-engineering-fieldbook-v1",
     "source-rasa-why-agents-fail"

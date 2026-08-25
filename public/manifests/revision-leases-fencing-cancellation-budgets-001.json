@@ -7,7 +7,7 @@
   "summary": "Initial public revision of the leases, fencing, cancellation, and budgets chapter.",
   "affectedClaimIds": [],
   "correctionDisposition": "publication",
-  "contentHash": "sha256-2bfdf1969c06aef442f54a518819491e7d73d756d2a37f29aa418753b8db97d2",
+  "contentHash": "sha256-ed234778b40b0a0dda9df36f736a584ebe0288d7b5674f3f551183b82f4cdd46",
   "sourceIds": [
     "source-anthropic-effective-long-running-harnesses",
     "source-harness-engineering-fieldbook-v1"

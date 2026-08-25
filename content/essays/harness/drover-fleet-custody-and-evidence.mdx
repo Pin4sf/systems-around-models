@@ -1,0 +1,70 @@
+---
+slug: drover-fleet-custody-and-evidence
+title: "Drover: Fleet Custody and Evidence"
+description: A source-pinned study of Drover's fleet command plane, host-local process custody, normalized evidence, rebuildable projections, and quiescent runtime upgrades.
+sequence: Harness Engineering
+sequence_position: 29
+revision: 1
+authors:
+  - author-shivansh-fulper
+published_at: 2026-08-26
+substantively_revised_at: 2026-08-26
+reading_time_source: 8 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-drover-fleet-runtime
+revision_id: revision-drover-fleet-custody-and-evidence-001
+previous_essay_slug: deepseek-harness-and-cordis
+---
+
+## A fleet is a custody problem
+
+Drover supervises native agent harnesses across private hosts. That changes the control question. A central service may know where a session should run, but the host daemon owns the local process, protocol adapter, terminal, and filesystem reach. Routing authority and execution custody are not the same thing.
+
+This chapter is pinned to Drover v0.3.7. Current `main` includes an unreleased Phase 0 loop-engine experiment outside the distributed package. It is useful research input, but it is not shipped behavior and is excluded from this release-pinned case.
+
+<DroverFleetPlanes />
+
+## Keep the central registry subordinate to host truth
+
+The fleet API authenticates requests, tracks hosts, and routes commands. Per-host daemons start and recover local sessions and speak each harness's native protocol. A registry can project that a session is active, but it cannot make a dead process alive or make an unreachable host current.
+
+Truthful fleet UI therefore needs freshness and provenance. It should show when a projection was last confirmed, which host owns the process, and whether the view is stale. Unknown reachability should remain unknown instead of being rendered as healthy or completed.
+
+## Separate facts from projections
+
+Drover normalizes events and spans into partitioned Parquet, then builds DuckDB views and higher-level summaries, briefs, decisions, and embeddings. The raw facts and the replaceable projections have different recovery properties.
+
+That separation is valuable beyond analytics. If a summary becomes corrupt or a schema changes, the system can rebuild it from attributed facts. A derived record must retain links to its source material, transformation version, and time boundary. Otherwise a convenient projection can quietly become a second, untraceable truth store.
+
+Stable event identity also matters under retry. Host-to-hub delivery can be at least once only if the receiver deduplicates the same fact and preserves per-session ordering. Deduplication prevents repeated records; it does not prove that the native harness itself executed an external effect once.
+
+## Mutate runtime machinery only at quiescence
+
+Drover's release flow installs a checksum-verified runtime beside the active version and smoke-tests it before activation. The host activates only when structured sessions and attached terminals are provably idle. Uncertain quiescence is treated as busy. The prior version remains addressable, and failure to re-register after restart triggers rollback.
+
+This is a narrow and useful update contract: download, verify, wait, activate, observe liveness, and restore if the new process cannot return. It does not migrate arbitrary session semantics between incompatible harness versions, and it does not reverse work an agent already performed.
+
+## Retain the declared trust model
+
+Drover documents a trusted single-operator boundary over localhost, private LAN, or private Tailscale. It does not claim public-internet hardening, multi-user isolation, RBAC, SSO, or host-bound credential enforcement. A fleet design for multiple principals would need a different identity, admission, credential, and audit spine.
+
+## Failure boundary
+
+The design fails if the hub overwrites contradictory host-local process truth, an event replay creates duplicate canonical facts, a projection loses provenance, an update activates while work is live, unknown quiescence is treated as idle, a bad artifact passes checksum or smoke testing, or reconnect failure cannot restore the prior version. It also fails if a single-operator private-network design is presented as a general multi-tenant control plane.
+
+## Retrieval check
+
+The fleet registry says a session is idle, the host has stopped heartbeating, and a new runtime is ready beside the active version. May the update activate? Which observation owns the decision, what must remain recoverable, and what should the central UI say while host truth is unavailable?
+
+## Build-and-break lab
+
+Model one hub, two hosts, and one session per host. Deliver the same event batch twice, then corrupt a derived summary and rebuild it from facts. Stage a new runtime beside the old one, force an indeterminate quiescence check, and assert that activation waits. Finally simulate a failed post-restart registration and restore the previous version.
+
+## Sources and further reading
+
+- [Drover v0.3.7](https://github.com/arniesaha/drover/tree/81b344d025a7850d5697a7c19468ca8fd95e909e) — release-pinned source for fleet routing, host custody, evidence, projections, and update mechanics.
+- [Drover architecture](https://github.com/arniesaha/drover/blob/81b344d025a7850d5697a7c19468ca8fd95e909e/docs/architecture.md) — first-party command, host, context, and security boundaries.
+- [Drover context store](https://github.com/arniesaha/drover/blob/81b344d025a7850d5697a7c19468ca8fd95e909e/docs/context-store.md) — fact, projection, provenance, and job-ledger contracts.
+- [Harness Engineering Study Guide](/fieldbook/harness-engineering-study-guide) — the shared vocabulary for custody, evidence, recovery, and truthful closure.

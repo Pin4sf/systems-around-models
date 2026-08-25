@@ -7,7 +7,7 @@
   "summary": "Initial public revision of the H0 to H9 diagnostic progression chapter.",
   "affectedClaimIds": [],
   "correctionDisposition": "publication",
-  "contentHash": "sha256-e83edc312cab8a45b2fdc939b0137b7ced5a3bfb63e9a7faa688d060eecc4e82",
+  "contentHash": "sha256-e3a5b058d6bdc0c900fb7781b1ecba2c7d19b192e5244237192cce6ff8f661b9",
   "sourceIds": [
     "source-harness-engineering-fieldbook-v1",
     "source-rasa-why-agents-fail"

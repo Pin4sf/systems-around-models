@@ -7,7 +7,7 @@
   "summary": "Initial public revision of the Anthropic long-running harness case study.",
   "affectedClaimIds": [],
   "correctionDisposition": "publication",
-  "contentHash": "sha256-03891f27846cb8513c9e5d622d14c0aa2e508a9c11632de9ee3dadbb5b877d69",
+  "contentHash": "sha256-5c9be8f60255724da7e6aceb7bc89ed00ccfb2aa267f521e44dd03ad52074134",
   "sourceIds": [
     "source-anthropic-effective-long-running-harnesses",
     "source-harness-engineering-fieldbook-v1"

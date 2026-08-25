@@ -100,7 +100,7 @@ export const EssayMetadataSchema = z.object({
   sequence: z.string().min(2),
   sequencePosition: z.number().int().positive(),
   revision: z.number().int().positive(),
-  authors: z.array(z.string().min(2)).min(1),
+  authors: z.array(Identifier("author")).min(1),
   publishedAt: DateString,
   substantivelyRevisedAt: DateString,
   readingTimeSource: z.string().min(2),
