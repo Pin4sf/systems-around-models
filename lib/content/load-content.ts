@@ -146,6 +146,17 @@ function sourceFromYaml(value: unknown, repositoryRoot: string, filename: string
 
 function revisionFromYaml(value: unknown, repositoryRoot: string, filename: string): RevisionRecord {
   const raw = value as Record<string, unknown>;
+  const sourceSnapshots = Array.isArray(raw.sources)
+    ? raw.sources.map((source) => {
+        const item = source as Record<string, unknown>;
+        return {
+          ...item,
+          canonicalUrl: item.canonical_url,
+          lastValidated: item.last_validated,
+          licenseStatus: item.license_status,
+        };
+      })
+    : raw.sources;
   const result = RevisionSchema.safeParse({
     ...raw,
     targetSlug: raw.target_slug,
@@ -153,6 +164,8 @@ function revisionFromYaml(value: unknown, repositoryRoot: string, filename: stri
     substantivelyRevisedAt: raw.substantively_revised_at,
     affectedClaimIds: raw.affected_claim_ids,
     correctionDisposition: raw.correction_disposition,
+    contentHash: raw.content_hash,
+    sourceSnapshots,
   });
 
   if (!result.success) {
@@ -567,7 +580,7 @@ function validateUnifiedIntegrity(
   for (const essay of essays.values()) {
     const filename = essayFilenames.get(essay.slug) ?? `content/essays/${essay.slug}.mdx`;
     for (const href of internalEssayLinks(essaySources.get(essay.slug) ?? "")) {
-      if (href.startsWith("/manifests/") || href === "/") continue;
+      if (href.startsWith("/manifests/") || href === "/" || href === "/architectures") continue;
       let targetSlug = essay.slug;
       let fragment: string | undefined;
       if (href.startsWith("#")) {

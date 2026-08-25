@@ -8,27 +8,12 @@ import {
   SequenceNavigation,
 } from "@/components/article/sequence-navigation";
 import { SystemTrace } from "@/components/diagrams/system-trace";
-import {
-  AdmissionBoundary,
-  AmbiguityRecovery,
-  CapabilityBinding,
-  ContextAssembly,
-  ControlStructures,
-  CustodyBoundary,
-  EffectOutbox,
-  FailureChain,
-  HarnessHandoff,
-  HarnessProgression,
-  LeaseFencing,
-  MemoryLifecycle,
-  RevocationPropagation,
-  StateLayers,
-  SurfaceMap,
-} from "@/components/diagrams/harness-learning-diagrams";
+import { harnessLearningComponents } from "@/components/diagrams/harness-learning-diagrams";
 import type { EssayMetadata, RevisionRecord } from "@/lib/content/schema";
 import { compilePublicMdx } from "@/lib/content/compile-public-mdx";
 import { slugifyHeading } from "@/lib/content/slugify";
 import { getStudyGuideEntryForEssay } from "@/lib/study-guide/study-guide-registry";
+import { authorName, authorUrl } from "@/lib/publication/metadata";
 
 function articleHeadings(source: string): ArticleHeading[] {
   return [...source.matchAll(/^##\s+(.+?)\s*$/gm)].map((match) => ({
@@ -76,21 +61,7 @@ export async function ArticleReader({
       h2: Heading,
       EvidenceBadge: HiddenPublicationNote,
       SystemTrace: ArticleSystemTrace,
-      HarnessProgression,
-      FailureChain,
-      SurfaceMap,
-      HarnessHandoff,
-      ContextAssembly,
-      CapabilityBinding,
-      CustodyBoundary,
-      StateLayers,
-      ControlStructures,
-      MemoryLifecycle,
-      AdmissionBoundary,
-      LeaseFencing,
-      EffectOutbox,
-      AmbiguityRecovery,
-      RevocationPropagation,
+      ...harnessLearningComponents,
     },
   });
 
@@ -105,7 +76,7 @@ export async function ArticleReader({
           <h1>{essay.title}</h1>
           <p className="article-reader__description">{essay.description}</p>
           <p className="article-reader__byline interface-text">
-            By {essay.authors.join(", ")} · {essay.readingTimeSource}
+            By <a href={authorUrl} rel="author">{authorName}</a> · {essay.readingTimeSource}
           </p>
         </header>
         <div className="article-reader__prose prose">{content}</div>

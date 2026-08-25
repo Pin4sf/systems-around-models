@@ -1,0 +1,25 @@
+id: source-anthropic-agent-skills-repository
+title: Anthropic Skills repository
+author: Anthropic
+canonical_url: https://github.com/anthropics/skills/tree/3b3fad96af16a10759d930941b4520ba0c40edae
+published_at: 2025-09-22
+retrieved_at: 2026-08-25
+repository_commit: 3b3fad96af16a10759d930941b4520ba0c40edae
+inspected_paths:
+  - README.md
+source_type: first-party-repository
+basis: Commit-pinned inspection of Anthropic's official repository README for the documented skill-package structure, disclaimer, and per-directory license boundary.
+license_status: unknown
+evidence_grade: FD
+observed_mechanisms:
+  - description: The repository documents skills as self-contained folders of instructions, scripts, and resources loaded dynamically for a task.
+    evidence_grade: FD
+    basis: The pinned README describes the package structure and links its specification and template.
+author_reported_claims: []
+unknowns:
+  - The repository has mixed licensing by directory, including source-available document skills, so no single root license governs every package.
+  - The repository explicitly warns that examples are educational and may behave differently in production environments.
+falsifiers:
+  - The pinned README does not describe self-contained skill folders or the per-directory license boundary.
+last_validated: 2026-08-25
+correction_ledger_status: reviewed

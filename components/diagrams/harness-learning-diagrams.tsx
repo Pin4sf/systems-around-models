@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 const progression = [
   ["H0", "Response"], ["H1", "Context"], ["H2", "Tools"], ["H3", "Environment"], ["H4", "Durable state"],
   ["H5", "Orchestration"], ["H6", "Memory"], ["H7", "Reliable effects"], ["H8", "Evidence"], ["H9", "Evaluation"],
@@ -66,4 +68,61 @@ export function AmbiguityRecovery() {
 export function RevocationPropagation() {
   return <Diagram name="Revocation propagation across active surfaces"><dl className="learning-diagram__surfaces"><div><dt>Sessions</dt><dd>Reject new privileged turns</dd></div><div><dt>Queued effects</dt><dd>Re-authorize before dispatch</dd></div><div><dt>Delegates</dt><dd>Invalidate inherited grants</dd></div><div><dt>Credentials</dt><dd>Expire cached material</dd></div></dl><figcaption>Revocation is complete only when every active or deferred authority surface stops accepting the old grant.</figcaption></Diagram>;
 }
-import type { ReactNode } from "react";
+
+export function TraceReconstruction() {
+  return <Diagram name="Trace reconstruction from request to decision"><ol className="learning-diagram__chain"><li>Work and attempt IDs</li><li>Effective context and capabilities</li><li>Tool intents and effects</li><li>Evidence and policy</li><li>Decision and final state</li></ol><figcaption>A reconstructable trace links the admitted request to the facts that explain what changed and why the run stopped.</figcaption></Diagram>;
+}
+
+export function MakerCheckerSeparation() {
+  return <Diagram name="Maker and checker separation"><dl className="learning-diagram__surfaces"><div><dt>Maker</dt><dd>Acts, records artifacts, and cannot rewrite the rubric</dd></div><div><dt>Checker</dt><dd>Uses canonical evidence, a locked contract, and typed dispositions</dd></div></dl><figcaption>The checker evaluates canonical artifacts against a contract fixed before the run, not the maker&apos;s account of success.</figcaption></Diagram>;
+}
+
+export function CompletionLedger() {
+  return <Diagram name="Completion ledger from evidence to closure"><ol className="learning-diagram__chain"><li>Evidence produced</li><li>Verification decided</li><li>Policy allowed</li><li>Owner accepted</li><li>Loop consciously closed</li></ol><figcaption>Each transition has its own owner and disposition; an earlier success cannot silently stand in for a later decision.</figcaption></Diagram>;
+}
+
+export function OpenLoopReentry() {
+  return <Diagram name="Open loop re-entry lifecycle"><ol className="learning-diagram__chain"><li>Waiting with owner</li><li>Useful cue arrives</li><li>Re-enter exact state</li><li>Take safe next action</li><li>Verify · close · or wait again</li></ol><figcaption>Re-entry resumes from a durable branch and current authority; dismissal or elapsed time alone does not prove closure.</figcaption></Diagram>;
+}
+
+export function FreshSessionHandoff() {
+  return <Diagram name="Fresh-session work handoff"><ol className="learning-diagram__chain"><li>Initialize repository</li><li>Choose one unfinished feature</li><li>Implement and test</li><li>Record progress</li><li>Leave a clean handoff</li></ol><figcaption>Durable artifacts let a new context window recover the work without treating a prose summary as the system of record.</figcaption></Diagram>;
+}
+
+export function CursorHarnessEvaluation() {
+  return <Diagram name="Cursor harness improvement loop"><ol className="learning-diagram__chain"><li>Collect traces</li><li>Classify failures</li><li>Reproduce offline</li><li>Change one harness seam</li><li>Compare offline and online signals</li><li>Promote or roll back</li></ol><figcaption>A model score and a product outcome are different signals; both need attribution to the model-harness combination that produced them.</figcaption></Diagram>;
+}
+
+export function LangGraphDurableInterrupt() {
+  return <Diagram name="LangGraph durable interrupt boundary"><ol className="learning-diagram__chain"><li>Admit a thread</li><li>Checkpoint graph state</li><li>Run a node</li><li>Interrupt with durable context</li><li>Resume under current authority</li></ol><figcaption>A checkpoint can restore graph execution; the application still owns external-effect reconciliation and acceptance.</figcaption></Diagram>;
+}
+
+export function HermesRuntimeSeams() {
+  return <Diagram name="Hermes integrated runtime seams"><dl className="learning-diagram__surfaces"><div><dt>Context</dt><dd>Prompt assembly and compression</dd></div><div><dt>Continuity</dt><dd>Memory and session history</dd></div><div><dt>Capability</dt><dd>Tool registry and skills</dd></div><div><dt>Presence</dt><dd>Gateway, channels, and schedules</dd></div></dl><figcaption>An integrated runtime makes seams easier to inspect, but breadth alone does not establish tenant isolation, consent, or exactly-once effects.</figcaption></Diagram>;
+}
+
+export const harnessLearningComponents = {
+  HarnessProgression,
+  FailureChain,
+  SurfaceMap,
+  HarnessHandoff,
+  ContextAssembly,
+  CapabilityBinding,
+  CustodyBoundary,
+  StateLayers,
+  ControlStructures,
+  MemoryLifecycle,
+  AdmissionBoundary,
+  LeaseFencing,
+  EffectOutbox,
+  AmbiguityRecovery,
+  RevocationPropagation,
+  TraceReconstruction,
+  MakerCheckerSeparation,
+  CompletionLedger,
+  OpenLoopReentry,
+  FreshSessionHandoff,
+  CursorHarnessEvaluation,
+  LangGraphDurableInterrupt,
+  HermesRuntimeSeams,
+};

@@ -1,0 +1,70 @@
+---
+slug: langgraph-durable-state-and-interrupts
+title: "LangGraph: Durable State and Interrupts"
+description: What LangGraph's explicit graph, checkpoint, thread, and interrupt primitives solve—and why application effects, authority, and acceptance remain outside that durability boundary.
+sequence: Harness Engineering
+sequence_position: 24
+revision: 1
+authors:
+  - Systems Around Models
+published_at: 2026-08-25
+substantively_revised_at: 2026-08-25
+reading_time_source: 9 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-architecture-langgraph
+revision_id: revision-langgraph-durable-state-interrupts-001
+previous_essay_slug: cursor-model-harness-evaluation
+next_essay_slug: hermes-integrated-agent-runtime
+---
+
+## Make control flow inspectable
+
+An agent loop is easy to begin and hard to govern as responsibilities accumulate. Planning, tool use, human review, retries, subflows, and recovery can become implicit branches inside one large function. LangGraph makes those branches explicit as nodes, edges, graph state, checkpoints, and interrupts.
+
+The case study here is the open-source Python library at release 1.2.9. Its separately versioned SDK and hosted platform have different operational responsibilities and are not silently included in this boundary.
+
+<LangGraphDurableInterrupt />
+
+An explicit graph helps when a transition needs a named owner, durable state, testable routing rule, or policy seam. It is unnecessary ceremony when a short loop has one owner and no meaningful recovery boundary. Graph shape should follow responsibility, not a desire to visualize every function.
+
+## Bind state to a durable thread
+
+Checkpointing records graph state so execution can resume under a thread identifier. That creates continuity across turns and process interruptions when the application provides an appropriate checkpointer and restores the same logical thread.
+
+The thread identifier is therefore part of the state contract. Reusing it for unrelated work can blend histories; generating a new one for every retry can strand the checkpoint that recovery needs. The application should define which principal and work item may address a thread and prevent identifiers from becoming ambient authority.
+
+An in-memory checkpointer can demonstrate the mechanism, but it does not survive a process restart. Production durability depends on the selected store, its consistency and retention behavior, and the deployment boundary around it.
+
+## Treat interrupts as typed pauses
+
+An interrupt lets a node pause with information needed by an external decision and later resume. This is useful for human review, missing input, policy approval, or another condition that should not be guessed inside the model loop.
+
+The pause payload should explain what decision is needed, what evidence is available, what options are valid, and what state will be resumed. On return, revalidate the principal, current policy, and any facts that could have changed during the wait. A resume command should not inherit authorization merely because it knows the thread identifier.
+
+Durable pause and user-owned closure are different contracts. LangGraph supplies a useful execution primitive; the surrounding application defines who may decide, what acceptance means, and when the wider responsibility is complete.
+
+## Keep external effects outside replay assumptions
+
+A checkpoint can tell the graph where it was. It cannot prove whether an email, payment, deployment, or file mutation happened exactly once. If a node performs an external effect and the process fails before the next checkpoint, resuming may repeat the effect or skip necessary reconciliation.
+
+Use stable effect identifiers, durable intent records, provider lookups, idempotency where supported, and an explicit ambiguous state. Design effectful nodes so replay is either safe or forced through reconciliation. Do not let graph completion stand in for evidence that the external world reached the intended state.
+
+## Failure boundary
+
+The design fails when graph state is treated as the only source of truth, thread identifiers are unscoped, in-memory persistence is described as restart durability, interrupt payloads carry untrusted authority, or a resumed node repeats an ambiguous effect. It also fails when every code path becomes a node even though no state, ownership, recovery, or policy boundary justifies the split.
+
+## Retrieval check
+
+A graph checkpoints immediately before sending a payment request. The provider accepts the request, the worker loses its response, and the graph resumes from the checkpoint. What belongs in graph state, what must be looked up through a stable effect key, which transition should remain ambiguous, and who may authorize the next action?
+
+## Build-and-break lab
+
+Create a small graph that pauses for review and persists state under a thread identifier. First use an in-memory checkpointer and restart the process; record what is lost. Then use durable persistence, scope the thread to a principal, and simulate failure around an external effect. Demonstrate that checkpoint recovery and effect reconciliation are separate tests.
+
+## Sources and further reading
+
+- [LangGraph 1.2.9 source](https://github.com/langchain-ai/langgraph/tree/95af6a00718588e7b7ce17310e8006d267896a77) — commit-pinned implementation and tests for graph execution, checkpointing, and interrupts.
+- [The Big Agent Harness Architecture Comparison](/architectures) — a normalized view of which responsibilities LangGraph owns and which remain delegated to the application.
+- [Harness Engineering Study Guide](/fieldbook/harness-engineering-study-guide) — the broader treatment of state, graphs, authority, recovery, and reliable effects.

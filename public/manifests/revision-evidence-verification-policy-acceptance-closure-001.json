@@ -1,0 +1,37 @@
+{
+  "id": "revision-evidence-verification-policy-acceptance-closure-001",
+  "essaySlug": "evidence-verification-policy-acceptance-and-closure",
+  "revision": 1,
+  "publishedAt": "2026-08-24",
+  "substantivelyRevisedAt": "2026-08-24",
+  "summary": "Initial public revision of the evidence, verification, policy, acceptance, and closure chapter.",
+  "affectedClaimIds": [],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-7b12335922fd7c64586b78297c210e41c3fd6fa1eb21e446ac6386ad01ed407c",
+  "sourceIds": [
+    "source-harness-engineering-fieldbook-v1",
+    "source-nist-ai-rmf-1"
+  ],
+  "sourceValidationDates": {
+    "source-harness-engineering-fieldbook-v1": "2026-08-21",
+    "source-nist-ai-rmf-1": "2026-08-24"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-nist-ai-rmf-1",
+      "title": "Artificial Intelligence Risk Management Framework (AI RMF 1.0)",
+      "canonicalUrl": "https://doi.org/10.6028/NIST.AI.100-1",
+      "lastValidated": "2026-08-24",
+      "licenseStatus": "unknown"
+    }
+  ]
+}

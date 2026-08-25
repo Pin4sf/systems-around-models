@@ -14,3 +14,13 @@ affected_claim_ids:
   - claim-harness-failure-injection-learning-method
   - claim-system-trace-responsibility-checklist
 correction_disposition: publication
+content_hash: sha256-a261feaa38335c81871d6422e6f8946d33ca8d579f697197413980f3da43297a
+sources:
+  - { id: source-anthropic-effective-long-running-harnesses, title: Effective harnesses for long-running agents, canonical_url: https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents, last_validated: 2026-08-25, license_status: all-rights-reserved }
+  - { id: source-earendil-what-is-a-harness, title: What is a Harness?, canonical_url: https://earendil.com/posts/what-is-a-harness/, last_validated: 2026-08-21, license_status: unknown }
+  - { id: source-harness-engineering-fieldbook-v1, title: "The Agent Systems Fieldbook — Harness Engineering, version 1", canonical_url: /manifests/revision-fieldbook-essay-001.json, last_validated: 2026-08-21, license_status: all-rights-reserved }
+  - { id: source-humanlayer-12-factor-agents, title: 12-Factor Agents, canonical_url: https://github.com/humanlayer/12-factor-agents, last_validated: 2026-08-22, license_status: Apache-2.0 }
+  - { id: source-langchain-anatomy-agent-harness, title: The Anatomy of an Agent Harness, canonical_url: https://www.langchain.com/blog/the-anatomy-of-an-agent-harness, last_validated: 2026-08-22, license_status: all-rights-reserved }
+  - { id: source-rasa-why-agents-fail, title: Why Agents Fail, canonical_url: https://github.com/RasaHQ/why-agents-fail, last_validated: 2026-08-22, license_status: MIT }
+  - { id: source-walkinglabs-awesome-harness-engineering, title: Awesome Harness Engineering, canonical_url: https://github.com/walkinglabs/awesome-harness-engineering, last_validated: 2026-08-22, license_status: CC0-1.0 }
+  - { id: source-walkinglabs-learn-harness-engineering, title: Learn Harness Engineering, canonical_url: https://walkinglabs.github.io/learn-harness-engineering/en/, last_validated: 2026-08-22, license_status: MIT }

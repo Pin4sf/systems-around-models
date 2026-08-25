@@ -39,10 +39,10 @@ function harnessChapterItems(
   return publicHarnessChapters(releasedEssays).map((essay) => {
     const chapterNumber = essay.sequencePosition - 1;
     return currentSlug === essay.slug
-      ? { kind: "current", eyebrow: `Chapter ${chapterNumber} of 40`, label: essay.title }
+      ? { kind: "current", eyebrow: `Chapter ${chapterNumber}`, label: essay.title }
       : {
           kind: "link",
-          eyebrow: `Chapter ${chapterNumber} of 40`,
+          eyebrow: `Chapter ${chapterNumber}`,
           label: essay.title,
           href: `/fieldbook/${essay.slug}`,
         };
@@ -95,7 +95,7 @@ function harnessChapterEntry(
 
   return {
     sourcePath: `harness/${essay.slug}.mdx`,
-    readerPosition: `Chapter ${chapterNumber} of 40`,
+    readerPosition: `Chapter ${chapterNumber}`,
     sequenceName: "Harness Engineering",
     navigation: {
       ...navigation,

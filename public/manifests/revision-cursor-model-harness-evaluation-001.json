@@ -1,0 +1,37 @@
+{
+  "id": "revision-cursor-model-harness-evaluation-001",
+  "essaySlug": "cursor-model-harness-evaluation",
+  "revision": 1,
+  "publishedAt": "2026-08-25",
+  "substantivelyRevisedAt": "2026-08-25",
+  "summary": "Initial public revision of the Cursor model and harness evaluation case study.",
+  "affectedClaimIds": [],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-b7b308056c136841c33db302786aa71a897a350532b52c9e376d80dffc25bd8f",
+  "sourceIds": [
+    "source-cursor-continually-improving-agent-harness",
+    "source-harness-engineering-fieldbook-v1"
+  ],
+  "sourceValidationDates": {
+    "source-harness-engineering-fieldbook-v1": "2026-08-21",
+    "source-cursor-continually-improving-agent-harness": "2026-08-25"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-cursor-continually-improving-agent-harness",
+      "title": "Continually improving the agent harness",
+      "canonicalUrl": "https://cursor.com/blog/continually-improving-agent-harness",
+      "lastValidated": "2026-08-25",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    }
+  ]
+}

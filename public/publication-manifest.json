@@ -22,6 +22,25 @@
       }
     },
     {
+      "id": "revision-anthropic-long-running-harnesses-001",
+      "essaySlug": "anthropic-long-running-harnesses",
+      "revision": 1,
+      "publishedAt": "2026-08-25",
+      "substantivelyRevisedAt": "2026-08-25",
+      "summary": "Initial public revision of the Anthropic long-running harness case study.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-03891f27846cb8513c9e5d622d14c0aa2e508a9c11632de9ee3dadbb5b877d69",
+      "sourceIds": [
+        "source-anthropic-effective-long-running-harnesses",
+        "source-harness-engineering-fieldbook-v1"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-anthropic-effective-long-running-harnesses": "2026-08-25"
+      }
+    },
+    {
       "id": "revision-control-structures-delegation-001",
       "essaySlug": "loops-workflows-graphs-and-delegation",
       "revision": 1,
@@ -37,7 +56,26 @@
       ],
       "sourceValidationDates": {
         "source-harness-engineering-fieldbook-v1": "2026-08-21",
-        "source-anthropic-effective-long-running-harnesses": "2026-08-22"
+        "source-anthropic-effective-long-running-harnesses": "2026-08-25"
+      }
+    },
+    {
+      "id": "revision-cursor-model-harness-evaluation-001",
+      "essaySlug": "cursor-model-harness-evaluation",
+      "revision": 1,
+      "publishedAt": "2026-08-25",
+      "substantivelyRevisedAt": "2026-08-25",
+      "summary": "Initial public revision of the Cursor model and harness evaluation case study.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-b7b308056c136841c33db302786aa71a897a350532b52c9e376d80dffc25bd8f",
+      "sourceIds": [
+        "source-cursor-continually-improving-agent-harness",
+        "source-harness-engineering-fieldbook-v1"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-cursor-continually-improving-agent-harness": "2026-08-25"
       }
     },
     {
@@ -56,7 +94,7 @@
       ],
       "sourceValidationDates": {
         "source-harness-engineering-fieldbook-v1": "2026-08-21",
-        "source-anthropic-effective-long-running-harnesses": "2026-08-22"
+        "source-anthropic-effective-long-running-harnesses": "2026-08-25"
       }
     },
     {
@@ -76,6 +114,25 @@
       "sourceValidationDates": {
         "source-harness-engineering-fieldbook-v1": "2026-08-21",
         "source-memory-nist-agent-hijacking-evaluations": "2026-08-22"
+      }
+    },
+    {
+      "id": "revision-evidence-verification-policy-acceptance-closure-001",
+      "essaySlug": "evidence-verification-policy-acceptance-and-closure",
+      "revision": 1,
+      "publishedAt": "2026-08-24",
+      "substantivelyRevisedAt": "2026-08-24",
+      "summary": "Initial public revision of the evidence, verification, policy, acceptance, and closure chapter.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-7b12335922fd7c64586b78297c210e41c3fd6fa1eb21e446ac6386ad01ed407c",
+      "sourceIds": [
+        "source-harness-engineering-fieldbook-v1",
+        "source-nist-ai-rmf-1"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-nist-ai-rmf-1": "2026-08-24"
       }
     },
     {
@@ -189,14 +246,88 @@
         "source-walkinglabs-learn-harness-engineering"
       ],
       "sourceValidationDates": {
+        "source-anthropic-effective-long-running-harnesses": "2026-08-25",
+        "source-earendil-what-is-a-harness": "2026-08-21",
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-humanlayer-12-factor-agents": "2026-08-22",
+        "source-langchain-anatomy-agent-harness": "2026-08-22",
+        "source-rasa-why-agents-fail": "2026-08-22",
+        "source-walkinglabs-awesome-harness-engineering": "2026-08-22",
+        "source-walkinglabs-learn-harness-engineering": "2026-08-22"
+      }
+    },
+    {
+      "id": "revision-harness-engineering-study-guide-002",
+      "essaySlug": "harness-engineering-study-guide",
+      "revision": 2,
+      "publishedAt": "2026-08-22",
+      "substantivelyRevisedAt": "2026-08-25",
+      "summary": "Added a commit-pinned ten-repository crosswalk that teaches mechanism transfer through explicit authority, evidence, licensing, and failure boundaries.",
+      "affectedClaimIds": [
+        "claim-architecture-selection-responsibilities",
+        "claim-harness-capability-configuration",
+        "claim-harness-failure-injection-learning-method"
+      ],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-5335df701fa92463f2efe5395fa87c5af6152acb8f433af4c125e949bdf29db4",
+      "sourceIds": [
+        "source-agentmemory-runtime",
+        "source-ai-boost-awesome-harness-engineering",
+        "source-ai-job-search-workflow",
+        "source-anthropic-agent-skills-repository",
+        "source-anthropic-effective-long-running-harnesses",
+        "source-architecture-openhands",
+        "source-browser-use-runtime",
+        "source-community-cybersecurity-skills",
+        "source-diagram-design-skill",
+        "source-earendil-what-is-a-harness",
+        "source-harness-engineering-fieldbook-v1",
+        "source-humanlayer-12-factor-agents",
+        "source-langchain-anatomy-agent-harness",
+        "source-openviking-context-database",
+        "source-rasa-why-agents-fail",
+        "source-scientific-agent-skills",
+        "source-walkinglabs-awesome-harness-engineering",
+        "source-walkinglabs-learn-harness-engineering"
+      ],
+      "sourceValidationDates": {
         "source-earendil-what-is-a-harness": "2026-08-21",
         "source-harness-engineering-fieldbook-v1": "2026-08-21",
         "source-walkinglabs-learn-harness-engineering": "2026-08-22",
         "source-walkinglabs-awesome-harness-engineering": "2026-08-22",
         "source-rasa-why-agents-fail": "2026-08-22",
-        "source-anthropic-effective-long-running-harnesses": "2026-08-22",
+        "source-anthropic-effective-long-running-harnesses": "2026-08-25",
         "source-langchain-anatomy-agent-harness": "2026-08-22",
-        "source-humanlayer-12-factor-agents": "2026-08-22"
+        "source-humanlayer-12-factor-agents": "2026-08-22",
+        "source-openviking-context-database": "2026-08-25",
+        "source-agentmemory-runtime": "2026-08-25",
+        "source-anthropic-agent-skills-repository": "2026-08-25",
+        "source-diagram-design-skill": "2026-08-25",
+        "source-scientific-agent-skills": "2026-08-25",
+        "source-ai-boost-awesome-harness-engineering": "2026-08-25",
+        "source-community-cybersecurity-skills": "2026-08-25",
+        "source-ai-job-search-workflow": "2026-08-25",
+        "source-architecture-openhands": "2026-08-25",
+        "source-browser-use-runtime": "2026-08-25"
+      }
+    },
+    {
+      "id": "revision-hermes-integrated-agent-runtime-001",
+      "essaySlug": "hermes-integrated-agent-runtime",
+      "revision": 1,
+      "publishedAt": "2026-08-25",
+      "substantivelyRevisedAt": "2026-08-25",
+      "summary": "Initial public revision of the Hermes integrated agent runtime case study.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-4fce1564f719e726c40175373e32c1ae99bcd6c0f2a066005d38e57d6fb2d4cc",
+      "sourceIds": [
+        "source-harness-engineering-fieldbook-v1",
+        "source-hermes-agent-runtime"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-hermes-agent-runtime": "2026-08-25"
       }
     },
     {
@@ -238,6 +369,25 @@
       }
     },
     {
+      "id": "revision-langgraph-durable-state-interrupts-001",
+      "essaySlug": "langgraph-durable-state-and-interrupts",
+      "revision": 1,
+      "publishedAt": "2026-08-25",
+      "substantivelyRevisedAt": "2026-08-25",
+      "summary": "Initial public revision of the LangGraph durable state and interrupts case study.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-fe04c872797bd2ab229f4e7bd04b66b1f147929f5ddf257613469bfd77a213b8",
+      "sourceIds": [
+        "source-architecture-langgraph",
+        "source-harness-engineering-fieldbook-v1"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-architecture-langgraph": "2026-08-25"
+      }
+    },
+    {
       "id": "revision-leases-fencing-cancellation-budgets-001",
       "essaySlug": "leases-fencing-cancellation-and-budgets",
       "revision": 1,
@@ -253,7 +403,28 @@
       ],
       "sourceValidationDates": {
         "source-harness-engineering-fieldbook-v1": "2026-08-21",
-        "source-anthropic-effective-long-running-harnesses": "2026-08-22"
+        "source-anthropic-effective-long-running-harnesses": "2026-08-25"
+      }
+    },
+    {
+      "id": "revision-maker-checker-separation-001",
+      "essaySlug": "maker-checker-separation",
+      "revision": 1,
+      "publishedAt": "2026-08-24",
+      "substantivelyRevisedAt": "2026-08-24",
+      "summary": "Initial public revision of the maker and checker separation chapter.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-cfdec6d92861fb93ecf3f8076fc825a763912030f3f51cfef957aef467aaed67",
+      "sourceIds": [
+        "source-harness-engineering-fieldbook-v1",
+        "source-llm-as-judge-mt-bench",
+        "source-nist-ai-rmf-1"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-nist-ai-rmf-1": "2026-08-24",
+        "source-llm-as-judge-mt-bench": "2026-08-24"
       }
     },
     {
@@ -275,6 +446,35 @@
         "source-harness-engineering-fieldbook-v1": "2026-08-21",
         "source-memory-anthropic-context-engineering": "2026-08-22",
         "source-memory-memgpt": "2026-08-22"
+      }
+    },
+    {
+      "id": "revision-memory-compaction-continuity-002",
+      "essaySlug": "memory-compaction-and-continuity",
+      "revision": 2,
+      "publishedAt": "2026-08-22",
+      "substantivelyRevisedAt": "2026-08-25",
+      "summary": "Added a context-database-versus-memory-engine comparison that separates addressability, capture, identity, correction, deletion, and benchmark boundaries.",
+      "affectedClaimIds": [
+        "claim-memory-capture-not-belief",
+        "claim-memory-decision-scoped-retrieval",
+        "claim-memory-forgetting-contracts"
+      ],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-27185e79a9357db07c7a78897db57694e4eec4223a966b285863c4f8de68dca0",
+      "sourceIds": [
+        "source-agentmemory-runtime",
+        "source-harness-engineering-fieldbook-v1",
+        "source-memory-anthropic-context-engineering",
+        "source-memory-memgpt",
+        "source-openviking-context-database"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-memory-anthropic-context-engineering": "2026-08-22",
+        "source-memory-memgpt": "2026-08-22",
+        "source-openviking-context-database": "2026-08-25",
+        "source-agentmemory-runtime": "2026-08-25"
       }
     },
     {
@@ -321,6 +521,44 @@
       }
     },
     {
+      "id": "revision-observability-trace-reconstruction-001",
+      "essaySlug": "observability-and-trace-reconstruction",
+      "revision": 1,
+      "publishedAt": "2026-08-24",
+      "substantivelyRevisedAt": "2026-08-24",
+      "summary": "Initial public revision of the observability and trace reconstruction chapter.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-aac6a46a91bd0cc358167a587922a8dabd7065f0ff8e166b36e109f7ebe564c8",
+      "sourceIds": [
+        "source-harness-engineering-fieldbook-v1",
+        "source-w3c-trace-context"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-w3c-trace-context": "2026-08-24"
+      }
+    },
+    {
+      "id": "revision-open-loops-re-entry-001",
+      "essaySlug": "open-loops-and-re-entry",
+      "revision": 1,
+      "publishedAt": "2026-08-24",
+      "substantivelyRevisedAt": "2026-08-24",
+      "summary": "Initial public revision of the open loops and re-entry chapter.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-bfa6989b24518ae000fdca4aa47b890bef36082ec68b918e043e63a62009b5a1",
+      "sourceIds": [
+        "source-harness-engineering-fieldbook-v1",
+        "source-temporal-workflow-execution-docs"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-temporal-workflow-execution-docs": "2026-08-24"
+      }
+    },
+    {
       "id": "revision-security-supply-chain-revocation-001",
       "essaySlug": "security-credentials-supply-chain-and-revocation",
       "revision": 1,
@@ -329,7 +567,7 @@
       "summary": "Initial public revision of the security, credentials, supply chain, and revocation chapter.",
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-92ca23ea408d62b548d4a4baeaed94227d0d4d34e500f038904a2ea14a990c11",
+      "contentHash": "sha256-ec581fafccdf2cd61a1318e172fc70097258ad9cfff5d34e3119d67c90a33e27",
       "sourceIds": [
         "source-harness-engineering-fieldbook-v1",
         "source-memory-nist-agent-hijacking-evaluations",
@@ -357,7 +595,7 @@
       ],
       "sourceValidationDates": {
         "source-harness-engineering-fieldbook-v1": "2026-08-21",
-        "source-anthropic-effective-long-running-harnesses": "2026-08-22"
+        "source-anthropic-effective-long-running-harnesses": "2026-08-25"
       }
     },
     {
@@ -401,8 +639,24 @@
   ],
   "sources": [
     {
+      "id": "source-agentmemory-runtime",
+      "lastValidated": "2026-08-25"
+    },
+    {
+      "id": "source-ai-boost-awesome-harness-engineering",
+      "lastValidated": "2026-08-25"
+    },
+    {
+      "id": "source-ai-job-search-workflow",
+      "lastValidated": "2026-08-25"
+    },
+    {
+      "id": "source-anthropic-agent-skills-repository",
+      "lastValidated": "2026-08-25"
+    },
+    {
       "id": "source-anthropic-effective-long-running-harnesses",
-      "lastValidated": "2026-08-22"
+      "lastValidated": "2026-08-25"
     },
     {
       "id": "source-architecture-claude-code",
@@ -426,7 +680,7 @@
     },
     {
       "id": "source-architecture-langgraph",
-      "lastValidated": "2026-08-22"
+      "lastValidated": "2026-08-25"
     },
     {
       "id": "source-architecture-letta",
@@ -442,7 +696,7 @@
     },
     {
       "id": "source-architecture-openhands",
-      "lastValidated": "2026-08-22"
+      "lastValidated": "2026-08-25"
     },
     {
       "id": "source-aws-making-retries-safe",
@@ -453,6 +707,22 @@
       "lastValidated": "2026-08-23"
     },
     {
+      "id": "source-browser-use-runtime",
+      "lastValidated": "2026-08-25"
+    },
+    {
+      "id": "source-community-cybersecurity-skills",
+      "lastValidated": "2026-08-25"
+    },
+    {
+      "id": "source-cursor-continually-improving-agent-harness",
+      "lastValidated": "2026-08-25"
+    },
+    {
+      "id": "source-diagram-design-skill",
+      "lastValidated": "2026-08-25"
+    },
+    {
       "id": "source-earendil-what-is-a-harness",
       "lastValidated": "2026-08-21"
     },
@@ -461,12 +731,20 @@
       "lastValidated": "2026-08-21"
     },
     {
+      "id": "source-hermes-agent-runtime",
+      "lastValidated": "2026-08-25"
+    },
+    {
       "id": "source-humanlayer-12-factor-agents",
       "lastValidated": "2026-08-22"
     },
     {
       "id": "source-langchain-anatomy-agent-harness",
       "lastValidated": "2026-08-22"
+    },
+    {
+      "id": "source-llm-as-judge-mt-bench",
+      "lastValidated": "2026-08-24"
     },
     {
       "id": "source-memory-anthropic-context-engineering",
@@ -505,8 +783,28 @@
       "lastValidated": "2026-08-22"
     },
     {
+      "id": "source-nist-ai-rmf-1",
+      "lastValidated": "2026-08-24"
+    },
+    {
+      "id": "source-openviking-context-database",
+      "lastValidated": "2026-08-25"
+    },
+    {
       "id": "source-rasa-why-agents-fail",
       "lastValidated": "2026-08-22"
+    },
+    {
+      "id": "source-scientific-agent-skills",
+      "lastValidated": "2026-08-25"
+    },
+    {
+      "id": "source-temporal-workflow-execution-docs",
+      "lastValidated": "2026-08-24"
+    },
+    {
+      "id": "source-w3c-trace-context",
+      "lastValidated": "2026-08-24"
     },
     {
       "id": "source-walkinglabs-awesome-harness-engineering",
@@ -620,18 +918,18 @@
       "recordKind": "system",
       "productClass": "general-agent-runtime",
       "revision": 1,
-      "lastReviewed": "2026-08-22",
-      "inspectedVersion": "f09cfe8ffc1eeffd68f4b628ed69c30f7cad229f",
+      "lastReviewed": "2026-08-25",
+      "inspectedVersion": "95af6a00718588e7b7ce17310e8006d267896a77",
       "dossierStatus": "refresh-needed",
-      "evidenceGrade": "FD",
-      "evidenceFidelity": "working-profile",
-      "contentHash": "sha256-66e11edd49fcd2e57f1bfe35ad82b38ceb5ad5376f10a4d1f103238eededaeb5",
+      "evidenceGrade": "IP",
+      "evidenceFidelity": "implementation-pinned",
+      "contentHash": "sha256-3bc0d41af7e7f9144c91da892f287e040836db4b8f74a4c7a7de09a6c525f908",
       "sourceIds": [
         "source-architecture-langgraph",
         "source-langchain-anatomy-agent-harness"
       ],
       "sourceValidationDates": {
-        "source-architecture-langgraph": "2026-08-22",
+        "source-architecture-langgraph": "2026-08-25",
         "source-langchain-anatomy-agent-harness": "2026-08-22"
       }
     },
@@ -699,18 +997,18 @@
       "slug": "openhands",
       "recordKind": "system",
       "productClass": "frontier-coding-harness",
-      "revision": 1,
-      "lastReviewed": "2026-08-22",
-      "inspectedVersion": "4bf8dd3aaf1217916b2ce8a6f9168fa7633a26f8",
+      "revision": 2,
+      "lastReviewed": "2026-08-25",
+      "inspectedVersion": "150e76046db026dd944df0506642dc9b7b99391e",
       "dossierStatus": "refresh-needed",
       "evidenceGrade": "FD",
       "evidenceFidelity": "working-profile",
-      "contentHash": "sha256-3e40a8fe4b08c255708e0d4f4730dda7d846c4c3172251b5200fccc74292b50b",
+      "contentHash": "sha256-1322aca94b9a9a02f0980a0c1556c8ed44b724009884309887fefb7bfad473c1",
       "sourceIds": [
         "source-architecture-openhands"
       ],
       "sourceValidationDates": {
-        "source-architecture-openhands": "2026-08-22"
+        "source-architecture-openhands": "2026-08-25"
       }
     }
   ],
@@ -744,5 +1042,5 @@
       }
     }
   ],
-  "buildId": "sha256-6f8a042649c913c8b70a63044f575d81132d70ec165942564ba3ec5cf555ec7b"
+  "buildId": "sha256-bdd0159a5511bcd2e4a89367cdfcd5fe7fb56b635c02fe2ed9cc68fae5b27ae0"
 }

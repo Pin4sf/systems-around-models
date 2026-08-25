@@ -1,0 +1,23 @@
+id: source-nist-ai-rmf-1
+title: Artificial Intelligence Risk Management Framework (AI RMF 1.0)
+author: Elham Tabassi
+canonical_url: https://doi.org/10.6028/NIST.AI.100-1
+published_at: 2023-01-26
+retrieved_at: 2026-08-24
+inspected_paths: []
+source_type: first-party-article
+basis: Direct reading of the dated NIST publication record and the official AI RMF 1.0 framework.
+license_status: unknown
+evidence_grade: FD
+observed_mechanisms:
+  - description: The framework separates governance, mapping, measurement, and management responsibilities across the AI lifecycle.
+    evidence_grade: FD
+    basis: The four functions and their lifecycle outcomes are defined in the official NIST framework.
+author_reported_claims:
+  - AI risk management requires documented roles, evaluation, monitoring, and accountability across the system lifecycle.
+unknowns:
+  - The framework does not prescribe a specific runtime completion ledger for autonomous agent work.
+falsifiers:
+  - NIST withdraws AI RMF 1.0 or publishes a correction that invalidates the cited lifecycle responsibilities.
+last_validated: 2026-08-24
+correction_ledger_status: reviewed

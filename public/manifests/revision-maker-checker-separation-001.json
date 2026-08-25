@@ -1,0 +1,46 @@
+{
+  "id": "revision-maker-checker-separation-001",
+  "essaySlug": "maker-checker-separation",
+  "revision": 1,
+  "publishedAt": "2026-08-24",
+  "substantivelyRevisedAt": "2026-08-24",
+  "summary": "Initial public revision of the maker and checker separation chapter.",
+  "affectedClaimIds": [],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-cfdec6d92861fb93ecf3f8076fc825a763912030f3f51cfef957aef467aaed67",
+  "sourceIds": [
+    "source-harness-engineering-fieldbook-v1",
+    "source-llm-as-judge-mt-bench",
+    "source-nist-ai-rmf-1"
+  ],
+  "sourceValidationDates": {
+    "source-harness-engineering-fieldbook-v1": "2026-08-21",
+    "source-nist-ai-rmf-1": "2026-08-24",
+    "source-llm-as-judge-mt-bench": "2026-08-24"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-llm-as-judge-mt-bench",
+      "title": "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena",
+      "canonicalUrl": "https://arxiv.org/abs/2306.05685",
+      "lastValidated": "2026-08-24",
+      "licenseStatus": "unknown"
+    },
+    {
+      "id": "source-nist-ai-rmf-1",
+      "title": "Artificial Intelligence Risk Management Framework (AI RMF 1.0)",
+      "canonicalUrl": "https://doi.org/10.6028/NIST.AI.100-1",
+      "lastValidated": "2026-08-24",
+      "licenseStatus": "unknown"
+    }
+  ]
+}

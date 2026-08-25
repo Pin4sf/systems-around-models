@@ -1,0 +1,68 @@
+{
+  "id": "revision-memory-compaction-continuity-002",
+  "essaySlug": "memory-compaction-and-continuity",
+  "revision": 2,
+  "publishedAt": "2026-08-22",
+  "substantivelyRevisedAt": "2026-08-25",
+  "summary": "Added a context-database-versus-memory-engine comparison that separates addressability, capture, identity, correction, deletion, and benchmark boundaries.",
+  "affectedClaimIds": [
+    "claim-memory-capture-not-belief",
+    "claim-memory-decision-scoped-retrieval",
+    "claim-memory-forgetting-contracts"
+  ],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-27185e79a9357db07c7a78897db57694e4eec4223a966b285863c4f8de68dca0",
+  "sourceIds": [
+    "source-agentmemory-runtime",
+    "source-harness-engineering-fieldbook-v1",
+    "source-memory-anthropic-context-engineering",
+    "source-memory-memgpt",
+    "source-openviking-context-database"
+  ],
+  "sourceValidationDates": {
+    "source-harness-engineering-fieldbook-v1": "2026-08-21",
+    "source-memory-anthropic-context-engineering": "2026-08-22",
+    "source-memory-memgpt": "2026-08-22",
+    "source-openviking-context-database": "2026-08-25",
+    "source-agentmemory-runtime": "2026-08-25"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-agentmemory-runtime",
+      "title": "AgentMemory repository",
+      "canonicalUrl": "https://github.com/rohitg00/agentmemory/tree/e04ba88819c365c9acf9d6661ea802143e728bd6",
+      "lastValidated": "2026-08-25",
+      "licenseStatus": "Apache-2.0"
+    },
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-memory-anthropic-context-engineering",
+      "title": "Effective Context Engineering for AI Agents",
+      "canonicalUrl": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-memory-memgpt",
+      "title": "MemGPT: Towards LLMs as Operating Systems",
+      "canonicalUrl": "https://arxiv.org/abs/2310.08560",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "unknown"
+    },
+    {
+      "id": "source-openviking-context-database",
+      "title": "OpenViking repository",
+      "canonicalUrl": "https://github.com/volcengine/OpenViking/tree/7ee75611212a1fe502da037b59afa04cbcf5e2ed",
+      "lastValidated": "2026-08-25",
+      "licenseStatus": "AGPL-3.0"
+    }
+  ]
+}

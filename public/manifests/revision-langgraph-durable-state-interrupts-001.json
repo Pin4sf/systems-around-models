@@ -1,0 +1,37 @@
+{
+  "id": "revision-langgraph-durable-state-interrupts-001",
+  "essaySlug": "langgraph-durable-state-and-interrupts",
+  "revision": 1,
+  "publishedAt": "2026-08-25",
+  "substantivelyRevisedAt": "2026-08-25",
+  "summary": "Initial public revision of the LangGraph durable state and interrupts case study.",
+  "affectedClaimIds": [],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-fe04c872797bd2ab229f4e7bd04b66b1f147929f5ddf257613469bfd77a213b8",
+  "sourceIds": [
+    "source-architecture-langgraph",
+    "source-harness-engineering-fieldbook-v1"
+  ],
+  "sourceValidationDates": {
+    "source-harness-engineering-fieldbook-v1": "2026-08-21",
+    "source-architecture-langgraph": "2026-08-25"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-architecture-langgraph",
+      "title": "LangGraph repository",
+      "canonicalUrl": "https://github.com/langchain-ai/langgraph/tree/95af6a00718588e7b7ce17310e8006d267896a77",
+      "lastValidated": "2026-08-25",
+      "licenseStatus": "MIT"
+    },
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    }
+  ]
+}

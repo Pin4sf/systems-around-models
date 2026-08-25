@@ -1,0 +1,25 @@
+id: source-browser-use-runtime
+title: Browser Use repository
+author: Browser Use
+canonical_url: https://github.com/browser-use/browser-use/tree/9a2db2d2db42c6f68a871f011b3b25fdcaa71847
+published_at: 2024-10-31
+retrieved_at: 2026-08-25
+repository_commit: 9a2db2d2db42c6f68a871f011b3b25fdcaa71847
+inspected_paths:
+  - README.md
+  - LICENSE
+source_type: first-party-repository
+basis: Commit-pinned inspection of the official repository README and MIT license for its documented browser-action, session, custom-tool, and hosted-service boundaries.
+license_status: MIT
+evidence_grade: FD
+observed_mechanisms:
+  - description: The repository documents an open-source browser automation library with browser actions, authenticated profiles, and custom tool extensions.
+    evidence_grade: FD
+    basis: The pinned README describes the library surface, cloud option, profiles, and extension points.
+author_reported_claims: []
+unknowns:
+  - A browser event or DOM observation does not establish the downstream business outcome, site-policy compliance, or authority to submit a consequential action.
+falsifiers:
+  - The pinned README does not document browser actions, profiles, custom tools, or the distinction between the open-source library and hosted service.
+last_validated: 2026-08-25
+correction_ledger_status: reviewed

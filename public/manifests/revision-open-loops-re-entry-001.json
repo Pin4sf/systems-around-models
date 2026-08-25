@@ -1,0 +1,37 @@
+{
+  "id": "revision-open-loops-re-entry-001",
+  "essaySlug": "open-loops-and-re-entry",
+  "revision": 1,
+  "publishedAt": "2026-08-24",
+  "substantivelyRevisedAt": "2026-08-24",
+  "summary": "Initial public revision of the open loops and re-entry chapter.",
+  "affectedClaimIds": [],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-bfa6989b24518ae000fdca4aa47b890bef36082ec68b918e043e63a62009b5a1",
+  "sourceIds": [
+    "source-harness-engineering-fieldbook-v1",
+    "source-temporal-workflow-execution-docs"
+  ],
+  "sourceValidationDates": {
+    "source-harness-engineering-fieldbook-v1": "2026-08-21",
+    "source-temporal-workflow-execution-docs": "2026-08-24"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-temporal-workflow-execution-docs",
+      "title": "Temporal Workflow Execution and Event History documentation",
+      "canonicalUrl": "https://github.com/temporalio/documentation/tree/053c35af7e9ead0a7714d01612576bba14f0fcc1/docs/encyclopedia/workflow/workflow-execution",
+      "lastValidated": "2026-08-24",
+      "licenseStatus": "MIT"
+    }
+  ]
+}

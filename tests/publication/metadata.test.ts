@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { buildHomeMetadata } from "@/lib/publication/metadata";
+import { buildHomeJsonLd, buildHomeMetadata } from "@/lib/publication/metadata";
 import { resolveSiteUrl } from "@/lib/publication/site-url";
 import { generateMetadata, buildArticleStructuredData } from "@/app/fieldbook/[slug]/page";
 import sitemap from "@/app/sitemap";
@@ -26,6 +26,14 @@ const releasedChapterPaths = [
   "/fieldbook/external-effects-and-transactional-outboxes",
   "/fieldbook/ambiguity-idempotency-and-recovery",
   "/fieldbook/security-credentials-supply-chain-and-revocation",
+  "/fieldbook/observability-and-trace-reconstruction",
+  "/fieldbook/maker-checker-separation",
+  "/fieldbook/evidence-verification-policy-acceptance-and-closure",
+  "/fieldbook/open-loops-and-re-entry",
+  "/fieldbook/anthropic-long-running-harnesses",
+  "/fieldbook/cursor-model-harness-evaluation",
+  "/fieldbook/langgraph-durable-state-and-interrupts",
+  "/fieldbook/hermes-integrated-agent-runtime",
 ];
 
 afterEach(() => {
@@ -94,6 +102,11 @@ describe("canonical publication metadata", () => {
     expect(home.title).toBe("Systems Around Models");
     expect(home.description).not.toBe(chapter.description);
     expect(home.alternates?.canonical).toBe("/");
+    expect(home.authors).toEqual([
+      { name: "Shivansh Fulper", url: "https://shivansh-portfolio-one.vercel.app" },
+    ]);
+    expect(home.keywords).toContain("agent harness engineering");
+    expect(home.robots).toMatchObject({ index: true, follow: true });
     expect(chapter.title).toBe("The Model Is Not the Agent | Systems Around Models");
     expect(chapter.alternates?.canonical).toBe(chapterPath);
     expect(chapter.openGraph).toMatchObject({
@@ -102,6 +115,22 @@ describe("canonical publication metadata", () => {
       modifiedTime: "2026-08-21",
       url: `${canonicalSite}${chapterPath}`,
     });
+  });
+
+  it("publishes the repository crosswalk as a substantive guide revision", async () => {
+    vi.stubEnv("SITE_URL", canonicalSite);
+    const guide = await generateMetadata({
+      params: Promise.resolve({ slug: "harness-engineering-study-guide" }),
+    });
+
+    expect(guide.openGraph).toMatchObject({
+      publishedTime: "2026-08-22",
+      modifiedTime: "2026-08-25",
+      url: `${canonicalSite}${guidePath}`,
+    });
+    expect(guide.other?.["article:revision"]).toBe(
+      "revision-harness-engineering-study-guide-002",
+    );
   });
 
   it("builds Article JSON-LD from the canonical essay and revision", async () => {
@@ -121,8 +150,71 @@ describe("canonical publication metadata", () => {
       mainEntityOfPage: `${canonicalSite}${chapterPath}`,
     });
     expect(structuredData.author).toEqual([
-      { "@type": "Organization", name: "Systems Around Models" },
+      expect.objectContaining({
+        "@type": "Person",
+        name: "Shivansh Fulper",
+        url: "https://shivansh-portfolio-one.vercel.app",
+      }),
     ]);
+    expect(structuredData).toMatchObject({
+      image: `${canonicalSite}/social/systems-around-models.png`,
+      articleSection: "Harness Engineering",
+      publisher: {
+        "@type": "Person",
+        name: "Shivansh Fulper",
+        url: "https://shivansh-portfolio-one.vercel.app",
+      },
+    });
+  });
+
+  it("publishes canonical metadata and Article JSON-LD for the latest released chapter", async () => {
+    vi.stubEnv("SITE_URL", canonicalSite);
+    const latestSlug = "hermes-integrated-agent-runtime";
+    const latestPath = `/fieldbook/${latestSlug}`;
+    const [metadata, structuredData] = await Promise.all([
+      generateMetadata({ params: Promise.resolve({ slug: latestSlug }) }),
+      buildArticleStructuredData(latestSlug),
+    ]);
+
+    expect(metadata.title).toBe("Hermes: An Integrated Agent Runtime | Systems Around Models");
+    expect(metadata.alternates?.canonical).toBe(latestPath);
+    expect(metadata.openGraph).toMatchObject({
+      type: "article",
+      publishedTime: "2026-08-25",
+      modifiedTime: "2026-08-25",
+      url: `${canonicalSite}${latestPath}`,
+    });
+    expect(structuredData).toMatchObject({
+      "@type": "Article",
+      headline: "Hermes: An Integrated Agent Runtime",
+      datePublished: "2026-08-25",
+      dateModified: "2026-08-25",
+      mainEntityOfPage: `${canonicalSite}${latestPath}`,
+    });
+  });
+
+  it("publishes a connected WebSite, author, and fieldbook graph for answer engines", () => {
+    vi.stubEnv("SITE_URL", canonicalSite);
+    const structuredData = buildHomeJsonLd();
+
+    expect(structuredData["@graph"]).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        "@type": "WebSite",
+        name: "Systems Around Models",
+        author: { "@id": "https://shivansh-portfolio-one.vercel.app/#person" },
+      }),
+      expect.objectContaining({
+        "@type": "Person",
+        name: "Shivansh Fulper",
+        url: "https://shivansh-portfolio-one.vercel.app",
+      }),
+      expect.objectContaining({
+        "@type": "CollectionPage",
+        about: expect.arrayContaining([
+          { "@type": "Thing", name: "agent harness engineering" },
+        ]),
+      }),
+    ]));
   });
 });
 
@@ -157,6 +249,12 @@ describe("publication discovery endpoints", () => {
     expect(body).toContain(`<link>${canonicalSite}${memoryGuidePath}</link>`);
     expect(body).toContain("revision-memory-engineering-study-guide-001");
     expect(body).toContain("revision-fieldbook-essay-001");
+    expect(body).toContain("<title>Open Loops and Re-entry</title>");
+    expect(body).toContain(`<link>${canonicalSite}/fieldbook/open-loops-and-re-entry</link>`);
+    expect(body).toContain("revision-open-loops-re-entry-001");
+    expect(body).toContain("<title>Hermes: An Integrated Agent Runtime</title>");
+    expect(body).toContain(`<link>${canonicalSite}/fieldbook/hermes-integrated-agent-runtime</link>`);
+    expect(body).toContain("revision-hermes-integrated-agent-runtime-001");
   });
 
   it("points crawlers at the canonical sitemap", () => {

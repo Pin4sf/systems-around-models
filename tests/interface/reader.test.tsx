@@ -37,7 +37,12 @@ describe("flagship fieldbook reader", () => {
     expect(
       screen.getByRole("navigation", { name: "Harness Engineering chapters" }),
     ).toBeInTheDocument();
-    expect(screen.getAllByText("Chapter 1 of 40").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Chapter 1").length).toBeGreaterThan(0);
+    expect(screen.queryByText(/Chapter 1 of 40/)).not.toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Shivansh Fulper" })).toHaveAttribute(
+      "href",
+      "https://shivansh-portfolio-one.vercel.app",
+    );
     expect(screen.queryByRole("group", { name: /evidence/i })).not.toBeInTheDocument();
     expect(screen.queryByRole("link", { name: /Challenge this/i })).not.toBeInTheDocument();
     expect(screen.queryByText(/Article revision record/i)).not.toBeInTheDocument();
@@ -81,6 +86,31 @@ describe("flagship fieldbook reader", () => {
       "href",
       "/fieldbook/the-model-is-not-the-agent",
     );
+  });
+
+  it("turns ten agent repositories into a source-pinned boundary exercise", async () => {
+    const page = await ArticlePage({ params: Promise.resolve({ slug: guideSlug }) });
+    render(page);
+
+    expect(
+      screen.getByRole("heading", { name: "Repository crosswalk: ten boundary tests", level: 2 }),
+    ).toBeInTheDocument();
+    for (const linkName of [
+      "OpenViking",
+      "AgentMemory",
+      "Anthropic Skills",
+      "Diagram Design",
+      "Scientific Agent Skills",
+      "AI Boost Awesome Harness Engineering",
+      "Community Cybersecurity Skills",
+      "AI Job Search",
+      "OpenHands",
+      "Browser Use",
+    ]) {
+      expect(screen.getByRole("link", { name: linkName })).toBeInTheDocument();
+    }
+    expect(screen.getByText(/repository is evidence of a mechanism, not proof of production safety/i))
+      .toBeInTheDocument();
   });
 
   it("registers the Memory Engineering guide as a static public route", async () => {
@@ -133,7 +163,7 @@ describe("flagship fieldbook reader", () => {
     );
     expect(screen.queryByText("Evidence grade")).not.toBeInTheDocument();
     expect(screen.queryByRole("group", { name: /evidence/i })).not.toBeInTheDocument();
-    expect(screen.queryByText(/Chapter 1 of 40|H0→H9 progression/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Chapter 1|H0→H9 progression/)).not.toBeInTheDocument();
   });
 
   it("uses durable heading anchors and ordinary source links", async () => {
@@ -218,6 +248,14 @@ describe("flagship fieldbook reader", () => {
     ["external-effects-and-transactional-outboxes", "External Effects and Transactional Outboxes", "Transactional outbox effect lifecycle"],
     ["ambiguity-idempotency-and-recovery", "Ambiguity, Idempotency, and Recovery", "Ambiguous effect reconciliation"],
     ["security-credentials-supply-chain-and-revocation", "Security, Credentials, Supply Chain, and Revocation", "Revocation propagation across active surfaces"],
+    ["observability-and-trace-reconstruction", "Observability and Trace Reconstruction", "Trace reconstruction from request to decision"],
+    ["maker-checker-separation", "Maker/Checker Separation", "Maker and checker separation"],
+    ["evidence-verification-policy-acceptance-and-closure", "Evidence, Verification, Policy, Acceptance, and Closure", "Completion ledger from evidence to closure"],
+    ["open-loops-and-re-entry", "Open Loops and Re-entry", "Open loop re-entry lifecycle"],
+    ["anthropic-long-running-harnesses", "Anthropic Long-Running Harnesses", "Fresh-session work handoff"],
+    ["cursor-model-harness-evaluation", "Cursor: Model × Harness Evaluation", "Cursor harness improvement loop"],
+    ["langgraph-durable-state-and-interrupts", "LangGraph: Durable State and Interrupts", "LangGraph durable interrupt boundary"],
+    ["hermes-integrated-agent-runtime", "Hermes: An Integrated Agent Runtime", "Hermes integrated runtime seams"],
   ])("publishes %s with a retrieval diagram and check", async (chapterSlug, title, diagramName) => {
     const page = await ArticlePage({ params: Promise.resolve({ slug: chapterSlug }) });
     render(page);
@@ -229,6 +267,37 @@ describe("flagship fieldbook reader", () => {
     expect(diagram.querySelector("figcaption")).toHaveTextContent(/\S/);
     expect(diagram.textContent?.length).toBeGreaterThan(60);
     expect(screen.getByRole("heading", { name: "Retrieval check", level: 2 })).toBeInTheDocument();
+  });
+
+  it.each([
+    ["observability-and-trace-reconstruction", "Trace reconstruction from request to decision", "ol"],
+    ["maker-checker-separation", "Maker and checker separation", "dl"],
+    ["evidence-verification-policy-acceptance-and-closure", "Completion ledger from evidence to closure", "ol"],
+    ["open-loops-and-re-entry", "Open loop re-entry lifecycle", "ol"],
+    ["anthropic-long-running-harnesses", "Fresh-session work handoff", "ol"],
+    ["cursor-model-harness-evaluation", "Cursor harness improvement loop", "ol"],
+    ["langgraph-durable-state-and-interrupts", "LangGraph durable interrupt boundary", "ol"],
+    ["hermes-integrated-agent-runtime", "Hermes integrated runtime seams", "dl"],
+  ])("gives the %s diagram native %s semantics", async (chapterSlug, diagramName, semanticTag) => {
+    const page = await ArticlePage({ params: Promise.resolve({ slug: chapterSlug }) });
+    render(page);
+
+    expect(screen.getByRole("figure", { name: diagramName }).querySelector(semanticTag))
+      .toBeInTheDocument();
+  });
+
+  it("connects Evidence and Completion to the first comparative case and ends the released batch at Hermes", async () => {
+    const openLoopsPage = await ArticlePage({ params: Promise.resolve({ slug: "open-loops-and-re-entry" }) });
+    const { unmount } = render(openLoopsPage);
+    expect(screen.getByRole("link", { name: "Next: Anthropic Long-Running Harnesses" }))
+      .toHaveAttribute("href", "/fieldbook/anthropic-long-running-harnesses");
+    unmount();
+
+    const hermesPage = await ArticlePage({ params: Promise.resolve({ slug: "hermes-integrated-agent-runtime" }) });
+    render(hermesPage);
+    expect(screen.getByRole("link", { name: "Previous: LangGraph: Durable State and Interrupts" }))
+      .toHaveAttribute("href", "/fieldbook/langgraph-durable-state-and-interrupts");
+    expect(screen.queryByRole("link", { name: /^Next:/ })).not.toBeInTheDocument();
   });
 
   it("derives next-link semantics from the released essay sequence", async () => {

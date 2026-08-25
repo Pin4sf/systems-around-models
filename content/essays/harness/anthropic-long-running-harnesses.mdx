@@ -1,0 +1,76 @@
+---
+slug: anthropic-long-running-harnesses
+title: Anthropic Long-Running Harnesses
+description: What Anthropic's fresh-session coding pattern teaches about durable artifacts, incremental progress, verification, and clean handoffs across context windows.
+sequence: Harness Engineering
+sequence_position: 22
+revision: 1
+authors:
+  - Systems Around Models
+published_at: 2026-08-25
+substantively_revised_at: 2026-08-25
+reading_time_source: 8 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-anthropic-effective-long-running-harnesses
+revision_id: revision-anthropic-long-running-harnesses-001
+previous_essay_slug: open-loops-and-re-entry
+next_essay_slug: cursor-model-harness-evaluation
+---
+
+## The context window is not the project
+
+A long-running coding task usually outlives one model context. If the next session receives only a prose summary, it must infer which work is real, which tests passed, what remains unfinished, and whether the repository is safe to change. That ambiguity consumes the fresh context before useful work begins.
+
+Anthropic's long-running agent experiment treats the repository and a small set of durable progress artifacts as the handoff. An initializer prepares the environment and work plan. Later sessions take one bounded increment, inspect the existing state, implement and test it, record what changed, and leave the repository in a clean condition for the next worker.
+
+<FreshSessionHandoff />
+
+The transferable lesson is not that every agent needs the same files. It is that continuity should be recoverable from inspectable artifacts whose claims can be checked against the environment.
+
+## Give initialization a different job
+
+The first session faces a different problem from every later session. It must turn a broad request into an executable workspace: establish the project, record the feature inventory, define how to run and test it, and create a baseline that future sessions can inspect.
+
+An incremental session should not repeatedly redesign that foundation. It should select a small unfinished capability, reproduce the current state, make one coherent change, verify the result, and update the handoff. This division limits drift and makes partial progress legible.
+
+The initializer still needs constraints. A generated feature list can be incomplete or wrong. Treat it as a maintained plan, not as authority over the user request. When new evidence changes the plan, record the revision rather than silently rewriting history.
+
+## Make the handoff executable
+
+A useful handoff answers four questions with durable evidence:
+
+1. What version of the work exists now?
+2. Which behavior was verified, and how can another session reproduce that check?
+3. What remains unfinished or uncertain?
+4. What is the smallest safe next increment?
+
+The code, version history, tests, and runnable environment provide stronger evidence than a confident status paragraph. A progress note is valuable as an index into those artifacts. It should point to evidence rather than replace it.
+
+This is also why a clean working state matters. Uncommitted or unexplained changes make ownership ambiguous: a new session cannot tell whether a failing test is a known partial step, an accidental regression, or unrelated work that must be preserved.
+
+## Verification keeps progress monotonic
+
+Incremental work is only useful when later sessions can distinguish new capability from new breakage. Run focused checks for the changed seam, then the broader checks needed to catch regressions. For interface work, verification may include exercising the product rather than only reading the implementation.
+
+Do not interpret a passing local test as proof of deployment, user acceptance, or safe authority. The case study demonstrates a development-harness handoff. Product-runtime admission, credentials, external effects, policy, and closure remain separate responsibilities.
+
+## Failure boundary
+
+This pattern fails when the progress file becomes an unverifiable diary, every session rewrites the plan, work is divided into increments too large to finish cleanly, tests do not represent the requested behavior, or a fresh worker changes unexplained local state. It also fails when context compression is mistaken for durable continuity: a compact summary can help orientation, but it cannot replace the repository, evidence, and versioned decisions.
+
+Anthropic describes the experiment in a full-stack web-application setting. The article does not establish one universal harness for research, operations, regulated effects, or every software architecture. Adapt the artifact set and verification boundary to the domain.
+
+## Retrieval check
+
+A new session reads “authentication complete” in a progress note, but the repository contains an uncommitted migration, a skipped integration test, and no record of the target environment. What should the session treat as evidence, what should remain unverified, and what clean handoff should it produce before another session continues?
+
+## Build-and-break lab
+
+Run the same two-session task twice. In the first run, hand the second session only a narrative summary. In the second, provide a versioned task list, clean repository state, focused test command, and evidence-linked progress note. Compare time-to-first-correct-change, repeated work, and the number of claims that the second session could independently verify.
+
+## Sources and further reading
+
+- [Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents) — Anthropic's first-party account of initializer and incremental roles, progress artifacts, clean handoffs, and verification in its experiment.
+- [Harness Engineering Study Guide](/fieldbook/harness-engineering-study-guide) — the broader responsibility model for context, state, verification, and product-runtime admission.

@@ -10,6 +10,10 @@ it("presents a simple study-guide navigation", () => {
   );
 
   expect(screen.getByText("Systems Around Models")).toBeInTheDocument();
+  expect(screen.getByRole("link", { name: "By Shivansh Fulper · Portfolio" })).toHaveAttribute(
+    "href",
+    "https://shivansh-portfolio-one.vercel.app",
+  );
   expect(
     screen.getByRole("navigation", { name: "Publication" }),
   ).toBeInTheDocument();
@@ -34,6 +38,7 @@ it("offers architecture comparison as a first-class study path", async () => {
   render(await HomePage());
 
   expect(screen.getByRole("heading", { name: "Study the machinery around models." })).toBeInTheDocument();
+  expect(screen.getByText("The agent systems fieldbook")).toBeInTheDocument();
   expect(screen.getByRole("link", { name: "Explore architectures" })).toHaveAttribute(
     "href",
     "/architectures",
@@ -92,9 +97,17 @@ it("leads readers into a complete harness-engineering course map", async () => {
     ["External Effects and Transactional Outboxes", "/fieldbook/external-effects-and-transactional-outboxes"],
     ["Ambiguity, Idempotency, and Recovery", "/fieldbook/ambiguity-idempotency-and-recovery"],
     ["Security, Credentials, Supply Chain, and Revocation", "/fieldbook/security-credentials-supply-chain-and-revocation"],
+    ["Observability and Trace Reconstruction", "/fieldbook/observability-and-trace-reconstruction"],
+    ["Maker/Checker Separation", "/fieldbook/maker-checker-separation"],
+    ["Evidence, Verification, Policy, Acceptance, and Closure", "/fieldbook/evidence-verification-policy-acceptance-and-closure"],
+    ["Open Loops and Re-entry", "/fieldbook/open-loops-and-re-entry"],
+    ["Anthropic long-running harnesses", "/fieldbook/anthropic-long-running-harnesses"],
+    ["Cursor", "/fieldbook/cursor-model-harness-evaluation"],
+    ["LangGraph", "/fieldbook/langgraph-durable-state-and-interrupts"],
+    ["Hermes", "/fieldbook/hermes-integrated-agent-runtime"],
   ]) {
     expect(screen.getByRole("link", { name: new RegExp(name, "i") })).toHaveAttribute("href", href);
   }
-  expect(screen.getByText("Observability and trace reconstruction").closest("li"))
+  expect(screen.getByText("QM").closest("li"))
     .toHaveTextContent("Coming next");
 });

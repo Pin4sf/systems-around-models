@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { authorName, authorUrl } from "@/lib/publication/metadata";
 
 export function PublicationShell({ children }: { children: ReactNode }) {
   return (
@@ -9,7 +10,8 @@ export function PublicationShell({ children }: { children: ReactNode }) {
       </a>
       <header className="site-header">
         <Link className="wordmark" href="/">
-          Systems Around Models
+          <span className="brand-mark" aria-hidden="true"><span /></span>
+          <span>Systems Around Models</span>
         </Link>
         <nav aria-label="Publication">
           <Link href="/">Start here</Link>
@@ -19,7 +21,10 @@ export function PublicationShell({ children }: { children: ReactNode }) {
         </nav>
       </header>
       <main id="main-content">{children}</main>
-      <footer className="site-footer">A practical, independent guide to building systems around models.</footer>
+      <footer className="site-footer">
+        <span>A practical, independent guide to building systems around models.</span>
+        <a href={authorUrl} rel="author me">By {authorName} · Portfolio</a>
+      </footer>
     </>
   );
 }

@@ -1,24 +1,26 @@
 id: source-architecture-openhands
-title: OpenHands repository
+title: OpenHands Agent Canvas repository
 author: OpenHands
-canonical_url: https://github.com/OpenHands/OpenHands
+canonical_url: https://github.com/OpenHands/OpenHands/tree/150e76046db026dd944df0506642dc9b7b99391e
 published_at: 2024-03-13
-retrieved_at: 2026-08-22
-repository_commit: 4bf8dd3aaf1217916b2ce8a6f9168fa7633a26f8
+retrieved_at: 2026-08-25
+repository_commit: 150e76046db026dd944df0506642dc9b7b99391e
 inspected_paths:
   - README.md
+  - docs/architecture.md
+  - LICENSE
 source_type: first-party-repository
-basis: Commit-pinned inspection of the official public repository README and its documented software-agent platform boundary.
+basis: Commit-pinned inspection of the official public repository README, architecture document, and license for the Agent Canvas module boundary.
 license_status: MIT
 evidence_grade: FD
 observed_mechanisms:
-  - description: The repository presents an agent platform that operates through a software-development workspace and tool environment.
+  - description: The repository presents Agent Canvas as a user interface that delegates agent execution, sandboxing, client, and automation responsibilities to separate modules and repositories.
     evidence_grade: FD
-    basis: The official README documents the project as a software-development agent platform and links its runtime surfaces.
+    basis: The pinned architecture document explicitly separates the Canvas from the agent server, SDK, client, and automation components.
 author_reported_claims: []
 unknowns:
-  - The current first-pass card does not separate every Agent Canvas surface from the underlying runtime implementation.
+  - A complete runtime profile requires separate implementation-pinned inspection of the SDK and agent server, TypeScript client, automation service, and sandbox behavior.
 falsifiers:
-  - Current source shows that the normalized runtime boundary materially combines responsibilities kept separate in this profile.
-last_validated: 2026-08-22
+  - The pinned architecture document shows that Agent Canvas itself executes agent actions or provides the sandbox.
+last_validated: 2026-08-25
 correction_ledger_status: reviewed

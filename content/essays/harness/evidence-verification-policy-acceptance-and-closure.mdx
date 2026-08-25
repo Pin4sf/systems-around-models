@@ -1,0 +1,81 @@
+---
+slug: evidence-verification-policy-acceptance-and-closure
+title: Evidence, Verification, Policy, Acceptance, and Closure
+description: How a harness keeps proof, checking, permission, owner acceptance, and the conscious end of responsibility as distinct state transitions.
+sequence: Harness Engineering
+sequence_position: 20
+revision: 1
+authors:
+  - Systems Around Models
+published_at: 2026-08-24
+substantively_revised_at: 2026-08-24
+reading_time_source: 9 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-nist-ai-rmf-1
+revision_id: revision-evidence-verification-policy-acceptance-closure-001
+previous_essay_slug: maker-checker-separation
+next_essay_slug: open-loops-and-re-entry
+---
+
+## Completion is a sequence of decisions
+
+An executor can stop without completing its effect. An effect can occur without producing trustworthy evidence. Evidence can exist without passing verification. A verified result can still violate policy. A policy-allowed result can remain unaccepted by its owner. An accepted deliverable can leave a wider responsibility open.
+
+<CompletionLedger />
+
+This fieldbook proposes the ledger as a harness responsibility contract. Its individual boundaries draw on established evidence, verification, and governance practices; the complete ladder is not a universal standard.
+
+Collapsing these states into one green “done” flag creates false closure. The remedy is a completion ledger in which each transition has a named input, owner, disposition, and time.
+
+## Evidence is an artifact, not a conclusion
+
+Evidence is a durable observation that can support or challenge a claim: a test report tied to a commit, a provider receipt tied to an idempotency key, a screenshot tied to a deployed version, a signed approval, or a trace tied to an attempt.
+
+Evidence needs provenance and scope. A local test result does not prove production deployment. A provider accepted response does not prove downstream delivery. A screenshot can show visible state without proving who caused it. Store what the artifact establishes, what it does not establish, and which version or attempt it describes.
+
+## Verification applies a method
+
+Verification evaluates evidence against a contract. The method may be deterministic, statistical, model-assisted, or human, but it should name its rubric, version, inputs, limitations, and disposition. The verifier should be able to return confirmed, refuted, inconclusive, needs correction, or needs escalation.
+
+An inconclusive result is useful information. It prevents the harness from turning absence of proof into proof of success. It may lead to another observation, a safer bounded retry, or escalation to an owner with better access.
+
+The [NIST AI Risk Management Framework](https://doi.org/10.6028/NIST.AI.100-1) treats measurement and management as distinct lifecycle functions supported by governance. That distinction is valuable here: evaluating a result is not the same as deciding what the organization or agent may do next.
+
+## Policy decides whether the transition is allowed
+
+Policy evaluates permission and risk under the current authority snapshot. It can block a verified result without declaring the result technically wrong. A release may be correctly built and tested yet prohibited because an approval expired, a dependency was revoked, a privacy review is missing, or the destination is outside the admitted scope.
+
+Record the policy version, principal, relevant grants, decision, and reason. Re-check current policy at consequential seams such as publish, send, spend, disclose, or delete. Earlier authorization is evidence for history, not an everlasting capability.
+
+“Not authorized” should be a first-class disposition. It keeps the work truthful while leaving a clear route to request approval, narrow the effect, or stop.
+
+## Acceptance belongs to an owner
+
+Acceptance is the responsible owner's decision that the verified, policy-allowed result satisfies the intended outcome. The acceptance owner may be the requesting user, a service owner, a reviewer, or another explicitly delegated role.
+
+Do not infer acceptance from silence, a dismissed notification, or a lack of further edits. Record who accepted what version, under which conditions, and whether anything remains. A user can accept a partial deliverable while keeping the broader outcome open.
+
+For low-risk reversible work, policy may define automatic acceptance criteria. For consequential or subjective outcomes, the interface should present the result, evidence, uncertainty, and available choices without manufacturing urgency.
+
+## Closure ends a responsibility consciously
+
+Closure records that an open responsibility no longer requires active follow-up. It may be completed, cancelled, transferred, superseded, expired under an agreed rule, or consciously released. Closure names the authority that ended the loop and preserves the reason.
+
+This final state is broader than task execution. A report may be accepted while a remediation remains open. A deployment may succeed while user confirmation is still pending. A cancelled project can close responsibly even though its original outcome was never achieved.
+
+The ledger therefore keeps both the artifact state and the responsibility state. Reopening creates a new transition that explains why the earlier closure no longer holds; it does not erase the earlier decision.
+
+## Failure boundary
+
+Completion fails when process exit is treated as effect success, a tool response is treated as evidence, evidence is treated as verification, verification is treated as policy approval, silence is treated as acceptance, or a dismissed reminder is treated as closure. It also fails when a later stage overwrites the evidence and disposition of an earlier one.
+
+## Retrieval check
+
+A deployment command exits successfully, an external health check passes, and the release violates a newly activated data-residency policy. The product owner has not reviewed the change. What evidence exists, what has been verified, which transition is blocked, who can accept the result, and why must the responsibility remain open?
+
+## Sources and further reading
+
+- [Artificial Intelligence Risk Management Framework (AI RMF 1.0)](https://doi.org/10.6028/NIST.AI.100-1) — NIST's framework for lifecycle governance, measurement, and risk management.
+- [Harness Engineering Study Guide](/fieldbook/harness-engineering-study-guide) — the publication synthesis connecting proof, authority, acceptance, and closure.

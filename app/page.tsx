@@ -2,32 +2,56 @@ import Link from "next/link";
 import { SystemTrace } from "@/components/diagrams/system-trace";
 import { harnessChapterCount, harnessCourse } from "@/lib/study-guide/harness-course";
 import { loadContent } from "@/lib/content/load-content";
+import { buildHomeJsonLd } from "@/lib/publication/metadata";
 
 export default async function HomePage() {
   const content = await loadContent();
+  const structuredData = buildHomeJsonLd();
   const releasedHarnessChapters = new Map(
     [...content.essays.values()]
       .filter((essay) => essay.status === "public" && essay.sequence === "Harness Engineering" && essay.sequencePosition > 1)
       .map((essay) => [essay.sequencePosition - 1, essay]),
   );
   return (
-    <article className="homepage">
-      <header className="homepage__hero prose">
-        <p className="eyebrow interface-text">A visual study hub for agent systems</p>
-        <h1>Study the machinery around models.</h1>
-        <p className="homepage__lede">
-          Learn harnesses, memory, authority, recovery, and verification—then compare how real
-          systems arrange them. Start with the complete guide or follow the question you are building around.
-        </p>
-        <p className="homepage__course-stats interface-text">
-          {harnessChapterCount} chapters · 12 labs · 1 capstone
-        </p>
-        <Link className="homepage__chapter-link interface-text" href="/fieldbook/harness-engineering-study-guide">
-          Start with Harness Engineering
-        </Link>
-        <Link className="homepage__chapter-link homepage__chapter-link--secondary interface-text" href="/architectures">
-          Explore architectures
-        </Link>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+        }}
+      />
+      <article className="homepage">
+      <header className="homepage__hero">
+        <div className="homepage__hero-copy prose">
+          <p className="eyebrow interface-text">The agent systems fieldbook</p>
+          <h1>Study the machinery around models.</h1>
+          <p className="homepage__lede">
+            Learn harnesses, memory, authority, recovery, and verification—then compare how real
+            systems arrange them. Start with the complete guide or follow the question you are building around.
+          </p>
+          <p className="homepage__course-stats interface-text">
+            {harnessChapterCount} chapters · 12 labs · 1 capstone
+          </p>
+          <div className="homepage__hero-actions">
+            <Link className="homepage__chapter-link interface-text" href="/fieldbook/harness-engineering-study-guide">
+              Start with Harness Engineering
+            </Link>
+            <Link className="homepage__chapter-link homepage__chapter-link--secondary interface-text" href="/architectures">
+              Explore architectures
+            </Link>
+          </div>
+        </div>
+        <div className="system-field interface-text" aria-hidden="true">
+          <span className="system-field__label system-field__label--context">Context</span>
+          <span className="system-field__label system-field__label--authority">Authority</span>
+          <span className="system-field__label system-field__label--state">State</span>
+          <span className="system-field__label system-field__label--tools">Tools</span>
+          <span className="system-field__label system-field__label--evidence">Evidence</span>
+          <span className="system-field__label system-field__label--recovery">Recovery</span>
+          <span className="system-field__orbit system-field__orbit--outer" />
+          <span className="system-field__orbit system-field__orbit--inner" />
+          <span className="system-field__model"><b>Model</b><small>one component</small></span>
+        </div>
       </header>
 
       <SystemTrace />
@@ -123,6 +147,7 @@ export default async function HomePage() {
       <footer className="homepage__status interface-text">
         <p>Public working edition · Read the short course now; detailed chapters follow</p>
       </footer>
-    </article>
+      </article>
+    </>
   );
 }

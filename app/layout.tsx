@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Mono, Inter, Source_Serif_4 } from "next/font/google";
 import type { ReactNode } from "react";
 import { PublicationShell } from "@/components/publication-shell";
@@ -22,6 +22,10 @@ const traceFont = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = buildHomeMetadata();
+export const viewport: Viewport = {
+  colorScheme: "light",
+  themeColor: "#28513d",
+};
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (

@@ -82,6 +82,25 @@ describe("deterministic public build manifest", () => {
           ]),
         }),
         expect.objectContaining({
+          id: "revision-harness-engineering-study-guide-002",
+          essaySlug: "harness-engineering-study-guide",
+          publishedAt: "2026-08-22",
+          substantivelyRevisedAt: "2026-08-25",
+          correctionDisposition: "publication",
+          sourceIds: expect.arrayContaining([
+            "source-openviking-context-database",
+            "source-agentmemory-runtime",
+            "source-anthropic-agent-skills-repository",
+            "source-diagram-design-skill",
+            "source-scientific-agent-skills",
+            "source-ai-boost-awesome-harness-engineering",
+            "source-community-cybersecurity-skills",
+            "source-ai-job-search-workflow",
+            "source-architecture-openhands",
+            "source-browser-use-runtime",
+          ]),
+        }),
+        expect.objectContaining({
           id: "revision-memory-engineering-study-guide-001",
           essaySlug: "memory-engineering-study-guide",
           publishedAt: "2026-08-22",
@@ -92,6 +111,17 @@ describe("deterministic public build manifest", () => {
             "source-memory-memgpt",
             "source-memory-anthropic-context-engineering",
             "source-memory-owasp-memory-attack-surface",
+          ]),
+        }),
+        expect.objectContaining({
+          id: "revision-memory-compaction-continuity-002",
+          essaySlug: "memory-compaction-and-continuity",
+          publishedAt: "2026-08-22",
+          substantivelyRevisedAt: "2026-08-25",
+          correctionDisposition: "publication",
+          sourceIds: expect.arrayContaining([
+            "source-openviking-context-database",
+            "source-agentmemory-runtime",
           ]),
         }),
       ]),
@@ -146,10 +176,22 @@ describe("deterministic public build manifest", () => {
     ).resolves.toContain('"essaySlug": "harness-engineering-study-guide"');
     await expect(
       readFile(
+        path.join(root, "public", "manifests", "revision-harness-engineering-study-guide-002.json"),
+        "utf8",
+      ),
+    ).resolves.toContain('"revision": 2');
+    await expect(
+      readFile(
         path.join(root, "public", "manifests", "revision-memory-engineering-study-guide-001.json"),
         "utf8",
       ),
     ).resolves.toContain('"essaySlug": "memory-engineering-study-guide"');
+    await expect(
+      readFile(
+        path.join(root, "public", "manifests", "revision-memory-compaction-continuity-002.json"),
+        "utf8",
+      ),
+    ).resolves.toContain('"revision": 2');
     await expect(
       readFile(path.join(root, "public", "manifests", "architecture-openai-codex.json"), "utf8"),
     ).resolves.toContain('"slug": "openai-codex"');
@@ -181,5 +223,73 @@ describe("deterministic public build manifest", () => {
       (revision: { id: string }) => revision.id === "revision-fieldbook-essay-001",
     );
     expect(secondRevision.contentHash).not.toBe(firstRevision.contentHash);
+  });
+
+  it("keeps historical source identity frozen when a live source record changes", async () => {
+    const root = await manifestFixture();
+    expect((await generate(root)).code).toBe(0);
+    const historicalPath = path.join(
+      root,
+      "public",
+      "manifests",
+      "revision-harness-engineering-study-guide-001.json",
+    );
+    const before = JSON.parse(await readFile(historicalPath, "utf8"));
+    const sourcePath = path.join(
+      root,
+      "content",
+      "sources",
+      "source-earendil-what-is-a-harness.yaml",
+    );
+    const source = await readFile(sourcePath, "utf8");
+    await writeFile(
+      sourcePath,
+      source
+        .replace("https://earendil.com/posts/what-is-a-harness/", "https://example.com/revalidated-source")
+        .replace("last_validated: 2026-08-21", "last_validated: 2026-08-25"),
+    );
+
+    expect((await generate(root)).code).toBe(0);
+    const after = JSON.parse(await readFile(historicalPath, "utf8"));
+    expect(after.sources).toEqual(before.sources);
+    expect(after.sourceValidationDates).toEqual(before.sourceValidationDates);
+  });
+
+  it("rejects a historical revision with a malformed frozen snapshot", async () => {
+    const root = await manifestFixture();
+    const revisionPath = path.join(
+      root,
+      "content",
+      "revisions",
+      "revision-harness-engineering-study-guide-001.yaml",
+    );
+    const revision = await readFile(revisionPath, "utf8");
+    await writeFile(revisionPath, revision.replace(/^content_hash: .*$/m, "content_hash: not-a-hash"));
+
+    const result = await generate(root);
+    expect(result.code).toBe(1);
+    expect(result.stderr).toContain("missing its frozen content and source snapshot");
+  });
+
+  it("rejects malformed source identity inside a historical snapshot", async () => {
+    const root = await manifestFixture();
+    const revisionPath = path.join(
+      root,
+      "content",
+      "revisions",
+      "revision-harness-engineering-study-guide-001.yaml",
+    );
+    const revision = await readFile(revisionPath, "utf8");
+    await writeFile(
+      revisionPath,
+      revision.replace(
+        "canonical_url: https://earendil.com/posts/what-is-a-harness/",
+        "canonical_url: not-a-url",
+      ),
+    );
+
+    const result = await generate(root);
+    expect(result.code).toBe(1);
+    expect(result.stderr).toContain("contains an invalid source snapshot");
   });
 });

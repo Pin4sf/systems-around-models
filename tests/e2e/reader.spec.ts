@@ -7,6 +7,9 @@ const architecturesRoute = "/architectures";
 const admissionRoute = "/fieldbook/identity-authority-and-admission";
 const effectsRoute = "/fieldbook/external-effects-and-transactional-outboxes";
 const securityRoute = "/fieldbook/security-credentials-supply-chain-and-revocation";
+const openLoopsRoute = "/fieldbook/open-loops-and-re-entry";
+const hermesRoute = "/fieldbook/hermes-integrated-agent-runtime";
+const siteOrigin = process.env.SITE_URL ?? "https://example.invalid";
 
 test("@desktop homepage leads to a complete readable Harness Engineering guide", async ({ page }) => {
   await page.goto("/");
@@ -52,7 +55,7 @@ test("@desktop reader exposes a simple chapter and ordinary study navigation", a
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", new RegExp(`${route}$`));
   await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
     "content",
-    "https://example.invalid/social/systems-around-models.png",
+    `${siteOrigin}/social/systems-around-models.png`,
   );
   const socialImage = await page.evaluate(async () => {
     const image = new Image();
@@ -75,7 +78,8 @@ test("@desktop reader exposes a simple chapter and ordinary study navigation", a
   await expect(page.getByRole("navigation", { name: "On this page" })).toBeVisible();
   await expect(page.getByRole("button", { name: "Open chapters" })).toBeHidden();
 
-  await expect(page.getByText("Chapter 1 of 40").first()).toBeVisible();
+  await expect(page.getByText("Chapter 1", { exact: true }).first()).toBeVisible();
+  await expect(page.getByText(/Chapter 1 of 40/)).toHaveCount(0);
   await expect(page.getByRole("group", { name: /evidence/i })).toHaveCount(0);
   expect(javascriptRequests).toEqual([]);
 
@@ -118,12 +122,18 @@ test("@desktop discovery endpoints expose only released publication routes", asy
   expect(sitemap).toContain(memoryGuideRoute);
   expect(sitemap).toContain("/fieldbook/memory-compaction-and-continuity");
   expect(sitemap).toContain("/fieldbook/security-credentials-supply-chain-and-revocation");
+  expect(sitemap).toContain(openLoopsRoute);
+  expect(sitemap).toContain(hermesRoute);
   expect(robots).toContain("Sitemap:");
   expect(rssResponse.headers()["content-type"]).toContain("application/rss+xml");
   expect(rss).toContain("The Model Is Not the Agent");
   expect(rss).toContain("Memory Engineering: A Practical Study Guide");
   expect(rss).toContain("revision-memory-engineering-study-guide-001");
   expect(rss).toContain("revision-fieldbook-essay-001");
+  expect(rss).toContain("Open Loops and Re-entry");
+  expect(rss).toContain("revision-open-loops-re-entry-001");
+  expect(rss).toContain("Hermes: An Integrated Agent Runtime");
+  expect(rss).toContain("revision-hermes-integrated-agent-runtime-001");
 });
 
 test("@desktop architecture field map compares nine profiles and opens extended studies without JavaScript", async ({ page }) => {
@@ -241,9 +251,7 @@ test("@mobile Reliable Action security chapter keeps the diagram and pager conta
   expect(contentFits).toBe(true);
   expect(diagramFits).toBe(true);
   await expect(page.getByRole("link", { name: "Previous: Ambiguity, Idempotency, and Recovery" })).toBeVisible();
-  await expect(page.locator(".article-pager__forthcoming")).toContainText(
-    "Observability and trace reconstruction",
-  );
+  await expect(page.getByRole("link", { name: "Next: Observability and Trace Reconstruction" })).toBeVisible();
 });
 
 test("@mobile architecture field map keeps narrative contained and topology labels visible", async ({ page }) => {
@@ -268,6 +276,8 @@ test("@nojs reader keeps the lesson, sources, and ordinary navigation visible", 
   await expect(page.getByText(/You can read this page in one sitting/)).toBeVisible();
   await expect(page.getByRole("list", { name: "Agent system trace" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Sources and next reading" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Repository crosswalk: ten boundary tests" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Community Cybersecurity Skills" })).toBeVisible();
   await expect(page.getByRole("link", { name: "What is a Harness?" }).first()).toBeVisible();
   const correction = page.getByRole("link", { name: "Suggest a correction" });
   const correctionBody = new URL(await correction.getAttribute("href") ?? "").searchParams.get(
@@ -305,6 +315,77 @@ test("@nojs Reliable Action effect chapter preserves custody and ordinary naviga
   await expect(page.getByRole("link", { name: "Transactional outbox pattern" })).toBeVisible();
   await expect(page.getByRole("link", { name: "Next: Ambiguity, Idempotency, and Recovery" })).toBeVisible();
   await expect(page.getByRole("group", { name: /evidence/i })).toHaveCount(0);
+});
+
+test("@nojs Evidence and Completion chapter preserves re-entry state and ordinary navigation", async ({ page }) => {
+  await page.goto(openLoopsRoute);
+  await expect(page.getByRole("heading", { name: "Open Loops and Re-entry" })).toBeVisible();
+  await expect(page.getByRole("figure", { name: "Open loop re-entry lifecycle" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Retrieval check" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Sources and further reading" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Previous: Evidence, Verification, Policy, Acceptance, and Closure" })).toBeVisible();
+  await expect(page.getByRole("group", { name: /evidence/i })).toHaveCount(0);
+});
+
+test("@mobile Evidence and Completion chapter keeps its diagram and prose contained", async ({ page }) => {
+  await page.goto(openLoopsRoute);
+  const diagram = page.getByRole("figure", { name: "Open loop re-entry lifecycle" });
+  await expect(diagram).toBeVisible();
+  const [contentFits, diagramFits] = await Promise.all([
+    page.locator(".article-reader__prose").evaluate(
+      (element) => element.scrollWidth <= element.clientWidth,
+    ),
+    diagram.evaluate(
+      (element) => element.getBoundingClientRect().right <= window.innerWidth,
+    ),
+  ]);
+  expect(contentFits).toBe(true);
+  expect(diagramFits).toBe(true);
+});
+
+test("@desktop print preserves Evidence and Completion sources and closure state", async ({ page }) => {
+  await page.goto(openLoopsRoute);
+  await page.emulateMedia({ media: "print", reducedMotion: "reduce" });
+  await expect(page.getByRole("navigation", { name: "On this page" })).toBeHidden();
+  await expect(page.getByRole("figure", { name: "Open loop re-entry lifecycle" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Sources and further reading" })).toBeVisible();
+  await expect(page.locator(".study-guide-footer")).toBeVisible();
+});
+
+test("@nojs comparative case preserves source boundaries and released navigation", async ({ page }) => {
+  await page.goto(hermesRoute);
+  await expect(page.getByRole("heading", { name: "Hermes: An Integrated Agent Runtime" })).toBeVisible();
+  await expect(page.getByRole("figure", { name: "Hermes integrated runtime seams" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Failure boundary" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Retrieval check" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Hermes Agent release v0.20.5" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Previous: LangGraph: Durable State and Interrupts" })).toBeVisible();
+  await expect(page.getByRole("group", { name: /evidence/i })).toHaveCount(0);
+});
+
+test("@mobile comparative case keeps its seam map and prose contained", async ({ page }) => {
+  await page.goto(hermesRoute);
+  const diagram = page.getByRole("figure", { name: "Hermes integrated runtime seams" });
+  await expect(diagram).toBeVisible();
+  const [contentFits, diagramFits] = await Promise.all([
+    page.locator(".article-reader__prose").evaluate(
+      (element) => element.scrollWidth <= element.clientWidth,
+    ),
+    diagram.evaluate(
+      (element) => element.getBoundingClientRect().right <= window.innerWidth,
+    ),
+  ]);
+  expect(contentFits).toBe(true);
+  expect(diagramFits).toBe(true);
+});
+
+test("@desktop print preserves comparative source and retrieval surfaces", async ({ page }) => {
+  await page.goto(hermesRoute);
+  await page.emulateMedia({ media: "print", reducedMotion: "reduce" });
+  await expect(page.getByRole("navigation", { name: "On this page" })).toBeHidden();
+  await expect(page.getByRole("figure", { name: "Hermes integrated runtime seams" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Sources and further reading" })).toBeVisible();
+  await expect(page.locator(".study-guide-footer")).toBeVisible();
 });
 
 test("@nojs architecture profiles preserve native disclosure and ordinary sources", async ({ page }) => {

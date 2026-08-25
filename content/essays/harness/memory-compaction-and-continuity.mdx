@@ -4,18 +4,20 @@ title: Memory, Compaction, and Continuity
 description: How runtime memory preserves useful continuity without turning summaries, retrieved notes, or prior model output into authority.
 sequence: Harness Engineering
 sequence_position: 12
-revision: 1
+revision: 2
 authors:
   - Systems Around Models
 published_at: 2026-08-22
-substantively_revised_at: 2026-08-22
-reading_time_source: 10 minute editorial estimate
+substantively_revised_at: 2026-08-25
+reading_time_source: 12 minute editorial estimate
 status: public
 source_manifest_ids:
   - source-harness-engineering-fieldbook-v1
   - source-memory-anthropic-context-engineering
   - source-memory-memgpt
-revision_id: revision-memory-compaction-continuity-001
+  - source-openviking-context-database
+  - source-agentmemory-runtime
+revision_id: revision-memory-compaction-continuity-002
 previous_essay_slug: loops-workflows-graphs-and-delegation
 next_essay_slug: identity-authority-and-admission
 ---
@@ -39,6 +41,26 @@ Sensitive material needs an explicit purpose and permission boundary. A system s
 Similarity is only one retrieval signal. Select memory for the choice at hand: current objective, identity, time, environment, authority, recency, contradiction status, and expected utility all matter. Return a small attributed packet rather than an undifferentiated history.
 
 Retrieved memory is input, not command. A note that once said “publish automatically” cannot expand the authority of a new run. Current admission and locked policy remain in control.
+
+## Context database versus memory engine
+
+A context database and a memory engine can both make old material available to a later run, but they own different seams. At the inspected OpenViking commit, resources, memories, and skills live in an addressable `viking://` hierarchy. Its L0 abstracts and L1 overviews are derived directory sidecars with explicit freshness and sampling metadata; L2 remains source detail. Retrieval plans typed queries and recursively explores directories, while a separate context assembler applies tier, category, token, peer, and served-entry deduplication policy. Account and user identity determine the visible namespace; a peer only narrows content inside a user boundary.
+
+At the inspected AgentMemory commit, hooks and MCP turn host activity into sessions, observations, memories, summaries, and lessons. Internal recall can fuse BM25, optional embeddings, and graph matches; `mem::context` can assemble a bounded packet, while host injection is opt-in and disabled by default. Project is an explicit or basename-derived selector, and agent recall is shared by default unless isolated mode is enabled. Unscoped legacy records can remain visible across project filters. The common MCP `memory_recall` tool does not expose or forward project, so project-aware storage and internal search do not imply project-safe recall on every surface.
+
+| Seam | Context-database question | Memory-engine question |
+|---|---|---|
+| Address | Can the source and its projections be browsed through stable paths? | Can an observation be traced to its session, project, agent, and origin? |
+| Capture | Who may add a resource, session, memory, skill, or compiled artifact? | Which host events become observations or durable memories, and under what consent? |
+| Scope | Which authenticated account, user, or peer may read this URI? | Which project or agent selector is applied, and can unscoped records still pass? |
+| Correction | Which source record or memory diff supersedes a derived sidecar or extracted memory? | Which version remains canonical, and were stale versions removed from every retrieval index? |
+| Deletion | Which source files, indexes, queues, and compiled projections were removed? | Which KV records, indexes, exports, snapshots, audits, and connected hosts were purged or retained? |
+
+A scope filter is not identity proof. In either design, keep authenticated subject, admitted scope, storage filter, returned context, accepted belief, and current effect authority separate. OpenViking's first-party benchmarks and AgentMemory's maintained evaluation results were not rerun for this chapter; they are not evidence that either system closes those wider contracts.
+
+### Boundary exercise
+
+An agent automatically records “the user prefers weekly email summaries” in a repository named `client`. The user later corrects it to “never email; draft only.” A second, unrelated repository is also named `client`. Identify the canonical correction, the selectors and authenticated scope required before recall, every stale projection that must stop winning retrieval, and the evidence needed before claiming deletion. Then decide whether either memory may authorize sending an email. The safe answer should not depend on retrieval score.
 
 ## Compact without manufacturing certainty
 
@@ -64,4 +86,6 @@ A prior summary says an email was sent, but the durable run journal says deliver
 
 - [Effective Context Engineering for AI Agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) — context selection and compaction patterns.
 - [MemGPT: Towards LLMs as Operating Systems](https://arxiv.org/abs/2310.08560) — a public virtual-context architecture spanning constrained model context and external memory.
+- [OpenViking at the inspected commit](https://github.com/volcengine/OpenViking/tree/7ee75611212a1fe502da037b59afa04cbcf5e2ed) — a filesystem-shaped context database with directory projections, hierarchical retrieval, session memory extraction, and explicit account/user URI boundaries.
+- [AgentMemory at the inspected commit](https://github.com/rohitg00/agentmemory/tree/e04ba88819c365c9acf9d6661ea802143e728bd6) — a host-connected memory engine with hook capture, hybrid recall, project and agent selectors, supersession, and governance paths.
 - [Memory Engineering: A Practical Study Guide](/fieldbook/memory-engineering-study-guide) — the connected full lifecycle course.

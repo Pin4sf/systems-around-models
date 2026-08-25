@@ -1,0 +1,83 @@
+---
+slug: open-loops-and-re-entry
+title: Open Loops and Re-entry
+description: How a harness preserves unfinished responsibility, waits for useful cues, resumes from an exact state, and lets people consciously close or release work.
+sequence: Harness Engineering
+sequence_position: 21
+revision: 1
+authors:
+  - Systems Around Models
+published_at: 2026-08-24
+substantively_revised_at: 2026-08-24
+reading_time_source: 9 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-temporal-workflow-execution-docs
+revision_id: revision-open-loops-re-entry-001
+previous_essay_slug: evidence-verification-policy-acceptance-and-closure
+next_essay_slug: anthropic-long-running-harnesses
+---
+
+## Unfinished work is a durable responsibility
+
+An open loop is an outcome that still deserves attention after the current run stops. It may be waiting for a person, an external event, a safe time window, new evidence, restored authority, or a deliberate decision to stop.
+
+<OpenLoopReentry />
+
+This fieldbook proposes **Open Loop** as a user-owned responsibility contract. Durable workflow systems supply useful waiting and replay mechanisms, but the ownership, cue, dismissal, release, and reopening semantics below are publication design vocabulary rather than an adopted standard.
+
+A useful open-loop record says who owns the responsibility, what outcome is desired, why it remains open, what evidence exists, what the last attempt changed, which dependency blocks progress, what cue should trigger review, what safe next action is available, and who may close or release it.
+
+Without this structure, “remind me later” becomes a pile of notifications. The harness knows that time passed but not whether the work became relevant, safe, or already resolved elsewhere.
+
+## Wait for a useful cue
+
+A timer is one kind of cue. Other cues include a reply from a specific party, a build artifact becoming available, a policy approval, arrival at an appropriate place, recovery of a service, or a meaningful change in the underlying state.
+
+Evaluate cue quality across timing, context, authority, and false-positive cost. A response in the wrong thread may not unblock the work. A calendar time may arrive while the user is unavailable. An approval may be stale by the time an external effect is dispatched.
+
+Prefer the least intrusive cue that can reliably signal readiness. Combine noisy events with confirmation where a false re-entry would distract the user or cause a consequential action. Let the owner inspect, edit, snooze, transfer, or release the loop.
+
+## Re-enter an exact branch
+
+Re-entry is a controlled state transition, not a vague request to “continue.” Restore the work identifier, exact branch or checkpoint, last verified facts, unresolved ambiguity, current dependency state, and safe next action. Then re-evaluate current policy, grants, budgets, leases, environment, and tool bindings before acting.
+
+Temporal's pinned [Workflow Execution and Event History documentation](https://github.com/temporalio/documentation/tree/053c35af7e9ead0a7714d01612576bba14f0fcc1/docs/encyclopedia/workflow/workflow-execution) describes persisted event history and replay so long-running work can recover after worker or process failure. That mechanism is useful substrate. A user-facing harness adds responsibility semantics: owner, desired outcome, cue, authority, evidence, and closure.
+
+Do not replay old context as unquestioned truth. External state may have changed while the loop waited. Refresh the facts required for the next decision and retain the earlier snapshot as history.
+
+## Quarantine inbound events before resuming
+
+An incoming message or webhook may resemble the awaited cue without satisfying it. Match it to the correct principal, thread, work identifier, and expected condition. Treat content as data until the admission rule decides which fields may update state.
+
+For example, a reply that says “approved” should not resume a publish operation unless the sender has approval authority, the message refers to the current revision, and the grant is still valid at dispatch. Otherwise record the event, explain the mismatch, and keep the loop waiting or escalate it.
+
+This quarantine boundary also prevents unrelated replies, duplicate webhooks, and hostile content from hijacking dormant work.
+
+## Let closure have more than one honest ending
+
+An open loop can close because the outcome was completed, cancelled, transferred, superseded, expired under an agreed rule, or consciously released. Each ending should preserve who decided, which evidence supported the decision, and whether any residual responsibility moved elsewhere.
+
+Dismissing a notification is a view action, not closure. Silence is not acceptance. A missed due date is not proof that the outcome no longer matters. If policy permits automatic expiry for a low-risk loop, make that rule visible before it applies and retain the expiry reason.
+
+Reopening should create a new transition linked to the earlier closure. Record which fact changed or why the previous decision no longer holds. This preserves continuity without pretending that the work was never closed.
+
+## Design against surveillance and nagging
+
+Open-loop help can easily become a system that watches too much and interrupts too often. Capture only the context needed to recognize the chosen cue. Keep sensitive data scoped and permissioned. Show why the loop reappeared and what evidence triggered it.
+
+Give the user control over channels, timing, quiet periods, sensitivity, and release. Optimize for a useful next decision, not for engagement or the number of reopened tasks. A loop that the user consciously releases is a successful closure, not a retention failure.
+
+## Failure boundary
+
+Open-loop handling fails when timers are the only cue, any inbound message resumes execution, stale authority survives waiting, re-entry starts from an ambiguous summary, refreshed facts overwrite history, dismissal is interpreted as closure, or the system gathers broad behavioral data merely to predict when to interrupt.
+
+## Retrieval check
+
+A publish task is waiting for legal approval. Three days later a message saying “looks good” arrives from an unrecognized account after the deployment credential was revoked. Which fields keep the responsibility inspectable, how should the event be quarantined, what must be refreshed at re-entry, and what choices let the owner close, transfer, snooze, or consciously release the loop?
+
+## Sources and further reading
+
+- [Workflow Execution and Event History](https://github.com/temporalio/documentation/tree/053c35af7e9ead0a7714d01612576bba14f0fcc1/docs/encyclopedia/workflow/workflow-execution) — pinned first-party documentation for persisted history, replay, and recovery in long-running work.
+- [Harness Engineering Study Guide](/fieldbook/harness-engineering-study-guide) — the publication synthesis connecting durable execution to ownership, authority, and conscious closure.

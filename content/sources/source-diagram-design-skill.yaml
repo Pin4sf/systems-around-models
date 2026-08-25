@@ -1,0 +1,25 @@
+id: source-diagram-design-skill
+title: Diagram Design repository
+author: Kathryn Lavery
+canonical_url: https://github.com/cathrynlavery/diagram-design/tree/4faae6696c2953b59dee2b89ad89c688f80c3a67
+published_at: 2026-04-16
+retrieved_at: 2026-08-25
+repository_commit: 4faae6696c2953b59dee2b89ad89c688f80c3a67
+inspected_paths:
+  - README.md
+  - LICENSE
+source_type: first-party-repository
+basis: Commit-pinned inspection of the official repository README and MIT license for its documented semantic, static, and accessible diagram artifact contract.
+license_status: MIT
+evidence_grade: FD
+observed_mechanisms:
+  - description: The repository documents a diagram skill that generates self-contained HTML and SVG with static defaults and accessible labeling.
+    evidence_grade: FD
+    basis: The pinned README describes output format, semantic diagram selection, accessibility, and branding inputs.
+author_reported_claims: []
+unknowns:
+  - The inspected documentation does not establish that a generated diagram accurately represents the implementation it depicts.
+falsifiers:
+  - The pinned README does not document self-contained static output or accessible SVG labeling.
+last_validated: 2026-08-25
+correction_ledger_status: reviewed

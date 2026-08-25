@@ -1,0 +1,26 @@
+id: source-community-cybersecurity-skills
+title: Community Cybersecurity Skills repository
+author: Mukul Kumar
+canonical_url: https://github.com/mukul975/Anthropic-Cybersecurity-Skills/tree/1b3f6b2286981381a5cc0566551ef3bb6bc38383
+published_at: 2026-02-25
+retrieved_at: 2026-08-25
+repository_commit: 1b3f6b2286981381a5cc0566551ef3bb6bc38383
+inspected_paths:
+  - README.md
+  - LICENSE
+source_type: first-party-repository
+basis: Commit-pinned inspection of the community repository README and Apache license for its documented cybersecurity skill catalog and framework mappings.
+license_status: Apache-2.0
+evidence_grade: FD
+observed_mechanisms:
+  - description: The community repository documents structured cybersecurity skill packages mapped to security domains and frameworks.
+    evidence_grade: FD
+    basis: The pinned README exposes the catalog organization and framework-mapping structure.
+author_reported_claims: []
+unknowns:
+  - The repository is maintained by a community author and is not an official Anthropic repository despite its repository name.
+  - Framework mapping and catalog inclusion do not establish authorization, safety, correctness, or current tool behavior for an executed skill.
+falsifiers:
+  - Repository ownership shows official Anthropic maintenance or the pinned README does not contain the documented skill and framework structure.
+last_validated: 2026-08-25
+correction_ledger_status: reviewed
