@@ -8,18 +8,55 @@ repository_commit: e04ba88819c365c9acf9d6661ea802143e728bd6
 inspected_paths:
   - README.md
   - LICENSE
+  - package.json
+  - src/hooks/_project.ts
+  - src/hooks/session-start.ts
+  - src/hooks/pre-tool-use.ts
+  - src/config.ts
+  - src/types.ts
+  - src/functions/remember.ts
+  - src/functions/search.ts
+  - src/functions/context.ts
+  - src/functions/governance.ts
+  - src/functions/audit.ts
+  - src/functions/team.ts
+  - src/state/hybrid-search.ts
+  - src/state/search-index.ts
+  - src/mcp/tools-registry.ts
+  - src/mcp/server.ts
+  - eval/README.md
 source_type: first-party-repository
-basis: Commit-pinned inspection of the official repository README and Apache license for its documented persistent-memory adapters and integration boundary.
+basis: Commit-pinned implementation inspection of AgentMemory's capture, project and agent selectors, persistence, hybrid retrieval, context injection, correction, governance, and team sharing, plus documentation inspection of its evaluation and license boundaries.
 license_status: Apache-2.0
-evidence_grade: FD
+evidence_grade: IP
 observed_mechanisms:
-  - description: The repository documents a local persistent-memory runtime with hooks and MCP-based integrations for coding agents.
+  - description: Hooks and MCP feed sessions, observations, and explicit memories into one persistent engine that can assemble bounded context for opt-in host injection into later sessions.
+    evidence_grade: IP
+    basis: The inspected hook resolver, memory functions, context assembler, and host hooks expose these capture and opt-in return paths; injection is disabled by default.
+  - description: Retrieval fuses BM25, optional vectors, and graph matches with weighted reciprocal-rank fusion, then diversifies results by session.
+    evidence_grade: IP
+    basis: The inspected hybrid-search and search-index implementations contain the three streams, RRF scoring, and session diversification.
+  - description: Project labels are caller-provided or basename-derived selectors, while agent filtering is opt-in and shared by default; unscoped legacy records can remain visible across project filters.
+    evidence_grade: IP
+    basis: The inspected project resolver, configuration, remember, search, and context code define these selector and compatibility behaviors.
+  - description: Memory supersession preserves the prior KV version while removing it from search indexes, and selected forget or governance paths remove KV and index records with audit entries.
+    evidence_grade: IP
+    basis: The inspected remember, governance, audit, and search-index code implement these correction and deletion paths.
+  - description: The repository includes an adapter-pluggable retrieval harness for a public LongMemEval subset and an in-house coding-session corpus.
     evidence_grade: FD
-    basis: The pinned README describes the runtime and its adapter surfaces.
-author_reported_claims: []
+    basis: The pinned evaluation README documents the adapters, datasets, and score outputs; this manifest does not claim implementation inspection of the runner.
+  - description: The common MCP memory_recall tool does not expose or forward a project selector into the internal search path.
+    evidence_grade: IP
+    basis: The inspected MCP registry schema and server handler omit project even though the internal search implementation supports it.
+author_reported_claims:
+  - The repository README reports retrieval, latency, token, and cost results for its maintained benchmark configurations.
 unknowns:
-  - The inspected documentation does not establish cross-tenant isolation, identity collision handling, correction authority, or the validity of reported benchmark results.
+  - Project and agent selectors do not by themselves establish authenticated user identity or tenant isolation, and same-basename project collisions remain possible without an explicit project name.
+  - Project-safe storage and internal filtering do not establish project-safe recall through the common MCP tool at the inspected pin.
+  - Deletion was not proven across every backup, export, snapshot, audit record, connected host, or legacy unscoped projection.
+  - Published benchmark and platform-compatibility claims were not independently reproduced; the inspected coding-agent-life report uses 15 queries, session-ID retrieval scoring, and an older v0.9.26 snapshot.
 falsifiers:
-  - The pinned README does not document persistent memory or the named hook and MCP integration surfaces.
+  - The pinned implementation does not contain the described capture, hybrid retrieval, project and agent filtering, supersession, or governance paths.
+  - Project is bound to independently authenticated identity at the inspected pin rather than caller-provided or basename-derived metadata.
 last_validated: 2026-08-25
 correction_ledger_status: reviewed

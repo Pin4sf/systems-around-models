@@ -1,0 +1,11 @@
+id: revision-memory-compaction-continuity-002
+target_slug: memory-compaction-and-continuity
+revision: 2
+published_at: 2026-08-22
+substantively_revised_at: 2026-08-25
+summary: Added a context-database-versus-memory-engine comparison that separates addressability, capture, identity, correction, deletion, and benchmark boundaries.
+affected_claim_ids:
+  - claim-memory-capture-not-belief
+  - claim-memory-decision-scoped-retrieval
+  - claim-memory-forgetting-contracts
+correction_disposition: publication

@@ -6,3 +6,8 @@ substantively_revised_at: 2026-08-22
 summary: Initial public revision of the memory, compaction, and continuity chapter.
 affected_claim_ids: []
 correction_disposition: publication
+content_hash: sha256-42d7cb4858feeb9f4b0504e09d9dad4e9016538274ccfd5cf670774b8ecae675
+sources:
+  - { id: source-harness-engineering-fieldbook-v1, title: "The Agent Systems Fieldbook — Harness Engineering, version 1", canonical_url: /manifests/revision-fieldbook-essay-001.json, last_validated: 2026-08-21, license_status: all-rights-reserved }
+  - { id: source-memory-anthropic-context-engineering, title: Effective Context Engineering for AI Agents, canonical_url: https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents, last_validated: 2026-08-22, license_status: all-rights-reserved }
+  - { id: source-memory-memgpt, title: "MemGPT: Towards LLMs as Operating Systems", canonical_url: https://arxiv.org/abs/2310.08560, last_validated: 2026-08-22, license_status: unknown }

@@ -449,6 +449,35 @@
       }
     },
     {
+      "id": "revision-memory-compaction-continuity-002",
+      "essaySlug": "memory-compaction-and-continuity",
+      "revision": 2,
+      "publishedAt": "2026-08-22",
+      "substantivelyRevisedAt": "2026-08-25",
+      "summary": "Added a context-database-versus-memory-engine comparison that separates addressability, capture, identity, correction, deletion, and benchmark boundaries.",
+      "affectedClaimIds": [
+        "claim-memory-capture-not-belief",
+        "claim-memory-decision-scoped-retrieval",
+        "claim-memory-forgetting-contracts"
+      ],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-27185e79a9357db07c7a78897db57694e4eec4223a966b285863c4f8de68dca0",
+      "sourceIds": [
+        "source-agentmemory-runtime",
+        "source-harness-engineering-fieldbook-v1",
+        "source-memory-anthropic-context-engineering",
+        "source-memory-memgpt",
+        "source-openviking-context-database"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-memory-anthropic-context-engineering": "2026-08-22",
+        "source-memory-memgpt": "2026-08-22",
+        "source-openviking-context-database": "2026-08-25",
+        "source-agentmemory-runtime": "2026-08-25"
+      }
+    },
+    {
       "id": "revision-memory-engineering-study-guide-001",
       "essaySlug": "memory-engineering-study-guide",
       "revision": 1,
@@ -1013,5 +1042,5 @@
       }
     }
   ],
-  "buildId": "sha256-5e7f89820cb153644d3cf3c3a18cf195a864b6d85d85fd4921a60f1b972c6576"
+  "buildId": "sha256-bdd0159a5511bcd2e4a89367cdfcd5fe7fb56b635c02fe2ed9cc68fae5b27ae0"
 }

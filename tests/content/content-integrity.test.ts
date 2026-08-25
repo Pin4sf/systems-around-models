@@ -127,6 +127,51 @@ describe("public content registry", () => {
     );
   });
 
+  it("pins the context-database versus memory-engine boundary in Chapter 11", async () => {
+    const [content, source] = await Promise.all([
+      loadContent(),
+      readFile(
+        path.join(process.cwd(), "content/essays/harness/memory-compaction-and-continuity.mdx"),
+        "utf8",
+      ),
+    ]);
+    const essay = content.essays.get("memory-compaction-and-continuity");
+    const revision = content.revisions.get("revision-memory-compaction-continuity-002");
+    const openViking = content.sources.get("source-openviking-context-database");
+    const agentMemory = content.sources.get("source-agentmemory-runtime");
+
+    expect(essay).toMatchObject({
+      revision: 2,
+      revisionId: "revision-memory-compaction-continuity-002",
+      sourceManifestIds: expect.arrayContaining([
+        "source-openviking-context-database",
+        "source-agentmemory-runtime",
+      ]),
+    });
+    expect(revision?.summary).toContain("context-database-versus-memory-engine");
+    expect(source).toContain("## Context database versus memory engine");
+    expect(source).toContain("A scope filter is not identity proof");
+    expect(openViking).toMatchObject({
+      evidenceGrade: "IP",
+      inspectedPaths: expect.arrayContaining([
+        "docs/en/concepts/03-context-layers.md",
+        "docs/en/concepts/11-multi-tenant.md",
+        "openviking/retrieve/context_assembler/pipeline.py",
+      ]),
+    });
+    expect(agentMemory).toMatchObject({
+      evidenceGrade: "IP",
+      inspectedPaths: expect.arrayContaining([
+        "src/hooks/_project.ts",
+        "src/functions/search.ts",
+        "src/state/hybrid-search.ts",
+        "src/mcp/tools-registry.ts",
+        "src/hooks/session-start.ts",
+      ]),
+    });
+    expect(source).toContain("common MCP `memory_recall` tool does not expose or forward project");
+  });
+
   it("covers the central Memory Engineering claims with source-backed revision records", async () => {
     const [content, source] = await Promise.all([
       loadContent(),

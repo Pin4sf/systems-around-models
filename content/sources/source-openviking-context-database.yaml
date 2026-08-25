@@ -8,21 +8,59 @@ repository_commit: 7ee75611212a1fe502da037b59afa04cbcf5e2ed
 inspected_paths:
   - README.md
   - LICENSE
+  - docs/en/concepts/01-architecture.md
+  - docs/en/concepts/02-context-types.md
+  - docs/en/concepts/03-context-layers.md
+  - docs/en/concepts/04-viking-uri.md
+  - docs/en/concepts/07-retrieval.md
+  - docs/en/concepts/08-session.md
+  - docs/en/concepts/09-transaction.md
+  - docs/en/concepts/11-multi-tenant.md
+  - docs/en/context-compilation/01-overview.md
+  - docs/en/context-compilation/02-llm-wiki.md
+  - docs/en/context-compilation/03-knowledge-graph.md
+  - openviking/retrieve/context_assembler/params.py
+  - openviking/retrieve/context_assembler/pipeline.py
+  - openviking/retrieve/context_assembler/gather.py
+  - openviking/retrieve/context_assembler/ledger.py
+  - openviking/server/identity.py
+  - openviking/core/namespace.py
+  - openviking/session/session.py
+  - openviking/storage/queuefs/session_commit_processor.py
 source_type: first-party-repository
-basis: Commit-pinned inspection of the official repository README and AGPL license for its documented context-database and retrieval boundaries.
+basis: Commit-pinned documentation and implementation inspection of the current post-v0.4.16 repository across URI identity, directory sidecars, retrieval, context assembly, sessions, recovery, multi-tenancy, context compilation, and licensing.
 license_status: AGPL-3.0
-evidence_grade: FD
+evidence_grade: IP
 observed_mechanisms:
-  - description: The repository documents a viking URI namespace that organizes resources, memories, and skills for retrieval.
+  - description: The repository documents a viking URI hierarchy that organizes resources, user and peer memories, and skills under account and authenticated-user boundaries.
     evidence_grade: FD
-    basis: The pinned README describes the addressable context filesystem and its resource families.
-  - description: The repository documents progressively loaded abstract, overview, and detail layers plus a visible retrieval path.
+    basis: The pinned URI, context-type, and multi-tenant documents define the addressable context hierarchy and identity-relative home alias.
+  - description: L0 abstracts and L1 overviews are derived directory sidecars with explicit body limits, metadata, sampling, and freshness fields; L2 remains source detail.
     evidence_grade: FD
-    basis: The pinned README names the L0, L1, and L2 layers and observable retrieval trajectory.
-author_reported_claims: []
+    basis: The pinned context-layer document defines the sidecar storage and projection behavior.
+  - description: Retrieval plans typed queries over memory, resource, and skill roots, recursively explores directories, and may rerank candidates.
+    evidence_grade: FD
+    basis: The pinned retrieval document defines find and search, typed-query planning, recursive traversal, and fallback scoring.
+  - description: Session commit archives messages before asynchronous summary and memory extraction and writes a per-commit memory change record.
+    evidence_grade: FD
+    basis: The pinned session and transaction documents define the two-phase boundary, persistent queue recovery, and memory_diff artifact.
+  - description: Context compilation delegates source-to-artifact work to VikingBot and a selected Skill, producing derived Wiki, graph, report, or distillation outputs.
+    evidence_grade: FD
+    basis: The pinned context-compilation documents define the asynchronous agent loop and output contracts.
+  - description: The request-time context assembler gathers authenticated memory, resource, and skill candidates, loads selected representation tiers, applies peer and token-budget policy, renders an injection-ready envelope, and records only entries served.
+    evidence_grade: IP
+    basis: The inspected context-assembler parameters, gatherer, pipeline, and best-effort recall ledger implement these boundaries.
+  - description: Session commit archives a lock-protected snapshot before restart-safe asynchronous extraction; durable archive completion does not prove phase-two extraction completion.
+    evidence_grade: IP
+    basis: The inspected session and persistent queue processor implement the two-phase boundary and identity restoration.
+author_reported_claims:
+  - The repository README reports improved memory and agent-task benchmark results together with lower token use and query latency for OpenViking 0.3.22, not the v0.4.16 release or inspected post-release commit.
 unknowns:
-  - The inspected documentation does not establish admission, correction, deletion, tenant isolation, or authority semantics for every captured memory.
+  - The inspected documentation does not establish belief acceptance, correction authority, deletion propagation, or current effect authority for every captured or compiled memory.
+  - The memory diff is useful audit and manual rollback input, but no first-party automated rollback API was found.
+  - Benchmark results, hosted editions, and production multi-tenant guarantees were not independently reproduced.
 falsifiers:
-  - The pinned README does not contain the named URI organization, tiered loading, or retrieval-path descriptions.
+  - The pinned documents do not define directory-level L0 and L1 sidecars, hierarchical retrieval, identity-bound user paths, or two-phase session commit as recorded here.
+  - The v0.4.16 release tag is shown to include every post-release behavior attributed only to the inspected current commit.
 last_validated: 2026-08-25
 correction_ledger_status: reviewed

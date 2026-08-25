@@ -113,6 +113,17 @@ describe("deterministic public build manifest", () => {
             "source-memory-owasp-memory-attack-surface",
           ]),
         }),
+        expect.objectContaining({
+          id: "revision-memory-compaction-continuity-002",
+          essaySlug: "memory-compaction-and-continuity",
+          publishedAt: "2026-08-22",
+          substantivelyRevisedAt: "2026-08-25",
+          correctionDisposition: "publication",
+          sourceIds: expect.arrayContaining([
+            "source-openviking-context-database",
+            "source-agentmemory-runtime",
+          ]),
+        }),
       ]),
     });
     expect(manifest.architectures).toEqual(expect.arrayContaining([
@@ -175,6 +186,12 @@ describe("deterministic public build manifest", () => {
         "utf8",
       ),
     ).resolves.toContain('"essaySlug": "memory-engineering-study-guide"');
+    await expect(
+      readFile(
+        path.join(root, "public", "manifests", "revision-memory-compaction-continuity-002.json"),
+        "utf8",
+      ),
+    ).resolves.toContain('"revision": 2');
     await expect(
       readFile(path.join(root, "public", "manifests", "architecture-openai-codex.json"), "utf8"),
     ).resolves.toContain('"slug": "openai-codex"');
