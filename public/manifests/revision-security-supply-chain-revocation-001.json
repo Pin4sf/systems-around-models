@@ -7,7 +7,7 @@
   "summary": "Initial public revision of the security, credentials, supply chain, and revocation chapter.",
   "affectedClaimIds": [],
   "correctionDisposition": "publication",
-  "contentHash": "sha256-5cc9f43fc170056a8a7e8928ddbf1685844a23c8c81580cab958a28228ecea4d",
+  "contentHash": "sha256-ec581fafccdf2cd61a1318e172fc70097258ad9cfff5d34e3119d67c90a33e27",
   "sourceIds": [
     "source-harness-engineering-fieldbook-v1",
     "source-memory-nist-agent-hijacking-evaluations",

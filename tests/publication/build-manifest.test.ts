@@ -128,6 +128,22 @@ describe("deterministic public build manifest", () => {
           ]),
         }),
         expect.objectContaining({
+          id: "revision-hermes-integrated-agent-runtime-001",
+          essaySlug: "hermes-integrated-agent-runtime",
+          revision: 1,
+          contentHash: "sha256-4fce1564f719e726c40175373e32c1ae99bcd6c0f2a066005d38e57d6fb2d4cc",
+          sourceValidationDates: {
+            "source-harness-engineering-fieldbook-v1": "2026-08-21",
+            "source-hermes-agent-runtime": "2026-08-25",
+          },
+        }),
+        expect.objectContaining({
+          id: "revision-hermes-integrated-agent-runtime-002",
+          essaySlug: "hermes-integrated-agent-runtime",
+          revision: 2,
+          substantivelyRevisedAt: "2026-08-26",
+        }),
+        expect.objectContaining({
           id: "revision-qm-scoped-resources-and-leased-runs-001",
           essaySlug: "qm-scoped-resources-and-leased-runs",
           sourceIds: expect.arrayContaining(["source-qm-agent-runtime"]),
@@ -259,6 +275,12 @@ describe("deterministic public build manifest", () => {
         "utf8",
       ),
     ).resolves.toContain("d931fe963de3ac20b9a7526ea9a4873c0d8ed18e");
+    await expect(
+      readFile(
+        path.join(root, "public", "manifests", "revision-hermes-integrated-agent-runtime-001.json"),
+        "utf8",
+      ),
+    ).resolves.toContain("sha256-4fce1564f719e726c40175373e32c1ae99bcd6c0f2a066005d38e57d6fb2d4cc");
   });
 
   it("is stable for identical content and changes its hashes when essay content changes", async () => {

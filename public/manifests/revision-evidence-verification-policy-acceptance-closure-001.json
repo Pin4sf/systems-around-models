@@ -7,7 +7,7 @@
   "summary": "Initial public revision of the evidence, verification, policy, acceptance, and closure chapter.",
   "affectedClaimIds": [],
   "correctionDisposition": "publication",
-  "contentHash": "sha256-30cd6720d5136a4f9ce1951eb3a777442f90f572048e01425f12c0d9876f0083",
+  "contentHash": "sha256-7b12335922fd7c64586b78297c210e41c3fd6fa1eb21e446ac6386ad01ed407c",
   "sourceIds": [
     "source-harness-engineering-fieldbook-v1",
     "source-nist-ai-rmf-1"

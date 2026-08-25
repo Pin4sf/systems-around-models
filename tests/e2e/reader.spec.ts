@@ -141,7 +141,7 @@ test("@desktop discovery endpoints expose only released publication routes", asy
   expect(rss).toContain("Open Loops and Re-entry");
   expect(rss).toContain("revision-open-loops-re-entry-001");
   expect(rss).toContain("Hermes: An Integrated Agent Runtime");
-  expect(rss).toContain("revision-hermes-integrated-agent-runtime-001");
+  expect(rss).toContain("revision-hermes-integrated-agent-runtime-002");
   expect(rss).toContain("revision-qm-scoped-resources-and-leased-runs-001");
   expect(rss).toContain("revision-cloudflare-think-and-agents-001");
   expect(rss).toContain("revision-deepseek-harness-and-cordis-001");

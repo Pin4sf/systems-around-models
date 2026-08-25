@@ -7,7 +7,7 @@
   "summary": "Initial public revision of the loops, workflows, graphs, and delegation chapter.",
   "affectedClaimIds": [],
   "correctionDisposition": "publication",
-  "contentHash": "sha256-255f099df5cd9cad3a43b53d34e2021ac963aa772ac1e6b28953deef52b300fc",
+  "contentHash": "sha256-3da06adbca2f5b2765c055f56b9bfdcc425202ce31c914c695875cb0a0177801",
   "sourceIds": [
     "source-anthropic-effective-long-running-harnesses",
     "source-harness-engineering-fieldbook-v1"

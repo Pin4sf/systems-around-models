@@ -7,7 +7,7 @@
   "summary": "Initial public revision of the LangGraph durable state and interrupts case study.",
   "affectedClaimIds": [],
   "correctionDisposition": "publication",
-  "contentHash": "sha256-1f91fe90de876a1197cacfe1b7eae0030346b65c385f61bd147d37430f98cf69",
+  "contentHash": "sha256-fe04c872797bd2ab229f4e7bd04b66b1f147929f5ddf257613469bfd77a213b8",
   "sourceIds": [
     "source-architecture-langgraph",
     "source-harness-engineering-fieldbook-v1"

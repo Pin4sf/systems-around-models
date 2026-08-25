@@ -7,7 +7,7 @@
   "summary": "Initial public revision of the identity, authority, and admission chapter.",
   "affectedClaimIds": [],
   "correctionDisposition": "publication",
-  "contentHash": "sha256-edd8ab5c52bdb5e3431ef38d9a9aeb3acdd98c4d2d77f4d8c1f6fd0a67a58844",
+  "contentHash": "sha256-b0b9f59331af3abd50da8564a7fd0546617eccad968c0c9be7fd1b6c7286d975",
   "sourceIds": [
     "source-harness-engineering-fieldbook-v1",
     "source-memory-nist-agent-hijacking-evaluations"

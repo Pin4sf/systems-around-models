@@ -11,7 +11,7 @@
       "summary": "Initial public revision of the ambiguity, idempotency, and recovery chapter.",
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-6840eabf745cf039b12bbf061ac84a147a6653c465a6cdbd1d8334009b7fc250",
+      "contentHash": "sha256-be851a36ac9e116d9c92bbe6bbb5258652e49a2a9d121752d66b92dc75a9310d",
       "sourceIds": [
         "source-aws-making-retries-safe",
         "source-harness-engineering-fieldbook-v1"
@@ -30,7 +30,7 @@
       "summary": "Initial public revision of the Anthropic long-running harness case study.",
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-5c9be8f60255724da7e6aceb7bc89ed00ccfb2aa267f521e44dd03ad52074134",
+      "contentHash": "sha256-03891f27846cb8513c9e5d622d14c0aa2e508a9c11632de9ee3dadbb5b877d69",
       "sourceIds": [
         "source-anthropic-effective-long-running-harnesses",
         "source-harness-engineering-fieldbook-v1"
@@ -68,7 +68,7 @@
       "summary": "Initial public revision of the loops, workflows, graphs, and delegation chapter.",
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-255f099df5cd9cad3a43b53d34e2021ac963aa772ac1e6b28953deef52b300fc",
+      "contentHash": "sha256-3da06adbca2f5b2765c055f56b9bfdcc425202ce31c914c695875cb0a0177801",
       "sourceIds": [
         "source-anthropic-effective-long-running-harnesses",
         "source-harness-engineering-fieldbook-v1"
@@ -87,7 +87,7 @@
       "summary": "Initial public revision of the Cursor model and harness evaluation case study.",
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-eee3e5c9422145a15508709e0f3c00086ac14d62002f403e52cbe4775c02e0a8",
+      "contentHash": "sha256-b7b308056c136841c33db302786aa71a897a350532b52c9e376d80dffc25bd8f",
       "sourceIds": [
         "source-cursor-continually-improving-agent-harness",
         "source-harness-engineering-fieldbook-v1"
@@ -127,7 +127,7 @@
       "summary": "Initial public revision of the developer and product runtime harness handoff chapter.",
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-1e03edaaa181f1f2d398115293a9aab101248f2f45c4ab201806b24d0928cf31",
+      "contentHash": "sha256-517674e077dd3cbf6bcb4297e5bbde18e0410501287b159fc90669def970e083",
       "sourceIds": [
         "source-anthropic-effective-long-running-harnesses",
         "source-harness-engineering-fieldbook-v1"
@@ -165,7 +165,7 @@
       "summary": "Initial public revision of the environments, sandboxes, and custody chapter.",
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-09f45a79080e617191d1cc39c47ddb1b8878a3ffddb8e297cd5afe28a37e5cfa",
+      "contentHash": "sha256-f32b3a11ebd6e6d7331443015cd75d5df300ed011c4e5d95a5bb7e04d26bd4cf",
       "sourceIds": [
         "source-harness-engineering-fieldbook-v1",
         "source-memory-nist-agent-hijacking-evaluations"
@@ -184,7 +184,7 @@
       "summary": "Initial public revision of the evidence, verification, policy, acceptance, and closure chapter.",
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-30cd6720d5136a4f9ce1951eb3a777442f90f572048e01425f12c0d9876f0083",
+      "contentHash": "sha256-7b12335922fd7c64586b78297c210e41c3fd6fa1eb21e446ac6386ad01ed407c",
       "sourceIds": [
         "source-harness-engineering-fieldbook-v1",
         "source-nist-ai-rmf-1"
@@ -203,7 +203,7 @@
       "summary": "Initial public revision of the external effects and transactional outboxes chapter.",
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-500ab4478e202315a20450eec6c00c86f79be8f0750bf8cc471e3fbf7db12f1c",
+      "contentHash": "sha256-990b9a394cff640d5b9410cd40cb6fee01be89478cf9adbf149164f4855f8f5a",
       "sourceIds": [
         "source-aws-transactional-outbox",
         "source-harness-engineering-fieldbook-v1"
@@ -229,7 +229,7 @@
         "claim-system-trace-responsibility-checklist"
       ],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-de2ba7547013fa05c90143929b1ee0f1abdf02a9f7b586f1d50366b173e5880a",
+      "contentHash": "sha256-b0691c0e89908884ef39f95309522dbeda5e95fb00aa2ac97cf48d075745d3bb",
       "sourceIds": [
         "source-earendil-what-is-a-harness",
         "source-harness-engineering-fieldbook-v1"
@@ -248,7 +248,7 @@
       "summary": "Initial public revision of the four harness authority surface classes.",
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-a45e81848235d951427d15c8800f06db7504bb2284be5f16cdae79aa5c219c1b",
+      "contentHash": "sha256-8fdfd664119e7fd4cff101d69adaae1b7e3bc60ce9f35b3b8d4c38f0efe5b549",
       "sourceIds": [
         "source-harness-engineering-fieldbook-v1"
       ],
@@ -265,7 +265,7 @@
       "summary": "Initial public revision of the H0 to H9 diagnostic progression chapter.",
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-e3a5b058d6bdc0c900fb7781b1ecba2c7d19b192e5244237192cce6ff8f661b9",
+      "contentHash": "sha256-e83edc312cab8a45b2fdc939b0137b7ced5a3bfb63e9a7faa688d060eecc4e82",
       "sourceIds": [
         "source-harness-engineering-fieldbook-v1",
         "source-rasa-why-agents-fail"
@@ -328,7 +328,7 @@
         "claim-harness-failure-injection-learning-method"
       ],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-07f0459dad4178c17a53bede3f2d906f2717fde9b248c3f2d65c35af1a35403b",
+      "contentHash": "sha256-5335df701fa92463f2efe5395fa87c5af6152acb8f433af4c125e949bdf29db4",
       "sourceIds": [
         "source-agentmemory-runtime",
         "source-ai-boost-awesome-harness-engineering",
@@ -379,7 +379,26 @@
       "summary": "Initial public revision of the Hermes integrated agent runtime case study.",
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-b4ae31fb62c1fc11883eafe62af867cd9ba197591bdd3b531f87b973f5a6d7a2",
+      "contentHash": "sha256-4fce1564f719e726c40175373e32c1ae99bcd6c0f2a066005d38e57d6fb2d4cc",
+      "sourceIds": [
+        "source-harness-engineering-fieldbook-v1",
+        "source-hermes-agent-runtime"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-hermes-agent-runtime": "2026-08-25"
+      }
+    },
+    {
+      "id": "revision-hermes-integrated-agent-runtime-002",
+      "essaySlug": "hermes-integrated-agent-runtime",
+      "revision": 2,
+      "publishedAt": "2026-08-25",
+      "substantivelyRevisedAt": "2026-08-26",
+      "summary": "Navigation revision connecting the released Hermes study to the next comparative case batch.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-57c4fc6a0c3905e05b1741a18efaba92dcb7f5edd94b47554b3bf4cea294ab4f",
       "sourceIds": [
         "source-harness-engineering-fieldbook-v1",
         "source-hermes-agent-runtime"
@@ -398,7 +417,7 @@
       "summary": "Initial public revision of the identity, authority, and admission chapter.",
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-edd8ab5c52bdb5e3431ef38d9a9aeb3acdd98c4d2d77f4d8c1f6fd0a67a58844",
+      "contentHash": "sha256-b0b9f59331af3abd50da8564a7fd0546617eccad968c0c9be7fd1b6c7286d975",
       "sourceIds": [
         "source-harness-engineering-fieldbook-v1",
         "source-memory-nist-agent-hijacking-evaluations"
@@ -417,7 +436,7 @@
       "summary": "Initial public revision of the instructions and context assembly chapter.",
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-8a58692e911d72375e3826be49cdcfa379ff0731f1d0e122ab0fe026f2254121",
+      "contentHash": "sha256-227e374bb8e5ede0918703222bef53dbb7829071ea3aaf57b9bb4349df4e4975",
       "sourceIds": [
         "source-harness-engineering-fieldbook-v1",
         "source-memory-anthropic-context-engineering"
@@ -436,7 +455,7 @@
       "summary": "Initial public revision of the LangGraph durable state and interrupts case study.",
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-1f91fe90de876a1197cacfe1b7eae0030346b65c385f61bd147d37430f98cf69",
+      "contentHash": "sha256-fe04c872797bd2ab229f4e7bd04b66b1f147929f5ddf257613469bfd77a213b8",
       "sourceIds": [
         "source-architecture-langgraph",
         "source-harness-engineering-fieldbook-v1"
@@ -455,7 +474,7 @@
       "summary": "Initial public revision of the leases, fencing, cancellation, and budgets chapter.",
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-ed234778b40b0a0dda9df36f736a584ebe0288d7b5674f3f551183b82f4cdd46",
+      "contentHash": "sha256-2bfdf1969c06aef442f54a518819491e7d73d756d2a37f29aa418753b8db97d2",
       "sourceIds": [
         "source-anthropic-effective-long-running-harnesses",
         "source-harness-engineering-fieldbook-v1"
@@ -474,7 +493,7 @@
       "summary": "Initial public revision of the maker and checker separation chapter.",
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-52d1b94a384f47e1fda05bd0b6c1408fd098f351601665ae5fac67c55989362f",
+      "contentHash": "sha256-cfdec6d92861fb93ecf3f8076fc825a763912030f3f51cfef957aef467aaed67",
       "sourceIds": [
         "source-harness-engineering-fieldbook-v1",
         "source-llm-as-judge-mt-bench",
@@ -520,7 +539,7 @@
         "claim-memory-forgetting-contracts"
       ],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-ea4b68d0deeab4b2105ed92801e63c6787d96b765a6c02213baf2056e32617f2",
+      "contentHash": "sha256-27185e79a9357db07c7a78897db57694e4eec4223a966b285863c4f8de68dca0",
       "sourceIds": [
         "source-agentmemory-runtime",
         "source-harness-engineering-fieldbook-v1",
@@ -555,7 +574,7 @@
         "claim-memory-prospective-eligibility"
       ],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-803b8fb14d59c98d6253a95aa9a0a17f0d29cb613b2cafa174e551ec96e92efd",
+      "contentHash": "sha256-d2210855bfd51d823275454d8a625f9e4cd2e20973db9b5fc7f66f67f598c050",
       "sourceIds": [
         "source-memory-anthropic-context-engineering",
         "source-memory-karpathy-llm-wiki",
@@ -588,7 +607,7 @@
       "summary": "Initial public revision of the observability and trace reconstruction chapter.",
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-25d2efb1280e5f9f4439828a8f3eb26ef4142183eb982484fdb2bfe0e6ac9a25",
+      "contentHash": "sha256-aac6a46a91bd0cc358167a587922a8dabd7065f0ff8e166b36e109f7ebe564c8",
       "sourceIds": [
         "source-harness-engineering-fieldbook-v1",
         "source-w3c-trace-context"
@@ -607,7 +626,7 @@
       "summary": "Initial public revision of the open loops and re-entry chapter.",
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-57fa6097afce8f1382a72dda6f7cb24df9c2d6a5231f791551a581cb9ae432fe",
+      "contentHash": "sha256-bfa6989b24518ae000fdca4aa47b890bef36082ec68b918e043e63a62009b5a1",
       "sourceIds": [
         "source-harness-engineering-fieldbook-v1",
         "source-temporal-workflow-execution-docs"
@@ -645,7 +664,7 @@
       "summary": "Initial public revision of the security, credentials, supply chain, and revocation chapter.",
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-5cc9f43fc170056a8a7e8928ddbf1685844a23c8c81580cab958a28228ecea4d",
+      "contentHash": "sha256-ec581fafccdf2cd61a1318e172fc70097258ad9cfff5d34e3119d67c90a33e27",
       "sourceIds": [
         "source-harness-engineering-fieldbook-v1",
         "source-memory-nist-agent-hijacking-evaluations",
@@ -666,7 +685,7 @@
       "summary": "Initial public revision of the state, journals, checkpoints, and replay chapter.",
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-d7ad7c1ca50e18cb1d26acab5404a18f81bc2b26f999becd9a10574d17be5b86",
+      "contentHash": "sha256-845da58ffa09bddacb832b0c1f521472ee28079a065e0ac969d1730499a4fef5",
       "sourceIds": [
         "source-anthropic-effective-long-running-harnesses",
         "source-harness-engineering-fieldbook-v1"
@@ -685,7 +704,7 @@
       "summary": "Initial public revision of the tools, capability manifests, and binding chapter.",
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-01a630be78cd00e1fa8566790225c89858516711310a72057a061601c7fed97a",
+      "contentHash": "sha256-431a68344d77d227643823be854c9d97d22ad0e3048d34953b1605cb1224d51d",
       "sourceIds": [
         "source-earendil-what-is-a-harness",
         "source-harness-engineering-fieldbook-v1"
@@ -704,7 +723,7 @@
       "summary": "Initial public revision of the twelve recurring harness failure classes.",
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
-      "contentHash": "sha256-31a434e1dded083af4086dba1c218e8522bb2292803d5437f4f86efd9a6ead69",
+      "contentHash": "sha256-7a8dc0cba647f5818ae98e875e82961b1200123c2a5f12c49f8026908970361f",
       "sourceIds": [
         "source-harness-engineering-fieldbook-v1",
         "source-rasa-why-agents-fail"
@@ -1132,5 +1151,5 @@
       }
     }
   ],
-  "buildId": "sha256-92008eaf616727c5015ca61dcc3eaddfacdf9f571344e5afbdf4e22fa937fb3d"
+  "buildId": "sha256-c3df30db8eb66730ba215850deedcd4a6a42cb5c39c2922abd4ef7de82f010c1"
 }

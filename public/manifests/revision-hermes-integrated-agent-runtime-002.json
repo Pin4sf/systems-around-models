@@ -1,13 +1,13 @@
 {
-  "id": "revision-hermes-integrated-agent-runtime-001",
+  "id": "revision-hermes-integrated-agent-runtime-002",
   "essaySlug": "hermes-integrated-agent-runtime",
-  "revision": 1,
+  "revision": 2,
   "publishedAt": "2026-08-25",
-  "substantivelyRevisedAt": "2026-08-25",
-  "summary": "Initial public revision of the Hermes integrated agent runtime case study.",
+  "substantivelyRevisedAt": "2026-08-26",
+  "summary": "Navigation revision connecting the released Hermes study to the next comparative case batch.",
   "affectedClaimIds": [],
   "correctionDisposition": "publication",
-  "contentHash": "sha256-4fce1564f719e726c40175373e32c1ae99bcd6c0f2a066005d38e57d6fb2d4cc",
+  "contentHash": "sha256-57c4fc6a0c3905e05b1741a18efaba92dcb7f5edd94b47554b3bf4cea294ab4f",
   "sourceIds": [
     "source-harness-engineering-fieldbook-v1",
     "source-hermes-agent-runtime"

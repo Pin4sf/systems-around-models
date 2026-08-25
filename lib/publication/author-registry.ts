@@ -6,21 +6,22 @@ export type AuthorIdentity = Readonly<{
   sameAs: readonly string[];
 }>;
 
+const shivanshFulper = Object.freeze({
+  id: "author-shivansh-fulper",
+  name: "Shivansh Fulper",
+  url: "https://shivansh-portfolio-one.vercel.app",
+  role: "Founder and AI systems researcher",
+  sameAs: Object.freeze([
+    "https://shivansh-portfolio-one.vercel.app",
+    "https://github.com/Pin4sf",
+    "https://www.linkedin.com/in/shivansh-fulper/",
+  ]),
+});
+
 const authorRegistry = new Map<string, AuthorIdentity>([
-  [
-    "author-shivansh-fulper",
-    Object.freeze({
-      id: "author-shivansh-fulper",
-      name: "Shivansh Fulper",
-      url: "https://shivansh-portfolio-one.vercel.app",
-      role: "Founder and AI systems researcher",
-      sameAs: Object.freeze([
-        "https://shivansh-portfolio-one.vercel.app",
-        "https://github.com/Pin4sf",
-        "https://www.linkedin.com/in/shivansh-fulper/",
-      ]),
-    }),
-  ],
+  ["author-shivansh-fulper", shivanshFulper],
+  // Preserve already-published essay bytes while resolving the legacy byline token.
+  ["Systems Around Models", shivanshFulper],
 ]);
 
 export const publicationEditor = authorRegistry.get("author-shivansh-fulper")!;

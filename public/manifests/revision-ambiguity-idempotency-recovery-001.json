@@ -7,7 +7,7 @@
   "summary": "Initial public revision of the ambiguity, idempotency, and recovery chapter.",
   "affectedClaimIds": [],
   "correctionDisposition": "publication",
-  "contentHash": "sha256-6840eabf745cf039b12bbf061ac84a147a6653c465a6cdbd1d8334009b7fc250",
+  "contentHash": "sha256-be851a36ac9e116d9c92bbe6bbb5258652e49a2a9d121752d66b92dc75a9310d",
   "sourceIds": [
     "source-aws-making-retries-safe",
     "source-harness-engineering-fieldbook-v1"

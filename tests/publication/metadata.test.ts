@@ -52,6 +52,12 @@ describe("canonical publication metadata", () => {
     );
   });
 
+  it("resolves the legacy publication byline through the same canonical identity", () => {
+    expect(resolveAuthorIdentities(["Systems Around Models"])).toEqual(
+      resolveAuthorIdentities(["author-shivansh-fulper"]),
+    );
+  });
+
   it("fails closed when a production build has no SITE_URL", () => {
     expect(() => resolveSiteUrl({ NODE_ENV: "production" })).toThrow(
       "SITE_URL is required for production metadata",
@@ -267,7 +273,7 @@ describe("publication discovery endpoints", () => {
     expect(body).toContain("revision-open-loops-re-entry-001");
     expect(body).toContain("<title>Hermes: An Integrated Agent Runtime</title>");
     expect(body).toContain(`<link>${canonicalSite}/fieldbook/hermes-integrated-agent-runtime</link>`);
-    expect(body).toContain("revision-hermes-integrated-agent-runtime-001");
+    expect(body).toContain("revision-hermes-integrated-agent-runtime-002");
     expect(body).toContain("<title>QM: Scoped Resources and Leased Runs</title>");
     expect(body).toContain("revision-qm-scoped-resources-and-leased-runs-001");
     expect(body).toContain("<title>Cloudflare Think and Agents</title>");

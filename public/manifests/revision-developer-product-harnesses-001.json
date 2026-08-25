@@ -7,7 +7,7 @@
   "summary": "Initial public revision of the developer and product runtime harness handoff chapter.",
   "affectedClaimIds": [],
   "correctionDisposition": "publication",
-  "contentHash": "sha256-1e03edaaa181f1f2d398115293a9aab101248f2f45c4ab201806b24d0928cf31",
+  "contentHash": "sha256-517674e077dd3cbf6bcb4297e5bbde18e0410501287b159fc90669def970e083",
   "sourceIds": [
     "source-anthropic-effective-long-running-harnesses",
     "source-harness-engineering-fieldbook-v1"
