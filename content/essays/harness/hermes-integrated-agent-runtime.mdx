@@ -1,0 +1,74 @@
+---
+slug: hermes-integrated-agent-runtime
+title: "Hermes: An Integrated Agent Runtime"
+description: A source-pinned study of Hermes Agent's integrated context, memory, session, tool, gateway, and scheduling seams—and the governance contracts that remain external.
+sequence: Harness Engineering
+sequence_position: 25
+revision: 1
+authors:
+  - Systems Around Models
+published_at: 2026-08-25
+substantively_revised_at: 2026-08-25
+reading_time_source: 9 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-hermes-agent-runtime
+revision_id: revision-hermes-integrated-agent-runtime-001
+previous_essay_slug: langgraph-durable-state-and-interrupts
+---
+
+## Integration makes seams visible
+
+An agent becomes a runtime when it must do more than answer one request. It assembles context, compresses history, preserves memory, restores sessions, discovers tools, receives messages through gateways, and wakes for scheduled work. Hermes Agent brings many of these seams into one inspectable open-source system.
+
+This case study is pinned to Hermes Agent v0.20.5. It describes mechanisms visible in that release, not every deployment built with it and not every claim made about adjacent projects.
+
+<HermesRuntimeSeams />
+
+The value of studying an integrated runtime is architectural: it shows where responsibilities meet. The danger is assuming that integration removes the need for explicit contracts between them.
+
+## Separate continuity surfaces
+
+Hermes includes durable memory files, session history, and context compression. These mechanisms solve different problems. Memory files carry selected continuity across sessions. Session records preserve conversational history. Compression creates a smaller input when the active history no longer fits the desired context budget.
+
+Do not collapse them into one “memory” store. A compressed summary needs lineage to the history it represents. A memory update needs a rule for scope, correction, and deletion. A restored session needs an identity boundary. Retrieval into a prompt does not make any of this material authoritative.
+
+The inspected release does not establish a universal five-tier memory taxonomy, and this publication does not attribute Dreaming Mode to native Hermes behavior. Those ideas require their own sources and contracts rather than being imported through resemblance.
+
+## Keep profile, session, and schedule distinct
+
+A long-lived agent may have a profile, many sessions, several channels, and scheduled jobs. These identifiers should not substitute for one another.
+
+A profile describes a configured runtime scope. A session groups an interaction history. A gateway pairing determines which external presence may connect. A turn lease coordinates concurrent activity. A scheduled job records deferred work. Each boundary needs explicit ownership and lookup rules so one channel cannot accidentally resume another user's session or run a job under stale authority.
+
+Hermes provides implementation seams for pairing, session handling, turn leases, and profile-scoped scheduling. Whether a particular deployment achieves strong multi-tenant isolation depends on its storage, identity, credential, and policy design; integration alone does not prove that property.
+
+## Bind capabilities at the runtime edge
+
+The tool registry and skill surface make capabilities discoverable to the agent. A production harness still needs to distinguish discovery from authorization and invocation. The presence of a tool definition does not tell us which principal may use it, against which resources, for how long, or with what approval.
+
+Gateway and scheduled execution raise the stakes because work can begin outside an active foreground conversation. Re-check current grants before consequential dispatch, preserve the triggering event, and expose why the runtime woke. A turn lease can coordinate workers; it does not replace resource-specific authorization or effect idempotency.
+
+## Adopt seams, adapt governance, reject inherited authority
+
+Adopt the integrated view: context, continuity, capability, presence, and scheduling should be designed together and traced across one run. Adapt storage and identity boundaries to the number of users, profiles, channels, and devices in the deployment. Reject the assumption that a remembered fact, restored session, paired channel, or scheduled job carries permanent authority.
+
+The runtime also needs an outcome contract above these mechanisms. An agent can finish a turn without proving an external effect, satisfying policy, earning user acceptance, or closing the responsibility that caused the turn.
+
+## Failure boundary
+
+An integrated runtime fails when session IDs become tenant boundaries without access checks, compression overwrites history, memory cannot be corrected, scheduled work acts under stale credentials, pairings grant more authority than intended, or tool availability is mistaken for permission. It also fails when the breadth of the repository is presented as proof of exactly-once effects, consent, production isolation, or conscious closure.
+
+## Retrieval check
+
+A scheduled job wakes a profile, restores the most recent session, retrieves a memory note, and finds a tool credential cached before the user revoked access. Which identifiers must remain distinct, what context may be used as evidence, where must authority be refreshed, and what should the runtime record if it cannot safely act?
+
+## Build-and-break lab
+
+Model two users, two profiles, three sessions, one shared channel, and a scheduled job. Attempt to resume work using only the latest session ID, then list the cross-user failures that become possible. Add explicit principal, profile, session, trigger, grant snapshot, and effect identifiers; test revocation between scheduling and dispatch.
+
+## Sources and further reading
+
+- [Hermes Agent release v0.20.5](https://github.com/NousResearch/hermes-agent/tree/fcbd1076a93841fa88855acce810e342a5b78101) — commit-pinned source for the context, memory, session, pairing, scheduling, and tool seams discussed here.
+- [Harness Engineering Study Guide](/fieldbook/harness-engineering-study-guide) — the publication synthesis for identity, context, continuity, capabilities, effects, evidence, and closure.

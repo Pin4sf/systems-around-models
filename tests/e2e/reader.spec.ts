@@ -8,6 +8,7 @@ const admissionRoute = "/fieldbook/identity-authority-and-admission";
 const effectsRoute = "/fieldbook/external-effects-and-transactional-outboxes";
 const securityRoute = "/fieldbook/security-credentials-supply-chain-and-revocation";
 const openLoopsRoute = "/fieldbook/open-loops-and-re-entry";
+const hermesRoute = "/fieldbook/hermes-integrated-agent-runtime";
 const siteOrigin = process.env.SITE_URL ?? "https://example.invalid";
 
 test("@desktop homepage leads to a complete readable Harness Engineering guide", async ({ page }) => {
@@ -122,6 +123,7 @@ test("@desktop discovery endpoints expose only released publication routes", asy
   expect(sitemap).toContain("/fieldbook/memory-compaction-and-continuity");
   expect(sitemap).toContain("/fieldbook/security-credentials-supply-chain-and-revocation");
   expect(sitemap).toContain(openLoopsRoute);
+  expect(sitemap).toContain(hermesRoute);
   expect(robots).toContain("Sitemap:");
   expect(rssResponse.headers()["content-type"]).toContain("application/rss+xml");
   expect(rss).toContain("The Model Is Not the Agent");
@@ -130,6 +132,8 @@ test("@desktop discovery endpoints expose only released publication routes", asy
   expect(rss).toContain("revision-fieldbook-essay-001");
   expect(rss).toContain("Open Loops and Re-entry");
   expect(rss).toContain("revision-open-loops-re-entry-001");
+  expect(rss).toContain("Hermes: An Integrated Agent Runtime");
+  expect(rss).toContain("revision-hermes-integrated-agent-runtime-001");
 });
 
 test("@desktop architecture field map compares nine profiles and opens extended studies without JavaScript", async ({ page }) => {
@@ -342,6 +346,42 @@ test("@desktop print preserves Evidence and Completion sources and closure state
   await page.emulateMedia({ media: "print", reducedMotion: "reduce" });
   await expect(page.getByRole("navigation", { name: "On this page" })).toBeHidden();
   await expect(page.getByRole("figure", { name: "Open loop re-entry lifecycle" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Sources and further reading" })).toBeVisible();
+  await expect(page.locator(".study-guide-footer")).toBeVisible();
+});
+
+test("@nojs comparative case preserves source boundaries and released navigation", async ({ page }) => {
+  await page.goto(hermesRoute);
+  await expect(page.getByRole("heading", { name: "Hermes: An Integrated Agent Runtime" })).toBeVisible();
+  await expect(page.getByRole("figure", { name: "Hermes integrated runtime seams" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Failure boundary" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Retrieval check" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Hermes Agent release v0.20.5" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Previous: LangGraph: Durable State and Interrupts" })).toBeVisible();
+  await expect(page.getByRole("group", { name: /evidence/i })).toHaveCount(0);
+});
+
+test("@mobile comparative case keeps its seam map and prose contained", async ({ page }) => {
+  await page.goto(hermesRoute);
+  const diagram = page.getByRole("figure", { name: "Hermes integrated runtime seams" });
+  await expect(diagram).toBeVisible();
+  const [contentFits, diagramFits] = await Promise.all([
+    page.locator(".article-reader__prose").evaluate(
+      (element) => element.scrollWidth <= element.clientWidth,
+    ),
+    diagram.evaluate(
+      (element) => element.getBoundingClientRect().right <= window.innerWidth,
+    ),
+  ]);
+  expect(contentFits).toBe(true);
+  expect(diagramFits).toBe(true);
+});
+
+test("@desktop print preserves comparative source and retrieval surfaces", async ({ page }) => {
+  await page.goto(hermesRoute);
+  await page.emulateMedia({ media: "print", reducedMotion: "reduce" });
+  await expect(page.getByRole("navigation", { name: "On this page" })).toBeHidden();
+  await expect(page.getByRole("figure", { name: "Hermes integrated runtime seams" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Sources and further reading" })).toBeVisible();
   await expect(page.locator(".study-guide-footer")).toBeVisible();
 });

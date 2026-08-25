@@ -1,0 +1,35 @@
+id: source-hermes-agent-runtime
+title: Hermes Agent release v0.20.5
+author: Nous Research
+canonical_url: https://github.com/NousResearch/hermes-agent/tree/fcbd1076a93841fa88855acce810e342a5b78101
+published_at: 2026-08-19
+retrieved_at: 2026-08-25
+repository_commit: fcbd1076a93841fa88855acce810e342a5b78101
+inspected_paths:
+  - README.md
+  - LICENSE
+  - pyproject.toml
+  - agent/memory_manager.py
+  - agent/context_compressor.py
+  - gateway/session.py
+  - gateway/pairing.py
+  - gateway/turn_lease.py
+  - cron/jobs.py
+  - tools/registry.py
+  - docs/session-lifecycle.md
+source_type: first-party-repository
+basis: Commit-pinned inspection of the v0.20.5 release implementation across context, memory, sessions, pairing, turn leases, scheduling, tools, and lifecycle documentation.
+license_status: MIT
+evidence_grade: IP
+observed_mechanisms:
+  - description: The runtime integrates context compression, memory files, session history, a tool registry, gateway sessions, pairing, turn leases, and scheduled jobs.
+    evidence_grade: IP
+    basis: These seams are present in the inspected implementation paths at the pinned release commit.
+author_reported_claims: []
+unknowns:
+  - The inspected release does not by itself establish production-grade multi-tenant isolation, exactly-once external effects, or user-owned consent and acceptance semantics.
+  - Dreaming Mode and a five-tier memory taxonomy are not attributed to native Hermes behavior in this publication.
+falsifiers:
+  - The pinned source does not contain the named runtime seams or the release tag is shown not to resolve to this commit.
+last_validated: 2026-08-25
+correction_ledger_status: reviewed

@@ -227,6 +227,10 @@ describe("flagship fieldbook reader", () => {
     ["maker-checker-separation", "Maker/Checker Separation", "Maker and checker separation"],
     ["evidence-verification-policy-acceptance-and-closure", "Evidence, Verification, Policy, Acceptance, and Closure", "Completion ledger from evidence to closure"],
     ["open-loops-and-re-entry", "Open Loops and Re-entry", "Open loop re-entry lifecycle"],
+    ["anthropic-long-running-harnesses", "Anthropic Long-Running Harnesses", "Fresh-session work handoff"],
+    ["cursor-model-harness-evaluation", "Cursor: Model × Harness Evaluation", "Cursor harness improvement loop"],
+    ["langgraph-durable-state-and-interrupts", "LangGraph: Durable State and Interrupts", "LangGraph durable interrupt boundary"],
+    ["hermes-integrated-agent-runtime", "Hermes: An Integrated Agent Runtime", "Hermes integrated runtime seams"],
   ])("publishes %s with a retrieval diagram and check", async (chapterSlug, title, diagramName) => {
     const page = await ArticlePage({ params: Promise.resolve({ slug: chapterSlug }) });
     render(page);
@@ -245,12 +249,30 @@ describe("flagship fieldbook reader", () => {
     ["maker-checker-separation", "Maker and checker separation", "dl"],
     ["evidence-verification-policy-acceptance-and-closure", "Completion ledger from evidence to closure", "ol"],
     ["open-loops-and-re-entry", "Open loop re-entry lifecycle", "ol"],
+    ["anthropic-long-running-harnesses", "Fresh-session work handoff", "ol"],
+    ["cursor-model-harness-evaluation", "Cursor harness improvement loop", "ol"],
+    ["langgraph-durable-state-and-interrupts", "LangGraph durable interrupt boundary", "ol"],
+    ["hermes-integrated-agent-runtime", "Hermes integrated runtime seams", "dl"],
   ])("gives the %s diagram native %s semantics", async (chapterSlug, diagramName, semanticTag) => {
     const page = await ArticlePage({ params: Promise.resolve({ slug: chapterSlug }) });
     render(page);
 
     expect(screen.getByRole("figure", { name: diagramName }).querySelector(semanticTag))
       .toBeInTheDocument();
+  });
+
+  it("connects Evidence and Completion to the first comparative case and ends the released batch at Hermes", async () => {
+    const openLoopsPage = await ArticlePage({ params: Promise.resolve({ slug: "open-loops-and-re-entry" }) });
+    const { unmount } = render(openLoopsPage);
+    expect(screen.getByRole("link", { name: "Next: Anthropic Long-Running Harnesses" }))
+      .toHaveAttribute("href", "/fieldbook/anthropic-long-running-harnesses");
+    unmount();
+
+    const hermesPage = await ArticlePage({ params: Promise.resolve({ slug: "hermes-integrated-agent-runtime" }) });
+    render(hermesPage);
+    expect(screen.getByRole("link", { name: "Previous: LangGraph: Durable State and Interrupts" }))
+      .toHaveAttribute("href", "/fieldbook/langgraph-durable-state-and-interrupts");
+    expect(screen.queryByRole("link", { name: /^Next:/ })).not.toBeInTheDocument();
   });
 
   it("derives next-link semantics from the released essay sequence", async () => {

@@ -101,9 +101,13 @@ it("leads readers into a complete harness-engineering course map", async () => {
     ["Maker/Checker Separation", "/fieldbook/maker-checker-separation"],
     ["Evidence, Verification, Policy, Acceptance, and Closure", "/fieldbook/evidence-verification-policy-acceptance-and-closure"],
     ["Open Loops and Re-entry", "/fieldbook/open-loops-and-re-entry"],
+    ["Anthropic long-running harnesses", "/fieldbook/anthropic-long-running-harnesses"],
+    ["Cursor", "/fieldbook/cursor-model-harness-evaluation"],
+    ["LangGraph", "/fieldbook/langgraph-durable-state-and-interrupts"],
+    ["Hermes", "/fieldbook/hermes-integrated-agent-runtime"],
   ]) {
     expect(screen.getByRole("link", { name: new RegExp(name, "i") })).toHaveAttribute("href", href);
   }
-  expect(screen.getByText("Anthropic long-running harnesses").closest("li"))
+  expect(screen.getByText("QM").closest("li"))
     .toHaveTextContent("Coming next");
 });

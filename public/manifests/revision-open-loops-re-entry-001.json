@@ -7,7 +7,7 @@
   "summary": "Initial public revision of the open loops and re-entry chapter.",
   "affectedClaimIds": [],
   "correctionDisposition": "publication",
-  "contentHash": "sha256-6a99d1bb123d983fcaf5f01c5f30c6d41352e2e2b387cb89bcfdc7554375cc75",
+  "contentHash": "sha256-bfa6989b24518ae000fdca4aa47b890bef36082ec68b918e043e63a62009b5a1",
   "sourceIds": [
     "source-harness-engineering-fieldbook-v1",
     "source-temporal-workflow-execution-docs"

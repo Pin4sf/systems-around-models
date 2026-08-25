@@ -28,14 +28,14 @@ lifecycle_trace:
   - { order: 1, label: Start thread, owner: Application plus LangGraph, outcome: Initial graph state is admitted and checkpointed. }
   - { order: 2, label: Execute transitions, owner: LangGraph runtime, outcome: Nodes update state and select the next edge. }
   - { order: 3, label: Interrupt or finish, owner: Runtime plus application, outcome: Work pauses for re-entry or reaches an application-defined terminal state. }
-evidence_grade: FD
-evidence_fidelity: working-profile
+evidence_grade: IP
+evidence_fidelity: implementation-pinned
 dossier_status: refresh-needed
 source_ids:
   - source-architecture-langgraph
   - source-langchain-anatomy-agent-harness
-inspected_version: f09cfe8ffc1eeffd68f4b628ed69c30f7cad229f
+inspected_version: 95af6a00718588e7b7ce17310e8006d267896a77
 unknowns:
-  - The first profile does not treat open-source library and hosted platform operations as the same responsibility boundary.
-last_reviewed: 2026-08-22
+  - The inspected Python library does not treat checkpoint packages, the separately versioned SDK, and hosted platform operations as the same responsibility boundary.
+last_reviewed: 2026-08-25
 revision: 1

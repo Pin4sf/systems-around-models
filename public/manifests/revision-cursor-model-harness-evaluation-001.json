@@ -1,28 +1,28 @@
 {
-  "id": "revision-control-structures-delegation-001",
-  "essaySlug": "loops-workflows-graphs-and-delegation",
+  "id": "revision-cursor-model-harness-evaluation-001",
+  "essaySlug": "cursor-model-harness-evaluation",
   "revision": 1,
-  "publishedAt": "2026-08-22",
-  "substantivelyRevisedAt": "2026-08-22",
-  "summary": "Initial public revision of the loops, workflows, graphs, and delegation chapter.",
+  "publishedAt": "2026-08-25",
+  "substantivelyRevisedAt": "2026-08-25",
+  "summary": "Initial public revision of the Cursor model and harness evaluation case study.",
   "affectedClaimIds": [],
   "correctionDisposition": "publication",
-  "contentHash": "sha256-3da06adbca2f5b2765c055f56b9bfdcc425202ce31c914c695875cb0a0177801",
+  "contentHash": "sha256-b7b308056c136841c33db302786aa71a897a350532b52c9e376d80dffc25bd8f",
   "sourceIds": [
-    "source-anthropic-effective-long-running-harnesses",
+    "source-cursor-continually-improving-agent-harness",
     "source-harness-engineering-fieldbook-v1"
   ],
   "sourceValidationDates": {
     "source-harness-engineering-fieldbook-v1": "2026-08-21",
-    "source-anthropic-effective-long-running-harnesses": "2026-08-25"
+    "source-cursor-continually-improving-agent-harness": "2026-08-25"
   },
   "schemaVersion": 2,
   "validationSchemaVersion": "publication-v2",
   "sources": [
     {
-      "id": "source-anthropic-effective-long-running-harnesses",
-      "title": "Effective harnesses for long-running agents",
-      "canonicalUrl": "https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents",
+      "id": "source-cursor-continually-improving-agent-harness",
+      "title": "Continually improving the agent harness",
+      "canonicalUrl": "https://cursor.com/blog/continually-improving-agent-harness",
       "lastValidated": "2026-08-25",
       "licenseStatus": "all-rights-reserved"
     },

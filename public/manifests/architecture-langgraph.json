@@ -4,18 +4,18 @@
   "recordKind": "system",
   "productClass": "general-agent-runtime",
   "revision": 1,
-  "lastReviewed": "2026-08-22",
-  "inspectedVersion": "f09cfe8ffc1eeffd68f4b628ed69c30f7cad229f",
+  "lastReviewed": "2026-08-25",
+  "inspectedVersion": "95af6a00718588e7b7ce17310e8006d267896a77",
   "dossierStatus": "refresh-needed",
-  "evidenceGrade": "FD",
-  "evidenceFidelity": "working-profile",
-  "contentHash": "sha256-66e11edd49fcd2e57f1bfe35ad82b38ceb5ad5376f10a4d1f103238eededaeb5",
+  "evidenceGrade": "IP",
+  "evidenceFidelity": "implementation-pinned",
+  "contentHash": "sha256-3bc0d41af7e7f9144c91da892f287e040836db4b8f74a4c7a7de09a6c525f908",
   "sourceIds": [
     "source-architecture-langgraph",
     "source-langchain-anatomy-agent-harness"
   ],
   "sourceValidationDates": {
-    "source-architecture-langgraph": "2026-08-22",
+    "source-architecture-langgraph": "2026-08-25",
     "source-langchain-anatomy-agent-harness": "2026-08-22"
   },
   "schemaVersion": 2,
@@ -24,8 +24,8 @@
     {
       "id": "source-architecture-langgraph",
       "title": "LangGraph repository",
-      "canonicalUrl": "https://github.com/langchain-ai/langgraph",
-      "lastValidated": "2026-08-22",
+      "canonicalUrl": "https://github.com/langchain-ai/langgraph/tree/95af6a00718588e7b7ce17310e8006d267896a77",
+      "lastValidated": "2026-08-25",
       "licenseStatus": "MIT"
     },
     {

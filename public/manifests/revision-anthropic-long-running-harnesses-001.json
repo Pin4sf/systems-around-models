@@ -1,13 +1,13 @@
 {
-  "id": "revision-developer-product-harnesses-001",
-  "essaySlug": "developer-and-product-runtime-harnesses",
+  "id": "revision-anthropic-long-running-harnesses-001",
+  "essaySlug": "anthropic-long-running-harnesses",
   "revision": 1,
-  "publishedAt": "2026-08-22",
-  "substantivelyRevisedAt": "2026-08-22",
-  "summary": "Initial public revision of the developer and product runtime harness handoff chapter.",
+  "publishedAt": "2026-08-25",
+  "substantivelyRevisedAt": "2026-08-25",
+  "summary": "Initial public revision of the Anthropic long-running harness case study.",
   "affectedClaimIds": [],
   "correctionDisposition": "publication",
-  "contentHash": "sha256-517674e077dd3cbf6bcb4297e5bbde18e0410501287b159fc90669def970e083",
+  "contentHash": "sha256-03891f27846cb8513c9e5d622d14c0aa2e508a9c11632de9ee3dadbb5b877d69",
   "sourceIds": [
     "source-anthropic-effective-long-running-harnesses",
     "source-harness-engineering-fieldbook-v1"

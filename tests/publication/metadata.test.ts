@@ -30,6 +30,10 @@ const releasedChapterPaths = [
   "/fieldbook/maker-checker-separation",
   "/fieldbook/evidence-verification-policy-acceptance-and-closure",
   "/fieldbook/open-loops-and-re-entry",
+  "/fieldbook/anthropic-long-running-harnesses",
+  "/fieldbook/cursor-model-harness-evaluation",
+  "/fieldbook/langgraph-durable-state-and-interrupts",
+  "/fieldbook/hermes-integrated-agent-runtime",
 ];
 
 afterEach(() => {
@@ -149,26 +153,26 @@ describe("canonical publication metadata", () => {
 
   it("publishes canonical metadata and Article JSON-LD for the latest released chapter", async () => {
     vi.stubEnv("SITE_URL", canonicalSite);
-    const latestSlug = "open-loops-and-re-entry";
+    const latestSlug = "hermes-integrated-agent-runtime";
     const latestPath = `/fieldbook/${latestSlug}`;
     const [metadata, structuredData] = await Promise.all([
       generateMetadata({ params: Promise.resolve({ slug: latestSlug }) }),
       buildArticleStructuredData(latestSlug),
     ]);
 
-    expect(metadata.title).toBe("Open Loops and Re-entry | Systems Around Models");
+    expect(metadata.title).toBe("Hermes: An Integrated Agent Runtime | Systems Around Models");
     expect(metadata.alternates?.canonical).toBe(latestPath);
     expect(metadata.openGraph).toMatchObject({
       type: "article",
-      publishedTime: "2026-08-24",
-      modifiedTime: "2026-08-24",
+      publishedTime: "2026-08-25",
+      modifiedTime: "2026-08-25",
       url: `${canonicalSite}${latestPath}`,
     });
     expect(structuredData).toMatchObject({
       "@type": "Article",
-      headline: "Open Loops and Re-entry",
-      datePublished: "2026-08-24",
-      dateModified: "2026-08-24",
+      headline: "Hermes: An Integrated Agent Runtime",
+      datePublished: "2026-08-25",
+      dateModified: "2026-08-25",
       mainEntityOfPage: `${canonicalSite}${latestPath}`,
     });
   });
@@ -232,6 +236,9 @@ describe("publication discovery endpoints", () => {
     expect(body).toContain("<title>Open Loops and Re-entry</title>");
     expect(body).toContain(`<link>${canonicalSite}/fieldbook/open-loops-and-re-entry</link>`);
     expect(body).toContain("revision-open-loops-re-entry-001");
+    expect(body).toContain("<title>Hermes: An Integrated Agent Runtime</title>");
+    expect(body).toContain(`<link>${canonicalSite}/fieldbook/hermes-integrated-agent-runtime</link>`);
+    expect(body).toContain("revision-hermes-integrated-agent-runtime-001");
   });
 
   it("points crawlers at the canonical sitemap", () => {

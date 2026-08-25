@@ -14,7 +14,7 @@
   ],
   "sourceValidationDates": {
     "source-harness-engineering-fieldbook-v1": "2026-08-21",
-    "source-anthropic-effective-long-running-harnesses": "2026-08-22"
+    "source-anthropic-effective-long-running-harnesses": "2026-08-25"
   },
   "schemaVersion": 2,
   "validationSchemaVersion": "publication-v2",
@@ -23,7 +23,7 @@
       "id": "source-anthropic-effective-long-running-harnesses",
       "title": "Effective harnesses for long-running agents",
       "canonicalUrl": "https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents",
-      "lastValidated": "2026-08-22",
+      "lastValidated": "2026-08-25",
       "licenseStatus": "all-rights-reserved"
     },
     {

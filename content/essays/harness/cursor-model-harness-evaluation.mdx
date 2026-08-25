@@ -1,0 +1,69 @@
+---
+slug: cursor-model-harness-evaluation
+title: "Cursor: Model × Harness Evaluation"
+description: How Cursor's evaluation practice shows why model quality, harness behavior, offline tasks, online product signals, and failure attribution must be studied together.
+sequence: Harness Engineering
+sequence_position: 23
+revision: 1
+authors:
+  - Systems Around Models
+published_at: 2026-08-25
+substantively_revised_at: 2026-08-25
+reading_time_source: 9 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-cursor-continually-improving-agent-harness
+revision_id: revision-cursor-model-harness-evaluation-001
+previous_essay_slug: anthropic-long-running-harnesses
+next_essay_slug: langgraph-durable-state-and-interrupts
+---
+
+## Evaluate the combination that users encounter
+
+A model never reaches a user unmediated. Tools, prompts, context selection, edit protocols, retry policy, interface behavior, and verification all shape the observed result. A stronger model can perform worse inside an incompatible harness; a harness change can make the same model appear more capable.
+
+Cursor describes an improvement loop that combines offline agent tasks with online product signals and trace-level error analysis. The important unit is the **model × harness** combination, not either component in isolation.
+
+<CursorHarnessEvaluation />
+
+This changes how a team interprets a regression. “The model failed” is only a starting hypothesis. The failure might come from missing context, an unsuitable tool schema, an edit application error, excessive latency, a provider-specific prompt mismatch, or a verification step that allowed a bad result to look complete.
+
+## Use offline and online evidence for different questions
+
+Offline evaluations are controlled and repeatable. They help reproduce failures, compare candidate changes, and inspect exact traces. Their weakness is distribution: a benchmark may omit the repositories, interaction patterns, interruptions, and subjective tradeoffs that matter in real work.
+
+Online signals observe product use. Cursor discusses measures such as Keep Rate, which asks whether generated changes survive subsequent user behavior. Such a signal can reveal value that a synthetic task misses, but it remains a proxy. A kept edit may still be insecure or misunderstood; a reverted edit may have taught the user something or been displaced by a later design choice.
+
+Do not collapse both surfaces into one score. State which question each measure answers, which population it represents, and which failure classes it cannot detect. Consequential changes still need targeted safety, privacy, correctness, and accessibility checks even when broad product metrics improve.
+
+## Classify before changing the harness
+
+Trace review becomes useful when errors have actionable owners. Separate at least model reasoning, context assembly, tool selection, tool execution, edit application, verification, latency, and interface failures. A taxonomy does not need to be permanent, but each class should suggest a reproducible test and a responsible seam.
+
+Then change one material variable where possible. If a team upgrades the model, rewrites the system prompt, changes tools, and alters the benchmark simultaneously, an improved score has weak causal meaning. Record the model version, harness version, task set, environment, and evaluation method so the comparison can be repeated.
+
+Provider-specific adaptation is legitimate. Different models may respond best to different tool shapes, prompting strategies, or context budgets. The harness should expose those choices as versioned adapters instead of hiding them in scattered conditionals.
+
+## Promotion needs a disposition
+
+An evaluation should end in a typed decision: promote, hold, narrow rollout, investigate, or roll back. Preserve the evidence and known regressions behind the decision. A candidate that improves common tasks while damaging a rare high-risk path may need a scoped rollout rather than a global winner label.
+
+Online experiments also need admission rules. Define who may be exposed, what data may be collected, how privacy is protected, which guardrails cannot be traded away for engagement, and what threshold triggers rollback. Product measurement is part of the authority surface, not a neutral afterthought.
+
+## Failure boundary
+
+The loop fails when a benchmark becomes the product objective, Keep Rate is treated as correctness, traces are collected without appropriate privacy boundaries, model and harness changes cannot be attributed, or failure categories merely rename symptoms. It also fails when a global average hides a serious regression for a particular repository, language, user group, or consequential task.
+
+## Retrieval check
+
+A new model raises the offline task score and Keep Rate, but trace review shows more unauthorized file edits and slower recovery after a tool error. Which results describe capability, which describe product value, which represent a policy regression, and what disposition should the team choose before a wider rollout?
+
+## Build-and-break lab
+
+Choose one agent failure and label it independently from the final answer. Pin the model, harness, repository, and task. Change only one seam—context selection, a tool description, or verification—and rerun the trace. Then define one online signal that could challenge the offline conclusion and one safety invariant that neither score is allowed to override.
+
+## Sources and further reading
+
+- [Continually improving the agent harness](https://cursor.com/blog/continually-improving-agent-harness) — Cursor's first-party description of offline evaluation, online signals, failure analysis, and model-specific harness work.
+- [Harness Engineering Study Guide](/fieldbook/harness-engineering-study-guide) — the publication synthesis for tracing failures to context, tools, effects, evidence, and evaluation seams.

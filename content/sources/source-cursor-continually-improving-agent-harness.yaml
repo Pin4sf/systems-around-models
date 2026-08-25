@@ -1,0 +1,24 @@
+id: source-cursor-continually-improving-agent-harness
+title: Continually improving the agent harness
+author: Stefan Heule, Jediah Katz, and Cursor
+canonical_url: https://cursor.com/blog/continually-improving-agent-harness
+published_at: 2026-04-30
+retrieved_at: 2026-08-25
+inspected_paths: []
+source_type: first-party-article
+basis: Direct reading of Cursor's public engineering article about offline evaluation, online product signals, failure analysis, and model-specific harness adaptation.
+license_status: all-rights-reserved
+evidence_grade: FD
+observed_mechanisms:
+  - description: The article describes CursorBench, online A/B signals including Keep Rate, trace-based error classification, and adaptations to tools and prompts for different model providers.
+    evidence_grade: FD
+    basis: The mechanisms and reported evaluation practice are described by the team operating the harness.
+author_reported_claims:
+  - Cursor reports using offline and online evaluation together to improve its agent harness.
+unknowns:
+  - The article does not establish Keep Rate as a complete measure of correctness, safety, or user value.
+  - Provider-specific improvements do not establish that one harness configuration transfers unchanged to every model or task distribution.
+falsifiers:
+  - Cursor corrects the article or publishes evidence that the named evaluation and adaptation mechanisms were not used as described.
+last_validated: 2026-08-25
+correction_ledger_status: reviewed
