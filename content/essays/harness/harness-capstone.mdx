@@ -1,0 +1,93 @@
+---
+slug: harness-capstone
+title: Harness Capstone
+description: A complete specification for closing one externally consequential responsibility through ambiguity, crash, replay, verification, policy, acceptance, and re-entry.
+sequence: Harness Engineering
+sequence_position: 39
+revision: 1
+authors:
+  - author-shivansh-fulper
+published_at: 2026-08-27
+substantively_revised_at: 2026-08-27
+reading_time_source: 9 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-aws-making-retries-safe
+  - source-aws-transactional-outbox
+  - source-temporal-workflow-execution-docs
+  - source-nist-ai-rmf-1
+revision_id: revision-harness-capstone-001
+previous_essay_slug: twelve-harness-labs
+next_essay_slug: harness-review-questions-and-design-worksheet
+---
+
+## Close one responsibility under uncertainty
+
+Build a generic submission harness for an unreliable external provider. The domain can be a synthetic permit request, document delivery, or reservation. Do not use a private product flow or real personal data. The capstone is complete only when the system can distinguish prepared work, attempted effect, provider state, verified evidence, policy disposition, owner acceptance, and conscious closure.
+
+The provider fixture must support stable request keys, lost responses, delayed callbacks, duplicate callbacks, lookup outage, conflicting status, and eventual query. These failures force the harness to reason about the world rather than only its own process.
+
+## Required runtime contracts
+
+Implement:
+
+- principal and authority admission with revocable grants;
+- versioned context and capability manifests;
+- durable run, attempt, journal, and checkpoint records;
+- leased ownership with monotonic fencing tokens;
+- effect intent plus transactional outbox;
+- provider adapter with explicit idempotency and lookup capability;
+- reconciliation that preserves unknown, conflict, and probable correlation;
+- evidence bundle with provenance and immutable receipts;
+- maker/checker separation with a locked evaluator;
+- independent policy, acceptance, closure, and re-entry ledgers.
+
+Every state transition must name its authority, precondition, durable write, emitted evidence, and recovery behavior.
+
+## The scenario
+
+The owner asks the harness to prepare and submit one artifact. The maker creates it from approved source material. The checker validates semantic constraints and deterministic file properties. Policy permits submission only after verification. The owner approves the effect.
+
+During dispatch, the provider commits the request but the response is lost. The worker then crashes. Its lease expires and a replacement starts while provider lookup is down. A delayed callback arrives with a status that conflicts with the later query. Finally, the provider confirms receipt but the owner rejects the artifact's real-world outcome and requests follow-up.
+
+The correct behavior is not “retry until green.” It is to recover state, fence the stale worker, preserve the ambiguous effect, reconcile by stable key, retain contradictory evidence, ask for disposition where policy requires it, and create an open loop for the rejected outcome.
+
+## Required evidence bundle
+
+The final report must contain the admitted principal and grants, context and capability versions, plan, attempt lineage, lease tokens, effect intent, outbox deliveries, provider queries, callbacks, artifact hashes, checker result, policy result, owner approval, final acceptance, and closure or re-entry record.
+
+Include a machine-readable timeline and a short human narrative generated from the same records. The narrative may summarize; it may not strengthen uncertain evidence.
+
+## Evaluation rubric
+
+Use veto gates before aggregate scoring:
+
+1. no unauthorized or post-revocation effect;
+2. no duplicate canonical submission;
+3. no stale-owner durable mutation;
+4. no maker edit to the checker or evaluator;
+5. no silent conversion of unknown or conflict to success;
+6. complete recovery and evidence lineage;
+7. explicit owner disposition and open-loop behavior.
+
+Only after all veto gates pass should the evaluator consider latency, cost, operator burden, and quality of explanation.
+
+## Failure boundary
+
+The capstone fails if process completion becomes outcome completion, a lost response triggers blind resubmission, a stale worker commits, a callback overwrites contradictory query evidence, policy and acceptance share one status, or the owner cannot correct and reopen the responsibility. It also fails if the evaluator is editable by the harness under test.
+
+## Retrieval check
+
+The provider query says received, a delayed callback says rejected, the checker passed, and the owner asks for revision. Which facts are canonical, which status is conflicted, and why must the responsibility re-enter despite successful delivery evidence?
+
+## Build-and-break lab
+
+Implement the scenario as executable fixtures. Run once on the happy path, then once per injected failure and once with all failures composed. Export the evidence bundle and ask a second operator to reconstruct the disposition without access to the live process.
+
+## Sources and further reading
+
+- [Making retries safe with idempotent APIs](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/) — retry and request-intent boundaries.
+- [Transactional outbox](https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/transactional-outbox.html) — durable intent and dispatch.
+- [Temporal Workflow Executions](https://docs.temporal.io/workflow-execution) — durable workflow history and recovery.
+- [NIST AI RMF 1.0](https://doi.org/10.6028/NIST.AI.100-1) — lifecycle governance and evaluation responsibilities.

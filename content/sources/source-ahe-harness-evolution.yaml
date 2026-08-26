@@ -1,0 +1,23 @@
+id: source-ahe-harness-evolution
+title: "Agentic Harness Engineering: Observability-Driven Automatic Evolution of Coding-Agent Harnesses"
+author: Jiahang Lin, Shichun Liu, Chengjun Pan, Lizhi Lin, Shihan Dou, Zhiheng Xi, Xuanjing Huang, Hang Yan, Zhenhua Han, Tao Gui, and Yu-Gang Jiang
+canonical_url: https://arxiv.org/abs/2604.25850v4
+published_at: 2026-04-28
+retrieved_at: 2026-08-26
+inspected_paths: []
+source_type: first-party-article
+basis: Direct reading of arXiv version 4 of the primary research paper describing automated search over agent harness configurations and its reported software-engineering experiments.
+license_status: unknown
+evidence_grade: FD
+observed_mechanisms:
+  - description: The paper defines harness configuration as an optimization target and evaluates candidate changes through an automated experimental loop.
+    evidence_grade: FD
+    basis: The mechanism is specified in the authors' paper; reported performance remains author-reported rather than reproduced here.
+author_reported_claims:
+  - The authors report benchmark improvements from automated harness evolution under their experimental setup.
+unknowns:
+  - The reported results do not establish general improvement across models, budgets, task distributions, or independently held evaluators.
+falsifiers:
+  - The paper is withdrawn or corrected such that automated harness search is no longer the described intervention.
+last_validated: 2026-08-26
+correction_ledger_status: reviewed

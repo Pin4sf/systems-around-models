@@ -104,6 +104,13 @@ describe("deterministic public build manifest", () => {
           ]),
         }),
         expect.objectContaining({
+          id: "revision-harness-engineering-study-guide-003",
+          essaySlug: "harness-engineering-study-guide",
+          revision: 3,
+          substantivelyRevisedAt: "2026-08-27",
+          sourceIds: expect.arrayContaining(["source-ai-job-search-workflow"]),
+        }),
+        expect.objectContaining({
           id: "revision-memory-engineering-study-guide-001",
           essaySlug: "memory-engineering-study-guide",
           publishedAt: "2026-08-22",
@@ -194,6 +201,30 @@ describe("deterministic public build manifest", () => {
           essaySlug: "drover-fleet-custody-and-evidence",
           revision: 2,
         }),
+        expect.objectContaining({
+          id: "revision-drover-fleet-custody-and-evidence-003",
+          essaySlug: "drover-fleet-custody-and-evidence",
+          revision: 3,
+        }),
+        expect.objectContaining({
+          id: "revision-spotify-xirp-and-portal-001",
+          essaySlug: "spotify-xirp-and-portal",
+          revision: 1,
+          sourceIds: expect.arrayContaining(["source-spotify-xirp-portal"]),
+        }),
+        expect.objectContaining({
+          id: "revision-model-harness-evaluation-001",
+          essaySlug: "model-harness-evaluation",
+          sourceIds: expect.arrayContaining([
+            "source-swe-bench-evaluation-harness",
+            "source-rethinking-harness-evolution",
+          ]),
+        }),
+        expect.objectContaining({
+          id: "revision-keeping-the-guide-current-001",
+          essaySlug: "keeping-the-guide-current",
+          revision: 1,
+        }),
       ]),
     });
     expect(manifest.architectures).toEqual(expect.arrayContaining([
@@ -257,6 +288,14 @@ describe("deterministic public build manifest", () => {
         id: "source-drover-fleet-runtime",
         lastValidated: "2026-08-26",
       }),
+      expect.objectContaining({
+        id: "source-ai-job-search-workflow",
+        lastValidated: "2026-08-26",
+      }),
+      expect.objectContaining({
+        id: "source-swe-bench-evaluation-harness",
+        lastValidated: "2026-08-26",
+      }),
     ]));
     await expect(
       readFile(
@@ -276,6 +315,12 @@ describe("deterministic public build manifest", () => {
         "utf8",
       ),
     ).resolves.toContain('"revision": 2');
+    await expect(
+      readFile(
+        path.join(root, "public", "manifests", "revision-keeping-the-guide-current-001.json"),
+        "utf8",
+      ),
+    ).resolves.toContain('"essaySlug": "keeping-the-guide-current"');
     await expect(
       readFile(
         path.join(root, "public", "manifests", "revision-memory-engineering-study-guide-001.json"),

@@ -9,3 +9,42 @@ affected_claim_ids:
   - claim-harness-capability-configuration
   - claim-harness-failure-injection-learning-method
 correction_disposition: publication
+content_hash: sha256-5335df701fa92463f2efe5395fa87c5af6152acb8f433af4c125e949bdf29db4
+sources:
+  - { id: source-agentmemory-runtime, title: AgentMemory repository, canonical_url: https://github.com/rohitg00/agentmemory/tree/e04ba88819c365c9acf9d6661ea802143e728bd6, last_validated: 2026-08-25, license_status: Apache-2.0 }
+  - { id: source-ai-boost-awesome-harness-engineering, title: AI Boost Awesome Harness Engineering repository, canonical_url: https://github.com/ai-boost/awesome-harness-engineering/tree/f5e17c351cf05e3b611275e20aef3c7797e04d83, last_validated: 2026-08-25, license_status: CC0-1.0 }
+  - { id: source-ai-job-search-workflow, title: AI Job Search repository, canonical_url: https://github.com/MadsLorentzen/ai-job-search/tree/e2c311a5b40512daf79a04b22c96d7e049afc745, last_validated: 2026-08-25, license_status: MIT }
+  - { id: source-anthropic-agent-skills-repository, title: Anthropic Skills repository, canonical_url: https://github.com/anthropics/skills/tree/3b3fad96af16a10759d930941b4520ba0c40edae, last_validated: 2026-08-25, license_status: unknown }
+  - { id: source-anthropic-effective-long-running-harnesses, title: Effective harnesses for long-running agents, canonical_url: https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents, last_validated: 2026-08-25, license_status: all-rights-reserved }
+  - { id: source-architecture-openhands, title: OpenHands Agent Canvas repository, canonical_url: https://github.com/OpenHands/OpenHands/tree/150e76046db026dd944df0506642dc9b7b99391e, last_validated: 2026-08-25, license_status: MIT }
+  - { id: source-browser-use-runtime, title: Browser Use repository, canonical_url: https://github.com/browser-use/browser-use/tree/9a2db2d2db42c6f68a871f011b3b25fdcaa71847, last_validated: 2026-08-25, license_status: MIT }
+  - { id: source-community-cybersecurity-skills, title: Community Cybersecurity Skills repository, canonical_url: https://github.com/mukul975/Anthropic-Cybersecurity-Skills/tree/1b3f6b2286981381a5cc0566551ef3bb6bc38383, last_validated: 2026-08-25, license_status: Apache-2.0 }
+  - { id: source-diagram-design-skill, title: Diagram Design repository, canonical_url: https://github.com/cathrynlavery/diagram-design/tree/4faae6696c2953b59dee2b89ad89c688f80c3a67, last_validated: 2026-08-25, license_status: MIT }
+  - { id: source-earendil-what-is-a-harness, title: What is a Harness?, canonical_url: https://earendil.com/posts/what-is-a-harness/, last_validated: 2026-08-21, license_status: unknown }
+  - { id: source-harness-engineering-fieldbook-v1, title: "The Agent Systems Fieldbook — Harness Engineering, version 1", canonical_url: /manifests/revision-fieldbook-essay-001.json, last_validated: 2026-08-21, license_status: all-rights-reserved }
+  - { id: source-humanlayer-12-factor-agents, title: 12-Factor Agents, canonical_url: https://github.com/humanlayer/12-factor-agents, last_validated: 2026-08-22, license_status: Apache-2.0 }
+  - { id: source-langchain-anatomy-agent-harness, title: The Anatomy of an Agent Harness, canonical_url: https://www.langchain.com/blog/the-anatomy-of-an-agent-harness, last_validated: 2026-08-22, license_status: all-rights-reserved }
+  - { id: source-openviking-context-database, title: OpenViking repository, canonical_url: https://github.com/volcengine/OpenViking/tree/7ee75611212a1fe502da037b59afa04cbcf5e2ed, last_validated: 2026-08-25, license_status: AGPL-3.0 }
+  - { id: source-rasa-why-agents-fail, title: Why Agents Fail, canonical_url: https://github.com/RasaHQ/why-agents-fail, last_validated: 2026-08-22, license_status: MIT }
+  - { id: source-scientific-agent-skills, title: Scientific Agent Skills repository, canonical_url: https://github.com/K-Dense-AI/scientific-agent-skills/tree/36d8f13a1e754618794bf42f417884940077b4ae, last_validated: 2026-08-25, license_status: MIT }
+  - { id: source-walkinglabs-awesome-harness-engineering, title: Awesome Harness Engineering, canonical_url: https://github.com/walkinglabs/awesome-harness-engineering, last_validated: 2026-08-22, license_status: CC0-1.0 }
+  - { id: source-walkinglabs-learn-harness-engineering, title: Learn Harness Engineering, canonical_url: https://walkinglabs.github.io/learn-harness-engineering/en/, last_validated: 2026-08-22, license_status: MIT }
+source_validation_order:
+  - source-earendil-what-is-a-harness
+  - source-harness-engineering-fieldbook-v1
+  - source-walkinglabs-learn-harness-engineering
+  - source-walkinglabs-awesome-harness-engineering
+  - source-rasa-why-agents-fail
+  - source-anthropic-effective-long-running-harnesses
+  - source-langchain-anatomy-agent-harness
+  - source-humanlayer-12-factor-agents
+  - source-openviking-context-database
+  - source-agentmemory-runtime
+  - source-anthropic-agent-skills-repository
+  - source-diagram-design-skill
+  - source-scientific-agent-skills
+  - source-ai-boost-awesome-harness-engineering
+  - source-community-cybersecurity-skills
+  - source-ai-job-search-workflow
+  - source-architecture-openhands
+  - source-browser-use-runtime

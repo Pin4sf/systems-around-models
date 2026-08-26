@@ -1,0 +1,95 @@
+---
+slug: twelve-harness-labs
+title: Twelve Harness Labs
+description: Twelve cumulative exercises that turn the fieldbook's runtime, authority, recovery, evidence, and evaluation contracts into executable fixtures.
+sequence: Harness Engineering
+sequence_position: 38
+revision: 1
+authors:
+  - author-shivansh-fulper
+published_at: 2026-08-27
+substantively_revised_at: 2026-08-27
+reading_time_source: 10 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-anthropic-agent-skills-repository
+  - source-scientific-agent-skills
+  - source-browser-use-runtime
+revision_id: revision-twelve-harness-labs-001
+previous_essay_slug: harness-learning-promotion-and-retirement
+next_essay_slug: harness-capstone
+---
+
+## Build cumulatively, break deliberately
+
+These labs build one small harness in twelve increments. Each increment adds a responsibility and a failure fixture. Keep expected traces and locked evaluators outside the agent's editable workspace. A passing happy path is only the start; the lab is complete when the new responsibility survives its named break.
+
+The labs are a proposed curriculum, not experimentally validated pedagogy. Their value is practical: each produces an inspectable contract, test, and failure receipt that can transfer to a real system.
+
+## Lab 1 — Context as a compiled artifact
+
+Compile task, principal, environment, and source references into a versioned context packet. Include provenance and a token budget. Break it with contradictory instructions and stale source material; require explicit conflict and freshness states.
+
+## Lab 2 — Capability admission
+
+Declare tools, operations, scopes, credentials, and unsupported controls in a capability manifest. Bind only the admitted subset at run start. Break it with an undeclared tool and a provider adapter that lacks cancel support.
+
+## Lab 3 — Custody and sandbox boundaries
+
+Run one task in a disposable workspace and one in a persistent user workspace. Record who owns process, files, network, and cleanup. Break it with a symlink escape and uncertain worktree ownership; cleanup must fail closed.
+
+## Lab 4 — Journal and checkpoint
+
+Append turn events and produce a checkpoint with schema version and source offset. Crash between event append and checkpoint update. Recover from the journal without duplicating canonical state.
+
+## Lab 5 — Lease, fence, cancel, and budget
+
+Issue a monotonic fencing token to one worker. Expire its lease, start a replacement, and let the old worker attempt a write. Reject the stale token. Exercise cancellation and prove it blocks future authority without claiming to reverse completed effects.
+
+## Lab 6 — Effect intent and outbox
+
+Persist an effect intent and outbox record atomically. Crash before dispatch, after dispatch, and after external commit but before response storage. Reconcile by stable request key and preserve unknown when lookup is unavailable.
+
+## Lab 7 — Evidence and trace reconstruction
+
+Emit trace context, attempt identity, tool receipts, artifacts, and external acknowledgements. Delete one span and duplicate one event. Reconstruct a bounded timeline that marks missing and deduplicated observations instead of inventing continuity.
+
+## Lab 8 — Maker/checker separation
+
+Give the maker an editable workspace and the checker a clean reconstruction plus locked tests. Let the maker try to alter the evaluator. Reject the change, preserve the attempt, and require checker findings to cite artifacts and oracles.
+
+## Lab 9 — Policy, acceptance, and closure
+
+Implement distinct verification, policy, acceptance, and closure ledgers. Pass verification while policy blocks, then authorize a recorded override while owner acceptance remains pending. No ledger may silently advance another.
+
+## Lab 10 — Memory lifecycle
+
+Capture an observation as a candidate, validate it, retrieve it for a named decision, correct it, expire it, and delete it with lineage. Inject cross-principal retrieval and poisoned instructions. Scope filtering alone must not count as identity proof.
+
+## Lab 11 — Skill and browser admission
+
+Inspect one harmless skill before installation: owner, exact revision, license, instructions, scripts, network behavior, and permissions. Keep structural validity separate from scientific or operational correctness. Compare direct HTTP retrieval with browser execution; admit browser control only when rendering or interaction is necessary.
+
+## Lab 12 — Controlled harness evolution
+
+Generate one candidate harness change under an edit budget. Evaluate it on optimization and held-out tasks with matched budgets, then promote through a canary and roll it back on regression. The candidate may not edit tests, graders, or final acceptance criteria.
+
+## Failure boundary
+
+The lab sequence fails if fixtures live inside editable surfaces, later labs bypass earlier contracts, a structural skill check becomes a safety claim, browser execution is granted by default, or a green final run hides failed intermediate attempts. It also fails if learners copy domain-specific private data into fixtures.
+
+## Retrieval check
+
+Lab 12 improves the final score, but Lab 6 now duplicates an effect after a lost response. Which result governs promotion, and what should the course report preserve?
+
+## Build-and-break lab
+
+Treat the entire chapter as the lab. Maintain one repository with a contract file and failure fixture per increment. After every new mechanism, rerun all earlier fixtures. The final artifact is not a demo; it is a regression suite showing that added capability did not erase prior guarantees.
+
+## Sources and further reading
+
+- [Anthropic agent skills repository](https://github.com/anthropics/skills) — public skill-package material for admission exercises.
+- [Scientific agent skills](https://github.com/K-Dense-AI/claude-scientific-skills) — a broader skill corpus whose domain claims require separate validation.
+- [Browser Use](https://github.com/browser-use/browser-use) — public browser-runtime source for custody and permission exercises.
+- [Harness Engineering Study Guide](/fieldbook/harness-engineering-study-guide) — the conceptual sequence implemented by the labs.

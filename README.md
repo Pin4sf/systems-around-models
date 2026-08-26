@@ -6,7 +6,7 @@ Live deployment: [systems-around-models.vercel.app](https://systems-around-model
 
 ## Current status
 
-The public study hub now includes the complete **Harness Engineering** and **Memory Engineering** short guides, Harness Chapters 1–28, and **The Big Agent Harness Architecture Comparison** at `/architectures`. The architecture reader compares nine source-pinned profiles through one shared registry, normalized responsibility topologies, a wide matrix, and an anchored gallery. OpenAI Codex and DeepSeek Harness/Cordis have extended study pages; their visible evidence boundaries and the maintained refresh queue distinguish a current working study from an implementation-pinned dossier.
+The public study hub now includes the complete **Harness Engineering** and **Memory Engineering** short guides, all 40 Harness chapters, twelve cumulative labs, a capstone, a review worksheet, and **The Big Agent Harness Architecture Comparison** at `/architectures`. The architecture reader compares nine source-pinned profiles through one shared registry, normalized responsibility topologies, a wide matrix, and an anchored gallery. OpenAI Codex and DeepSeek Harness/Cordis have extended study pages; visible evidence boundaries and the maintained refresh queue distinguish current working studies from implementation-pinned dossiers.
 
 The editorial refresh queue is maintained in [`docs/editorial/publication-refresh-queue.md`](docs/editorial/publication-refresh-queue.md).
 

@@ -1,0 +1,55 @@
+{
+  "id": "revision-twelve-harness-labs-001",
+  "essaySlug": "twelve-harness-labs",
+  "revision": 1,
+  "publishedAt": "2026-08-27",
+  "substantivelyRevisedAt": "2026-08-27",
+  "summary": "Initial cumulative twelve-lab sequence covering context, capability, custody, durability, effects, evidence, memory, skills, browsers, and governed evolution.",
+  "affectedClaimIds": [],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-44bd3c53c8475a527738372c67ee1ffcb8df4b9391eecbeb80d53c0dac0371b7",
+  "sourceIds": [
+    "source-anthropic-agent-skills-repository",
+    "source-browser-use-runtime",
+    "source-harness-engineering-fieldbook-v1",
+    "source-scientific-agent-skills"
+  ],
+  "sourceValidationDates": {
+    "source-harness-engineering-fieldbook-v1": "2026-08-21",
+    "source-anthropic-agent-skills-repository": "2026-08-25",
+    "source-scientific-agent-skills": "2026-08-25",
+    "source-browser-use-runtime": "2026-08-25"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-anthropic-agent-skills-repository",
+      "title": "Anthropic Skills repository",
+      "canonicalUrl": "https://github.com/anthropics/skills/tree/3b3fad96af16a10759d930941b4520ba0c40edae",
+      "lastValidated": "2026-08-25",
+      "licenseStatus": "unknown"
+    },
+    {
+      "id": "source-browser-use-runtime",
+      "title": "Browser Use repository",
+      "canonicalUrl": "https://github.com/browser-use/browser-use/tree/9a2db2d2db42c6f68a871f011b3b25fdcaa71847",
+      "lastValidated": "2026-08-25",
+      "licenseStatus": "MIT"
+    },
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-scientific-agent-skills",
+      "title": "Scientific Agent Skills repository",
+      "canonicalUrl": "https://github.com/K-Dense-AI/scientific-agent-skills/tree/36d8f13a1e754618794bf42f417884940077b4ae",
+      "lastValidated": "2026-08-25",
+      "licenseStatus": "MIT"
+    }
+  ]
+}

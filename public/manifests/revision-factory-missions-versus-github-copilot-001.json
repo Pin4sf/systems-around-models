@@ -1,0 +1,46 @@
+{
+  "id": "revision-factory-missions-versus-github-copilot-001",
+  "essaySlug": "factory-missions-versus-github-copilot",
+  "revision": 1,
+  "publishedAt": "2026-08-27",
+  "substantivelyRevisedAt": "2026-08-27",
+  "summary": "Initial comparative publication separating mission validation, repository delivery, review authority, and external outcome closure.",
+  "affectedClaimIds": [],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-d744296acf28333f9fdad508aacef8d999287c49f35429325ac7d70f2db3584b",
+  "sourceIds": [
+    "source-factory-missions",
+    "source-github-copilot-cloud-agent",
+    "source-harness-engineering-fieldbook-v1"
+  ],
+  "sourceValidationDates": {
+    "source-harness-engineering-fieldbook-v1": "2026-08-21",
+    "source-factory-missions": "2026-08-26",
+    "source-github-copilot-cloud-agent": "2026-08-26"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-factory-missions",
+      "title": "Missions architecture and product documentation",
+      "canonicalUrl": "https://factory.ai/news/missions-architecture",
+      "lastValidated": "2026-08-26",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-github-copilot-cloud-agent",
+      "title": "GitHub Copilot cloud agent overview",
+      "canonicalUrl": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/use-copilot-agents/overview",
+      "lastValidated": "2026-08-26",
+      "licenseStatus": "unknown"
+    },
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    }
+  ]
+}

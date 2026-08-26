@@ -1,0 +1,73 @@
+{
+  "id": "revision-devin-greptile-coderabbit-and-qodo-001",
+  "essaySlug": "devin-greptile-coderabbit-and-qodo",
+  "revision": 1,
+  "publishedAt": "2026-08-27",
+  "substantivelyRevisedAt": "2026-08-27",
+  "summary": "Initial verification-plane comparison with typed evidence, disagreement, override, vendor-claim, and open-source lineage boundaries.",
+  "affectedClaimIds": [],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-f1627127d8f416e795b570d9a80c11a6ada17b23fa3e9d858c8d969e4277f151",
+  "sourceIds": [
+    "source-coderabbit-pre-merge-checks",
+    "source-devin-testing-recordings",
+    "source-greptile-trex-runtime-evidence",
+    "source-harness-engineering-fieldbook-v1",
+    "source-pr-agent-release",
+    "source-qodo-code-review-overview"
+  ],
+  "sourceValidationDates": {
+    "source-harness-engineering-fieldbook-v1": "2026-08-21",
+    "source-devin-testing-recordings": "2026-08-26",
+    "source-greptile-trex-runtime-evidence": "2026-08-26",
+    "source-coderabbit-pre-merge-checks": "2026-08-26",
+    "source-qodo-code-review-overview": "2026-08-26",
+    "source-pr-agent-release": "2026-08-26"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-coderabbit-pre-merge-checks",
+      "title": "CodeRabbit pre-merge checks",
+      "canonicalUrl": "https://docs.coderabbit.ai/pr-reviews/pre-merge-checks",
+      "lastValidated": "2026-08-26",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-devin-testing-recordings",
+      "title": "Testing and recordings with Devin",
+      "canonicalUrl": "https://docs.devin.ai/work-with-devin/testing-and-recordings",
+      "lastValidated": "2026-08-26",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-greptile-trex-runtime-evidence",
+      "title": "How Greptile Trex executes code",
+      "canonicalUrl": "https://www.greptile.com/blog/trex-code-execution",
+      "lastValidated": "2026-08-26",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-pr-agent-release",
+      "title": "PR-Agent v0.43.0 repository release",
+      "canonicalUrl": "https://github.com/The-PR-Agent/pr-agent/tree/4ebd5c5333c6ef21509e7304d27969eb825e6f22",
+      "lastValidated": "2026-08-26",
+      "licenseStatus": "MIT"
+    },
+    {
+      "id": "source-qodo-code-review-overview",
+      "title": "Qodo Merge code review overview",
+      "canonicalUrl": "https://docs.qodo.ai/code-review/overview",
+      "lastValidated": "2026-08-26",
+      "licenseStatus": "all-rights-reserved"
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+---
+slug: keeping-the-guide-current
+title: Keeping the Guide Current
+description: A publication harness for turning discovery feeds into revision-pinned evidence, visible corrections, reproducible manifests, and bounded claims.
+sequence: Harness Engineering
+sequence_position: 41
+revision: 1
+authors:
+  - author-shivansh-fulper
+published_at: 2026-08-27
+substantively_revised_at: 2026-08-27
+reading_time_source: 8 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-ai-boost-awesome-harness-engineering
+  - source-walkinglabs-awesome-harness-engineering
+  - source-walkinglabs-learn-harness-engineering
+revision_id: revision-keeping-the-guide-current-001
+previous_essay_slug: harness-review-questions-and-design-worksheet
+---
+
+## Publication needs a harness too
+
+Agent runtimes, product documentation, repositories, releases, and research papers change independently. A fieldbook that cites only a product name will drift into false precision. Maintaining the guide is therefore a harness problem: discovery, admission, inspection, evidence recording, review, publication, correction, and retirement need explicit contracts.
+
+The aim is not to freeze the field. It is to make every public observation recoverable to the exact source state that supported it.
+
+## Separate discovery from evidence
+
+Curated lists and learning repositories are valuable discovery feeds. They surface systems, papers, courses, and vocabulary that deserve inspection. They are not evidence for the projects they link to.
+
+For each candidate source, find the canonical owner, exact revision, publication date, license, and relevant paths. Prefer a release commit over moving `main`. If only live documentation exists, record retrieval and last-validation dates and narrow the claim to what the page actually says.
+
+## Pin the observation
+
+A source record should answer:
+
+- who owns the source and where is the canonical URL?
+- which release, commit, package, or dated document was inspected?
+- which files or sections support the mechanism?
+- what was directly observed versus author-reported?
+- what remains unknown?
+- what evidence would falsify the record?
+- what license governs reuse, and what remains legally uncertain?
+
+License labels are inventory, not legal conclusions. Check each artifact separately, especially when a repository combines code, documentation, examples, and third-party assets.
+
+## Recheck before comparative or frontier claims
+
+Before publishing “current,” “latest,” “supports,” or any performance claim, re-open the primary source. Product capabilities and repository heads can change within days. Record exact dates and avoid SOTA language unless the benchmark, task distribution, budgets, evaluator, and independent reproduction truly support that scope.
+
+When a vendor reports a metric, label it author-reported. When this publication inspects code at a commit, label the mechanism implementation-pinned. When only documentation is visible, do not infer proprietary internals.
+
+## Preserve immutable revisions and visible corrections
+
+Publication edits create a new revision record with a content hash and source snapshots. Do not silently rewrite what an older revision claimed. A correction should state what changed, why, which claims were affected, and whether the disposition was accepted, qualified, rejected, or unresolved.
+
+Upstream drift does not always invalidate history. Preserve the old observation at its pinned revision, update the current source record, and publish a new essay revision if the teaching claim changes.
+
+## Make the release reproducible
+
+Generate the public manifest from validated source, claim, essay, revision, architecture, and lesson records. Run schema checks, content integrity, interface tests, production build, sitemap and RSS checks, and no-JavaScript routes. Visually inspect representative desktop and mobile pages, including long tables, code, navigation, print, and reduced motion.
+
+The release evidence should name the commit, branch, commands, results, screenshots, known unknowns, and deployment status. A preview URL is not canonical production truth.
+
+## Retire stale material consciously
+
+Mark a source record as needing update when its primary revision drifts. Remove it from current comparative claims only through a reviewed revision. Keep useful historical material addressable, and retire broken links or superseded procedures with a reason and replacement when available.
+
+The maintenance loop closes when a reader can move from a claim to its source snapshot, understand the limits, report a correction, and see how the correction changed the public record.
+
+## Failure boundary
+
+The publication harness fails if a curated list becomes evidence, moving branches masquerade as exact revisions, vendor metrics lose their label, proprietary behavior is inferred from public lineage, corrections overwrite history, or release checks omit the actual no-JavaScript reading surface. It also fails if private research details leak into the public corpus.
+
+## Retrieval check
+
+A repository ships a new release after an essay publishes, while its documentation still describes the old behavior. What should remain historical, what becomes `needs-update`, and what evidence threshold justifies a new essay revision?
+
+## Build-and-break lab
+
+Choose one current fieldbook source. Re-pin it to a release or dated document, record inspected paths and falsifiers, then simulate upstream drift and a reader correction. Produce a new immutable revision, regenerate the manifest, and verify that both the historical and current evidence remain reconstructable.
+
+## Sources and further reading
+
+- [AI Boost Awesome Harness Engineering](https://github.com/ai-boost/awesome-harness-engineering/tree/f5e17c351cf05e3b611275e20aef3c7797e04d83) — a commit-pinned discovery feed, not primary evidence for the projects it lists.
+- [Awesome Harness Engineering](https://github.com/walkinglabs/awesome-harness-engineering) — a curated discovery index whose linked claims require source admission.
+- [Learn Harness Engineering](https://github.com/walkinglabs/learn-harness-engineering) — a learning resource used for curriculum discovery, not as proof of third-party systems.
+- [Harness Engineering Study Guide](/fieldbook/harness-engineering-study-guide) — the public synthesis maintained by this process.

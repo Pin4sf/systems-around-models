@@ -1,0 +1,87 @@
+---
+slug: harness-learning-promotion-and-retirement
+title: Harness Learning, Promotion, and Retirement
+description: A governed second loop for proposing, evaluating, promoting, monitoring, rolling back, and retiring harness changes without evaluator capture.
+sequence: Harness Engineering
+sequence_position: 37
+revision: 1
+authors:
+  - author-shivansh-fulper
+published_at: 2026-08-27
+substantively_revised_at: 2026-08-27
+reading_time_source: 9 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-cursor-continually-improving-agent-harness
+  - source-ahe-harness-evolution
+  - source-harness-updating-versus-benefit
+  - source-rethinking-harness-evolution
+  - source-swe-bench-evaluation-harness
+revision_id: revision-harness-learning-promotion-and-retirement-001
+previous_essay_slug: failure-injection-and-recovery-evaluation
+next_essay_slug: twelve-harness-labs
+---
+
+## Learning is a higher-authority loop
+
+The run loop uses the current harness to do work. The learning loop proposes changes to the machinery that governs future runs: instructions, tools, routing, memory procedures, recovery policies, or evaluators. That second loop has greater leverage and therefore needs stricter authority.
+
+A successful run can suggest a candidate lesson. It cannot promote its own lesson into policy. Captured behavior is not trusted procedure until it survives review and bounded evaluation.
+
+## Keep candidates diffable and attributable
+
+Represent proposed changes as versioned files or structured records with source runs, rationale, expected benefit, affected responsibilities, risk class, and rollback. Keep edit budgets narrow. A candidate should say whether it changes execution, evaluation, admission, or only documentation.
+
+Procedure memory follows the same rule. A frequently repeated sequence may be useful, but repetition does not establish correctness. Preserve the observations that produced it and the conditions under which it is eligible.
+
+## Protect the judge
+
+The candidate generator must not edit final tests, held-out tasks, grading thresholds, or acceptance rules. When evaluator changes are necessary, review and validate them as a separate intervention before using them to judge harness candidates.
+
+Use role and storage separation:
+
+```text
+candidate author -> optimization tasks -> proposal
+evaluation owner -> locked held-out tasks -> report
+release owner -> bounded rollout -> promotion or rejection
+operations owner -> monitoring -> retain, rollback, or retire
+```
+
+An automated pipeline may implement these roles, but authority boundaries still need independent credentials, protected paths, and receipts.
+
+## Separate update capability from benefit capability
+
+First ask whether the system can produce a valid harness change: syntactically correct, scoped, reversible, and within protected-surface policy. Then ask whether that change improves the intended construct under matched budgets and held-out evaluation. A system can be good at editing its harness and bad at improving it.
+
+Ablations should isolate the changed mechanism. Compare against no change, a simple hand-written baseline, and budget-matched alternatives. Preserve failed candidates and negative results so the search does not rediscover the same attractive mistake.
+
+## Promote in stages
+
+Move a candidate through locked evaluation, review, canary use, monitoring, and explicit promotion. Define rollback triggers before release: correctness regression, unsafe effects, cost growth, increased correction burden, or evaluator drift. Keep the previous version addressable.
+
+Retirement is part of learning. Remove obsolete procedures when their dependencies disappear, their evidence expires, or a safer mechanism supersedes them. Preserve the retirement record and migration impact instead of leaving contradictory instructions active.
+
+## Treat research results as bounded
+
+Agentic Harness Engineering reports improvement from automated search in its setup. Rethinking the Evaluation of Harness Evolution reports no consistent advantage under its matched-budget, held-out experiments. These results constrain experimental design; neither licenses a universal claim. This guide makes no SOTA assertion.
+
+## Failure boundary
+
+The learning loop fails if it edits its own judge, tunes on held-out tasks, receives a larger hidden budget, promotes from one noisy win, loses negative trials, cannot roll back, or leaves superseded procedures active. It also fails if a proposed lesson gains authority merely because the agent wrote it confidently.
+
+## Retrieval check
+
+A candidate harness fixes three optimization tasks, regresses one held-out safety fixture, and reduces token cost. May it promote? Which result has veto authority, and what evidence would justify a revised candidate rather than an override?
+
+## Build-and-break lab
+
+Create a candidate directory, protected evaluator directory, held-out set, promotion manifest, canary flag, and rollback pointer. Let the optimizer attempt to edit a test, overfit one task, and hide a failed trial. Assert protected-path rejection, complete trial retention, staged promotion, and automatic rollback on a predeclared regression.
+
+## Sources and further reading
+
+- [Agentic Harness Engineering](https://arxiv.org/abs/2604.25850v4) — version-pinned primary harness-search paper with author-reported results.
+- [Harness Updating Is Not Harness Benefit](https://arxiv.org/abs/2605.30621v1) — version-pinned primary distinction between producing and benefiting from harness updates.
+- [Rethinking the Evaluation of Harness Evolution for Agents](https://arxiv.org/abs/2607.12227v1) — version-pinned matched-budget and held-out counterevidence.
+- [Cursor's harness evaluation account](https://cursor.com/blog/continually-improving-agent-harness) — first-party offline, online, and model-specific iteration practice.
+- [SWE-bench evaluation harness](https://github.com/SWE-bench/SWE-bench/tree/7a21e05772954cc81471ae19d56f436cecf43c54) — a concrete protected evaluator surface.

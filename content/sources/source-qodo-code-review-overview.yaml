@@ -1,0 +1,24 @@
+id: source-qodo-code-review-overview
+title: Qodo Merge code review overview
+author: Qodo
+canonical_url: https://docs.qodo.ai/code-review/overview
+published_at: 2026-08-26
+retrieved_at: 2026-08-26
+inspected_paths:
+  - /code-review/overview
+source_type: first-party-article
+basis: Direct reading of Qodo's current product overview for repository-aware, requirement-aware, and specialized review agents.
+license_status: all-rights-reserved
+evidence_grade: FD
+observed_mechanisms:
+  - description: The product overview describes multiple specialized review roles using repository history, requirements, and organization standards as context.
+    evidence_grade: FD
+    basis: The mechanism is described in current first-party documentation and is not inferred from legacy open-source code.
+author_reported_claims:
+  - Qodo reports that its multi-agent review design targets high recall and precision; this publication treats that as vendor-reported.
+unknowns:
+  - Public product documentation does not expose enough proprietary implementation detail to reproduce the commercial reviewer.
+falsifiers:
+  - Qodo corrects the overview or no longer documents specialized context-aware review roles.
+last_validated: 2026-08-26
+correction_ledger_status: reviewed

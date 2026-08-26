@@ -1,0 +1,8 @@
+id: revision-conformance-and-trajectory-evaluation-001
+target_slug: conformance-and-trajectory-evaluation
+revision: 1
+published_at: 2026-08-27
+substantively_revised_at: 2026-08-27
+summary: Initial three-axis evaluation chapter separating outcome, observable trajectory, and runtime-contract conformance.
+affected_claim_ids: []
+correction_disposition: publication

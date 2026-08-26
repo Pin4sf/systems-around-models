@@ -1,0 +1,79 @@
+---
+slug: bounded-whole-product-case-study
+title: A Bounded Whole-Product Case Study
+description: A public, release-pinned responsibility case joining untrusted input, private source truth, maker-checker review, deterministic artifact checks, human approval, and outcomes.
+sequence: Harness Engineering
+sequence_position: 33
+revision: 1
+authors:
+  - author-shivansh-fulper
+published_at: 2026-08-27
+substantively_revised_at: 2026-08-27
+reading_time_source: 9 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-ai-job-search-workflow
+revision_id: revision-bounded-whole-product-case-study-001
+previous_essay_slug: devin-greptile-coderabbit-and-qodo
+next_essay_slug: model-harness-evaluation
+---
+
+## A bounded responsibility case
+
+The public AI Job Search v1.6.0 repository offers a useful whole-product case because its responsibility is narrow and its authority boundaries are explicit. It takes an external job posting, uses user-maintained profile material to prepare tailored artifacts, separates drafting from review, compiles and checks PDFs, leaves external submission to the human, proposes email-derived status changes for approval, and tracks outcomes.
+
+This chapter studies the mechanism, not the domain as a recommendation and not the author's outcome anecdote as causal proof. The workflow handles sensitive career data and should remain private to its operator.
+
+## Treat external text as data
+
+A job posting may contain instructions hostile to the workflow. The repository's security guidance treats posting content as untrusted data. That is a necessary instruction boundary, but the documentation correctly does not make it a sandbox claim.
+
+The context compiler should extract relevant requirements, preserve the source, and reject attempts by the posting to rewrite system rules or request unrelated secrets. User-maintained profile files remain the source of truth. A plausible sentence generated from a posting is not automatically a true statement about the applicant.
+
+## Separate maker, checker, and artifact verifier
+
+Drafting and review are distinct stages. The reviewer can compare claims against source material, remove unsupported assertions, and request revision. Deterministic artifact checks then answer different questions: did the PDF compile, render at the expected page count, preserve a searchable text layer, and avoid obvious visual breakage?
+
+These checks complement one another:
+
+<dl className="completion-map">
+  <div><dt>Draft</dt><dd>Produces a candidate artifact; it cannot attest its own truth.</dd></div>
+  <div><dt>Review</dt><dd>Checks support and requirements; it cannot prove rendering.</dd></div>
+  <div><dt>Artifact check</dt><dd>Tests mechanical delivery constraints; it cannot judge career truth.</dd></div>
+  <div><dt>Human approval</dt><dd>Authorizes submission; it does not prove employer receipt or outcome.</dd></div>
+</dl>
+
+## Preserve human-owned external effects
+
+The inspected workflow does not authorize automatic application submission. That is an important boundary, not missing automation. It keeps a consequential external effect under explicit human control while still reducing preparation and verification burden.
+
+Gmail synchronization follows the same pattern: infer candidate status changes, show the evidence, and ask for approval before changing canonical application state. An email can be ambiguous, duplicated, forwarded, or unrelated. Proposal-first state change keeps correction cheap.
+
+## Keep preparation, submission, and outcome separate
+
+An artifact can be verified without being submitted. A submission can be recorded without proof of receipt. A reply can be observed without establishing a final outcome. Keep separate ledgers for preparation, external effect, evidence, and disposition.
+
+Outcome tracking should not become retrospective storytelling. Record dates, source messages, stage changes, and explicit corrections. The repository author's account of finding work is meaningful personal testimony, but it does not prove the workflow caused that outcome or will transfer to another person.
+
+## Minimize sensitive data exposure
+
+Profile files, applications, and correspondence may contain personal data. Git ignore rules and security guards reduce accidental publication risk, while tests keep those guards from silently regressing. They do not replace filesystem permissions, repository access control, secret scanning, backups, and human review before sharing.
+
+## Failure boundary
+
+The design fails if untrusted posting text can rewrite the workflow, generated claims bypass the user's source-of-truth material, the maker approves its own artifact, PDF compilation is confused with semantic correctness, an email silently mutates canonical state, or submission occurs without the user's approval. It also fails if private profile material enters a public repository.
+
+## Retrieval check
+
+A posting requests an unsupported achievement, the draft includes it, the PDF renders perfectly, and an email later says “we will be in touch.” Which checks should fail, which state changes may be proposed, and what must remain unresolved?
+
+## Build-and-break lab
+
+Build a generic document-preparation workflow with a private fact file and an untrusted request. Inject an instruction to invent a credential, a malformed PDF, a duplicated status email, and a false-positive outcome phrase. Assert maker/checker separation, deterministic artifact receipts, proposal-first state changes, and human-owned submission.
+
+## Sources and further reading
+
+- [AI Job Search v1.6.0](https://github.com/MadsLorentzen/ai-job-search/tree/ab91c60cc47147d9416f0af758fb5e2d109956ce) — release-pinned public workflow, security boundary, verifiers, guards, and tests.
+- [Repository security guidance](https://github.com/MadsLorentzen/ai-job-search/blob/ab91c60cc47147d9416f0af758fb5e2d109956ce/SECURITY.md) — untrusted-input and sensitive-data boundaries.
+- [Harness Engineering Study Guide](/fieldbook/harness-engineering-study-guide) — the responsibility chain used to analyze the case.

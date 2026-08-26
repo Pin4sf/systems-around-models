@@ -1,0 +1,46 @@
+{
+  "id": "revision-harness-review-questions-and-design-worksheet-001",
+  "essaySlug": "harness-review-questions-and-design-worksheet",
+  "revision": 1,
+  "publishedAt": "2026-08-27",
+  "substantivelyRevisedAt": "2026-08-27",
+  "summary": "Initial failure-path review instrument spanning responsibility, authority, context, state, effects, evidence, memory, recovery, re-entry, and retirement.",
+  "affectedClaimIds": [],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-32f63ed433e216311afabde2133fd8bb600e0e7b1e0d470d2d9226bf45bbf84a",
+  "sourceIds": [
+    "source-harness-engineering-fieldbook-v1",
+    "source-nist-ai-rmf-1",
+    "source-w3c-trace-context"
+  ],
+  "sourceValidationDates": {
+    "source-harness-engineering-fieldbook-v1": "2026-08-21",
+    "source-nist-ai-rmf-1": "2026-08-24",
+    "source-w3c-trace-context": "2026-08-24"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-nist-ai-rmf-1",
+      "title": "Artificial Intelligence Risk Management Framework (AI RMF 1.0)",
+      "canonicalUrl": "https://doi.org/10.6028/NIST.AI.100-1",
+      "lastValidated": "2026-08-24",
+      "licenseStatus": "unknown"
+    },
+    {
+      "id": "source-w3c-trace-context",
+      "title": "Trace Context",
+      "canonicalUrl": "https://www.w3.org/TR/2021/REC-trace-context-1-20211123/",
+      "lastValidated": "2026-08-24",
+      "licenseStatus": "unknown"
+    }
+  ]
+}

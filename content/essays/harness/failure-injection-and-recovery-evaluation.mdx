@@ -1,0 +1,81 @@
+---
+slug: failure-injection-and-recovery-evaluation
+title: Failure Injection and Recovery Evaluation
+description: A recovery-first test method for durable cuts, ambiguous external effects, stale ownership, revoked authority, corrupted state, and degraded evidence.
+sequence: Harness Engineering
+sequence_position: 36
+revision: 1
+authors:
+  - author-shivansh-fulper
+published_at: 2026-08-27
+substantively_revised_at: 2026-08-27
+reading_time_source: 8 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-rasa-why-agents-fail
+  - source-aws-making-retries-safe
+  - source-aws-transactional-outbox
+  - source-temporal-workflow-execution-docs
+revision_id: revision-failure-injection-and-recovery-evaluation-001
+previous_essay_slug: conformance-and-trajectory-evaluation
+next_essay_slug: harness-learning-promotion-and-retirement
+---
+
+## Declare recovery before injecting failure
+
+A chaos test is useful only when the expected recovery contract is known. Before stopping a worker or dropping a response, state which records must already be durable, which component owns reconciliation, which effects may be retried, which states may degrade to unknown, and what evidence proves recovery.
+
+Without that declaration, the test rewards whichever behavior happened rather than evaluating a designed guarantee.
+
+## Inject faults at durable cuts
+
+The most informative failures sit between operations that developers casually describe as one step:
+
+1. persist effect intent, then crash before dispatch;
+2. commit the external effect, then lose the response;
+3. deliver an event, then crash before acknowledging it;
+4. expire a lease while a stale worker is still active;
+5. revoke a grant between planning and tool execution;
+6. write a checkpoint, then corrupt or truncate it;
+7. complete maker work while the checker is unavailable;
+8. retrieve poisoned, stale, or cross-principal memory.
+
+These are synthetic fixtures, not claims about incidents in a particular product. Their value comes from exercising general contracts described by retry, outbox, and durable-workflow sources.
+
+## Keep ambiguous effects open
+
+AWS's retry guidance emphasizes idempotent APIs, while transactional outbox guidance separates durable intent from later dispatch. Those mechanisms narrow failure, but neither can prove an unknown external state by itself.
+
+After a lost response, query by the stable request key when the provider supports it. If lookup is unavailable, preserve `unknown` or `probable` rather than resubmitting blindly. A retry token prevents duplicate application only when the provider honors it within the relevant scope and retention window.
+
+## Fence stale owners
+
+A new worker must not merely be newer in wall-clock time; it needs a monotonic ownership token checked at every durable mutation and effect boundary. Inject a partition that lets the old worker continue after its lease expires. The expected result is rejection of the stale token, not simultaneous “best effort” progress.
+
+Cancellation and budget exhaustion deserve the same treatment. Stop future authority, preserve partial evidence, and make compensation or cleanup explicit. Cancellation cannot reverse an external effect already committed.
+
+## Test evidence degradation
+
+Recovery is not only state restoration. It is truthful evidence under loss. Delete one span, delay one callback, make one checker unavailable, and corrupt one projection while preserving source facts. The UI and ledger should distinguish confirmed, inferred, stale, missing, and contradictory evidence.
+
+Temporal documents durable workflow execution and replay, but durable control flow does not automatically make external effects idempotent or artifacts correct. Test workflow history and external-world reconciliation as separate surfaces.
+
+## Failure boundary
+
+The evaluation fails if a retry can duplicate an effect, a stale worker can commit, revocation is checked only at admission, corrupt checkpoints are accepted silently, unavailable checkers become passes, or recovered projections lose provenance. It also fails if the test declares success merely because the process restarted.
+
+## Retrieval check
+
+A provider accepted a request, the response was lost, lookup is down, the worker lease expired, and a replacement worker starts. What may the replacement do immediately, which state must remain ambiguous, and what evidence is required before retry?
+
+## Build-and-break lab
+
+Implement an intent record, outbox, stable request key, provider lookup, lease token, and evidence ledger. Inject each durable cut above. Require invariant assertions for no duplicate canonical effect, no stale-owner mutation, no authority after revocation, recoverable checkpoints, and explicit degraded evidence.
+
+## Sources and further reading
+
+- [Making retries safe with idempotent APIs](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/) — stable request intent and retry boundaries.
+- [Transactional outbox pattern](https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/transactional-outbox.html) — durable intent and asynchronous dispatch.
+- [Temporal Workflow Executions](https://docs.temporal.io/workflow-execution) — durable workflow history and replay semantics.
+- [Why agents fail](https://rasa.com/blog/why-agents-fail/) — first-party failure framing for agent systems.

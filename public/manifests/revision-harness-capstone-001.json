@@ -1,0 +1,64 @@
+{
+  "id": "revision-harness-capstone-001",
+  "essaySlug": "harness-capstone",
+  "revision": 1,
+  "publishedAt": "2026-08-27",
+  "substantivelyRevisedAt": "2026-08-27",
+  "summary": "Initial capstone specification for closing one bounded external responsibility through ambiguity, recovery, verification, acceptance, and re-entry.",
+  "affectedClaimIds": [],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-736e7925678e6222029bff4c5bc6760579c1c4b7448bc4d0a38993b80ae05cdd",
+  "sourceIds": [
+    "source-aws-making-retries-safe",
+    "source-aws-transactional-outbox",
+    "source-harness-engineering-fieldbook-v1",
+    "source-nist-ai-rmf-1",
+    "source-temporal-workflow-execution-docs"
+  ],
+  "sourceValidationDates": {
+    "source-harness-engineering-fieldbook-v1": "2026-08-21",
+    "source-aws-making-retries-safe": "2026-08-23",
+    "source-aws-transactional-outbox": "2026-08-23",
+    "source-temporal-workflow-execution-docs": "2026-08-24",
+    "source-nist-ai-rmf-1": "2026-08-24"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-aws-making-retries-safe",
+      "title": "Making retries safe with idempotent APIs",
+      "canonicalUrl": "https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/",
+      "lastValidated": "2026-08-23",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-aws-transactional-outbox",
+      "title": "Transactional outbox pattern",
+      "canonicalUrl": "https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/transactional-outbox.html",
+      "lastValidated": "2026-08-23",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-nist-ai-rmf-1",
+      "title": "Artificial Intelligence Risk Management Framework (AI RMF 1.0)",
+      "canonicalUrl": "https://doi.org/10.6028/NIST.AI.100-1",
+      "lastValidated": "2026-08-24",
+      "licenseStatus": "unknown"
+    },
+    {
+      "id": "source-temporal-workflow-execution-docs",
+      "title": "Temporal Workflow Execution and Event History documentation",
+      "canonicalUrl": "https://github.com/temporalio/documentation/tree/053c35af7e9ead0a7714d01612576bba14f0fcc1/docs/encyclopedia/workflow/workflow-execution",
+      "lastValidated": "2026-08-24",
+      "licenseStatus": "MIT"
+    }
+  ]
+}
