@@ -99,7 +99,7 @@ The current essay correctly separates the Durable Object substrate from the Thin
 - opt-in Action authorization and explicit idempotency keys;
 - the difference between runtime recovery and external-effect correctness.
 
-This is a strong mechanism-level account. The largest omission is not another platform primitive; it is the policy significance of Think's defaults and entry paths.
+Before revision 2, the largest omission was not another platform primitive; it was the policy significance of Think's defaults and entry paths. Revision 2 adopts the defaults boundary while leaving the broader turn-entry comparison deferred.
 
 ### Adopted teaching: defaults are product policy
 
@@ -338,11 +338,11 @@ Those ideas should sharpen Chapters 26 and 28, but the four runtime case studies
 - [DeepSeek positional-correlation boundary](https://github.com/arniesaha/drover/blob/81b344d025a7850d5697a7c19468ca8fd95e909e/src/drover/server/harness/structured/deepseek.py)
 - [Quiescent activation and rollback](https://github.com/arniesaha/drover/blob/81b344d025a7850d5697a7c19468ca8fd95e909e/src/drover/server/harness/updater.py)
 
-## Editorial order of operations
+## Completed editorial audit trail
 
-1. Revise Chapter 26 first because its omitted defaults materially affect the interpretation of authority and privacy.
-2. Revise Chapter 28 next because v0.3.7's restart reconciliation is a concrete correction to the thinner delivery account.
-3. Add the DeepSeek effective-composition and durable/live-event distinction.
-4. Add the QM adapter-capability admission paragraph and narrow replay qualification.
-5. Re-run the exact release-pin check immediately before publishing any revision.
-6. Keep every operational or comparative result labeled **unverified** until independently executed; make no SOTA claim from this corpus.
+1. Rechecked every release pin, default branch, and package boundary before revising the essays.
+2. Added QM adapter-capability admission and the narrow replay qualification.
+3. Added Think defaults-as-policy and ownership-scoped idempotency boundaries; deferred the broader turn-entry table.
+4. Added DeepSeek effective composition and the durable-versus-live event distinction.
+5. Added Drover evidence grades and v0.3.7 restart reconciliation.
+6. Kept operational and comparative results **unverified** until independently executed and made no SOTA claim from this corpus.
