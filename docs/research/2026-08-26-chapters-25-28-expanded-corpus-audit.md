@@ -6,12 +6,13 @@ Validated: 2026-08-26 (Asia/Kolkata)
 
 This audit expands the source base behind the four released case studies without importing private product material into the public book. Twenty-three high-value Markdown records were inventoried across canonical manuscripts, memory and harness study guides, repository deep-dives, comparative analyses, adoption-boundary notes, and build-readiness audits. Duplicate worktree snapshots, application-specific implementation plans, private links, user data, and proprietary terminology were excluded.
 
-The private corpus was used only to generate questions. Every candidate teaching below is restated independently and checked against a public first-party repository, package manifest, release tag, or official documentation. No upstream installer, package script, test suite, hosted deployment, or application was run.
+The private corpus was used only to generate questions. Every retained teaching below is restated independently and checked against a public first-party repository, package manifest, release tag, or official documentation. No upstream installer, package script, test suite, hosted deployment, or application was run.
 
 Evidence labels:
 
 - **Verified** — directly rechecked at the immutable public revision linked here.
-- **Candidate** — a public-safe teaching worth adding, but not yet part of the released essay.
+- **Adopted** — included in the second public revision prepared by this branch.
+- **Deferred** — public-safe material intentionally left for a later revision or another chapter.
 - **Unverified** — requires a live failure experiment, deployment, or independent benchmark.
 
 ## Corpus inventory
@@ -57,21 +58,21 @@ The current essay correctly teaches:
 
 Those are the right center of gravity. The essay should not become a tour of every QM surface.
 
-### Distinct candidate teaching: make adapter capability a precondition
+### Adopted teaching: make adapter capability a precondition
 
 **Verified.** QM's release-pinned [`HarnessAdapterProfile`](https://github.com/yc-software/qm/blob/d931fe963de3ac20b9a7526ea9a4873c0d8ed18e/src/harness/harness.ts) records control transport, tool transport, transcript format, and capabilities including abort, steer, images, thinking level, fast mode, and provider sessions. The [`harness router`](https://github.com/yc-software/qm/blob/d931fe963de3ac20b9a7526ea9a4873c0d8ed18e/src/harness/harness-router.ts) resets incompatible provider-session state when a session switches harness.
 
-**Candidate.** Add one short section after resource identities:
+**Adopted in revision 2.** The chapter now adds one short section after policy composition:
 
 > A tool or provider name is not enough to admit work. The attempt should require a capability profile: how control travels, how tools travel, whether steering and cancellation exist, what transcript format is durable, and whether provider-session continuity survives a switch. If the required capability is missing, reject or record a visible fallback before enqueueing.
 
 This sharpens the existing adapter-parity paragraph. It also makes the study-guide exercise mechanical: intersect adapter capabilities, computer resources, principal grants, task grants, and current policy, then store the resulting view with the attempt.
 
-### Distinct candidate teaching: replay coordinates are bounded evidence
+### Adopted teaching: replay coordinates are bounded evidence
 
 **Verified.** The release-pinned [`tool context`](https://github.com/yc-software/qm/blob/d931fe963de3ac20b9a7526ea9a4873c0d8ed18e/src/tools/primitives.ts) consults a tool ledger by run, attempt, and call index. The [`Postgres run store`](https://github.com/yc-software/qm/blob/d931fe963de3ac20b9a7526ea9a4873c0d8ed18e/src/runs/postgres-run-store.ts) persists leases, attempts, deduplication keys, delivery state, and indexed tool-call outputs.
 
-**Candidate.** Clarify that a replay coordinate can reuse a recorded result inside its defined attempt semantics, but cannot prove that an unrecorded external effect happened zero or one times. This belongs beside the lease discussion, not as a second general idempotency tutorial.
+**Adopted in revision 2.** The lease section now clarifies that a replay coordinate can reuse a recorded result inside its defined attempt semantics, but cannot prove that an unrecorded external effect happened zero or one times.
 
 ### Claims that remain unverified
 
@@ -80,9 +81,9 @@ This sharpens the existing adapter-parity paragraph. It also makes the study-gui
 - A worker crash after an external send but before durable result recording has not been reproduced here.
 - No public benchmark establishes QM as state of the art in security, durability, agent quality, or fleet operations.
 
-### Revision recommendation
+### Revision 2 disposition
 
-Add the capability-profile paragraph and the narrow replay qualification. Retain the current release and trust-boundary framing. Do not add onboarding, memory-product, app-publishing, or deployment-tour material to this chapter; those are separate cases and would blur the central teaching.
+Added the capability-profile section and narrow replay qualification. The current release and trust-boundary framing remain; onboarding, memory-product, app-publishing, and deployment-tour material remain excluded because they would blur the central teaching.
 
 ## Chapter 26 · Cloudflare Think and Agents
 
@@ -100,11 +101,11 @@ The current essay correctly separates the Durable Object substrate from the Thin
 
 This is a strong mechanism-level account. The largest omission is not another platform primitive; it is the policy significance of Think's defaults and entry paths.
 
-### Distinct candidate teaching: defaults are product policy
+### Adopted teaching: defaults are product policy
 
 **Verified.** At the 0.16.0 release pin, the [`Think package documentation`](https://github.com/cloudflare/agents/blob/d42494503efe836a073fbf911fae1fbd12253198/packages/think/README.md) says every Think agent receives a SQLite-backed workspace and model-visible workspace tools. The `bash` tool is included by default, implemented through `just-bash`, and starts with network disabled unless configured otherwise. The same release documentation records `sendReasoning = true`, `workspaceBash = true`, and `chatRecovery = true` as defaults.
 
-**Candidate.** Add a section titled “Treat defaults as admitted capabilities”:
+**Adopted in revision 2.** The new “Treat defaults as admitted capabilities” section establishes that:
 
 - workspace and shell access are capabilities, not conveniences;
 - reasoning chunks sent to clients are a disclosure choice, not harmless rendering;
@@ -113,11 +114,11 @@ This is a strong mechanism-level account. The largest omission is not another pl
 
 The teaching is not “these defaults are unsafe everywhere.” It is “framework defaults are part of the effective policy and must be visible in the attempt manifest.”
 
-### Distinct candidate teaching: choose a turn-entry contract
+### Deferred teaching: choose a turn-entry contract
 
 **Verified.** The release-pinned [Think overview](https://github.com/cloudflare/agents/blob/d42494503efe836a073fbf911fae1fbd12253198/docs/think/index.md) distinguishes direct turns, programmatic submission, schedules, fibers, workflows, and sub-agent RPC. The [durable-execution contract](https://github.com/cloudflare/agents/blob/d42494503efe836a073fbf911fae1fbd12253198/docs/agents/durable-execution.md) makes cancellation cooperative and separates `runFiber` from durable acceptance via `startFiber`. Think's scheduled-task documentation says occurrence delivery is at least once and supplies occurrence/idempotency keys for application deduplication.
 
-**Candidate.** Add one compact decision table or paragraph:
+**Deferred.** A future revision could add one compact decision table or paragraph:
 
 | Trigger shape | Mechanism to inspect | Application obligation |
 | --- | --- | --- |
@@ -129,11 +130,11 @@ The teaching is not “these defaults are unsafe everywhere.” It is “framewo
 
 This adds engineering judgment without reviving the framework and CLI surfaces removed in Think 0.16.
 
-### Distinct candidate teaching: workspace state is not authority
+### Adopted teaching: workspace state is not authority
 
 **Verified.** Think's built-in workspace is a virtual filesystem backed by Durable Object SQLite. Its model tools include read, write, edit, list, find, grep, delete, and optional bash. Network can be kept absent or explicitly granted. This is useful structural containment, but neither a file's presence nor a binding's availability establishes current authorization.
 
-**Candidate.** Extend the existing session discussion by one sentence: context blocks, workspace files, and compacted history are model inputs with lineage; none should become a policy grant merely because the durable actor recovered them.
+**Adopted in revision 2.** The defaults section now states that context blocks, workspace files, and compacted history are available state with lineage, not policy grants created by recovery.
 
 ### Claims that remain unverified
 
@@ -144,9 +145,9 @@ This adds engineering judgment without reviving the framework and CLI surfaces r
 - Cloudflare's scale, token, or cost statements remain vendor-reported unless the exact benchmark is independently reproduced.
 - No state-of-the-art claim is supported.
 
-### Revision recommendation
+### Revision 2 disposition
 
-Prioritize the defaults-as-policy section. Add the turn-entry table only if the chapter can remain readable at roughly one additional screen. Keep Code Mode, self-authored extensions, and the adjacent capability-sandbox product out of this chapter unless they are introduced as separately pinned cases; earlier preview-era descriptions are not a safe substitute for Think 0.16 behavior.
+Added the defaults-as-policy section and ownership-scoped idempotency boundaries. The turn-entry table remains deferred to keep the chapter readable. Code Mode, self-authored extensions, and the adjacent capability-sandbox product remain outside this chapter; earlier preview-era descriptions are not a safe substitute for Think 0.16 behavior.
 
 ## Chapter 27 · DeepSeek Harness and Cordis
 
@@ -164,21 +165,21 @@ The current essay correctly teaches:
 
 This is already the most causally precise of the four essays.
 
-### Distinct candidate teaching: configuration is executable architecture
+### Adopted teaching: configuration is executable architecture
 
 **Verified.** The release-pinned [architecture document](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/docs/architecture.md) defines ordered profile/bundle layers. Patches target stable row IDs and replace a row's whole configuration or insert a new row. The effective boot tree can be printed with `--dump-config`.
 
-**Candidate.** Add a section after the introduction:
+**Adopted in revision 2.** The chapter now adds this teaching before lifecycle ownership:
 
 > The effective runtime is a compiled artifact. Ordered bundles and whole-row patches produce one inspectable tree of models, tools, persistence, sandbox, approvals, credentials, and telemetry. Freeze that evaluated composition for an admitted request; mutable defaults and hot replacement should affect later requests, not alter the meaning of one already in flight.
 
 The public teaching should emphasize inspectability and safe mutation boundaries, not the internal package count or configuration syntax.
 
-### Distinct candidate teaching: durable facts and live extension points are different
+### Adopted teaching: durable facts and live extension points are different
 
 **Verified.** The same architecture document distinguishes durable session events from live capability and waterfall events. It states that anything reaching a model request must be reconstructable from the durable log. The release-pinned [`tool-call scheduler`](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/agent-loop/src/tool-calls.ts) allows policy preparation and bodies to overlap only within its stated ordering rules, then appends results in model order.
 
-**Candidate.** Name the boundary explicitly:
+**Adopted in revision 2.** The profile section now names the boundary explicitly:
 
 - a durable event is a reconstructable fact;
 - a waterfall hook is a live interception seam;
@@ -187,11 +188,11 @@ The public teaching should emphasize inspectability and safe mutation boundaries
 
 This is more precise than saying “the event log is truth.” It prevents a reader from treating every transient callback as a canonical record.
 
-### Distinct candidate teaching: one effective capability path
+### Deferred teaching: one effective capability path
 
 **Verified.** Tool schemas enter prompt assembly through the registered tool context, while tool preparation and dispatch flow through the scheduler seam. Later calls are reclassified after earlier ordered commits, so a registry change can form a new barrier without reordering already committed meaning.
 
-**Candidate.** Add one paragraph connecting visibility, preparation, dispatch, result finalization, and policy to the same evaluated registry. The falsifier is a hidden call path that can execute a capability not represented in the model-visible/effective tool view.
+**Deferred.** A later revision may connect visibility, preparation, dispatch, result finalization, and policy to the same evaluated registry. The falsifier is a hidden call path that can execute a capability not represented in the model-visible/effective tool view.
 
 ### Claims that remain unverified
 
@@ -201,9 +202,9 @@ This is more precise than saying “the event log is truth.” It prevents a rea
 - The standalone Cordis package is not evidence for the exact vendored `@deepseek-ai/cordis` behavior unless the implementations are compared at the relevant revisions.
 - “Everything is a plugin” is a project thesis, not a comparative performance result or SOTA claim.
 
-### Revision recommendation
+### Revision 2 disposition
 
-Add “configuration is executable architecture” and the durable-versus-live distinction. The current ordered-commit and crash-tail sections should remain. Do not add package inventory, product-mode tours, or generalized plugin praise; those obscure the small number of testable invariants.
+Added “configuration is executable architecture” and the durable-versus-live distinction. The ordered-commit and crash-tail sections remain. Package inventory, product-mode tours, and generalized plugin praise remain excluded because they obscure the small number of testable invariants.
 
 ## Chapter 28 · Drover
 
@@ -222,11 +223,11 @@ The current essay correctly teaches:
 
 These are the right fleet-level lessons. The best remaining material concerns evidence fidelity, not another control-plane feature.
 
-### Distinct candidate teaching: normalize without inventing fidelity
+### Adopted teaching: normalize without inventing fidelity
 
 **Verified.** The release-pinned [`StructuredMessage` driver](https://github.com/arniesaha/drover/blob/81b344d025a7850d5697a7c19468ca8fd95e909e/src/drover/server/harness/structured/driver.py) retains globally generated event IDs and degrades unparseable protocol output to `raw` rather than silently dropping it. The [DeepSeek adapter](https://github.com/arniesaha/drover/blob/81b344d025a7850d5697a7c19468ca8fd95e909e/src/drover/server/harness/structured/deepseek.py) documents that the consumed RPC history lacks a native turn identifier; it therefore uses sequence-position correlation within a controlled polling window.
 
-**Candidate.** Add a section titled “Preserve the grade of the evidence”:
+**Adopted in revision 2.** The new compatibility-layer section establishes that:
 
 - native turn identity is stronger than per-session sequence;
 - per-session sequence is stronger than a positional polling window;
@@ -235,17 +236,17 @@ These are the right fleet-level lessons. The best remaining material concerns ev
 
 Raw fallback also creates a privacy and secret-retention obligation. Preserving source material is not permission to retain it indefinitely or expose it broadly.
 
-### Distinct candidate teaching: at-least-once delivery now crosses restart
+### Adopted teaching: at-least-once delivery now crosses restart
 
 **Verified.** The release-pinned [`EventPusher`](https://github.com/arniesaha/drover/blob/81b344d025a7850d5697a7c19468ca8fd95e909e/src/drover/server/harness/structured/pusher.py) retries batches and relies on central idempotency by event ID. It also reconciles durable host-registry events after an unexpected daemon restart by replaying them to the central receiver. The [context-store contract](https://github.com/arniesaha/drover/blob/81b344d025a7850d5697a7c19468ca8fd95e909e/docs/context-store.md) makes `dedup_key` the canonical logical identity for ingested evidence while retaining physical records for audit.
 
-**Candidate.** Refine the essay's delivery sentence: v0.3.7 includes restart reconciliation from durable host events, so the interesting boundary is now two identities at two layers—delivery event ID for host-to-hub replay and canonical dedup key for logical source evidence. Neither proves the native harness performed an external effect once.
+**Adopted in revision 2.** The delivery account now includes restart reconciliation from durable host events and retains the limit that delivery identity does not prove the native harness performed an external effect once.
 
-### Distinct candidate teaching: optional intelligence should fail softly
+### Deferred teaching: optional intelligence should fail softly
 
 **Verified.** Drover's architecture separates append-oriented evidence from summaries, briefs, embeddings, and other rebuildable projections. The host daemon remains authoritative for live processes even when projections lag.
 
-**Candidate.** Add a single sentence to the facts/projections section: search, summaries, and briefs may be unavailable or stale without changing the underlying execution facts or host lifecycle state. This gives the reader a concrete degraded-mode rule.
+**Deferred.** A later revision may add a compact degraded-mode rule: search, summaries, and briefs can be unavailable or stale without changing underlying execution facts or host lifecycle state.
 
 ### Claims that remain unverified
 
@@ -255,9 +256,9 @@ Raw fallback also creates a privacy and secret-retention obligation. Preserving 
 - The single-operator trust model does not establish public-network hardening, multi-user authorization, or host-bound least privilege.
 - No public benchmark establishes Drover as state of the art in fleet reliability, evidence quality, or operator productivity.
 
-### Revision recommendation
+### Revision 2 disposition
 
-Add the evidence-grade section and correct the delivery description to include restart reconciliation at v0.3.7. Keep the current quiescent-update walkthrough. Do not import mobile UI, repository-specific workflow, activity scoring, or private-application translation into this chapter.
+Added the evidence-grade section and corrected the delivery description to include restart reconciliation at v0.3.7. The quiescent-update walkthrough remains. Mobile UI, repository-specific workflow, activity scoring, and private-application translation remain excluded.
 
 ## Cross-chapter teachings worth keeping once
 
