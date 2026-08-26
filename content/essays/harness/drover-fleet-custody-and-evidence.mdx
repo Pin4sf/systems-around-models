@@ -4,18 +4,19 @@ title: "Drover: Fleet Custody and Evidence"
 description: A source-pinned study of Drover's fleet command plane, host-local process custody, normalized evidence, rebuildable projections, and quiescent runtime upgrades.
 sequence: Harness Engineering
 sequence_position: 29
-revision: 1
+revision: 3
 authors:
   - author-shivansh-fulper
 published_at: 2026-08-26
-substantively_revised_at: 2026-08-26
-reading_time_source: 8 minute editorial estimate
+substantively_revised_at: 2026-08-27
+reading_time_source: 11 minute editorial estimate
 status: public
 source_manifest_ids:
   - source-harness-engineering-fieldbook-v1
   - source-drover-fleet-runtime
-revision_id: revision-drover-fleet-custody-and-evidence-001
+revision_id: revision-drover-fleet-custody-and-evidence-003
 previous_essay_slug: deepseek-harness-and-cordis
+next_essay_slug: spotify-xirp-and-portal
 ---
 
 ## A fleet is a custody problem
@@ -39,6 +40,16 @@ Drover normalizes events and spans into partitioned Parquet, then builds DuckDB 
 That separation is valuable beyond analytics. If a summary becomes corrupt or a schema changes, the system can rebuild it from attributed facts. A derived record must retain links to its source material, transformation version, and time boundary. Otherwise a convenient projection can quietly become a second, untraceable truth store.
 
 Stable event identity also matters under retry. Host-to-hub delivery can be at least once only if the receiver deduplicates the same fact and preserves per-session ordering. Deduplication prevents repeated records; it does not prove that the native harness itself executed an external effect once.
+
+## Preserve native protocol truth through compatibility layers
+
+Drover's structured drivers wrap each native harness protocol and emit a common envelope with event identity, turn identity, type, role, text, payload, and time. If a provider emits an unparseable line, the base driver degrades it to a raw event instead of dropping it. Normalization adds a common view while the payload and explicit `structured` versus `inferred_terminal` source retain how the observation was obtained.
+
+That is the right direction for a multi-harness adapter: preserve native recovery keys and uncertainty, then add normalized semantics. A common `assistant_output` label cannot imply that every provider supports the same steer, approval, resume, usage, or cancellation contract. Those capabilities need versioned declarations and provider-specific conformance fixtures.
+
+Evidence strength should remain visible as it crosses the adapter. A native turn ID is stronger than a per-session sequence, and a sequence is stronger than a positional polling window. In the release-pinned DeepSeek adapter, the consumed RPC history has no native turn field, so Drover fences the history position before submission and attributes later items to that turn. That is a bounded correlation technique, not provider-issued causality.
+
+The delivery path reinforces the distinction. The host pusher retries event batches at least once and central ingestion deduplicates by stable event ID. Events that survive a daemon restart can be re-offered from the host's durable registry; a bounded live queue can still overflow, and shutdown can still end with explicitly counted undelivered events. Delivery fidelity is therefore an observable contract with loss states, not a blanket exactly-once claim.
 
 ## Mutate runtime machinery only at quiescence
 

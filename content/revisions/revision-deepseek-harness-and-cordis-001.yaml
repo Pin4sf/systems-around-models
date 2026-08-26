@@ -6,3 +6,12 @@ substantively_revised_at: 2026-08-26
 summary: Initial public revision of the refreshed DeepSeek Harness and Cordis mechanism case study.
 affected_claim_ids: []
 correction_disposition: publication
+content_hash: sha256-a3aff29235a4d1a49d2fa5114e2ba72c5a60ba73e50a348da7ce0f6788004ba3
+sources:
+  - { id: source-architecture-cordis, title: Cordis repository, canonical_url: https://github.com/cordiverse/cordis/tree/8cc9e33fab69e2d0476d126baaf2acb24e6a6ab4, last_validated: 2026-08-26, license_status: MIT }
+  - { id: source-architecture-deepseek-harness, title: DeepSeek Harness repository, canonical_url: https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e, last_validated: 2026-08-26, license_status: MIT }
+  - { id: source-harness-engineering-fieldbook-v1, title: "The Agent Systems Fieldbook — Harness Engineering, version 1", canonical_url: /manifests/revision-fieldbook-essay-001.json, last_validated: 2026-08-21, license_status: all-rights-reserved }
+source_validation_order:
+  - source-harness-engineering-fieldbook-v1
+  - source-architecture-deepseek-harness
+  - source-architecture-cordis

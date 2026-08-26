@@ -1,0 +1,31 @@
+id: source-spotify-xirp-portal
+title: Xirp v0.19.1 and Portal workspace documentation
+author: Spotify
+canonical_url: https://backstage.spotify.com/docs/xirp
+published_at: 2026-08-26
+retrieved_at: 2026-08-26
+inspected_paths:
+  - /docs/xirp
+  - /docs/xirp/sessions
+  - /docs/xirp/changelog
+  - /docs/xirp/workspaces/launching-sessions
+source_type: first-party-article
+basis: Direct reading of Spotify's current Xirp overview, session, changelog, and Portal launch documentation at the v0.19.1 documentation state.
+license_status: all-rights-reserved
+evidence_grade: FD
+observed_mechanisms:
+  - description: Xirp keeps sessions in native persistent terminals while exposing a shared supervision surface across supported coding agents.
+    evidence_grade: FD
+    basis: The current session documentation describes persistent terminals, attach and detach behavior, and provider-native agent processes.
+  - description: Portal can attach organizational workspace context through MCP without replacing the coding agent's native permissions, credentials, model choice, or sandbox.
+    evidence_grade: FD
+    basis: The workspace launch documentation distinguishes context loading from provider-native execution controls.
+author_reported_claims:
+  - Spotify documents Xirp v0.19.1 support for Claude Code, Codex, Gemini, and Cursor.
+unknowns:
+  - Public documentation does not establish implementation parity across providers or disclose proprietary Portal internals.
+  - Manual transcript upload has no automatic redaction and must not be treated as safe for secrets or personal data.
+falsifiers:
+  - Spotify removes the named session or workspace mechanisms from the pinned documentation state or corrects their described boundaries.
+last_validated: 2026-08-26
+correction_ledger_status: reviewed

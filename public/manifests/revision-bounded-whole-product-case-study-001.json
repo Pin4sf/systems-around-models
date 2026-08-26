@@ -1,0 +1,37 @@
+{
+  "id": "revision-bounded-whole-product-case-study-001",
+  "essaySlug": "bounded-whole-product-case-study",
+  "revision": 1,
+  "publishedAt": "2026-08-27",
+  "substantivelyRevisedAt": "2026-08-27",
+  "summary": "Initial public clean-room case study of bounded document preparation, verification, approval, sensitive-data handling, and outcome tracking.",
+  "affectedClaimIds": [],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-0169c24ec8149b635559afc268b446ccc5753701ff71d34c91b7db54cab1b963",
+  "sourceIds": [
+    "source-ai-job-search-workflow",
+    "source-harness-engineering-fieldbook-v1"
+  ],
+  "sourceValidationDates": {
+    "source-harness-engineering-fieldbook-v1": "2026-08-21",
+    "source-ai-job-search-workflow": "2026-08-26"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-ai-job-search-workflow",
+      "title": "AI Job Search repository",
+      "canonicalUrl": "https://github.com/MadsLorentzen/ai-job-search/tree/ab91c60cc47147d9416f0af758fb5e2d109956ce",
+      "lastValidated": "2026-08-26",
+      "licenseStatus": "MIT"
+    },
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    }
+  ]
+}

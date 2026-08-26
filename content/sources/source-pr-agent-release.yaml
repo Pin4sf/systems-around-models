@@ -1,0 +1,31 @@
+id: source-pr-agent-release
+title: PR-Agent v0.43.0 repository release
+author: Qodo and The PR-Agent contributors
+canonical_url: https://github.com/The-PR-Agent/pr-agent/tree/4ebd5c5333c6ef21509e7304d27969eb825e6f22
+published_at: 2026-08-22
+retrieved_at: 2026-08-26
+repository_commit: 4ebd5c5333c6ef21509e7304d27969eb825e6f22
+inspected_paths:
+  - README.md
+  - LICENSE
+  - pr_agent/agent/pr_agent.py
+  - pr_agent/tools/pr_reviewer.py
+  - pr_agent/git_providers/git_provider.py
+  - pr_agent/algo/pr_processing.py
+  - pr_agent/algo/ai_handlers/base_ai_handler.py
+  - pr_agent/servers/github_app.py
+source_type: first-party-repository
+basis: Release-pinned inspection of the public MIT-licensed PR-Agent orchestration, review, provider, prompt-processing, model-handler, and GitHub integration paths.
+license_status: MIT
+evidence_grade: IP
+observed_mechanisms:
+  - description: The release separates pull-request event handling, provider adapters, review orchestration, model handling, and feedback publication behind explicit interfaces.
+    evidence_grade: IP
+    basis: The inspected release paths expose these responsibilities directly in code.
+author_reported_claims: []
+unknowns:
+  - The public release must not be used to infer the current proprietary internals or performance of Qodo Merge.
+falsifiers:
+  - The pinned paths do not contain the named orchestration, provider, review, and model boundaries.
+last_validated: 2026-08-26
+correction_ledger_status: reviewed

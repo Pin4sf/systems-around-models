@@ -13,6 +13,10 @@ inspected_paths:
   - src/acl/acl-store.ts
   - src/security/security-posture.ts
   - src/policy/command-policy.ts
+  - src/harness/harness.ts
+  - src/harness/harness-router.ts
+  - test/harness-adapter.test.ts
+  - src/tools/primitives.ts
   - src/runs/postgres-run-store.ts
   - src/admin/postgres-audit-log.ts
 source_type: first-party-repository
@@ -26,6 +30,12 @@ observed_mechanisms:
   - description: The Postgres run store models queued, running, and terminal work with leases, heartbeats, attempts, deduplication, and per-session running constraints.
     evidence_grade: IP
     basis: The inspected run-store implementation records leased execution and indexed tool-call history.
+  - description: Harness adapters declare control and tool transports, transcript formats, capability sets, and tool-name presentation behind a shared turn boundary.
+    evidence_grade: IP
+    basis: The inspected adapter interface, router, and conformance test preserve explicit differences instead of asserting full semantic parity.
+  - description: Recorded tool results are addressed by run, attempt, and call position within a bounded replay contract.
+    evidence_grade: IP
+    basis: The inspected tool context and run store distinguish reusable recorded results from unrecorded or externally ambiguous effects.
 author_reported_claims:
   - QM describes itself as a multiplayer agent harness for work whose adapters drive one shared runtime core.
 unknowns:

@@ -13,6 +13,12 @@ const qmRoute = "/fieldbook/qm-scoped-resources-and-leased-runs";
 const cloudflareRoute = "/fieldbook/cloudflare-think-and-agents";
 const deepseekRoute = "/fieldbook/deepseek-harness-and-cordis";
 const droverRoute = "/fieldbook/drover-fleet-custody-and-evidence";
+const xirpRoute = "/fieldbook/spotify-xirp-and-portal";
+const boundedCaseRoute = "/fieldbook/bounded-whole-product-case-study";
+const evaluationRoute = "/fieldbook/model-harness-evaluation";
+const labsRoute = "/fieldbook/twelve-harness-labs";
+const worksheetRoute = "/fieldbook/harness-review-questions-and-design-worksheet";
+const latestRoute = "/fieldbook/keeping-the-guide-current";
 const siteOrigin = process.env.SITE_URL ?? "https://example.invalid";
 
 test("@desktop homepage leads to a complete readable Harness Engineering guide", async ({ page }) => {
@@ -132,6 +138,12 @@ test("@desktop discovery endpoints expose only released publication routes", asy
   expect(sitemap).toContain(cloudflareRoute);
   expect(sitemap).toContain(deepseekRoute);
   expect(sitemap).toContain(droverRoute);
+  expect(sitemap).toContain(xirpRoute);
+  expect(sitemap).toContain(boundedCaseRoute);
+  expect(sitemap).toContain(evaluationRoute);
+  expect(sitemap).toContain(labsRoute);
+  expect(sitemap).toContain(worksheetRoute);
+  expect(sitemap).toContain(latestRoute);
   expect(robots).toContain("Sitemap:");
   expect(rssResponse.headers()["content-type"]).toContain("application/rss+xml");
   expect(rss).toContain("The Model Is Not the Agent");
@@ -142,10 +154,14 @@ test("@desktop discovery endpoints expose only released publication routes", asy
   expect(rss).toContain("revision-open-loops-re-entry-001");
   expect(rss).toContain("Hermes: An Integrated Agent Runtime");
   expect(rss).toContain("revision-hermes-integrated-agent-runtime-002");
-  expect(rss).toContain("revision-qm-scoped-resources-and-leased-runs-001");
-  expect(rss).toContain("revision-cloudflare-think-and-agents-001");
-  expect(rss).toContain("revision-deepseek-harness-and-cordis-001");
-  expect(rss).toContain("revision-drover-fleet-custody-and-evidence-001");
+  expect(rss).toContain("revision-qm-scoped-resources-and-leased-runs-002");
+  expect(rss).toContain("revision-cloudflare-think-and-agents-002");
+  expect(rss).toContain("revision-deepseek-harness-and-cordis-002");
+  expect(rss).toContain("revision-drover-fleet-custody-and-evidence-003");
+  expect(rss).toContain("revision-spotify-xirp-and-portal-001");
+  expect(rss).toContain("revision-bounded-whole-product-case-study-001");
+  expect(rss).toContain("revision-model-harness-evaluation-001");
+  expect(rss).toContain("revision-keeping-the-guide-current-001");
 });
 
 test("@desktop architecture field map compares nine profiles and opens extended studies without JavaScript", async ({ page }) => {
@@ -431,7 +447,51 @@ test("@nojs latest comparative case preserves fleet custody and source boundarie
   await expect(page.getByRole("heading", { name: "Failure boundary" })).toBeVisible();
   await expect(page.getByRole("link", { name: "Drover v0.3.7" })).toBeVisible();
   await expect(page.getByRole("link", { name: "Previous: DeepSeek Harness and Cordis" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Next: Spotify Xirp and Portal: Native Custody and Context" })).toBeVisible();
   await expect(page.getByRole("group", { name: /evidence/i })).toHaveCount(0);
+});
+
+test("@desktop current Xirp case preserves native-custody and source boundaries", async ({ page }) => {
+  await page.goto(xirpRoute);
+  await expect(page.getByRole("heading", { name: "Spotify Xirp and Portal: Native Custody and Context" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Native custody is not provider parity" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Xirp changelog" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Next: Factory Missions versus GitHub Copilot" })).toBeVisible();
+});
+
+test("@nojs bounded whole-product case stays public, generic, and human-authorized", async ({ page }) => {
+  await page.goto(boundedCaseRoute);
+  await expect(page.getByRole("heading", { name: "A Bounded Whole-Product Case Study" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Preserve human-owned external effects" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "AI Job Search v1.6.0" })).toBeVisible();
+  await expect(page.getByRole("group", { name: /evidence/i })).toHaveCount(0);
+});
+
+test("@desktop evaluation chapter labels matched budgets and rejects SOTA shortcuts", async ({ page }) => {
+  await page.goto(evaluationRoute);
+  await expect(page.getByRole("heading", { name: "Model × Harness Evaluation" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Lock the evaluator and protect held-out tasks" })).toBeVisible();
+  await expect(page.getByText(/makes no SOTA assertion/i)).toHaveCount(0);
+  await expect(page.getByRole("link", { name: "Rethinking the Evaluation of Harness Evolution for Agents" })).toBeVisible();
+});
+
+test("@mobile labs and worksheet keep wide tables contained", async ({ page }) => {
+  for (const target of [labsRoute, worksheetRoute]) {
+    await page.goto(target);
+    await expect(page.getByRole("heading", { name: target === labsRoute ? "Twelve Harness Labs" : "Harness Review Questions and Design Worksheet" })).toBeVisible();
+    const contained = await page.locator(".article-reader__prose").evaluate(
+      (element) => element.scrollWidth <= element.clientWidth,
+    );
+    expect(contained).toBe(true);
+  }
+});
+
+test("@nojs final chapter closes the released sequence without a next link", async ({ page }) => {
+  await page.goto(latestRoute);
+  await expect(page.getByRole("heading", { name: "Keeping the Guide Current" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Publication needs a harness too" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Previous: Harness Review Questions and Design Worksheet" })).toBeVisible();
+  await expect(page.getByRole("link", { name: /^Next:/ })).toHaveCount(0);
 });
 
 test("@nojs architecture profiles preserve native disclosure and ordinary sources", async ({ page }) => {

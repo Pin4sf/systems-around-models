@@ -4,17 +4,17 @@ title: "QM: Scoped Resources and Leased Runs"
 description: A source-pinned study of how QM combines people, shared scopes, typed resources, policy floors, credentials, leased runs, and audit evidence in one work-oriented agent runtime.
 sequence: Harness Engineering
 sequence_position: 26
-revision: 1
+revision: 2
 authors:
   - author-shivansh-fulper
 published_at: 2026-08-26
 substantively_revised_at: 2026-08-26
-reading_time_source: 8 minute editorial estimate
+reading_time_source: 10 minute editorial estimate
 status: public
 source_manifest_ids:
   - source-harness-engineering-fieldbook-v1
   - source-qm-agent-runtime
-revision_id: revision-qm-scoped-resources-and-leased-runs-001
+revision_id: revision-qm-scoped-resources-and-leased-runs-002
 previous_essay_slug: hermes-integrated-agent-runtime
 next_essay_slug: cloudflare-think-and-agents
 ---
@@ -41,11 +41,21 @@ QM separates a broad security posture from command-specific policy. A strict pos
 
 That property should apply across every adapter. Switching from one model harness to another must not change the principal, resource grants, credential purpose, or audit identity. Adapter parity therefore means more than accepting the same prompt. It means preserving the same authority and evidence contract.
 
+## Declare adapter capabilities instead of promising parity
+
+QM's adapter interface makes several differences explicit. Each adapter declares its control transport, tool transport, transcript format, and a set of capabilities such as abort, steer, images, thinking level, fast mode, and provider sessions. Tool names also belong to the adapter presentation layer: one adapter can expose `read` while another presents the same core operation as `workspace_read`.
+
+This is a more honest compatibility contract than a single `supportsHarness` flag. A stable outer turn interface can coexist with real differences in control, tools, transcripts, and recovery. Selection should therefore compare the request with a declared profile, reject unsupported combinations, and preserve the chosen profile in the run record. A missing capability should become a typed degraded state or an admission failure—not a prompt that asks the model to pretend the capability exists.
+
+Profiles also make conformance testable. For each adapter, test the same identity and grant snapshot, tool-name mapping, cancellation path, transcript reconstruction, and reset-on-switch behavior. Passing the common cases does not prove semantic parity; it establishes exactly which contract each adapter satisfies.
+
 ## Lease runs without confusing activity for completion
 
 The Postgres run store represents queued, running, and terminal work with leases, heartbeats, attempts, deduplication, and a per-session running constraint. These records help a worker recover ownership and prevent two active attempts from casually claiming the same session.
 
 A lease answers who may work now. It does not prove that an external effect occurred once, that the result is correct, or that a person accepted it. Recovery still needs stable effect identities and world reconciliation. Audit records help reconstruct who attempted which action against which resource; they are evidence, not preventive control.
+
+The same limit applies to recorded tool results. A run, attempt, and call index can identify a reusable result inside the harness's replay contract. It cannot prove that an external effect with no durable result happened zero or one times. Replay coordinates organize evidence; effect reconciliation establishes what the world accepted.
 
 ## Adopt governance, retain the stated boundary
 

@@ -1,0 +1,78 @@
+---
+slug: factory-missions-versus-github-copilot
+title: Factory Missions versus GitHub Copilot
+description: A responsibility-level comparison of mission validation, repository delivery, review authority, and outcome closure.
+sequence: Harness Engineering
+sequence_position: 31
+revision: 1
+authors:
+  - author-shivansh-fulper
+published_at: 2026-08-27
+substantively_revised_at: 2026-08-27
+reading_time_source: 8 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-factory-missions
+  - source-github-copilot-cloud-agent
+revision_id: revision-factory-missions-versus-github-copilot-001
+previous_essay_slug: spotify-xirp-and-portal
+next_essay_slug: devin-greptile-coderabbit-and-qodo
+---
+
+## Compare responsibility, not product category
+
+Factory Missions and GitHub Copilot's cloud agent both organize coding work beyond a single chat turn, but their public descriptions emphasize different control boundaries. Factory describes a mission contract decomposed into features and milestones, with fresh workers, validators, black-box QA, correction loops, and handback. GitHub describes issue assignment, a cloud agent session, an inspectable log, steering, a pull request, requested changes, and a human-controlled merge.
+
+The useful comparison is not which product is “more autonomous.” It is which responsibility each layer accepts and which authority remains elsewhere.
+
+## Keep mission validation separate from delivery authority
+
+Mission confirmation answers: did the work satisfy the mission's declared acceptance criteria under its evaluator? Repository delivery answers: is the proposed change in a reviewable branch, with required checks and approvals, and may it merge? Neither necessarily answers whether the user's broader outcome occurred.
+
+Keep the states independent:
+
+```text
+mission: planned -> executing -> validated | blocked | handed_back
+delivery: no_pr -> draft_pr -> checks_pending -> review -> mergeable | rejected
+outcome: unverified -> evidence_pending -> accepted | rejected | follow_up
+```
+
+A mission can validate while repository policy blocks merge. A pull request can be mergeable while the mission's end-to-end criterion remains unproved. A merged patch can still fail to change the external outcome the user cared about.
+
+## Fresh workers reduce one class of coupling
+
+Factory's documented use of fresh workers and validators illustrates maker/checker separation at the orchestration level. Freshness reduces direct conversational contamination, but it does not guarantee independence. The roles may still share prompts, models, fixtures, repository assumptions, or incomplete acceptance criteria.
+
+The validator therefore needs a named input contract and an evidence bundle. It should say whether it inspected a diff, ran tests, exercised the product as a black box, or merely received a summary. A correction loop should preserve both the failed evidence and the reason a new attempt was admitted.
+
+## Pull requests are durable handoff objects
+
+GitHub's public workflow places the cloud agent's result in an ordinary pull request. That is a strong delivery seam because repository policy, CI, reviewers, requested changes, and merge authority remain legible to existing tooling. The agent's session log can help reconstruct how the proposal was produced, but the pull request—not the session transcript—is the repository disposition object.
+
+This boundary also makes override authority explicit. A reviewer may request changes, reject the proposal, or merge only when satisfied. An agent-authored change does not inherit merge authority from the issue assignment.
+
+## Preserve evidence across retry and handback
+
+When a validator rejects work, create a new attempt linked to the previous attempt, evidence, and failure reason. Do not overwrite the earlier trace with a successful rerun. When the mission halts or hands work back, preserve the current plan, artifacts, unresolved criteria, and last safe action so a human can resume without guessing.
+
+Repository checks need the same discipline. A restarted CI run is a new observation. A green rerun does not erase the failed run, and an override should record the actor, policy, reason, and evidence available at the time.
+
+## Failure boundary
+
+The design fails if “mission validated” is rendered as “safe to merge,” if a green pull request is rendered as “user outcome achieved,” if a correction loop discards rejected evidence, or if the agent can grant itself review or merge authority. It also fails if a handback contains only prose and omits recoverable state.
+
+## Retrieval check
+
+A mission validator passes black-box QA, CI is green, and the pull request is approved. The production-side acceptance check has not run. Which ledgers may advance, which must remain open, and who is authorized to close each one?
+
+## Build-and-break lab
+
+Implement the three state machines above for one repository task. Force mission validation to pass while a required repository policy fails, then force merge to succeed while an external acceptance probe remains unavailable. Assert that no state transition silently advances another ledger and that every override has a receipt.
+
+## Sources and further reading
+
+- [Factory Missions architecture](https://factory.ai/news/missions-architecture) — first-party description of mission plans, workers, validators, QA, and handback.
+- [Factory Missions overview](https://docs.factory.ai/missions/overview) — current product workflow.
+- [GitHub Copilot cloud agent overview](https://docs.github.com/en/copilot/how-tos/copilot-on-github/use-copilot-agents/overview) — issue assignment, agent sessions, pull requests, review, and merge authority.
+- [Harness Engineering Study Guide](/fieldbook/harness-engineering-study-guide) — the shared delivery, verification, and closure model.

@@ -41,6 +41,25 @@
       }
     },
     {
+      "id": "revision-bounded-whole-product-case-study-001",
+      "essaySlug": "bounded-whole-product-case-study",
+      "revision": 1,
+      "publishedAt": "2026-08-27",
+      "substantivelyRevisedAt": "2026-08-27",
+      "summary": "Initial public clean-room case study of bounded document preparation, verification, approval, sensitive-data handling, and outcome tracking.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-0169c24ec8149b635559afc268b446ccc5753701ff71d34c91b7db54cab1b963",
+      "sourceIds": [
+        "source-ai-job-search-workflow",
+        "source-harness-engineering-fieldbook-v1"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-ai-job-search-workflow": "2026-08-26"
+      }
+    },
+    {
       "id": "revision-cloudflare-think-and-agents-001",
       "essaySlug": "cloudflare-think-and-agents",
       "revision": 1,
@@ -57,6 +76,50 @@
       "sourceValidationDates": {
         "source-harness-engineering-fieldbook-v1": "2026-08-21",
         "source-cloudflare-think-agents": "2026-08-26"
+      }
+    },
+    {
+      "id": "revision-cloudflare-think-and-agents-002",
+      "essaySlug": "cloudflare-think-and-agents",
+      "revision": 2,
+      "publishedAt": "2026-08-26",
+      "substantivelyRevisedAt": "2026-08-26",
+      "summary": "Expanded corpus revision separating Cloudflare job, turn-admission, and external-action idempotency boundaries.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-3a25a0e549142964a63cc76ec6d8ec2ec39610b471989eb334f0ff1a0923ed06",
+      "sourceIds": [
+        "source-cloudflare-think-agents",
+        "source-harness-engineering-fieldbook-v1"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-cloudflare-think-agents": "2026-08-26"
+      }
+    },
+    {
+      "id": "revision-conformance-and-trajectory-evaluation-001",
+      "essaySlug": "conformance-and-trajectory-evaluation",
+      "revision": 1,
+      "publishedAt": "2026-08-27",
+      "substantivelyRevisedAt": "2026-08-27",
+      "summary": "Initial three-axis evaluation chapter separating outcome, observable trajectory, and runtime-contract conformance.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-62a887d43bb29107b52ef303dead37c0ddbcbe6bca024852a31cf72414a8bd72",
+      "sourceIds": [
+        "source-harness-engineering-fieldbook-v1",
+        "source-llm-as-judge-mt-bench",
+        "source-nist-ai-rmf-1",
+        "source-swe-bench-evaluation-harness",
+        "source-w3c-trace-context"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-nist-ai-rmf-1": "2026-08-24",
+        "source-w3c-trace-context": "2026-08-24",
+        "source-swe-bench-evaluation-harness": "2026-08-26",
+        "source-llm-as-judge-mt-bench": "2026-08-24"
       }
     },
     {
@@ -119,6 +182,27 @@
       }
     },
     {
+      "id": "revision-deepseek-harness-and-cordis-002",
+      "essaySlug": "deepseek-harness-and-cordis",
+      "revision": 2,
+      "publishedAt": "2026-08-26",
+      "substantivelyRevisedAt": "2026-08-26",
+      "summary": "Expanded corpus revision treating ordered DeepSeek profile composition as executable, versioned architecture.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-bbd2e6030c42f841f13aa2d9167b508deb81adbc7eff43e347f283d8017345eb",
+      "sourceIds": [
+        "source-architecture-cordis",
+        "source-architecture-deepseek-harness",
+        "source-harness-engineering-fieldbook-v1"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-architecture-deepseek-harness": "2026-08-26",
+        "source-architecture-cordis": "2026-08-26"
+      }
+    },
+    {
       "id": "revision-developer-product-harnesses-001",
       "essaySlug": "developer-and-product-runtime-harnesses",
       "revision": 1,
@@ -138,6 +222,33 @@
       }
     },
     {
+      "id": "revision-devin-greptile-coderabbit-and-qodo-001",
+      "essaySlug": "devin-greptile-coderabbit-and-qodo",
+      "revision": 1,
+      "publishedAt": "2026-08-27",
+      "substantivelyRevisedAt": "2026-08-27",
+      "summary": "Initial verification-plane comparison with typed evidence, disagreement, override, vendor-claim, and open-source lineage boundaries.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-f1627127d8f416e795b570d9a80c11a6ada17b23fa3e9d858c8d969e4277f151",
+      "sourceIds": [
+        "source-coderabbit-pre-merge-checks",
+        "source-devin-testing-recordings",
+        "source-greptile-trex-runtime-evidence",
+        "source-harness-engineering-fieldbook-v1",
+        "source-pr-agent-release",
+        "source-qodo-code-review-overview"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-devin-testing-recordings": "2026-08-26",
+        "source-greptile-trex-runtime-evidence": "2026-08-26",
+        "source-coderabbit-pre-merge-checks": "2026-08-26",
+        "source-qodo-code-review-overview": "2026-08-26",
+        "source-pr-agent-release": "2026-08-26"
+      }
+    },
+    {
       "id": "revision-drover-fleet-custody-and-evidence-001",
       "essaySlug": "drover-fleet-custody-and-evidence",
       "revision": 1,
@@ -147,6 +258,44 @@
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
       "contentHash": "sha256-09156cfa8c0234dca5df23b44afd3f61be416422deff22986a11ffa6d3abdde6",
+      "sourceIds": [
+        "source-drover-fleet-runtime",
+        "source-harness-engineering-fieldbook-v1"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-drover-fleet-runtime": "2026-08-26"
+      }
+    },
+    {
+      "id": "revision-drover-fleet-custody-and-evidence-002",
+      "essaySlug": "drover-fleet-custody-and-evidence",
+      "revision": 2,
+      "publishedAt": "2026-08-26",
+      "substantivelyRevisedAt": "2026-08-26",
+      "summary": "Expanded corpus revision adding native-protocol preservation, adapter capability, and event-delivery semantics.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-a2afb34d1b375bbda7eebfbd90a0ca142198835b3ae38f234ec9d8d7d2718386",
+      "sourceIds": [
+        "source-drover-fleet-runtime",
+        "source-harness-engineering-fieldbook-v1"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-drover-fleet-runtime": "2026-08-26"
+      }
+    },
+    {
+      "id": "revision-drover-fleet-custody-and-evidence-003",
+      "essaySlug": "drover-fleet-custody-and-evidence",
+      "revision": 3,
+      "publishedAt": "2026-08-26",
+      "substantivelyRevisedAt": "2026-08-27",
+      "summary": "Connected the release-pinned Drover case to the newly published Spotify Xirp and Portal chapter without changing the case analysis.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-6a18c134fc89c64e91962ae11b98eb1cb6362374a89925314c06492b90e4835e",
       "sourceIds": [
         "source-drover-fleet-runtime",
         "source-harness-engineering-fieldbook-v1"
@@ -214,6 +363,52 @@
       }
     },
     {
+      "id": "revision-factory-missions-versus-github-copilot-001",
+      "essaySlug": "factory-missions-versus-github-copilot",
+      "revision": 1,
+      "publishedAt": "2026-08-27",
+      "substantivelyRevisedAt": "2026-08-27",
+      "summary": "Initial comparative publication separating mission validation, repository delivery, review authority, and external outcome closure.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-d744296acf28333f9fdad508aacef8d999287c49f35429325ac7d70f2db3584b",
+      "sourceIds": [
+        "source-factory-missions",
+        "source-github-copilot-cloud-agent",
+        "source-harness-engineering-fieldbook-v1"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-factory-missions": "2026-08-26",
+        "source-github-copilot-cloud-agent": "2026-08-26"
+      }
+    },
+    {
+      "id": "revision-failure-injection-and-recovery-evaluation-001",
+      "essaySlug": "failure-injection-and-recovery-evaluation",
+      "revision": 1,
+      "publishedAt": "2026-08-27",
+      "substantivelyRevisedAt": "2026-08-27",
+      "summary": "Initial recovery-first failure-injection chapter covering durable cuts, ambiguous effects, stale ownership, revocation, corruption, and evidence degradation.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-b1f7325b0f4b02586ebb9ebb0dcfbc86f1d02c4d311899bfe96d3bd2233cd294",
+      "sourceIds": [
+        "source-aws-making-retries-safe",
+        "source-aws-transactional-outbox",
+        "source-harness-engineering-fieldbook-v1",
+        "source-rasa-why-agents-fail",
+        "source-temporal-workflow-execution-docs"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-rasa-why-agents-fail": "2026-08-22",
+        "source-aws-making-retries-safe": "2026-08-23",
+        "source-aws-transactional-outbox": "2026-08-23",
+        "source-temporal-workflow-execution-docs": "2026-08-24"
+      }
+    },
+    {
       "id": "revision-fieldbook-essay-001",
       "essaySlug": "the-model-is-not-the-agent",
       "revision": 1,
@@ -273,6 +468,31 @@
       "sourceValidationDates": {
         "source-harness-engineering-fieldbook-v1": "2026-08-21",
         "source-rasa-why-agents-fail": "2026-08-22"
+      }
+    },
+    {
+      "id": "revision-harness-capstone-001",
+      "essaySlug": "harness-capstone",
+      "revision": 1,
+      "publishedAt": "2026-08-27",
+      "substantivelyRevisedAt": "2026-08-27",
+      "summary": "Initial capstone specification for closing one bounded external responsibility through ambiguity, recovery, verification, acceptance, and re-entry.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-736e7925678e6222029bff4c5bc6760579c1c4b7448bc4d0a38993b80ae05cdd",
+      "sourceIds": [
+        "source-aws-making-retries-safe",
+        "source-aws-transactional-outbox",
+        "source-harness-engineering-fieldbook-v1",
+        "source-nist-ai-rmf-1",
+        "source-temporal-workflow-execution-docs"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-aws-making-retries-safe": "2026-08-23",
+        "source-aws-transactional-outbox": "2026-08-23",
+        "source-temporal-workflow-execution-docs": "2026-08-24",
+        "source-nist-ai-rmf-1": "2026-08-24"
       }
     },
     {
@@ -371,6 +591,105 @@
       }
     },
     {
+      "id": "revision-harness-engineering-study-guide-003",
+      "essaySlug": "harness-engineering-study-guide",
+      "revision": 3,
+      "publishedAt": "2026-08-22",
+      "substantivelyRevisedAt": "2026-08-27",
+      "summary": "Completed-course revision marking all forty chapters public and repinning the bounded workflow case to its inspected v1.6.0 release.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-41ae264475349ca0624a83887253ded64a7b2adf108da16d55bfcb9a2eeb5d2a",
+      "sourceIds": [
+        "source-agentmemory-runtime",
+        "source-ai-boost-awesome-harness-engineering",
+        "source-ai-job-search-workflow",
+        "source-anthropic-agent-skills-repository",
+        "source-anthropic-effective-long-running-harnesses",
+        "source-architecture-openhands",
+        "source-browser-use-runtime",
+        "source-community-cybersecurity-skills",
+        "source-diagram-design-skill",
+        "source-earendil-what-is-a-harness",
+        "source-harness-engineering-fieldbook-v1",
+        "source-humanlayer-12-factor-agents",
+        "source-langchain-anatomy-agent-harness",
+        "source-openviking-context-database",
+        "source-rasa-why-agents-fail",
+        "source-scientific-agent-skills",
+        "source-walkinglabs-awesome-harness-engineering",
+        "source-walkinglabs-learn-harness-engineering"
+      ],
+      "sourceValidationDates": {
+        "source-earendil-what-is-a-harness": "2026-08-21",
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-walkinglabs-learn-harness-engineering": "2026-08-22",
+        "source-walkinglabs-awesome-harness-engineering": "2026-08-22",
+        "source-rasa-why-agents-fail": "2026-08-22",
+        "source-anthropic-effective-long-running-harnesses": "2026-08-25",
+        "source-langchain-anatomy-agent-harness": "2026-08-22",
+        "source-humanlayer-12-factor-agents": "2026-08-22",
+        "source-openviking-context-database": "2026-08-25",
+        "source-agentmemory-runtime": "2026-08-25",
+        "source-anthropic-agent-skills-repository": "2026-08-25",
+        "source-diagram-design-skill": "2026-08-25",
+        "source-scientific-agent-skills": "2026-08-25",
+        "source-ai-boost-awesome-harness-engineering": "2026-08-25",
+        "source-community-cybersecurity-skills": "2026-08-25",
+        "source-ai-job-search-workflow": "2026-08-26",
+        "source-architecture-openhands": "2026-08-25",
+        "source-browser-use-runtime": "2026-08-25"
+      }
+    },
+    {
+      "id": "revision-harness-learning-promotion-and-retirement-001",
+      "essaySlug": "harness-learning-promotion-and-retirement",
+      "revision": 1,
+      "publishedAt": "2026-08-27",
+      "substantivelyRevisedAt": "2026-08-27",
+      "summary": "Initial governed-learning chapter separating candidate production, locked evaluation, staged promotion, monitoring, rollback, and retirement.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-ec78f0a84f5629bee279b749347a422a0834e7232d9a7b759868190fccfc1876",
+      "sourceIds": [
+        "source-ahe-harness-evolution",
+        "source-cursor-continually-improving-agent-harness",
+        "source-harness-engineering-fieldbook-v1",
+        "source-harness-updating-versus-benefit",
+        "source-rethinking-harness-evolution",
+        "source-swe-bench-evaluation-harness"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-cursor-continually-improving-agent-harness": "2026-08-25",
+        "source-ahe-harness-evolution": "2026-08-26",
+        "source-harness-updating-versus-benefit": "2026-08-27",
+        "source-rethinking-harness-evolution": "2026-08-26",
+        "source-swe-bench-evaluation-harness": "2026-08-26"
+      }
+    },
+    {
+      "id": "revision-harness-review-questions-and-design-worksheet-001",
+      "essaySlug": "harness-review-questions-and-design-worksheet",
+      "revision": 1,
+      "publishedAt": "2026-08-27",
+      "substantivelyRevisedAt": "2026-08-27",
+      "summary": "Initial failure-path review instrument spanning responsibility, authority, context, state, effects, evidence, memory, recovery, re-entry, and retirement.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-32f63ed433e216311afabde2133fd8bb600e0e7b1e0d470d2d9226bf45bbf84a",
+      "sourceIds": [
+        "source-harness-engineering-fieldbook-v1",
+        "source-nist-ai-rmf-1",
+        "source-w3c-trace-context"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-nist-ai-rmf-1": "2026-08-24",
+        "source-w3c-trace-context": "2026-08-24"
+      }
+    },
+    {
       "id": "revision-hermes-integrated-agent-runtime-001",
       "essaySlug": "hermes-integrated-agent-runtime",
       "revision": 1,
@@ -444,6 +763,29 @@
       "sourceValidationDates": {
         "source-harness-engineering-fieldbook-v1": "2026-08-21",
         "source-memory-anthropic-context-engineering": "2026-08-22"
+      }
+    },
+    {
+      "id": "revision-keeping-the-guide-current-001",
+      "essaySlug": "keeping-the-guide-current",
+      "revision": 1,
+      "publishedAt": "2026-08-27",
+      "substantivelyRevisedAt": "2026-08-27",
+      "summary": "Initial publication-harness chapter for source admission, exact pinning, bounded claims, immutable revisions, visible correction, and reproducible release.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-4cbfb558490ce67a40f62d91003acfc9ec30e776afa3d5d005fa2cbe70847f84",
+      "sourceIds": [
+        "source-ai-boost-awesome-harness-engineering",
+        "source-harness-engineering-fieldbook-v1",
+        "source-walkinglabs-awesome-harness-engineering",
+        "source-walkinglabs-learn-harness-engineering"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-ai-boost-awesome-harness-engineering": "2026-08-25",
+        "source-walkinglabs-awesome-harness-engineering": "2026-08-22",
+        "source-walkinglabs-learn-harness-engineering": "2026-08-22"
       }
     },
     {
@@ -599,6 +941,31 @@
       }
     },
     {
+      "id": "revision-model-harness-evaluation-001",
+      "essaySlug": "model-harness-evaluation",
+      "revision": 1,
+      "publishedAt": "2026-08-27",
+      "substantivelyRevisedAt": "2026-08-27",
+      "summary": "Initial evaluation chapter defining configuration-level units, constructs, factorial comparisons, protected evaluators, matched budgets, and held-out tasks.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-10f7b771f02ce2be01f552919cc8306bb2a9efa521db0515928c6b5137186ec3",
+      "sourceIds": [
+        "source-ahe-harness-evolution",
+        "source-cursor-continually-improving-agent-harness",
+        "source-harness-engineering-fieldbook-v1",
+        "source-rethinking-harness-evolution",
+        "source-swe-bench-evaluation-harness"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-cursor-continually-improving-agent-harness": "2026-08-25",
+        "source-swe-bench-evaluation-harness": "2026-08-26",
+        "source-ahe-harness-evolution": "2026-08-26",
+        "source-rethinking-harness-evolution": "2026-08-26"
+      }
+    },
+    {
       "id": "revision-observability-trace-reconstruction-001",
       "essaySlug": "observability-and-trace-reconstruction",
       "revision": 1,
@@ -656,6 +1023,25 @@
       }
     },
     {
+      "id": "revision-qm-scoped-resources-and-leased-runs-002",
+      "essaySlug": "qm-scoped-resources-and-leased-runs",
+      "revision": 2,
+      "publishedAt": "2026-08-26",
+      "substantivelyRevisedAt": "2026-08-26",
+      "summary": "Expanded corpus revision adding QM's declared adapter profiles, capability differences, and conformance boundary.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-34e082478100ad2d61b240f990b34684ae9c5acfb62c8d253ddff788680937a8",
+      "sourceIds": [
+        "source-harness-engineering-fieldbook-v1",
+        "source-qm-agent-runtime"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-qm-agent-runtime": "2026-08-26"
+      }
+    },
+    {
       "id": "revision-security-supply-chain-revocation-001",
       "essaySlug": "security-credentials-supply-chain-and-revocation",
       "revision": 1,
@@ -674,6 +1060,25 @@
         "source-harness-engineering-fieldbook-v1": "2026-08-21",
         "source-memory-nist-agent-hijacking-evaluations": "2026-08-22",
         "source-memory-owasp-memory-attack-surface": "2026-08-22"
+      }
+    },
+    {
+      "id": "revision-spotify-xirp-and-portal-001",
+      "essaySlug": "spotify-xirp-and-portal",
+      "revision": 1,
+      "publishedAt": "2026-08-27",
+      "substantivelyRevisedAt": "2026-08-27",
+      "summary": "Initial publication grounded in current Xirp v0.19.1 and Portal documentation with explicit parity, context, privacy, and drift boundaries.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-04327da67a781d6240a6199c883929681bdeaf6344564619478f2953fb30b63c",
+      "sourceIds": [
+        "source-harness-engineering-fieldbook-v1",
+        "source-spotify-xirp-portal"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-spotify-xirp-portal": "2026-08-26"
       }
     },
     {
@@ -732,6 +1137,29 @@
         "source-harness-engineering-fieldbook-v1": "2026-08-21",
         "source-rasa-why-agents-fail": "2026-08-22"
       }
+    },
+    {
+      "id": "revision-twelve-harness-labs-001",
+      "essaySlug": "twelve-harness-labs",
+      "revision": 1,
+      "publishedAt": "2026-08-27",
+      "substantivelyRevisedAt": "2026-08-27",
+      "summary": "Initial cumulative twelve-lab sequence covering context, capability, custody, durability, effects, evidence, memory, skills, browsers, and governed evolution.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-44bd3c53c8475a527738372c67ee1ffcb8df4b9391eecbeb80d53c0dac0371b7",
+      "sourceIds": [
+        "source-anthropic-agent-skills-repository",
+        "source-browser-use-runtime",
+        "source-harness-engineering-fieldbook-v1",
+        "source-scientific-agent-skills"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-anthropic-agent-skills-repository": "2026-08-25",
+        "source-scientific-agent-skills": "2026-08-25",
+        "source-browser-use-runtime": "2026-08-25"
+      }
     }
   ],
   "sources": [
@@ -740,12 +1168,16 @@
       "lastValidated": "2026-08-25"
     },
     {
+      "id": "source-ahe-harness-evolution",
+      "lastValidated": "2026-08-26"
+    },
+    {
       "id": "source-ai-boost-awesome-harness-engineering",
       "lastValidated": "2026-08-25"
     },
     {
       "id": "source-ai-job-search-workflow",
-      "lastValidated": "2026-08-25"
+      "lastValidated": "2026-08-26"
     },
     {
       "id": "source-anthropic-agent-skills-repository",
@@ -812,12 +1244,20 @@
       "lastValidated": "2026-08-26"
     },
     {
+      "id": "source-coderabbit-pre-merge-checks",
+      "lastValidated": "2026-08-26"
+    },
+    {
       "id": "source-community-cybersecurity-skills",
       "lastValidated": "2026-08-25"
     },
     {
       "id": "source-cursor-continually-improving-agent-harness",
       "lastValidated": "2026-08-25"
+    },
+    {
+      "id": "source-devin-testing-recordings",
+      "lastValidated": "2026-08-26"
     },
     {
       "id": "source-diagram-design-skill",
@@ -832,8 +1272,24 @@
       "lastValidated": "2026-08-21"
     },
     {
+      "id": "source-factory-missions",
+      "lastValidated": "2026-08-26"
+    },
+    {
+      "id": "source-github-copilot-cloud-agent",
+      "lastValidated": "2026-08-26"
+    },
+    {
+      "id": "source-greptile-trex-runtime-evidence",
+      "lastValidated": "2026-08-26"
+    },
+    {
       "id": "source-harness-engineering-fieldbook-v1",
       "lastValidated": "2026-08-21"
+    },
+    {
+      "id": "source-harness-updating-versus-benefit",
+      "lastValidated": "2026-08-27"
     },
     {
       "id": "source-hermes-agent-runtime",
@@ -896,7 +1352,15 @@
       "lastValidated": "2026-08-25"
     },
     {
+      "id": "source-pr-agent-release",
+      "lastValidated": "2026-08-26"
+    },
+    {
       "id": "source-qm-agent-runtime",
+      "lastValidated": "2026-08-26"
+    },
+    {
+      "id": "source-qodo-code-review-overview",
       "lastValidated": "2026-08-26"
     },
     {
@@ -904,8 +1368,20 @@
       "lastValidated": "2026-08-22"
     },
     {
+      "id": "source-rethinking-harness-evolution",
+      "lastValidated": "2026-08-26"
+    },
+    {
       "id": "source-scientific-agent-skills",
       "lastValidated": "2026-08-25"
+    },
+    {
+      "id": "source-spotify-xirp-portal",
+      "lastValidated": "2026-08-26"
+    },
+    {
+      "id": "source-swe-bench-evaluation-harness",
+      "lastValidated": "2026-08-26"
     },
     {
       "id": "source-temporal-workflow-execution-docs",
@@ -1151,5 +1627,5 @@
       }
     }
   ],
-  "buildId": "sha256-c3df30db8eb66730ba215850deedcd4a6a42cb5c39c2922abd4ef7de82f010c1"
+  "buildId": "sha256-2c8dbd58a6cd27b1898c73b0b8955df78cc4e22537d5b8a73bcac6e17b16615b"
 }

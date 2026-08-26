@@ -1,0 +1,23 @@
+id: source-rethinking-harness-evolution
+title: Rethinking the Evaluation of Harness Evolution for Agents
+author: Yike Wang, Huaisheng Zhu, Zhengyu Hu, Yige Yuan, Zhengyu Chen, Shakti Senthil, Hannaneh Hajishirzi, Yulia Tsvetkov, Pradeep Dasigi, and Teng Xiao
+canonical_url: https://arxiv.org/abs/2607.12227v1
+published_at: 2026-07-14
+retrieved_at: 2026-08-26
+inspected_paths: []
+source_type: first-party-article
+basis: Direct reading of the primary research paper on matched feedback and inference budgets, held-out tasks, and generalization in harness-evolution evaluation.
+license_status: unknown
+evidence_grade: FD
+observed_mechanisms:
+  - description: The study compares harness-evolution methods under matched budgets and held-out evaluation rather than accepting optimization-set gains as general improvement.
+    evidence_grade: FD
+    basis: The evaluation controls and reported experiments are described in the primary paper.
+author_reported_claims:
+  - The authors report no consistent superiority or generalization for evaluated harness-evolution methods under their controlled setup.
+unknowns:
+  - One controlled study does not prove that every future harness-evolution method will fail to generalize.
+falsifiers:
+  - The paper is withdrawn or corrected such that matched budgets and held-out tasks are no longer central evaluation controls.
+last_validated: 2026-08-26
+correction_ledger_status: reviewed

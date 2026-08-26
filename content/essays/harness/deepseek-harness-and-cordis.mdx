@@ -4,18 +4,18 @@ title: DeepSeek Harness and Cordis
 description: A source-pinned study of DeepSeek Harness's append-only sessions, bounded tool scheduling, causal commit, crash-tail repair, and Cordis lifecycle ownership.
 sequence: Harness Engineering
 sequence_position: 28
-revision: 1
+revision: 2
 authors:
   - author-shivansh-fulper
 published_at: 2026-08-26
 substantively_revised_at: 2026-08-26
-reading_time_source: 9 minute editorial estimate
+reading_time_source: 11 minute editorial estimate
 status: public
 source_manifest_ids:
   - source-harness-engineering-fieldbook-v1
   - source-architecture-deepseek-harness
   - source-architecture-cordis
-revision_id: revision-deepseek-harness-and-cordis-001
+revision_id: revision-deepseek-harness-and-cordis-002
 previous_essay_slug: cloudflare-think-and-agents
 next_essay_slug: drover-fleet-custody-and-evidence
 ---
@@ -45,6 +45,16 @@ Cancellation stops new replenishment and drains work already started. Calls skip
 Crash-tail repair distinguishes a tool call never recorded as started from one whose start was recorded but whose durable outcome is missing. The second case is ambiguous. Repair closes missing structural boundaries and tells the next request not to blindly repeat a potentially effectful call.
 
 This is the right epistemic posture: restore a valid record without inventing an outcome. Reconciliation still belongs to an effect-specific adapter that can query the external system by a stable identity.
+
+## Treat profiles as executable architecture
+
+DeepSeek Harness does not reduce configuration to a bag of optional settings. Its profile launcher composes an ordered list of plugin bundles, then applies the profile's own patch layer, then launcher-supplied patches. Shipped `web` and `headless` profiles are different compositions of the same plugin system. Example snapshots can replace a provider, insert a replay model, or switch the tool surface between direct tools and code mode.
+
+That makes a profile an executable architecture: it decides which providers, tools, persistence, interfaces, and policies exist and which plugin owns them. Order matters because a later patch can disable, replace, or reconfigure an earlier entry. The resolved configuration—not the friendly profile name—should therefore be the artifact attached to a session, evaluation, or bug report.
+
+This flexibility creates a migration obligation. A profile change can alter model-visible schemas, compaction behavior, sandbox policy, or persistence ownership without changing the user's task. Promotion should compare resolved snapshots, run conformance fixtures, and state whether existing sessions may resume under the new composition. “Same harness” is too coarse when the architecture is assembled at boot.
+
+The event model draws a related line. Turn, step, message, and tool events are durable session facts; agent and capability events are live extension points that may intercept work in flight. If a live waterfall rewrites or rejects what the model will see, the resulting durable turn still needs enough evidence to reconstruct the admitted request. A callback is not canonical merely because it ran during a canonical turn.
 
 ## Give registrations lifecycle owners
 

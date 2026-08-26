@@ -98,9 +98,9 @@ export default async function HomePage() {
           <h2 id="course-map-title">The curriculum behind the guide</h2>
           <p>
             Start with the complete short guide, then use this map to go deeper. It comes from a
-            forty-chapter working manuscript built from agent runtimes, coding agents, workflow
-            systems, memory systems, evaluation research, and failure reports. Detailed chapters
-            will be released as they are edited for the web.
+            forty-chapter manuscript built from agent runtimes, coding agents, workflow systems,
+            memory systems, evaluation research, and failure reports. Every detailed chapter is
+            now source-pinned and available here.
           </p>
         </div>
         <div className="course-map__parts">
@@ -145,7 +145,7 @@ export default async function HomePage() {
       </section>
 
       <footer className="homepage__status interface-text">
-        <p>Public working edition · Read the short course now; detailed chapters follow</p>
+        <p>Public working edition · Complete forty-chapter course, labs, and capstone</p>
       </footer>
       </article>
     </>

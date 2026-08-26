@@ -294,7 +294,7 @@ describe("flagship fieldbook reader", () => {
       .toBeInTheDocument();
   });
 
-  it("connects Evidence and Completion to the first comparative case and ends the released batch at Drover", async () => {
+  it("connects Evidence and Completion through the complete released course", async () => {
     const openLoopsPage = await ArticlePage({ params: Promise.resolve({ slug: "open-loops-and-re-entry" }) });
     const { unmount } = render(openLoopsPage);
     expect(screen.getByRole("link", { name: "Next: Anthropic Long-Running Harnesses" }))
@@ -310,9 +310,17 @@ describe("flagship fieldbook reader", () => {
     unmountHermes();
 
     const droverPage = await ArticlePage({ params: Promise.resolve({ slug: "drover-fleet-custody-and-evidence" }) });
-    render(droverPage);
+    const { unmount: unmountDrover } = render(droverPage);
     expect(screen.getByRole("link", { name: "Previous: DeepSeek Harness and Cordis" }))
       .toHaveAttribute("href", "/fieldbook/deepseek-harness-and-cordis");
+    expect(screen.getByRole("link", { name: "Next: Spotify Xirp and Portal: Native Custody and Context" }))
+      .toHaveAttribute("href", "/fieldbook/spotify-xirp-and-portal");
+    unmountDrover();
+
+    const finalPage = await ArticlePage({ params: Promise.resolve({ slug: "keeping-the-guide-current" }) });
+    render(finalPage);
+    expect(screen.getByRole("link", { name: "Previous: Harness Review Questions and Design Worksheet" }))
+      .toHaveAttribute("href", "/fieldbook/harness-review-questions-and-design-worksheet");
     expect(screen.queryByRole("link", { name: /^Next:/ })).not.toBeInTheDocument();
   });
 

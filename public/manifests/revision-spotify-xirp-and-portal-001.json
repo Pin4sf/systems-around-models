@@ -1,0 +1,37 @@
+{
+  "id": "revision-spotify-xirp-and-portal-001",
+  "essaySlug": "spotify-xirp-and-portal",
+  "revision": 1,
+  "publishedAt": "2026-08-27",
+  "substantivelyRevisedAt": "2026-08-27",
+  "summary": "Initial publication grounded in current Xirp v0.19.1 and Portal documentation with explicit parity, context, privacy, and drift boundaries.",
+  "affectedClaimIds": [],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-04327da67a781d6240a6199c883929681bdeaf6344564619478f2953fb30b63c",
+  "sourceIds": [
+    "source-harness-engineering-fieldbook-v1",
+    "source-spotify-xirp-portal"
+  ],
+  "sourceValidationDates": {
+    "source-harness-engineering-fieldbook-v1": "2026-08-21",
+    "source-spotify-xirp-portal": "2026-08-26"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-spotify-xirp-portal",
+      "title": "Xirp v0.19.1 and Portal workspace documentation",
+      "canonicalUrl": "https://backstage.spotify.com/docs/xirp",
+      "lastValidated": "2026-08-26",
+      "licenseStatus": "all-rights-reserved"
+    }
+  ]
+}

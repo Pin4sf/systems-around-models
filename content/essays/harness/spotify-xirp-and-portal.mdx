@@ -1,0 +1,73 @@
+---
+slug: spotify-xirp-and-portal
+title: "Spotify Xirp and Portal: Native Custody and Context"
+description: A current, documentation-pinned study of shared supervision that preserves provider-native sessions, capability differences, and context authority.
+sequence: Harness Engineering
+sequence_position: 30
+revision: 1
+authors:
+  - author-shivansh-fulper
+published_at: 2026-08-27
+substantively_revised_at: 2026-08-27
+reading_time_source: 8 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-spotify-xirp-portal
+revision_id: revision-spotify-xirp-and-portal-001
+previous_essay_slug: drover-fleet-custody-and-evidence
+next_essay_slug: factory-missions-versus-github-copilot
+---
+
+## One surface, several native runtimes
+
+Spotify's public Xirp documentation describes a common place to launch, observe, attach to, and resume coding-agent sessions. The current v0.19.1 documentation names Claude Code, Codex, Gemini, and Cursor. Xirp does not make those agents one runtime. The provider process still runs in a native persistent terminal with its own credentials, permissions, model choices, sandbox, and protocol behavior.
+
+That boundary is the useful case. A supervision layer can unify the operator's view without pretending to unify the underlying guarantees. It can own session discovery and terminal attachment while the native agent retains execution custody.
+
+## Native custody is not provider parity
+
+A common status such as `working` or `waiting` is a projection over provider-specific evidence. Spotify's changelog records fixes for stale working state, incorrect waiting state, corrupted Codex tool-call evidence after resume, stale pull-request state, crash loops, and unsafe worktree cleanup. Those corrections show why normalization needs a capability-and-evidence contract rather than a cosmetic adapter.
+
+For each provider and version, declare:
+
+<dl className="completion-map">
+  <div><dt>What is native?</dt><dd>Session identifier, terminal, permission prompt, usage, and recovery keys.</dd></div>
+  <div><dt>What can the supervisor do?</dt><dd>Launch, attach, steer, stop, resume, or only observe.</dd></div>
+  <div><dt>What proves state?</dt><dd>Native event, parsed terminal output, polling, or operator inference.</dd></div>
+  <div><dt>What happens on drift?</dt><dd>Raw preservation, degraded status, blocked control, and a diagnostic receipt.</dd></div>
+</dl>
+
+An adapter may support attach for every provider while supporting safe resume for only some. The honest interface exposes that difference.
+
+## Keep organizational context subordinate to execution authority
+
+Portal workspaces can make team context available to a launched session through MCP. Context attachment is not authority amplification. It should be optional, permission-aware, attributable, and loaded only when relevant. It must not silently replace the native agent's permission model or turn organizational documentation into executable instructions.
+
+This also creates a privacy seam. Xirp documents transcript upload as a manual action without automatic redaction. A public or shared transcript therefore needs an explicit review step. Secrets, personal data, and customer data are not made safe by appearing in a debugging artifact.
+
+## Preserve escape hatches
+
+A shared supervisor should let the operator drop into the native terminal when the common projection is uncertain. That is not a failure of abstraction. It is a controlled escape hatch that preserves debuggability while the adapter catches up with provider drift.
+
+The right fallback is classified, not silent: `native`, `normalized`, `inferred`, or `unknown`. If a provider upgrade changes an event shape, retain the raw observation, stop asserting the stronger status, and show the recovery action.
+
+## Failure boundary
+
+The design fails if the common UI promises controls a provider does not support, treats parsed terminal text as provider-issued truth, attaches workspace context beyond the principal's authority, uploads sensitive transcripts without review, or deletes a worktree whose ownership is uncertain. It also fails if a broken projection makes the native session unreachable.
+
+## Retrieval check
+
+Xirp shows a Codex session as waiting, but the native terminal is still producing tool events after a resume. Which state should the UI publish, what evidence should it retain, and which controls must be disabled until the adapter reconciles the contradiction?
+
+## Build-and-break lab
+
+Wrap two fake providers behind one session list. Give one native resume and structured status events; give the other attach-only support and terminal-text inference. Change the second provider's output format mid-run. Assert that the supervisor preserves the raw event, degrades status to unknown, keeps terminal access available, and never advertises unsupported resume.
+
+## Sources and further reading
+
+- [Xirp overview](https://backstage.spotify.com/docs/xirp) — current first-party product boundary and supported providers.
+- [Xirp sessions](https://backstage.spotify.com/docs/xirp/sessions) — persistent terminal and session behavior.
+- [Xirp changelog](https://backstage.spotify.com/docs/xirp/changelog) — version-specific corrections that constrain parity and state claims.
+- [Launching sessions from Portal](https://backstage.spotify.com/docs/xirp/workspaces/launching-sessions) — workspace-context attachment and native-agent boundaries.
+- [Harness Engineering Study Guide](/fieldbook/harness-engineering-study-guide) — the shared vocabulary for custody, capability manifests, and evidence.

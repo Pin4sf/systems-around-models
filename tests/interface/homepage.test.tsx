@@ -109,9 +109,21 @@ it("leads readers into a complete harness-engineering course map", async () => {
     ["Cloudflare Think and Agents", "/fieldbook/cloudflare-think-and-agents"],
     ["DeepSeek Harness and Cordis", "/fieldbook/deepseek-harness-and-cordis"],
     ["Drover", "/fieldbook/drover-fleet-custody-and-evidence"],
+    ["Spotify Xirp and Portal", "/fieldbook/spotify-xirp-and-portal"],
+    ["Factory Missions versus GitHub Copilot", "/fieldbook/factory-missions-versus-github-copilot"],
+    ["Devin, Greptile, CodeRabbit, and Qodo", "/fieldbook/devin-greptile-coderabbit-and-qodo"],
+    ["A bounded whole-product case study", "/fieldbook/bounded-whole-product-case-study"],
+    ["Model × harness evaluation", "/fieldbook/model-harness-evaluation"],
+    ["Conformance and trajectory evaluation", "/fieldbook/conformance-and-trajectory-evaluation"],
+    ["Failure injection and recovery evaluation", "/fieldbook/failure-injection-and-recovery-evaluation"],
+    ["Harness learning, promotion, and retirement", "/fieldbook/harness-learning-promotion-and-retirement"],
+    ["Twelve Harness Labs", "/fieldbook/twelve-harness-labs"],
+    ["Harness Capstone", "/fieldbook/harness-capstone"],
+    ["Harness Review Questions and Design Worksheet", "/fieldbook/harness-review-questions-and-design-worksheet"],
+    ["Keeping the guide current", "/fieldbook/keeping-the-guide-current"],
   ]) {
-    expect(screen.getByRole("link", { name: new RegExp(name, "i") })).toHaveAttribute("href", href);
+    const matchingLinks = screen.getAllByRole("link", { name: new RegExp(name, "i") });
+    expect(matchingLinks.some((link) => link.getAttribute("href") === href)).toBe(true);
   }
-  expect(screen.getByText("Spotify Xirp and Portal").closest("li"))
-    .toHaveTextContent("Coming next");
+  expect(screen.queryByText("Coming next")).not.toBeInTheDocument();
 });

@@ -1,0 +1,55 @@
+{
+  "id": "revision-keeping-the-guide-current-001",
+  "essaySlug": "keeping-the-guide-current",
+  "revision": 1,
+  "publishedAt": "2026-08-27",
+  "substantivelyRevisedAt": "2026-08-27",
+  "summary": "Initial publication-harness chapter for source admission, exact pinning, bounded claims, immutable revisions, visible correction, and reproducible release.",
+  "affectedClaimIds": [],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-4cbfb558490ce67a40f62d91003acfc9ec30e776afa3d5d005fa2cbe70847f84",
+  "sourceIds": [
+    "source-ai-boost-awesome-harness-engineering",
+    "source-harness-engineering-fieldbook-v1",
+    "source-walkinglabs-awesome-harness-engineering",
+    "source-walkinglabs-learn-harness-engineering"
+  ],
+  "sourceValidationDates": {
+    "source-harness-engineering-fieldbook-v1": "2026-08-21",
+    "source-ai-boost-awesome-harness-engineering": "2026-08-25",
+    "source-walkinglabs-awesome-harness-engineering": "2026-08-22",
+    "source-walkinglabs-learn-harness-engineering": "2026-08-22"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-ai-boost-awesome-harness-engineering",
+      "title": "AI Boost Awesome Harness Engineering repository",
+      "canonicalUrl": "https://github.com/ai-boost/awesome-harness-engineering/tree/f5e17c351cf05e3b611275e20aef3c7797e04d83",
+      "lastValidated": "2026-08-25",
+      "licenseStatus": "CC0-1.0"
+    },
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-walkinglabs-awesome-harness-engineering",
+      "title": "Awesome Harness Engineering",
+      "canonicalUrl": "https://github.com/walkinglabs/awesome-harness-engineering",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "CC0-1.0"
+    },
+    {
+      "id": "source-walkinglabs-learn-harness-engineering",
+      "title": "Learn Harness Engineering",
+      "canonicalUrl": "https://walkinglabs.github.io/learn-harness-engineering/en/",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "MIT"
+    }
+  ]
+}

@@ -172,6 +172,112 @@ describe("public content registry", () => {
     expect(source).toContain("common MCP `memory_recall` tool does not expose or forward project");
   });
 
+  it("publishes the expanded Chapters 25–28 as source-pinned second revisions", async () => {
+    const content = await loadContent();
+    const cases = [
+      {
+        slug: "qm-scoped-resources-and-leased-runs",
+        revisionId: "revision-qm-scoped-resources-and-leased-runs-002",
+        heading: "## Declare adapter capabilities instead of promising parity",
+        sourceId: "source-qm-agent-runtime",
+        inspectedPath: "src/harness/harness.ts",
+      },
+      {
+        slug: "cloudflare-think-and-agents",
+        revisionId: "revision-cloudflare-think-and-agents-002",
+        heading: "## Put one idempotency key at each ownership boundary",
+        sourceId: "source-cloudflare-think-agents",
+        inspectedPath: "docs/think/programmatic-submissions.md",
+      },
+      {
+        slug: "deepseek-harness-and-cordis",
+        revisionId: "revision-deepseek-harness-and-cordis-002",
+        heading: "## Treat profiles as executable architecture",
+        sourceId: "source-architecture-deepseek-harness",
+        inspectedPath: "packages/boot/app-boot/src/profile.ts",
+      },
+      {
+        slug: "drover-fleet-custody-and-evidence",
+        revisionId: "revision-drover-fleet-custody-and-evidence-003",
+        heading: "## Preserve native protocol truth through compatibility layers",
+        sourceId: "source-drover-fleet-runtime",
+        inspectedPath: "src/drover/server/harness/structured/pusher.py",
+      },
+    ];
+
+    for (const item of cases) {
+      const essay = content.essays.get(item.slug);
+      const source = content.sources.get(item.sourceId);
+      const body = await readFile(
+        path.join(process.cwd(), `content/essays/harness/${item.slug}.mdx`),
+        "utf8",
+      );
+
+      expect(essay).toMatchObject({
+        revision: item.slug === "drover-fleet-custody-and-evidence" ? 3 : 2,
+        revisionId: item.revisionId,
+      });
+      const revisionSummary = content.revisions.get(item.revisionId)?.summary.toLowerCase() ?? "";
+      expect(revisionSummary).toContain(
+        item.slug === "drover-fleet-custody-and-evidence" ? "connected" : "expanded corpus",
+      );
+      expect(source?.inspectedPaths).toContain(item.inspectedPath);
+      expect(body).toContain(item.heading);
+    }
+  });
+
+  it("publishes Chapters 29–40 as one source-pinned course sequence", async () => {
+    const content = await loadContent();
+    const chapters = [
+      ["spotify-xirp-and-portal", 30, "revision-spotify-xirp-and-portal-001", "## Native custody is not provider parity"],
+      ["factory-missions-versus-github-copilot", 31, "revision-factory-missions-versus-github-copilot-001", "## Keep mission validation separate from delivery authority"],
+      ["devin-greptile-coderabbit-and-qodo", 32, "revision-devin-greptile-coderabbit-and-qodo-001", "## Verification is a plane, not a verdict"],
+      ["bounded-whole-product-case-study", 33, "revision-bounded-whole-product-case-study-001", "## A bounded responsibility case"],
+      ["model-harness-evaluation", 34, "revision-model-harness-evaluation-001", "## Evaluate configurations, not model names"],
+      ["conformance-and-trajectory-evaluation", 35, "revision-conformance-and-trajectory-evaluation-001", "## Three evaluators answer three questions"],
+      ["failure-injection-and-recovery-evaluation", 36, "revision-failure-injection-and-recovery-evaluation-001", "## Declare recovery before injecting failure"],
+      ["harness-learning-promotion-and-retirement", 37, "revision-harness-learning-promotion-and-retirement-001", "## Learning is a higher-authority loop"],
+      ["twelve-harness-labs", 38, "revision-twelve-harness-labs-001", "## Build cumulatively, break deliberately"],
+      ["harness-capstone", 39, "revision-harness-capstone-001", "## Close one responsibility under uncertainty"],
+      ["harness-review-questions-and-design-worksheet", 40, "revision-harness-review-questions-and-design-worksheet-001", "## Review the failure path"],
+      ["keeping-the-guide-current", 41, "revision-keeping-the-guide-current-001", "## Publication needs a harness too"],
+    ] as const;
+
+    for (const [slug, sequencePosition, revisionId, heading] of chapters) {
+      const essay = content.essays.get(slug);
+      const body = await readFile(
+        path.join(process.cwd(), `content/essays/harness/${slug}.mdx`),
+        "utf8",
+      );
+
+      expect(essay).toMatchObject({
+        revision: 1,
+        revisionId,
+        sequence: "Harness Engineering",
+        sequencePosition,
+        status: "public",
+      });
+      expect(content.revisions.has(revisionId)).toBe(true);
+      expect(essay?.sourceManifestIds.length).toBeGreaterThan(1);
+      expect(body).toContain(heading);
+      expect(body).toContain("## Failure boundary");
+      expect(body).toContain("## Retrieval check");
+      expect(body).toContain("## Build-and-break lab");
+      expect(body).toContain("## Sources and further reading");
+    }
+
+    expect(content.sources.get("source-spotify-xirp-portal")?.lastValidated).toBe("2026-08-26");
+    expect(content.sources.get("source-pr-agent-release")?.repositoryCommit).toBe(
+      "4ebd5c5333c6ef21509e7304d27969eb825e6f22",
+    );
+    expect(content.sources.get("source-ai-job-search-workflow")?.repositoryCommit).toBe(
+      "ab91c60cc47147d9416f0af758fb5e2d109956ce",
+    );
+    expect(content.sources.get("source-swe-bench-evaluation-harness")?.repositoryCommit).toBe(
+      "7a21e05772954cc81471ae19d56f436cecf43c54",
+    );
+  });
+
   it("covers the central Memory Engineering claims with source-backed revision records", async () => {
     const [content, source] = await Promise.all([
       loadContent(),

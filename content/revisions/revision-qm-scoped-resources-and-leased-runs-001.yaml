@@ -6,3 +6,7 @@ substantively_revised_at: 2026-08-26
 summary: Initial public revision of the release-pinned QM scoped-resource and leased-run case study.
 affected_claim_ids: []
 correction_disposition: publication
+content_hash: sha256-5e0eec5c2a319161b7504d98295481d51d3c71cd5b756e6cbed922120e195e8c
+sources:
+  - { id: source-harness-engineering-fieldbook-v1, title: "The Agent Systems Fieldbook — Harness Engineering, version 1", canonical_url: /manifests/revision-fieldbook-essay-001.json, last_validated: 2026-08-21, license_status: all-rights-reserved }
+  - { id: source-qm-agent-runtime, title: QM v0.1.5 repository release, canonical_url: https://github.com/yc-software/qm/tree/d931fe963de3ac20b9a7526ea9a4873c0d8ed18e, last_validated: 2026-08-26, license_status: MIT }

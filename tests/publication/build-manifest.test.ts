@@ -104,6 +104,13 @@ describe("deterministic public build manifest", () => {
           ]),
         }),
         expect.objectContaining({
+          id: "revision-harness-engineering-study-guide-003",
+          essaySlug: "harness-engineering-study-guide",
+          revision: 3,
+          substantivelyRevisedAt: "2026-08-27",
+          sourceIds: expect.arrayContaining(["source-ai-job-search-workflow"]),
+        }),
+        expect.objectContaining({
           id: "revision-memory-engineering-study-guide-001",
           essaySlug: "memory-engineering-study-guide",
           publishedAt: "2026-08-22",
@@ -146,25 +153,77 @@ describe("deterministic public build manifest", () => {
         expect.objectContaining({
           id: "revision-qm-scoped-resources-and-leased-runs-001",
           essaySlug: "qm-scoped-resources-and-leased-runs",
+          revision: 1,
+          contentHash: "sha256-5e0eec5c2a319161b7504d98295481d51d3c71cd5b756e6cbed922120e195e8c",
           sourceIds: expect.arrayContaining(["source-qm-agent-runtime"]),
+        }),
+        expect.objectContaining({
+          id: "revision-qm-scoped-resources-and-leased-runs-002",
+          essaySlug: "qm-scoped-resources-and-leased-runs",
+          revision: 2,
         }),
         expect.objectContaining({
           id: "revision-cloudflare-think-and-agents-001",
           essaySlug: "cloudflare-think-and-agents",
+          revision: 1,
+          contentHash: "sha256-04870322ff7b4f76fedbb0204fc123047ea79da4f94b84bede611757c709bde7",
           sourceIds: expect.arrayContaining(["source-cloudflare-think-agents"]),
+        }),
+        expect.objectContaining({
+          id: "revision-cloudflare-think-and-agents-002",
+          essaySlug: "cloudflare-think-and-agents",
+          revision: 2,
         }),
         expect.objectContaining({
           id: "revision-deepseek-harness-and-cordis-001",
           essaySlug: "deepseek-harness-and-cordis",
+          revision: 1,
+          contentHash: "sha256-a3aff29235a4d1a49d2fa5114e2ba72c5a60ba73e50a348da7ce0f6788004ba3",
           sourceIds: expect.arrayContaining([
             "source-architecture-deepseek-harness",
             "source-architecture-cordis",
           ]),
         }),
         expect.objectContaining({
+          id: "revision-deepseek-harness-and-cordis-002",
+          essaySlug: "deepseek-harness-and-cordis",
+          revision: 2,
+        }),
+        expect.objectContaining({
           id: "revision-drover-fleet-custody-and-evidence-001",
           essaySlug: "drover-fleet-custody-and-evidence",
+          revision: 1,
+          contentHash: "sha256-09156cfa8c0234dca5df23b44afd3f61be416422deff22986a11ffa6d3abdde6",
           sourceIds: expect.arrayContaining(["source-drover-fleet-runtime"]),
+        }),
+        expect.objectContaining({
+          id: "revision-drover-fleet-custody-and-evidence-002",
+          essaySlug: "drover-fleet-custody-and-evidence",
+          revision: 2,
+        }),
+        expect.objectContaining({
+          id: "revision-drover-fleet-custody-and-evidence-003",
+          essaySlug: "drover-fleet-custody-and-evidence",
+          revision: 3,
+        }),
+        expect.objectContaining({
+          id: "revision-spotify-xirp-and-portal-001",
+          essaySlug: "spotify-xirp-and-portal",
+          revision: 1,
+          sourceIds: expect.arrayContaining(["source-spotify-xirp-portal"]),
+        }),
+        expect.objectContaining({
+          id: "revision-model-harness-evaluation-001",
+          essaySlug: "model-harness-evaluation",
+          sourceIds: expect.arrayContaining([
+            "source-swe-bench-evaluation-harness",
+            "source-rethinking-harness-evolution",
+          ]),
+        }),
+        expect.objectContaining({
+          id: "revision-keeping-the-guide-current-001",
+          essaySlug: "keeping-the-guide-current",
+          revision: 1,
         }),
       ]),
     });
@@ -229,6 +288,14 @@ describe("deterministic public build manifest", () => {
         id: "source-drover-fleet-runtime",
         lastValidated: "2026-08-26",
       }),
+      expect.objectContaining({
+        id: "source-ai-job-search-workflow",
+        lastValidated: "2026-08-26",
+      }),
+      expect.objectContaining({
+        id: "source-swe-bench-evaluation-harness",
+        lastValidated: "2026-08-26",
+      }),
     ]));
     await expect(
       readFile(
@@ -248,6 +315,12 @@ describe("deterministic public build manifest", () => {
         "utf8",
       ),
     ).resolves.toContain('"revision": 2');
+    await expect(
+      readFile(
+        path.join(root, "public", "manifests", "revision-keeping-the-guide-current-001.json"),
+        "utf8",
+      ),
+    ).resolves.toContain('"essaySlug": "keeping-the-guide-current"');
     await expect(
       readFile(
         path.join(root, "public", "manifests", "revision-memory-engineering-study-guide-001.json"),

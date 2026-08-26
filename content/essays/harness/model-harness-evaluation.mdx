@@ -1,0 +1,88 @@
+---
+slug: model-harness-evaluation
+title: Model × Harness Evaluation
+description: A controlled method for evaluating complete model-and-harness configurations without confusing benchmark movement with general capability.
+sequence: Harness Engineering
+sequence_position: 34
+revision: 1
+authors:
+  - author-shivansh-fulper
+published_at: 2026-08-27
+substantively_revised_at: 2026-08-27
+reading_time_source: 9 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-cursor-continually-improving-agent-harness
+  - source-swe-bench-evaluation-harness
+  - source-ahe-harness-evolution
+  - source-rethinking-harness-evolution
+revision_id: revision-model-harness-evaluation-001
+previous_essay_slug: bounded-whole-product-case-study
+next_essay_slug: conformance-and-trajectory-evaluation
+---
+
+## Evaluate configurations, not model names
+
+An agent result comes from a configuration: model revision, instructions, tool schemas, context policy, environment, orchestration, retry rules, budget, and evaluator. Changing any of them changes the measured system. A leaderboard row labeled only with a model name hides the intervention that produced the score.
+
+Cursor's public account of harness work makes the interaction concrete: different models can benefit from different tools and prompts, and offline evaluations are considered alongside online product signals. The SWE-bench repository makes another part concrete: task instances, predictions, containers, grading code, and reports jointly define the evaluation harness. Neither source supports a universal ranking outside its declared setup.
+
+## Name the construct before the metric
+
+First state what you intend to measure. “Can recover a repository bug under a fixed budget” is a construct. “Resolved by the SWE-bench grader” is an operationalization. The metric is useful only insofar as the tasks, environment, and grader represent the intended capability.
+
+Write a pre-run card:
+
+```text
+construct: repository bug resolution under bounded tool use
+population: held-out tasks from declared repositories and dates
+configuration: model + harness commit + tools + instructions
+budget: attempts, tokens, time, and feedback calls
+oracle: locked tests and grading commit
+invalid run policy: declared before execution
+secondary costs: latency, spend, human correction, unsafe actions
+```
+
+This card prevents a score from silently changing meaning after results arrive.
+
+## Use factorial comparisons
+
+To estimate a harness effect, compare at least two models across at least two harness configurations while holding tasks, environments, budgets, and evaluators fixed. The comparisons separate three questions:
+
+- Did model A outperform model B under the same harness?
+- Did harness H2 outperform H1 for the same model?
+- Did the harness effect differ by model?
+
+Run order, sampling settings, retries, and invalid effects belong in the record. If H2 gets more attempts or evaluator feedback, the result confounds harness design with budget.
+
+## Lock the evaluator and protect held-out tasks
+
+The harness under evaluation must not edit its own tests, grader, task labels, or pass criteria. If the system can see solutions or tune against the final set, it can improve the metric without improving the construct. Keep optimization tasks separate from held-out evaluation and preserve access logs for protected artifacts.
+
+Agentic Harness Engineering reports gains from automated harness search in its experiments. A later paper, Rethinking the Evaluation of Harness Evolution for Agents, reports that advantages were not consistent under matched feedback and inference budgets and held-out evaluation in its tested setups. Both are author-reported research results. Together they teach evaluation discipline, not a verdict that harness evolution always works or never works.
+
+## Keep offline and online evidence distinct
+
+Offline tasks improve repeatability and diagnosis. Online signals can reveal real-use friction, but a proxy such as retained edits or task continuation is not identical to correctness, safety, or user value. Use multiple signals and preserve their disagreement.
+
+Report distributions, uncertainty, failed trials, and costs—not only an average score. A configuration that resolves one more task while doubling unsafe effects or human correction burden may be worse for the actual product.
+
+## Failure boundary
+
+The evaluation fails if the measured unit is labeled only by model, budgets differ without disclosure, the harness sees held-out solutions, evaluator changes are mixed with treatment changes, failed runs disappear, or an online proxy is called user value. It also fails if author-reported benchmark movement is promoted to a SOTA claim without independent reproduction and a matching scope.
+
+## Retrieval check
+
+Harness H2 scores higher than H1, but H2 received twice as many grader messages and was tuned on the final task set. What, if anything, can the experiment support, and which rerun would isolate the harness effect?
+
+## Build-and-break lab
+
+Create two tiny harnesses and two deterministic task families. Run a 2×2 model-harness comparison with fixed budgets and a locked evaluator. Then intentionally leak one held-out answer and grant one harness an extra retry. Require the report to detect both contaminations and refuse the headline comparison.
+
+## Sources and further reading
+
+- [SWE-bench evaluation harness](https://github.com/SWE-bench/SWE-bench/tree/7a21e05772954cc81471ae19d56f436cecf43c54) — commit-pinned environment, grading, and reporting machinery.
+- [Cursor: continually improving the agent harness](https://cursor.com/blog/continually-improving-agent-harness) — first-party account of offline, online, and model-specific evaluation practice.
+- [Agentic Harness Engineering](https://arxiv.org/abs/2604.25850v4) — version-pinned primary paper with author-reported automated-search results.
+- [Rethinking the Evaluation of Harness Evolution for Agents](https://arxiv.org/abs/2607.12227v1) — version-pinned primary counterevidence emphasizing matched budgets and held-out tasks.

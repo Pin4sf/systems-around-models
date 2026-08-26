@@ -39,6 +39,18 @@ const releasedChapterPaths = [
   "/fieldbook/cloudflare-think-and-agents",
   "/fieldbook/deepseek-harness-and-cordis",
   "/fieldbook/drover-fleet-custody-and-evidence",
+  "/fieldbook/spotify-xirp-and-portal",
+  "/fieldbook/factory-missions-versus-github-copilot",
+  "/fieldbook/devin-greptile-coderabbit-and-qodo",
+  "/fieldbook/bounded-whole-product-case-study",
+  "/fieldbook/model-harness-evaluation",
+  "/fieldbook/conformance-and-trajectory-evaluation",
+  "/fieldbook/failure-injection-and-recovery-evaluation",
+  "/fieldbook/harness-learning-promotion-and-retirement",
+  "/fieldbook/twelve-harness-labs",
+  "/fieldbook/harness-capstone",
+  "/fieldbook/harness-review-questions-and-design-worksheet",
+  "/fieldbook/keeping-the-guide-current",
 ];
 
 afterEach(() => {
@@ -144,11 +156,11 @@ describe("canonical publication metadata", () => {
 
     expect(guide.openGraph).toMatchObject({
       publishedTime: "2026-08-22",
-      modifiedTime: "2026-08-25",
+      modifiedTime: "2026-08-27",
       url: `${canonicalSite}${guidePath}`,
     });
     expect(guide.other?.["article:revision"]).toBe(
-      "revision-harness-engineering-study-guide-002",
+      "revision-harness-engineering-study-guide-003",
     );
   });
 
@@ -188,26 +200,26 @@ describe("canonical publication metadata", () => {
 
   it("publishes canonical metadata and Article JSON-LD for the latest released chapter", async () => {
     vi.stubEnv("SITE_URL", canonicalSite);
-    const latestSlug = "drover-fleet-custody-and-evidence";
+    const latestSlug = "keeping-the-guide-current";
     const latestPath = `/fieldbook/${latestSlug}`;
     const [metadata, structuredData] = await Promise.all([
       generateMetadata({ params: Promise.resolve({ slug: latestSlug }) }),
       buildArticleStructuredData(latestSlug),
     ]);
 
-    expect(metadata.title).toBe("Drover: Fleet Custody and Evidence | Systems Around Models");
+    expect(metadata.title).toBe("Keeping the Guide Current | Systems Around Models");
     expect(metadata.alternates?.canonical).toBe(latestPath);
     expect(metadata.openGraph).toMatchObject({
       type: "article",
-      publishedTime: "2026-08-26",
-      modifiedTime: "2026-08-26",
+      publishedTime: "2026-08-27",
+      modifiedTime: "2026-08-27",
       url: `${canonicalSite}${latestPath}`,
     });
     expect(structuredData).toMatchObject({
       "@type": "Article",
-      headline: "Drover: Fleet Custody and Evidence",
-      datePublished: "2026-08-26",
-      dateModified: "2026-08-26",
+      headline: "Keeping the Guide Current",
+      datePublished: "2026-08-27",
+      dateModified: "2026-08-27",
       mainEntityOfPage: `${canonicalSite}${latestPath}`,
     });
   });
@@ -275,13 +287,19 @@ describe("publication discovery endpoints", () => {
     expect(body).toContain(`<link>${canonicalSite}/fieldbook/hermes-integrated-agent-runtime</link>`);
     expect(body).toContain("revision-hermes-integrated-agent-runtime-002");
     expect(body).toContain("<title>QM: Scoped Resources and Leased Runs</title>");
-    expect(body).toContain("revision-qm-scoped-resources-and-leased-runs-001");
+    expect(body).toContain("revision-qm-scoped-resources-and-leased-runs-002");
     expect(body).toContain("<title>Cloudflare Think and Agents</title>");
-    expect(body).toContain("revision-cloudflare-think-and-agents-001");
+    expect(body).toContain("revision-cloudflare-think-and-agents-002");
     expect(body).toContain("<title>DeepSeek Harness and Cordis</title>");
-    expect(body).toContain("revision-deepseek-harness-and-cordis-001");
+    expect(body).toContain("revision-deepseek-harness-and-cordis-002");
     expect(body).toContain("<title>Drover: Fleet Custody and Evidence</title>");
-    expect(body).toContain("revision-drover-fleet-custody-and-evidence-001");
+    expect(body).toContain("revision-drover-fleet-custody-and-evidence-003");
+    expect(body).toContain("<title>Spotify Xirp and Portal: Native Custody and Context</title>");
+    expect(body).toContain("revision-bounded-whole-product-case-study-001");
+    expect(body).toContain("<title>Model × Harness Evaluation</title>");
+    expect(body).toContain("revision-harness-learning-promotion-and-retirement-001");
+    expect(body).toContain("<title>Keeping the Guide Current</title>");
+    expect(body).toContain("revision-keeping-the-guide-current-001");
     expect(body).toContain("<dc:creator>Shivansh Fulper</dc:creator>");
   });
 

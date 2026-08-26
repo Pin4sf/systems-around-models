@@ -13,6 +13,10 @@ inspected_paths:
   - docs/multi-host.md
   - docs/security.md
   - src/drover/schema.py
+  - src/drover/server/harness/events.py
+  - src/drover/server/harness/structured/driver.py
+  - src/drover/server/harness/structured/deepseek.py
+  - src/drover/server/harness/structured/pusher.py
   - src/drover/server/updates.py
   - src/drover/server/harness/updater.py
 source_type: first-party-repository
@@ -29,6 +33,9 @@ observed_mechanisms:
   - description: Hosts install beside the active runtime and activate only at a proven quiescent boundary with the prior version retained for reconnect-failure rollback.
     evidence_grade: IP
     basis: The inspected update and host-updater paths implement checksum, smoke-test, idle, activation, marker, and rollback states.
+  - description: Structured adapters preserve event and turn identity, retain raw protocol drift, and deliver normalized events at least once with durable replay and receiver deduplication.
+    evidence_grade: IP
+    basis: The inspected driver, normalization, and pusher paths expose source fidelity, bounded loss states, retry, reconciliation, and stable event identity.
 author_reported_claims:
   - Drover describes itself as an agent harness fleet control plane for trusted operators across private hosts.
 unknowns:
