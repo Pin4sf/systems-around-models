@@ -1,0 +1,40 @@
+id: source-drover-fleet-runtime
+title: Drover v0.3.7 repository release
+author: Arnab Saha
+canonical_url: https://github.com/arniesaha/drover/tree/81b344d025a7850d5697a7c19468ca8fd95e909e
+published_at: 2026-08-22
+retrieved_at: 2026-08-26
+repository_commit: 81b344d025a7850d5697a7c19468ca8fd95e909e
+inspected_paths:
+  - README.md
+  - LICENSE
+  - docs/architecture.md
+  - docs/context-store.md
+  - docs/multi-host.md
+  - docs/security.md
+  - src/drover/schema.py
+  - src/drover/server/updates.py
+  - src/drover/server/harness/updater.py
+source_type: first-party-repository
+basis: Commit-pinned inspection of the v0.3.7 release across fleet routing, host custody, normalized evidence, derived projections, and quiescent side-by-side upgrades.
+license_status: Apache-2.0
+evidence_grade: IP
+observed_mechanisms:
+  - description: A central authenticated fleet API routes work while per-host daemons retain process, protocol-adapter, PTY, and filesystem custody.
+    evidence_grade: IP
+    basis: The inspected architecture and host-runtime paths separate central routing from host-local execution authority.
+  - description: Normalized event and span facts feed replaceable DuckDB projections whose records retain source and provenance links.
+    evidence_grade: IP
+    basis: The inspected context-store and schema contracts separate append-oriented evidence from derived summaries, briefs, and current views.
+  - description: Hosts install beside the active runtime and activate only at a proven quiescent boundary with the prior version retained for reconnect-failure rollback.
+    evidence_grade: IP
+    basis: The inspected update and host-updater paths implement checksum, smoke-test, idle, activation, marker, and rollback states.
+author_reported_claims:
+  - Drover describes itself as an agent harness fleet control plane for trusted operators across private hosts.
+unknowns:
+  - The documented security model is single-operator and private-network oriented, without public-internet hardening, multi-user isolation, RBAC, or SSO.
+  - Current-main Phase 0 loop-engine work is unreleased and outside the distributed package, so it is excluded from release behavior here.
+falsifiers:
+  - Activation occurs while work is live or quiescence is unknown, a derived record lacks source provenance, or a failed reconnect cannot restore the prior runtime.
+last_validated: 2026-08-26
+correction_ledger_status: reviewed

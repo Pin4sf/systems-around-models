@@ -1,0 +1,72 @@
+---
+slug: deepseek-harness-and-cordis
+title: DeepSeek Harness and Cordis
+description: A source-pinned study of DeepSeek Harness's append-only sessions, bounded tool scheduling, causal commit, crash-tail repair, and Cordis lifecycle ownership.
+sequence: Harness Engineering
+sequence_position: 28
+revision: 1
+authors:
+  - author-shivansh-fulper
+published_at: 2026-08-26
+substantively_revised_at: 2026-08-26
+reading_time_source: 9 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-architecture-deepseek-harness
+  - source-architecture-cordis
+revision_id: revision-deepseek-harness-and-cordis-001
+previous_essay_slug: cloudflare-think-and-agents
+next_essay_slug: drover-fleet-custody-and-evidence
+---
+
+## Keep durable meaning reconstructable
+
+DeepSeek Harness is a developer-preview coding harness organized around a concrete agent loop and fine-grained plugins. Cordis supplies the composition runtime beneath those plugins. The useful question is not whether “everything is a plugin” is universally better. It is which responsibilities have explicit owners, which facts survive, and what unload can actually reverse.
+
+This chapter is pinned to `dsh-v0.1.1-rc.2`. That tag, the current default branch at inspection, and the published `@deepseek-ai/dsh` package align at one commit. The runtime uses its vendored `@deepseek-ai/cordis` 4.0.1; the standalone Cordis repository is related lifecycle evidence, not the exact imported artifact.
+
+<DeepSeekOrderedSession />
+
+## Derive requests from session facts
+
+The concrete loop claims queued input, opens turn and step boundaries, assembles a system prompt, tool schemas, and event-derived history, then streams a provider response and appends normalized results. Message history is a projection from the session event log rather than a separately authoritative transcript.
+
+This supports a demanding invariant: the same durable event prefix should derive the same model-visible request, subject to explicitly versioned compaction and provider preparation. If a UI, trajectory viewer, or recovery path invents a second account of the session, those views can drift.
+
+## Overlap work without reordering meaning
+
+Eligible tool bodies may overlap within a bounded rolling pool. Exclusive calls form barriers. Pre-execution policy, tool results, and deferred result context still commit in model order. Wall-clock completion therefore does not silently rewrite the causal story shown to the next model step.
+
+Cancellation stops new replenishment and drains work already started. Calls skipped before dispatch receive synthetic results so the session remains structurally valid. That behavior makes cancellation visible; it does not undo an effect already sent by a running tool.
+
+## Repair an interrupted tail honestly
+
+Crash-tail repair distinguishes a tool call never recorded as started from one whose start was recorded but whose durable outcome is missing. The second case is ambiguous. Repair closes missing structural boundaries and tells the next request not to blindly repeat a potentially effectful call.
+
+This is the right epistemic posture: restore a valid record without inventing an outcome. Reconciliation still belongs to an effect-specific adapter that can query the external system by a stable identity.
+
+## Give registrations lifecycle owners
+
+Cordis associates services, listeners, and other registrations with dependency-scoped fibers. Missing or replaced dependencies can trigger unload and reload. Within one effect's disposer chain, cleanup runs in reverse registration order and awaits asynchronous disposers.
+
+The boundary matters. Top-level effect wrappers may unload concurrently, and the framework cannot prove that a plugin supplied a correct inverse. Removing a listener is tractable. Reversing a payment, repository push, or message sent outside the process is a different contract.
+
+## Failure boundary
+
+The design fails if concurrent completion changes durable result order, an exclusive call overlaps prior work, replay derives a different request from the same event prefix, repair produces a provider-invalid transcript, or unloading an owning fiber leaves its registration reachable. It also fails if in-process cleanup is described as external-effect rollback or developer-preview source is presented as production isolation.
+
+## Retrieval check
+
+Two parallel-safe tools finish in reverse order. The first changed an external system but crashed before recording its result; the second completed locally. Which facts should the next request see, in what order, and which result may the harness repair structurally without claiming the external effect is safe to repeat?
+
+## Build-and-break lab
+
+Create three tool calls: two parallel-safe and one exclusive. Make the second finish first, then crash after the first tool's external send but before durable result commit. Rebuild the request from the event prefix, assert model-order commit, and require a provider lookup for the ambiguous effect. Unload the plugin and test that every in-process registration has disappeared.
+
+## Sources and further reading
+
+- [DeepSeek Harness dsh-v0.1.1-rc.2](https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e) — release and package-aligned source for the loop, session, scheduler, repair, and vendored lifecycle mechanisms.
+- [Tool-call scheduler](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/agent-loop/src/tool-calls.ts) — bounded overlap, barriers, cancellation, and ordered commit implementation.
+- [Vendored Cordis fiber](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/vendor/cordis/src/fiber.ts) — the exact lifecycle implementation shipped with the inspected harness.
+- [Harness Engineering Study Guide](/fieldbook/harness-engineering-study-guide) — the shared vocabulary for durable facts, concurrency, recovery, and external effects.

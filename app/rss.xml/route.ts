@@ -4,6 +4,7 @@ import {
   publicationTitle,
 } from "@/lib/publication/metadata";
 import { canonicalUrl } from "@/lib/publication/site-url";
+import { resolveAuthorIdentities } from "@/lib/publication/author-registry";
 
 export const dynamic = "force-static";
 
@@ -33,6 +34,7 @@ export async function GET() {
     const revision = content.revisions.get(essay.revisionId);
     if (!revision) throw new Error(`Missing public revision: ${essay.revisionId}`);
     const url = canonicalUrl(`/fieldbook/${essay.slug}`);
+    const authors = resolveAuthorIdentities(essay.authors);
     return [
       "    <item>",
       `      <title>${escapeXml(essay.title)}</title>`,
@@ -40,13 +42,14 @@ export async function GET() {
       `      <guid isPermaLink="true">${escapeXml(url)}</guid>`,
       `      <description>${escapeXml(essay.description)}</description>`,
       `      <pubDate>${rssDate(revision.publishedAt)}</pubDate>`,
+      ...authors.map((author) => `      <dc:creator>${escapeXml(author.name)}</dc:creator>`),
       `      <sam:revision>${escapeXml(revision.id)}</sam:revision>`,
       "    </item>",
     ].join("\n");
   });
   const xml = [
     '<?xml version="1.0" encoding="UTF-8"?>',
-    '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sam="https://github.com/Pin4sf/systems-around-models#publication">',
+    '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:sam="https://github.com/Pin4sf/systems-around-models#publication">',
     "  <channel>",
     `    <title>${escapeXml(publicationTitle)}</title>`,
     `    <link>${escapeXml(canonicalUrl("/"))}</link>`,

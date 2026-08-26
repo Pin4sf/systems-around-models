@@ -13,7 +13,7 @@ import type { EssayMetadata, RevisionRecord } from "@/lib/content/schema";
 import { compilePublicMdx } from "@/lib/content/compile-public-mdx";
 import { slugifyHeading } from "@/lib/content/slugify";
 import { getStudyGuideEntryForEssay } from "@/lib/study-guide/study-guide-registry";
-import { authorName, authorUrl } from "@/lib/publication/metadata";
+import { resolveAuthorIdentities } from "@/lib/publication/author-registry";
 
 function articleHeadings(source: string): ArticleHeading[] {
   return [...source.matchAll(/^##\s+(.+?)\s*$/gm)].map((match) => ({
@@ -34,6 +34,7 @@ export async function ArticleReader({
   releasedEssays,
 }: ArticleReaderProps) {
   const guide = getStudyGuideEntryForEssay(essay, releasedEssays);
+  const authors = resolveAuthorIdentities(essay.authors);
 
   const source = await readFile(
     path.join(process.cwd(), "content", "essays", guide.sourcePath),
@@ -76,7 +77,12 @@ export async function ArticleReader({
           <h1>{essay.title}</h1>
           <p className="article-reader__description">{essay.description}</p>
           <p className="article-reader__byline interface-text">
-            By <a href={authorUrl} rel="author">{authorName}</a> · {essay.readingTimeSource}
+            By {authors.map((author, index) => (
+              <span key={author.id}>
+                {index > 0 ? (index === authors.length - 1 ? " and " : ", ") : null}
+                <a href={author.url} rel="author">{author.name}</a>
+              </span>
+            ))} · {essay.readingTimeSource}
           </p>
         </header>
         <div className="article-reader__prose prose">{content}</div>

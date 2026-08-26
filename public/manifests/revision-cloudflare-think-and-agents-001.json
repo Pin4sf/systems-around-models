@@ -1,0 +1,37 @@
+{
+  "id": "revision-cloudflare-think-and-agents-001",
+  "essaySlug": "cloudflare-think-and-agents",
+  "revision": 1,
+  "publishedAt": "2026-08-26",
+  "substantivelyRevisedAt": "2026-08-26",
+  "summary": "Initial public revision of the release-pinned Cloudflare Think and Agents case study.",
+  "affectedClaimIds": [],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-04870322ff7b4f76fedbb0204fc123047ea79da4f94b84bede611757c709bde7",
+  "sourceIds": [
+    "source-cloudflare-think-agents",
+    "source-harness-engineering-fieldbook-v1"
+  ],
+  "sourceValidationDates": {
+    "source-harness-engineering-fieldbook-v1": "2026-08-21",
+    "source-cloudflare-think-agents": "2026-08-26"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-cloudflare-think-agents",
+      "title": "Cloudflare Agents 0.21.0 and Think 0.16.0 releases",
+      "canonicalUrl": "https://github.com/cloudflare/agents/tree/d42494503efe836a073fbf911fae1fbd12253198",
+      "lastValidated": "2026-08-26",
+      "licenseStatus": "MIT"
+    },
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    }
+  ]
+}

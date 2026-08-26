@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { authorName, authorUrl } from "@/lib/publication/metadata";
+import { publicationEditor } from "@/lib/publication/author-registry";
 
 export function PublicationShell({ children }: { children: ReactNode }) {
   return (
@@ -23,7 +23,7 @@ export function PublicationShell({ children }: { children: ReactNode }) {
       <main id="main-content">{children}</main>
       <footer className="site-footer">
         <span>A practical, independent guide to building systems around models.</span>
-        <a href={authorUrl} rel="author me">By {authorName} · Portfolio</a>
+        <a href={publicationEditor.url} rel="author me">By {publicationEditor.name} · Portfolio</a>
       </footer>
     </>
   );

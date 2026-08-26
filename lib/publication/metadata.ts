@@ -1,19 +1,12 @@
 import type { Metadata } from "next";
 import type { EssayMetadata, RevisionRecord } from "@/lib/content/schema";
 import { canonicalUrl, resolveSiteUrl } from "@/lib/publication/site-url";
+import { publicationEditor, resolveAuthorIdentities } from "@/lib/publication/author-registry";
 
 export const publicationTitle = "Systems Around Models";
 export const publicationDescription =
   "A practical study guide to the harnesses, memory, environments, authority, recovery, and verification that turn model responses into reliable work.";
 export const publicationTagline = "The agent systems fieldbook";
-export const authorName = "Shivansh Fulper";
-export const authorUrl = "https://shivansh-portfolio-one.vercel.app";
-export const authorRole = "Founder and AI systems researcher";
-export const authorSameAs = [
-  authorUrl,
-  "https://github.com/Pin4sf",
-  "https://www.linkedin.com/in/shivansh-fulper/",
-];
 export const publicationKeywords = [
   "agent systems",
   "AI agent architecture",
@@ -37,9 +30,9 @@ export function buildHomeMetadata(): Metadata {
     title: publicationTitle,
     description: publicationDescription,
     applicationName: publicationTitle,
-    authors: [{ name: authorName, url: authorUrl }],
-    creator: authorName,
-    publisher: authorName,
+    authors: [{ name: publicationEditor.name, url: publicationEditor.url }],
+    creator: publicationEditor.name,
+    publisher: publicationEditor.name,
     keywords: publicationKeywords,
     category: "technology",
     referrer: "origin-when-cross-origin",
@@ -89,13 +82,15 @@ export function buildArticleMetadata(
 ): Metadata {
   const route = `/fieldbook/${essay.slug}`;
   const url = canonicalUrl(route);
+  const authors = resolveAuthorIdentities(essay.authors);
+  const authorNames = authors.map((author) => author.name);
 
   return {
     title: `${essay.title} | ${publicationTitle}`,
     description: essay.description,
-    authors: [{ name: authorName, url: authorUrl }],
-    creator: authorName,
-    publisher: authorName,
+    authors: authors.map(({ name, url: authorUrl }) => ({ name, url: authorUrl })),
+    creator: authorNames.join(", "),
+    publisher: publicationEditor.name,
     keywords: publicationKeywords,
     category: essay.sequence,
     alternates: { canonical: route },
@@ -106,7 +101,7 @@ export function buildArticleMetadata(
       title: essay.title,
       description: essay.description,
       url,
-      authors: [authorName],
+      authors: authorNames,
       publishedTime: revision.publishedAt,
       modifiedTime: revision.substantivelyRevisedAt,
       images: [socialImage],
@@ -120,7 +115,7 @@ export function buildArticleMetadata(
     other: {
       "article:revision": revision.id,
       citation_title: essay.title,
-      citation_author: authorName,
+      citation_author: authorNames.join("; "),
       citation_publication_date: revision.publishedAt,
       citation_public_url: url,
     },
@@ -130,7 +125,7 @@ export function buildArticleMetadata(
 export function buildHomeJsonLd() {
   const url = canonicalUrl("/");
   const websiteId = `${url}#website`;
-  const authorId = `${authorUrl}/#person`;
+  const authorId = `${publicationEditor.url}/#person`;
 
   return {
     "@context": "https://schema.org",
@@ -149,10 +144,10 @@ export function buildHomeJsonLd() {
       {
         "@type": "Person",
         "@id": authorId,
-        name: authorName,
-        url: authorUrl,
-        jobTitle: authorRole,
-        sameAs: authorSameAs,
+        name: publicationEditor.name,
+        url: publicationEditor.url,
+        jobTitle: publicationEditor.role,
+        sameAs: publicationEditor.sameAs,
       },
       {
         "@type": "CollectionPage",
@@ -176,6 +171,7 @@ export function buildArticleJsonLd(
   revision: RevisionRecord,
 ) {
   const url = canonicalUrl(`/fieldbook/${essay.slug}`);
+  const authors = resolveAuthorIdentities(essay.authors);
   return {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -183,16 +179,16 @@ export function buildArticleJsonLd(
     description: essay.description,
     datePublished: revision.publishedAt,
     dateModified: revision.substantivelyRevisedAt,
-    author: [{
+    author: authors.map((author) => ({
       "@type": "Person",
-      name: authorName,
-      url: authorUrl,
-      sameAs: authorSameAs,
-    }],
+      name: author.name,
+      url: author.url,
+      sameAs: author.sameAs,
+    })),
     publisher: {
       "@type": "Person",
-      name: authorName,
-      url: authorUrl,
+      name: publicationEditor.name,
+      url: publicationEditor.url,
     },
     image: canonicalUrl(socialImage.url),
     articleSection: essay.sequence,

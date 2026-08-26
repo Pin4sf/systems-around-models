@@ -1,0 +1,38 @@
+id: source-cloudflare-think-agents
+title: Cloudflare Agents 0.21.0 and Think 0.16.0 releases
+author: Cloudflare
+canonical_url: https://github.com/cloudflare/agents/tree/d42494503efe836a073fbf911fae1fbd12253198
+published_at: 2026-08-18
+retrieved_at: 2026-08-26
+repository_commit: d42494503efe836a073fbf911fae1fbd12253198
+inspected_paths:
+  - LICENSE
+  - packages/agents/package.json
+  - packages/agents/src/index.ts
+  - packages/think/package.json
+  - packages/think/src/think.ts
+  - docs/agents/state.md
+  - docs/agents/sub-agents.md
+  - docs/agents/durable-execution.md
+  - docs/think/actions.md
+  - docs/think/channels.md
+source_type: first-party-repository
+basis: Commit-pinned inspection of the released Agents and Think package pair across Durable Object state, fibers, submissions, sessions, recovery, actions, and channels.
+license_status: MIT
+evidence_grade: IP
+observed_mechanisms:
+  - description: Agents bind logical agent state, schedules, sub-agents, and recoverable fibers to Durable Object-backed storage and routing.
+    evidence_grade: IP
+    basis: The inspected package exports and first-party state, sub-agent, and durable-execution documentation define these runtime seams.
+  - description: Think persists session branches and submissions, then unifies wait, stream, replay, and recovery paths around the same durable turn record.
+    evidence_grade: IP
+    basis: The inspected Think runtime, session, recovery, action, and channel paths implement the documented turn lifecycle.
+author_reported_claims:
+  - Cloudflare describes its Agents platform as scaling to very large numbers of idle and active Durable Object instances.
+unknowns:
+  - Think, runTurn, Actions, and Channels are experimental, authorization for Actions is opt-in, and a stable idempotency key is required for cross-retry deduplication.
+  - Durable recovery does not make arbitrary external effects idempotent, and no live eviction, placement, cost, or sustained-scale test was performed here.
+falsifiers:
+  - Eviction loses or duplicates a persisted turn, recovery repeats a non-idempotent effect, or a channel-less turn unexpectedly inherits privileged channel policy.
+last_validated: 2026-08-26
+correction_ledger_status: reviewed

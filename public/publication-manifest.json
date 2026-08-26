@@ -41,6 +41,25 @@
       }
     },
     {
+      "id": "revision-cloudflare-think-and-agents-001",
+      "essaySlug": "cloudflare-think-and-agents",
+      "revision": 1,
+      "publishedAt": "2026-08-26",
+      "substantivelyRevisedAt": "2026-08-26",
+      "summary": "Initial public revision of the release-pinned Cloudflare Think and Agents case study.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-04870322ff7b4f76fedbb0204fc123047ea79da4f94b84bede611757c709bde7",
+      "sourceIds": [
+        "source-cloudflare-think-agents",
+        "source-harness-engineering-fieldbook-v1"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-cloudflare-think-agents": "2026-08-26"
+      }
+    },
+    {
       "id": "revision-control-structures-delegation-001",
       "essaySlug": "loops-workflows-graphs-and-delegation",
       "revision": 1,
@@ -79,6 +98,27 @@
       }
     },
     {
+      "id": "revision-deepseek-harness-and-cordis-001",
+      "essaySlug": "deepseek-harness-and-cordis",
+      "revision": 1,
+      "publishedAt": "2026-08-26",
+      "substantivelyRevisedAt": "2026-08-26",
+      "summary": "Initial public revision of the refreshed DeepSeek Harness and Cordis mechanism case study.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-a3aff29235a4d1a49d2fa5114e2ba72c5a60ba73e50a348da7ce0f6788004ba3",
+      "sourceIds": [
+        "source-architecture-cordis",
+        "source-architecture-deepseek-harness",
+        "source-harness-engineering-fieldbook-v1"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-architecture-deepseek-harness": "2026-08-26",
+        "source-architecture-cordis": "2026-08-26"
+      }
+    },
+    {
       "id": "revision-developer-product-harnesses-001",
       "essaySlug": "developer-and-product-runtime-harnesses",
       "revision": 1,
@@ -95,6 +135,25 @@
       "sourceValidationDates": {
         "source-harness-engineering-fieldbook-v1": "2026-08-21",
         "source-anthropic-effective-long-running-harnesses": "2026-08-25"
+      }
+    },
+    {
+      "id": "revision-drover-fleet-custody-and-evidence-001",
+      "essaySlug": "drover-fleet-custody-and-evidence",
+      "revision": 1,
+      "publishedAt": "2026-08-26",
+      "substantivelyRevisedAt": "2026-08-26",
+      "summary": "Initial public revision of the release-pinned Drover fleet-custody and evidence case study.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-09156cfa8c0234dca5df23b44afd3f61be416422deff22986a11ffa6d3abdde6",
+      "sourceIds": [
+        "source-drover-fleet-runtime",
+        "source-harness-engineering-fieldbook-v1"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-drover-fleet-runtime": "2026-08-26"
       }
     },
     {
@@ -246,7 +305,7 @@
         "source-walkinglabs-learn-harness-engineering"
       ],
       "sourceValidationDates": {
-        "source-anthropic-effective-long-running-harnesses": "2026-08-25",
+        "source-anthropic-effective-long-running-harnesses": "2026-08-22",
         "source-earendil-what-is-a-harness": "2026-08-21",
         "source-harness-engineering-fieldbook-v1": "2026-08-21",
         "source-humanlayer-12-factor-agents": "2026-08-22",
@@ -321,6 +380,25 @@
       "affectedClaimIds": [],
       "correctionDisposition": "publication",
       "contentHash": "sha256-4fce1564f719e726c40175373e32c1ae99bcd6c0f2a066005d38e57d6fb2d4cc",
+      "sourceIds": [
+        "source-harness-engineering-fieldbook-v1",
+        "source-hermes-agent-runtime"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-hermes-agent-runtime": "2026-08-25"
+      }
+    },
+    {
+      "id": "revision-hermes-integrated-agent-runtime-002",
+      "essaySlug": "hermes-integrated-agent-runtime",
+      "revision": 2,
+      "publishedAt": "2026-08-25",
+      "substantivelyRevisedAt": "2026-08-26",
+      "summary": "Navigation revision connecting the released Hermes study to the next comparative case batch.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-57c4fc6a0c3905e05b1741a18efaba92dcb7f5edd94b47554b3bf4cea294ab4f",
       "sourceIds": [
         "source-harness-engineering-fieldbook-v1",
         "source-hermes-agent-runtime"
@@ -559,6 +637,25 @@
       }
     },
     {
+      "id": "revision-qm-scoped-resources-and-leased-runs-001",
+      "essaySlug": "qm-scoped-resources-and-leased-runs",
+      "revision": 1,
+      "publishedAt": "2026-08-26",
+      "substantivelyRevisedAt": "2026-08-26",
+      "summary": "Initial public revision of the release-pinned QM scoped-resource and leased-run case study.",
+      "affectedClaimIds": [],
+      "correctionDisposition": "publication",
+      "contentHash": "sha256-5e0eec5c2a319161b7504d98295481d51d3c71cd5b756e6cbed922120e195e8c",
+      "sourceIds": [
+        "source-harness-engineering-fieldbook-v1",
+        "source-qm-agent-runtime"
+      ],
+      "sourceValidationDates": {
+        "source-harness-engineering-fieldbook-v1": "2026-08-21",
+        "source-qm-agent-runtime": "2026-08-26"
+      }
+    },
+    {
       "id": "revision-security-supply-chain-revocation-001",
       "essaySlug": "security-credentials-supply-chain-and-revocation",
       "revision": 1,
@@ -664,11 +761,11 @@
     },
     {
       "id": "source-architecture-cordis",
-      "lastValidated": "2026-08-16"
+      "lastValidated": "2026-08-26"
     },
     {
       "id": "source-architecture-deepseek-harness",
-      "lastValidated": "2026-08-16"
+      "lastValidated": "2026-08-26"
     },
     {
       "id": "source-architecture-gemini-cli",
@@ -711,6 +808,10 @@
       "lastValidated": "2026-08-25"
     },
     {
+      "id": "source-cloudflare-think-agents",
+      "lastValidated": "2026-08-26"
+    },
+    {
       "id": "source-community-cybersecurity-skills",
       "lastValidated": "2026-08-25"
     },
@@ -721,6 +822,10 @@
     {
       "id": "source-diagram-design-skill",
       "lastValidated": "2026-08-25"
+    },
+    {
+      "id": "source-drover-fleet-runtime",
+      "lastValidated": "2026-08-26"
     },
     {
       "id": "source-earendil-what-is-a-harness",
@@ -791,6 +896,10 @@
       "lastValidated": "2026-08-25"
     },
     {
+      "id": "source-qm-agent-runtime",
+      "lastValidated": "2026-08-26"
+    },
+    {
       "id": "source-rasa-why-agents-fail",
       "lastValidated": "2026-08-22"
     },
@@ -858,20 +967,20 @@
       "slug": "deepseek-harness-cordis",
       "recordKind": "system",
       "productClass": "frontier-coding-harness",
-      "revision": 1,
-      "lastReviewed": "2026-08-22",
-      "inspectedVersion": "47f943859bef60e4160492346772ded9b24f765a",
-      "dossierStatus": "refresh-needed",
+      "revision": 2,
+      "lastReviewed": "2026-08-26",
+      "inspectedVersion": "b150a551b8d465e31e418e1b2eaf5e79bbb7d28e",
+      "dossierStatus": "ready",
       "evidenceGrade": "IP",
       "evidenceFidelity": "implementation-pinned",
-      "contentHash": "sha256-eb79337270b6e46526f666603f6c70fa5b1a8ab78ad0154e4ec4ed0c26d12f7e",
+      "contentHash": "sha256-3f417f04654a5c1ab254b2f46bf9b7bdad839783ea9fa52cc32eb53a8f275d23",
       "sourceIds": [
         "source-architecture-cordis",
         "source-architecture-deepseek-harness"
       ],
       "sourceValidationDates": {
-        "source-architecture-deepseek-harness": "2026-08-16",
-        "source-architecture-cordis": "2026-08-16"
+        "source-architecture-deepseek-harness": "2026-08-26",
+        "source-architecture-cordis": "2026-08-26"
       }
     },
     {
@@ -917,13 +1026,13 @@
       "slug": "langgraph",
       "recordKind": "system",
       "productClass": "general-agent-runtime",
-      "revision": 1,
+      "revision": 2,
       "lastReviewed": "2026-08-25",
       "inspectedVersion": "95af6a00718588e7b7ce17310e8006d267896a77",
       "dossierStatus": "refresh-needed",
       "evidenceGrade": "IP",
       "evidenceFidelity": "implementation-pinned",
-      "contentHash": "sha256-3bc0d41af7e7f9144c91da892f287e040836db4b8f74a4c7a7de09a6c525f908",
+      "contentHash": "sha256-af841960d5b6e9581e06e362a27542f1f96db34c3dce90dbc3b76537a60e420d",
       "sourceIds": [
         "source-architecture-langgraph",
         "source-langchain-anatomy-agent-harness"
@@ -1042,5 +1151,5 @@
       }
     }
   ],
-  "buildId": "sha256-bdd0159a5511bcd2e4a89367cdfcd5fe7fb56b635c02fe2ed9cc68fae5b27ae0"
+  "buildId": "sha256-c3df30db8eb66730ba215850deedcd4a6a42cb5c39c2922abd4ef7de82f010c1"
 }

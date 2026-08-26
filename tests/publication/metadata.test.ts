@@ -5,6 +5,7 @@ import { generateMetadata, buildArticleStructuredData } from "@/app/fieldbook/[s
 import sitemap from "@/app/sitemap";
 import robots from "@/app/robots";
 import { GET as getRss } from "@/app/rss.xml/route";
+import { resolveAuthorIdentities } from "@/lib/publication/author-registry";
 
 const canonicalSite = "https://fieldbook.example";
 const chapterPath = "/fieldbook/the-model-is-not-the-agent";
@@ -34,6 +35,10 @@ const releasedChapterPaths = [
   "/fieldbook/cursor-model-harness-evaluation",
   "/fieldbook/langgraph-durable-state-and-interrupts",
   "/fieldbook/hermes-integrated-agent-runtime",
+  "/fieldbook/qm-scoped-resources-and-leased-runs",
+  "/fieldbook/cloudflare-think-and-agents",
+  "/fieldbook/deepseek-harness-and-cordis",
+  "/fieldbook/drover-fleet-custody-and-evidence",
 ];
 
 afterEach(() => {
@@ -41,6 +46,18 @@ afterEach(() => {
 });
 
 describe("canonical publication metadata", () => {
+  it("rejects an unregistered essay author instead of silently using the publication editor", () => {
+    expect(() => resolveAuthorIdentities(["author-unregistered"])).toThrow(
+      "Unknown author identifier: author-unregistered",
+    );
+  });
+
+  it("resolves the legacy publication byline through the same canonical identity", () => {
+    expect(resolveAuthorIdentities(["Systems Around Models"])).toEqual(
+      resolveAuthorIdentities(["author-shivansh-fulper"]),
+    );
+  });
+
   it("fails closed when a production build has no SITE_URL", () => {
     expect(() => resolveSiteUrl({ NODE_ENV: "production" })).toThrow(
       "SITE_URL is required for production metadata",
@@ -114,7 +131,9 @@ describe("canonical publication metadata", () => {
       publishedTime: "2026-08-21",
       modifiedTime: "2026-08-21",
       url: `${canonicalSite}${chapterPath}`,
+      authors: ["Shivansh Fulper"],
     });
+    expect(chapter.other?.citation_author).toBe("Shivansh Fulper");
   });
 
   it("publishes the repository crosswalk as a substantive guide revision", async () => {
@@ -169,26 +188,26 @@ describe("canonical publication metadata", () => {
 
   it("publishes canonical metadata and Article JSON-LD for the latest released chapter", async () => {
     vi.stubEnv("SITE_URL", canonicalSite);
-    const latestSlug = "hermes-integrated-agent-runtime";
+    const latestSlug = "drover-fleet-custody-and-evidence";
     const latestPath = `/fieldbook/${latestSlug}`;
     const [metadata, structuredData] = await Promise.all([
       generateMetadata({ params: Promise.resolve({ slug: latestSlug }) }),
       buildArticleStructuredData(latestSlug),
     ]);
 
-    expect(metadata.title).toBe("Hermes: An Integrated Agent Runtime | Systems Around Models");
+    expect(metadata.title).toBe("Drover: Fleet Custody and Evidence | Systems Around Models");
     expect(metadata.alternates?.canonical).toBe(latestPath);
     expect(metadata.openGraph).toMatchObject({
       type: "article",
-      publishedTime: "2026-08-25",
-      modifiedTime: "2026-08-25",
+      publishedTime: "2026-08-26",
+      modifiedTime: "2026-08-26",
       url: `${canonicalSite}${latestPath}`,
     });
     expect(structuredData).toMatchObject({
       "@type": "Article",
-      headline: "Hermes: An Integrated Agent Runtime",
-      datePublished: "2026-08-25",
-      dateModified: "2026-08-25",
+      headline: "Drover: Fleet Custody and Evidence",
+      datePublished: "2026-08-26",
+      dateModified: "2026-08-26",
       mainEntityOfPage: `${canonicalSite}${latestPath}`,
     });
   });
@@ -254,7 +273,16 @@ describe("publication discovery endpoints", () => {
     expect(body).toContain("revision-open-loops-re-entry-001");
     expect(body).toContain("<title>Hermes: An Integrated Agent Runtime</title>");
     expect(body).toContain(`<link>${canonicalSite}/fieldbook/hermes-integrated-agent-runtime</link>`);
-    expect(body).toContain("revision-hermes-integrated-agent-runtime-001");
+    expect(body).toContain("revision-hermes-integrated-agent-runtime-002");
+    expect(body).toContain("<title>QM: Scoped Resources and Leased Runs</title>");
+    expect(body).toContain("revision-qm-scoped-resources-and-leased-runs-001");
+    expect(body).toContain("<title>Cloudflare Think and Agents</title>");
+    expect(body).toContain("revision-cloudflare-think-and-agents-001");
+    expect(body).toContain("<title>DeepSeek Harness and Cordis</title>");
+    expect(body).toContain("revision-deepseek-harness-and-cordis-001");
+    expect(body).toContain("<title>Drover: Fleet Custody and Evidence</title>");
+    expect(body).toContain("revision-drover-fleet-custody-and-evidence-001");
+    expect(body).toContain("<dc:creator>Shivansh Fulper</dc:creator>");
   });
 
   it("points crawlers at the canonical sitemap", () => {

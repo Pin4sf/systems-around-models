@@ -32,19 +32,19 @@ lifecycle_trace:
   - { order: 5, label: Drain or unload, owner: Lifecycle fibers, outcome: Owned work settles and reversible registrations unwind in reverse order. }
 evidence_grade: IP
 evidence_fidelity: implementation-pinned
-dossier_status: refresh-needed
+dossier_status: ready
 source_ids:
   - source-architecture-deepseek-harness
   - source-architecture-cordis
-inspected_version: 47f943859bef60e4160492346772ded9b24f765a
+inspected_version: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
 unknowns:
-  - Upstream head b150a551b8d465e31e418e1b2eaf5e79bbb7d28e and package 0.1.1-rc.2 require a path-level refresh before this profile can be called current.
   - Lifecycle inversion does not prove semantic cleanup, external-effect rollback, or safe execution of untrusted plugins.
-last_reviewed: 2026-08-22
-revision: 1
+  - The developer-preview trust model does not establish production maturity, multi-tenant isolation, or whole-product outcome acceptance.
+last_reviewed: 2026-08-26
+revision: 2
 study:
   deck: A source-pinned study of a concrete coding loop, an event-derived session model, and a plugin runtime designed to make ownership and teardown explicit.
-  evidence_boundary: Mechanism claims below are implementation-pinned to DeepSeek Harness 47f943859bef and Cordis 8cc9e33fab69. They are not a production-readiness claim. The newer upstream head remains a named refresh target.
+  evidence_boundary: Mechanism claims below are implementation-pinned to DeepSeek Harness dsh-v0.1.1-rc.2 at b150a551b8d4, its vendored @deepseek-ai/cordis 4.0.1, and standalone Cordis 8cc9e33fab69. They are not a production-readiness claim.
   system_boundary:
     - DeepSeek Harness owns one coding agent's turn and step lifecycle, context assembly, capability dispatch, session facts, and runtime projections.
     - Cordis owns in-process composition through contexts, services, dependencies, lifecycle fibers, and registered inverse effects.
@@ -55,13 +55,12 @@ study:
     - title: Overlap execution, preserve causal commit
       body: Concurrency-safe tool bodies may overlap within bounds. Exclusive calls form barriers, while results and deferred context commit in model order so wall-clock timing does not rewrite durable meaning.
     - title: Reversible ownership
-      body: Cordis associates registrations and cleanup with lifecycle owners. Unload can unwind those effects in reverse order, making residue testable without pretending that arbitrary external effects are reversible.
+      body: Cordis associates registrations and cleanup with lifecycle owners. Disposers unwind in reverse order within one effect chain, while top-level wrappers may unload concurrently; neither behavior makes arbitrary external effects reversible.
   failure_boundary:
     - A correct inverse is an author obligation; the runtime cannot prove that cleanup restores the intended semantics.
     - The documented trust model is a developer preview and does not establish multi-tenant or public-network security.
-    - The inspected mechanism pin trails upstream head b150a551b8d465e31e418e1b2eaf5e79bbb7d28e.
+    - Developer-preview source and repository checks do not establish production maturity, hostile-plugin safety, or whole-product acceptance.
   retrieval_check: Why can the runtime overlap two tool bodies but still commit their durable results in the model's original order? Name the property this preserves, then explain why reversible plugin cleanup does not imply rollback of an external payment.
-  refresh_target: Upstream refresh target is DeepSeek Harness b150a551b8d465e31e418e1b2eaf5e79bbb7d28e at package 0.1.1-rc.2.
   native_diagram: deepseek-session-lifecycle
   adopt_adapt_reject:
     adopt: Adopt reconstructable session facts, frozen attempt inputs, and explicit lifecycle ownership for long-lived registrations.

@@ -1,18 +1,19 @@
 id: source-architecture-deepseek-harness
 title: DeepSeek Harness repository
 author: DeepSeek
-canonical_url: https://github.com/deepseek-ai/deepseek-harness/tree/47f943859bef60e4160492346772ded9b24f765a
+canonical_url: https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
 published_at: 2026-08-13
-retrieved_at: 2026-08-16
-repository_commit: 47f943859bef60e4160492346772ded9b24f765a
+retrieved_at: 2026-08-26
+repository_commit: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
 inspected_paths:
   - README.md
   - LICENSE
   - docs/architecture.md
   - packages/core/agent-loop/src/tool-calls.ts
   - packages/core/session/src
+  - vendor/cordis/src/fiber.ts
 source_type: first-party-repository
-basis: Commit-pinned inspection of the public monorepo architecture, concrete loop, ordered tool execution, and session event contracts.
+basis: Commit-pinned inspection of dsh-v0.1.1-rc.2 across the concrete loop, ordered tool execution, append-only session contracts, crash-tail repair, and vendored Cordis lifecycle.
 license_status: MIT
 evidence_grade: IP
 observed_mechanisms:
@@ -25,9 +26,9 @@ observed_mechanisms:
 author_reported_claims:
   - The project describes every product element as a plugin composed through Cordis contexts and services.
 unknowns:
-  - Current head b150a551b8d465e31e418e1b2eaf5e79bbb7d28e has not received the same path-level reinspection.
   - Public source does not establish production maturity, multi-tenant isolation, or complete external-effect reconciliation.
+  - The runtime uses vendored @deepseek-ai/cordis 4.0.1 rather than the standalone cordis package, and compatibility-breaking changes remain expected during developer preview.
 falsifiers:
   - Reinspection of the pinned paths contradicts the event, scheduling, or composition mechanics represented here.
-last_validated: 2026-08-16
-correction_ledger_status: needs-update
+last_validated: 2026-08-26
+correction_ledger_status: reviewed

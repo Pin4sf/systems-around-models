@@ -1,0 +1,46 @@
+{
+  "id": "revision-deepseek-harness-and-cordis-001",
+  "essaySlug": "deepseek-harness-and-cordis",
+  "revision": 1,
+  "publishedAt": "2026-08-26",
+  "substantivelyRevisedAt": "2026-08-26",
+  "summary": "Initial public revision of the refreshed DeepSeek Harness and Cordis mechanism case study.",
+  "affectedClaimIds": [],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-a3aff29235a4d1a49d2fa5114e2ba72c5a60ba73e50a348da7ce0f6788004ba3",
+  "sourceIds": [
+    "source-architecture-cordis",
+    "source-architecture-deepseek-harness",
+    "source-harness-engineering-fieldbook-v1"
+  ],
+  "sourceValidationDates": {
+    "source-harness-engineering-fieldbook-v1": "2026-08-21",
+    "source-architecture-deepseek-harness": "2026-08-26",
+    "source-architecture-cordis": "2026-08-26"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-architecture-cordis",
+      "title": "Cordis repository",
+      "canonicalUrl": "https://github.com/cordiverse/cordis/tree/8cc9e33fab69e2d0476d126baaf2acb24e6a6ab4",
+      "lastValidated": "2026-08-26",
+      "licenseStatus": "MIT"
+    },
+    {
+      "id": "source-architecture-deepseek-harness",
+      "title": "DeepSeek Harness repository",
+      "canonicalUrl": "https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e",
+      "lastValidated": "2026-08-26",
+      "licenseStatus": "MIT"
+    },
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    }
+  ]
+}

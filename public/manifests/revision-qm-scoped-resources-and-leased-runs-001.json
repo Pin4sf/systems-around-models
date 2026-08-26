@@ -1,0 +1,37 @@
+{
+  "id": "revision-qm-scoped-resources-and-leased-runs-001",
+  "essaySlug": "qm-scoped-resources-and-leased-runs",
+  "revision": 1,
+  "publishedAt": "2026-08-26",
+  "substantivelyRevisedAt": "2026-08-26",
+  "summary": "Initial public revision of the release-pinned QM scoped-resource and leased-run case study.",
+  "affectedClaimIds": [],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-5e0eec5c2a319161b7504d98295481d51d3c71cd5b756e6cbed922120e195e8c",
+  "sourceIds": [
+    "source-harness-engineering-fieldbook-v1",
+    "source-qm-agent-runtime"
+  ],
+  "sourceValidationDates": {
+    "source-harness-engineering-fieldbook-v1": "2026-08-21",
+    "source-qm-agent-runtime": "2026-08-26"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-qm-agent-runtime",
+      "title": "QM v0.1.5 repository release",
+      "canonicalUrl": "https://github.com/yc-software/qm/tree/d931fe963de3ac20b9a7526ea9a4873c0d8ed18e",
+      "lastValidated": "2026-08-26",
+      "licenseStatus": "MIT"
+    }
+  ]
+}

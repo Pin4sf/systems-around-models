@@ -1,0 +1,37 @@
+{
+  "id": "revision-hermes-integrated-agent-runtime-002",
+  "essaySlug": "hermes-integrated-agent-runtime",
+  "revision": 2,
+  "publishedAt": "2026-08-25",
+  "substantivelyRevisedAt": "2026-08-26",
+  "summary": "Navigation revision connecting the released Hermes study to the next comparative case batch.",
+  "affectedClaimIds": [],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-57c4fc6a0c3905e05b1741a18efaba92dcb7f5edd94b47554b3bf4cea294ab4f",
+  "sourceIds": [
+    "source-harness-engineering-fieldbook-v1",
+    "source-hermes-agent-runtime"
+  ],
+  "sourceValidationDates": {
+    "source-harness-engineering-fieldbook-v1": "2026-08-21",
+    "source-hermes-agent-runtime": "2026-08-25"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-hermes-agent-runtime",
+      "title": "Hermes Agent release v0.20.5",
+      "canonicalUrl": "https://github.com/NousResearch/hermes-agent/tree/fcbd1076a93841fa88855acce810e342a5b78101",
+      "lastValidated": "2026-08-25",
+      "licenseStatus": "MIT"
+    }
+  ]
+}

@@ -9,6 +9,10 @@ const effectsRoute = "/fieldbook/external-effects-and-transactional-outboxes";
 const securityRoute = "/fieldbook/security-credentials-supply-chain-and-revocation";
 const openLoopsRoute = "/fieldbook/open-loops-and-re-entry";
 const hermesRoute = "/fieldbook/hermes-integrated-agent-runtime";
+const qmRoute = "/fieldbook/qm-scoped-resources-and-leased-runs";
+const cloudflareRoute = "/fieldbook/cloudflare-think-and-agents";
+const deepseekRoute = "/fieldbook/deepseek-harness-and-cordis";
+const droverRoute = "/fieldbook/drover-fleet-custody-and-evidence";
 const siteOrigin = process.env.SITE_URL ?? "https://example.invalid";
 
 test("@desktop homepage leads to a complete readable Harness Engineering guide", async ({ page }) => {
@@ -124,6 +128,10 @@ test("@desktop discovery endpoints expose only released publication routes", asy
   expect(sitemap).toContain("/fieldbook/security-credentials-supply-chain-and-revocation");
   expect(sitemap).toContain(openLoopsRoute);
   expect(sitemap).toContain(hermesRoute);
+  expect(sitemap).toContain(qmRoute);
+  expect(sitemap).toContain(cloudflareRoute);
+  expect(sitemap).toContain(deepseekRoute);
+  expect(sitemap).toContain(droverRoute);
   expect(robots).toContain("Sitemap:");
   expect(rssResponse.headers()["content-type"]).toContain("application/rss+xml");
   expect(rss).toContain("The Model Is Not the Agent");
@@ -133,7 +141,11 @@ test("@desktop discovery endpoints expose only released publication routes", asy
   expect(rss).toContain("Open Loops and Re-entry");
   expect(rss).toContain("revision-open-loops-re-entry-001");
   expect(rss).toContain("Hermes: An Integrated Agent Runtime");
-  expect(rss).toContain("revision-hermes-integrated-agent-runtime-001");
+  expect(rss).toContain("revision-hermes-integrated-agent-runtime-002");
+  expect(rss).toContain("revision-qm-scoped-resources-and-leased-runs-001");
+  expect(rss).toContain("revision-cloudflare-think-and-agents-001");
+  expect(rss).toContain("revision-deepseek-harness-and-cordis-001");
+  expect(rss).toContain("revision-drover-fleet-custody-and-evidence-001");
 });
 
 test("@desktop architecture field map compares nine profiles and opens extended studies without JavaScript", async ({ page }) => {
@@ -386,6 +398,40 @@ test("@desktop print preserves comparative source and retrieval surfaces", async
   await expect(page.getByRole("figure", { name: "Hermes integrated runtime seams" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Sources and further reading" })).toBeVisible();
   await expect(page.locator(".study-guide-footer")).toBeVisible();
+});
+
+test("@desktop refreshed DeepSeek case exposes its exact release boundary", async ({ page }) => {
+  await page.goto(deepseekRoute);
+  await expect(page.getByRole("heading", { name: "DeepSeek Harness and Cordis" })).toBeVisible();
+  await expect(page.getByRole("figure", { name: "DeepSeek ordered session lifecycle" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "DeepSeek Harness dsh-v0.1.1-rc.2" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Next: Drover: Fleet Custody and Evidence" })).toBeVisible();
+});
+
+test("@mobile Cloudflare case keeps its durable-turn diagram contained", async ({ page }) => {
+  await page.goto(cloudflareRoute);
+  const diagram = page.getByRole("figure", { name: "Cloudflare durable turn lifecycle" });
+  await expect(diagram).toBeVisible();
+  const [contentFits, diagramFits] = await Promise.all([
+    page.locator(".article-reader__prose").evaluate(
+      (element) => element.scrollWidth <= element.clientWidth,
+    ),
+    diagram.evaluate(
+      (element) => element.getBoundingClientRect().right <= window.innerWidth,
+    ),
+  ]);
+  expect(contentFits).toBe(true);
+  expect(diagramFits).toBe(true);
+});
+
+test("@nojs latest comparative case preserves fleet custody and source boundaries", async ({ page }) => {
+  await page.goto(droverRoute);
+  await expect(page.getByRole("heading", { name: "Drover: Fleet Custody and Evidence" })).toBeVisible();
+  await expect(page.getByRole("figure", { name: "Drover fleet custody and evidence planes" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Failure boundary" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Drover v0.3.7" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Previous: DeepSeek Harness and Cordis" })).toBeVisible();
+  await expect(page.getByRole("group", { name: /evidence/i })).toHaveCount(0);
 });
 
 test("@nojs architecture profiles preserve native disclosure and ordinary sources", async ({ page }) => {

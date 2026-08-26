@@ -1,0 +1,71 @@
+---
+slug: cloudflare-think-and-agents
+title: Cloudflare Think and Agents
+description: A source-pinned study of Cloudflare's Durable Object agent substrate and Think harness across durable state, submissions, sessions, recovery, actions, channels, and sub-agents.
+sequence: Harness Engineering
+sequence_position: 27
+revision: 1
+authors:
+  - author-shivansh-fulper
+published_at: 2026-08-26
+substantively_revised_at: 2026-08-26
+reading_time_source: 9 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-cloudflare-think-agents
+revision_id: revision-cloudflare-think-and-agents-001
+previous_essay_slug: qm-scoped-resources-and-leased-runs
+next_essay_slug: deepseek-harness-and-cordis
+---
+
+## Separate the substrate from the harness
+
+Cloudflare Agents and Cloudflare Think sit at different layers in one repository. Agents supplies Durable Object-backed runtime primitives. Think builds an opinionated conversational harness on top: turn execution, session persistence, streaming, recovery, tools, and sub-agent use.
+
+This chapter is pinned to `agents` 0.21.0 and `@cloudflare/think` 0.16.0, which share one release commit. Think 0.16 removed earlier convention-driven framework, generated-entrypoint, CLI, and Studio surfaces. Teaching those removed pieces as current behavior would mix editions.
+
+<CloudflareDurableTurn />
+
+## Make one durable object the coordination home
+
+An Agent is backed by a Durable Object with SQLite state, routing, WebSocket and RPC surfaces, schedules, durable fibers, sub-agents, and MCP connections. This creates a clear coordination home for one logical agent identity. State changes and recovery logic can meet in the same serialized runtime boundary.
+
+Sub-agents are logical facets beneath their parent. They can have their own state and work, yet share physical placement and alarm machinery. The term therefore describes a programming and routing boundary, not proof of a separate machine, failure domain, authority principal, or budget.
+
+## Distinguish recovery from effect correctness
+
+Durable fibers persist checkpoints so work can resume after eviction. A durable submission adds acceptance, status, and an idempotency key before the caller disconnects. Think routes programmatic wait, stream, and status behavior through persisted turn state rather than holding one request open indefinitely.
+
+These are strong runtime guarantees with a narrow scope. Cancellation is cooperative. A callback can ignore it. Recovery can replay local computation but cannot decide whether an arbitrary payment, message, or deployment already happened. External effects still need stable identities, provider receipts, and reconciliation rules.
+
+## Model sessions as branches, not one transcript
+
+Think sessions store a tree of messages and context blocks, support search, and compact history without treating the compacted view as the only record. This matters when a user branches, retries, resumes, or invokes a sub-agent. The request should name the intended branch and the context selected from it.
+
+Compaction helps fit a model input. It does not promote retrieved material into policy or make old credentials current. A recovered turn should preserve lineage to the session branch and re-check consequential authority at the effect boundary.
+
+## Treat Actions and Channels as experimental policy seams
+
+Think Actions record settled results and can support approvals, authorization, reply attachments, and explicit idempotency keys. Authorization is opt-in, not a secure default supplied by the framework. A missing stable key also weakens cross-retry deduplication, and an isolate failure can leave an outcome pending or unknown. That is a bounded recovery contract, not exactly-once execution.
+
+Channels can narrow instructions and tools for a surface, but a turn with no channel receives no channel policy and application hooks can override channel defaults. The safe design is to make channel context an explicit input to admission, never the only authority source.
+
+## Failure boundary
+
+The system fails if reconnect duplicates a delivered turn, eviction loses a durable submission, a cancelled callback continues an effect without a visible disposition, a child facet receives the wrong state, an approval attaches to the wrong action, or a channel-less turn inherits unintended privilege. It also fails when vendor scale or cost language is presented as an independently reproduced benchmark.
+
+## Retrieval check
+
+A webhook submits a Think turn, disconnects, and retries while the Durable Object is evicted. The turn had one approved browser-side action and one server action without an explicit idempotency key. Which state may be recovered automatically, which effect is now ambiguous, and what must the application—not the framework—decide?
+
+## Build-and-break lab
+
+Implement one durable submission with a stable key, one cooperative cancellation point, and one simulated external effect. Kill the worker after the effect is sent but before its local result is saved. On recovery, require a provider lookup before retry. Then issue the same turn with and without a channel and compare the admitted tool set.
+
+## Sources and further reading
+
+- [Cloudflare Agents 0.21.0 and Think 0.16.0](https://github.com/cloudflare/agents/tree/d42494503efe836a073fbf911fae1fbd12253198) — shared release commit for the runtime and harness mechanisms discussed here.
+- [Durable execution](https://github.com/cloudflare/agents/blob/d42494503efe836a073fbf911fae1fbd12253198/docs/agents/durable-execution.md) — first-party fiber, checkpoint, acceptance, idempotency, and cancellation boundary.
+- [Think Actions](https://github.com/cloudflare/agents/blob/d42494503efe836a073fbf911fae1fbd12253198/docs/think/actions.md) — experimental action ledger, approval, authorization, and ambiguity contract.
+- [Harness Engineering Study Guide](/fieldbook/harness-engineering-study-guide) — the shared vocabulary for durable state, external effects, authority, and recovery.

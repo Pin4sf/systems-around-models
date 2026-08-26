@@ -1,0 +1,37 @@
+{
+  "id": "revision-drover-fleet-custody-and-evidence-001",
+  "essaySlug": "drover-fleet-custody-and-evidence",
+  "revision": 1,
+  "publishedAt": "2026-08-26",
+  "substantivelyRevisedAt": "2026-08-26",
+  "summary": "Initial public revision of the release-pinned Drover fleet-custody and evidence case study.",
+  "affectedClaimIds": [],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-09156cfa8c0234dca5df23b44afd3f61be416422deff22986a11ffa6d3abdde6",
+  "sourceIds": [
+    "source-drover-fleet-runtime",
+    "source-harness-engineering-fieldbook-v1"
+  ],
+  "sourceValidationDates": {
+    "source-harness-engineering-fieldbook-v1": "2026-08-21",
+    "source-drover-fleet-runtime": "2026-08-26"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-drover-fleet-runtime",
+      "title": "Drover v0.3.7 repository release",
+      "canonicalUrl": "https://github.com/arniesaha/drover/tree/81b344d025a7850d5697a7c19468ca8fd95e909e",
+      "lastValidated": "2026-08-26",
+      "licenseStatus": "Apache-2.0"
+    },
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    }
+  ]
+}

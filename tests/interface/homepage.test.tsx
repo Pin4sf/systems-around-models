@@ -105,9 +105,13 @@ it("leads readers into a complete harness-engineering course map", async () => {
     ["Cursor", "/fieldbook/cursor-model-harness-evaluation"],
     ["LangGraph", "/fieldbook/langgraph-durable-state-and-interrupts"],
     ["Hermes", "/fieldbook/hermes-integrated-agent-runtime"],
+    ["QM", "/fieldbook/qm-scoped-resources-and-leased-runs"],
+    ["Cloudflare Think and Agents", "/fieldbook/cloudflare-think-and-agents"],
+    ["DeepSeek Harness and Cordis", "/fieldbook/deepseek-harness-and-cordis"],
+    ["Drover", "/fieldbook/drover-fleet-custody-and-evidence"],
   ]) {
     expect(screen.getByRole("link", { name: new RegExp(name, "i") })).toHaveAttribute("href", href);
   }
-  expect(screen.getByText("QM").closest("li"))
+  expect(screen.getByText("Spotify Xirp and Portal").closest("li"))
     .toHaveTextContent("Coming next");
 });

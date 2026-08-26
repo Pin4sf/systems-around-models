@@ -256,6 +256,10 @@ describe("flagship fieldbook reader", () => {
     ["cursor-model-harness-evaluation", "Cursor: Model × Harness Evaluation", "Cursor harness improvement loop"],
     ["langgraph-durable-state-and-interrupts", "LangGraph: Durable State and Interrupts", "LangGraph durable interrupt boundary"],
     ["hermes-integrated-agent-runtime", "Hermes: An Integrated Agent Runtime", "Hermes integrated runtime seams"],
+    ["qm-scoped-resources-and-leased-runs", "QM: Scoped Resources and Leased Runs", "QM resource governance boundary"],
+    ["cloudflare-think-and-agents", "Cloudflare Think and Agents", "Cloudflare durable turn lifecycle"],
+    ["deepseek-harness-and-cordis", "DeepSeek Harness and Cordis", "DeepSeek ordered session lifecycle"],
+    ["drover-fleet-custody-and-evidence", "Drover: Fleet Custody and Evidence", "Drover fleet custody and evidence planes"],
   ])("publishes %s with a retrieval diagram and check", async (chapterSlug, title, diagramName) => {
     const page = await ArticlePage({ params: Promise.resolve({ slug: chapterSlug }) });
     render(page);
@@ -278,6 +282,10 @@ describe("flagship fieldbook reader", () => {
     ["cursor-model-harness-evaluation", "Cursor harness improvement loop", "ol"],
     ["langgraph-durable-state-and-interrupts", "LangGraph durable interrupt boundary", "ol"],
     ["hermes-integrated-agent-runtime", "Hermes integrated runtime seams", "dl"],
+    ["qm-scoped-resources-and-leased-runs", "QM resource governance boundary", "dl"],
+    ["cloudflare-think-and-agents", "Cloudflare durable turn lifecycle", "ol"],
+    ["deepseek-harness-and-cordis", "DeepSeek ordered session lifecycle", "ol"],
+    ["drover-fleet-custody-and-evidence", "Drover fleet custody and evidence planes", "dl"],
   ])("gives the %s diagram native %s semantics", async (chapterSlug, diagramName, semanticTag) => {
     const page = await ArticlePage({ params: Promise.resolve({ slug: chapterSlug }) });
     render(page);
@@ -286,7 +294,7 @@ describe("flagship fieldbook reader", () => {
       .toBeInTheDocument();
   });
 
-  it("connects Evidence and Completion to the first comparative case and ends the released batch at Hermes", async () => {
+  it("connects Evidence and Completion to the first comparative case and ends the released batch at Drover", async () => {
     const openLoopsPage = await ArticlePage({ params: Promise.resolve({ slug: "open-loops-and-re-entry" }) });
     const { unmount } = render(openLoopsPage);
     expect(screen.getByRole("link", { name: "Next: Anthropic Long-Running Harnesses" }))
@@ -294,9 +302,17 @@ describe("flagship fieldbook reader", () => {
     unmount();
 
     const hermesPage = await ArticlePage({ params: Promise.resolve({ slug: "hermes-integrated-agent-runtime" }) });
-    render(hermesPage);
+    const { unmount: unmountHermes } = render(hermesPage);
     expect(screen.getByRole("link", { name: "Previous: LangGraph: Durable State and Interrupts" }))
       .toHaveAttribute("href", "/fieldbook/langgraph-durable-state-and-interrupts");
+    expect(screen.getByRole("link", { name: "Next: QM: Scoped Resources and Leased Runs" }))
+      .toHaveAttribute("href", "/fieldbook/qm-scoped-resources-and-leased-runs");
+    unmountHermes();
+
+    const droverPage = await ArticlePage({ params: Promise.resolve({ slug: "drover-fleet-custody-and-evidence" }) });
+    render(droverPage);
+    expect(screen.getByRole("link", { name: "Previous: DeepSeek Harness and Cordis" }))
+      .toHaveAttribute("href", "/fieldbook/deepseek-harness-and-cordis");
     expect(screen.queryByRole("link", { name: /^Next:/ })).not.toBeInTheDocument();
   });
 

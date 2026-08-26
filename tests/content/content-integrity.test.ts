@@ -10,7 +10,7 @@ const validClaim = `id: claim-valid\nstatement: A sufficiently long public claim
 
 const validRevision = `id: revision-valid\ntarget_slug: valid-essay\nrevision: 1\npublished_at: 2026-08-21\nsubstantively_revised_at: 2026-08-21\nsummary: A sufficiently long revision summary for validation.\naffected_claim_ids:\n  - claim-valid\ncorrection_disposition: publication\n`;
 
-const validEssay = `---\nslug: valid-essay\ntitle: A Valid Essay\ndescription: A sufficiently long essay description for validation.\nsequence: Harness Engineering\nsequence_position: 1\nrevision: 1\nauthors:\n  - Researcher\npublished_at: 2026-08-21\nsubstantively_revised_at: 2026-08-21\nreading_time_source: manual estimate\nstatus: public\nsource_manifest_ids:\n  - source-valid\nrevision_id: revision-valid\n---\n\nPublic essay body.\n`;
+const validEssay = `---\nslug: valid-essay\ntitle: A Valid Essay\ndescription: A sufficiently long essay description for validation.\nsequence: Harness Engineering\nsequence_position: 1\nrevision: 1\nauthors:\n  - author-researcher\npublished_at: 2026-08-21\nsubstantively_revised_at: 2026-08-21\nreading_time_source: manual estimate\nstatus: public\nsource_manifest_ids:\n  - source-valid\nrevision_id: revision-valid\n---\n\nPublic essay body.\n`;
 
 const validEssayWithRevision = validEssay;
 

@@ -1,0 +1,72 @@
+---
+slug: qm-scoped-resources-and-leased-runs
+title: "QM: Scoped Resources and Leased Runs"
+description: A source-pinned study of how QM combines people, shared scopes, typed resources, policy floors, credentials, leased runs, and audit evidence in one work-oriented agent runtime.
+sequence: Harness Engineering
+sequence_position: 26
+revision: 1
+authors:
+  - author-shivansh-fulper
+published_at: 2026-08-26
+substantively_revised_at: 2026-08-26
+reading_time_source: 8 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-qm-agent-runtime
+revision_id: revision-qm-scoped-resources-and-leased-runs-001
+previous_essay_slug: hermes-integrated-agent-runtime
+next_essay_slug: cloudflare-think-and-agents
+---
+
+## Govern the work around the turn
+
+QM is a useful case because its primary unit is not an isolated chat. It models people, shared rooms, resources, credentials, runs, policies, and audit records around a central agent runtime. A selected harness adapter may change how a model is driven, but it does not become the authority for the surrounding work.
+
+This chapter is pinned to the QM v0.1.5 release. Current `main` is newer and reports a 0.1.6 CLI manifest without a matching release, so unreleased behavior is outside this chapter's mechanism boundary.
+
+<QmResourceGovernance />
+
+## Give resources typed identities
+
+An authorization check needs more than a path or a tool name. QM distinguishes resource kinds such as files, skills, deployments, crons, and service credentials. It also distinguishes personal and shared scopes. That gives policy a coordinate: which principal is asking, for which resource, inside which scope, under which current membership.
+
+The transferable lesson is to compute one effective view for the attempt. Identity, current group membership, resource reference, organization floor, explicit grant, credential scope, and run budget should converge before the capability is invoked. If these inputs can change during execution, the attempt needs either a frozen snapshot or a safe re-authorization point.
+
+Typed resources improve inspectability. They do not prove that every backend enforces the same boundary. A sandbox, browser, database, or external API can still expose a wider surface than the central policy intends.
+
+## Keep policy layers compositional
+
+QM separates a broad security posture from command-specific policy. A strict posture may require approval across most tool calls; a command policy can still deny, allow, or require approval for particular operations. The useful property is monotonicity: a narrower layer may remove authority, but it should not silently loosen the organization floor.
+
+That property should apply across every adapter. Switching from one model harness to another must not change the principal, resource grants, credential purpose, or audit identity. Adapter parity therefore means more than accepting the same prompt. It means preserving the same authority and evidence contract.
+
+## Lease runs without confusing activity for completion
+
+The Postgres run store represents queued, running, and terminal work with leases, heartbeats, attempts, deduplication, and a per-session running constraint. These records help a worker recover ownership and prevent two active attempts from casually claiming the same session.
+
+A lease answers who may work now. It does not prove that an external effect occurred once, that the result is correct, or that a person accepted it. Recovery still needs stable effect identities and world reconciliation. Audit records help reconstruct who attempted which action against which resource; they are evidence, not preventive control.
+
+## Adopt governance, retain the stated boundary
+
+Adopt typed resource references, explicit scope membership, compositional policy floors, leased attempts, and durable audit coordinates. Adapt them to each execution backend and require conformance tests at the adapter seam. Reject the inference that a central policy object establishes containment everywhere it is referenced.
+
+QM explicitly describes an early, single-organization trust boundary rather than a hardened public or multi-tenant system. Its security documentation names bypassable command screening, incomplete egress enforcement, administrator visibility into content, and credentials that are plaintext while in use. Those limits are part of the architecture, not footnotes to erase.
+
+## Failure boundary
+
+The design fails if a current room member can read a resource from another scope, a harness switch changes effective grants, an expired worker commits after a replacement, recovery repeats a non-idempotent effect, or an audit row is presented as proof that an action was prevented. It also fails if an owner-only fallback is bypassed when audience resolution is uncertain.
+
+## Retrieval check
+
+A shared-room run is leased to one worker. Membership changes while the model is waiting for a tool result, and the worker loses its heartbeat after sending an external request. Which attempt inputs must remain frozen, which authority must be refreshed, and what evidence is required before a replacement worker may retry?
+
+## Build-and-break lab
+
+Create two people, one shared scope, one private resource, and two interchangeable harness adapters. Freeze a grant snapshot for a leased run, then remove one member and expire the lease mid-effect. Test cross-scope access, adapter parity, stale-worker fencing, and reconciliation by a stable external-effect key.
+
+## Sources and further reading
+
+- [QM v0.1.5](https://github.com/yc-software/qm/tree/d931fe963de3ac20b9a7526ea9a4873c0d8ed18e) — release-pinned implementation for the resource, policy, credential, run, and audit mechanisms discussed here.
+- [QM security boundary](https://github.com/yc-software/qm/blob/d931fe963de3ac20b9a7526ea9a4873c0d8ed18e/SECURITY.md) — first-party trust model and known limitations.
+- [Harness Engineering Study Guide](/fieldbook/harness-engineering-study-guide) — the shared vocabulary for identity, admission, leases, effects, evidence, and closure.
