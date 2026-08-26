@@ -1,0 +1,26 @@
+id: source-factory-missions
+title: Missions architecture and product documentation
+author: Factory
+canonical_url: https://factory.ai/news/missions-architecture
+published_at: 2026-04-10
+retrieved_at: 2026-08-26
+inspected_paths:
+  - /news/missions-architecture
+  - /missions/overview
+  - /missions/planning
+source_type: first-party-article
+basis: Direct reading of Factory's architecture article and current documentation for mission planning, workers, validators, QA loops, and handback.
+license_status: all-rights-reserved
+evidence_grade: FD
+observed_mechanisms:
+  - description: A mission is decomposed into features and milestones with fresh workers and validators operating against explicit plans and acceptance criteria.
+    evidence_grade: FD
+    basis: The first-party architecture and planning pages describe decomposition, independent validation, fix loops, and handback states.
+author_reported_claims:
+  - Factory reports that Missions can run black-box QA and correction loops before halting or handing work back.
+unknowns:
+  - Vendor-reported quality and productivity metrics were not independently reproduced for this publication.
+falsifiers:
+  - Current Factory documentation no longer describes mission plans, validators, QA loops, or explicit handback.
+last_validated: 2026-08-26
+correction_ledger_status: reviewed

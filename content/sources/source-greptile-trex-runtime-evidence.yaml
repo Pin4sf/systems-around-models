@@ -1,0 +1,23 @@
+id: source-greptile-trex-runtime-evidence
+title: How Greptile Trex executes code
+author: Greptile
+canonical_url: https://www.greptile.com/blog/trex-code-execution
+published_at: 2026-06-17
+retrieved_at: 2026-08-26
+inspected_paths: []
+source_type: first-party-article
+basis: Direct reading of Greptile's first-party article about disposable execution environments and runtime evidence collected during pull-request review.
+license_status: all-rights-reserved
+evidence_grade: FD
+observed_mechanisms:
+  - description: Trex is described as running code in a disposable sandbox and retaining artifacts such as logs, screenshots, API traces, scripts, and video.
+    evidence_grade: FD
+    basis: The article describes the execution environment and named evidence artifacts.
+author_reported_claims:
+  - Greptile reports that runtime execution found more bugs in its evaluation; this publication does not treat the reported percentage as independently verified.
+unknowns:
+  - The article does not establish that runtime execution detects every defect or that the reported evaluation generalizes to other repositories.
+falsifiers:
+  - Greptile corrects the article or removes disposable execution and runtime artifacts from the documented mechanism.
+last_validated: 2026-08-26
+correction_ledger_status: reviewed

@@ -1,0 +1,23 @@
+id: source-github-copilot-cloud-agent
+title: GitHub Copilot cloud agent overview
+author: GitHub
+canonical_url: https://docs.github.com/en/copilot/how-tos/copilot-on-github/use-copilot-agents/overview
+published_at: 2026-08-26
+retrieved_at: 2026-08-26
+inspected_paths:
+  - /copilot/how-tos/copilot-on-github/use-copilot-agents/overview
+source_type: first-party-article
+basis: Direct reading of GitHub's current public documentation for issue assignment, cloud agent sessions, steering, pull requests, review, and merge authority.
+license_status: unknown
+evidence_grade: FD
+observed_mechanisms:
+  - description: An assigned issue starts a cloud agent session whose work is inspectable and steerable before the agent opens a pull request for human review.
+    evidence_grade: FD
+    basis: The official overview documents assignment, session logs, steering, pull-request creation, requested changes, and user-controlled merge.
+author_reported_claims: []
+unknowns:
+  - Public product documentation does not expose every proprietary orchestration or isolation mechanism.
+falsifiers:
+  - GitHub's current documentation no longer places pull-request review and merge under user or reviewer control.
+last_validated: 2026-08-26
+correction_ledger_status: reviewed

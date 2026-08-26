@@ -1,0 +1,86 @@
+---
+slug: devin-greptile-coderabbit-and-qodo
+title: Devin, Greptile, CodeRabbit, and Qodo
+description: A source-bounded comparison of focused proof, runtime evidence, policy checks, contextual review, and recorded overrides.
+sequence: Harness Engineering
+sequence_position: 32
+revision: 1
+authors:
+  - author-shivansh-fulper
+published_at: 2026-08-27
+substantively_revised_at: 2026-08-27
+reading_time_source: 9 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-devin-testing-recordings
+  - source-greptile-trex-runtime-evidence
+  - source-coderabbit-pre-merge-checks
+  - source-qodo-code-review-overview
+  - source-pr-agent-release
+revision_id: revision-devin-greptile-coderabbit-and-qodo-001
+previous_essay_slug: factory-missions-versus-github-copilot
+next_essay_slug: bounded-whole-product-case-study
+---
+
+## Verification is a plane, not a verdict
+
+A software change can carry several kinds of evidence: a focused interaction recording, an executed test, runtime logs, a static review finding, a policy check, or a human disposition. Devin, Greptile, CodeRabbit, and Qodo expose different parts of that verification plane in their public materials. They should not be compressed into one “AI reviewer” category or ranked by undocumented internals.
+
+The common lesson is that executor self-report is insufficient. The harder lesson is that adding more reviewers does not automatically create independent proof.
+
+## Focused recordings show one path
+
+Devin's documentation describes an end-to-end test plan, browser execution, and an annotated recording focused on the change. It also directs exhaustive coverage to CI. That is the correct evidence boundary: a recording can make a particular interaction inspectable, but it cannot prove every path, environment, permission level, or regression surface.
+
+Store the recording with the exact build, test identity, environment, and expected observation. Without that context, a persuasive video can outlive the code it supposedly demonstrates.
+
+## Runtime execution changes the evidence class
+
+Greptile's Trex article describes running changed code in a disposable sandbox and retaining logs, screenshots, API traces, scripts, and video. Runtime execution can falsify assumptions that static inspection misses. It still does not make the environment representative or the test oracle complete.
+
+Greptile reports a measured improvement in bugs found; this guide does not reproduce that experiment and therefore does not use the percentage as a general performance claim. The durable takeaway is narrower: runtime artifacts can support or refute a review finding, and the environment plus oracle must be part of the evidence record.
+
+## Policy checks need typed outcomes
+
+CodeRabbit documents pre-merge checks with `passed`, `error`, `warning`, and `inconclusive` outcomes, configurable as off, warning, or error gates. It also documents per-pull-request overrides. This is more truthful than a single green or red badge.
+
+An inconclusive check is not a pass. An override is not a refutation. Record who overrode which policy, why, and with what evidence. Future incident review needs to distinguish “the rule was satisfied” from “an authorized actor accepted the residual risk.”
+
+## Contextual review still needs reproducibility
+
+Qodo's product documentation describes specialized review roles using repository history, requirements, and organizational standards. Those are valuable context classes. Qodo's claims about the resulting recall and precision remain vendor-reported here.
+
+The public PR-Agent v0.43.0 repository is inspected separately because it exposes concrete orchestration, provider, review, model-handler, and GitHub integration boundaries. It is not evidence for the proprietary internals of current Qodo Merge. Open-source lineage and current commercial architecture are different claims.
+
+## Preserve typed disagreement
+
+Normalize reviewer outcomes without erasing their bases:
+
+- `confirmed`: evidence supports the finding under a named oracle;
+- `refuted`: stronger evidence contradicts it;
+- `inconclusive`: evidence cannot decide;
+- `blocked`: required execution or context was unavailable;
+- `overridden`: an authorized actor accepted the unresolved condition.
+
+Track false positives, missed defects, correction burden, and time-to-understanding. Finding count alone rewards noisy systems.
+
+## Failure boundary
+
+The verification plane fails if a recording is presented as exhaustive coverage, sandbox execution is treated as production equivalence, an inconclusive check becomes green, an override disappears, or multiple model reviewers are called independent despite shared prompts, models, fixtures, or context. It also fails if public PR-Agent code is used to claim proprietary Qodo behavior.
+
+## Retrieval check
+
+A static reviewer flags a race, a focused browser recording passes, runtime execution cannot reproduce the production concurrency level, and a policy owner approves an override. What is confirmed, what remains inconclusive, and which receipt must travel with the merge decision?
+
+## Build-and-break lab
+
+Create one intentionally racy change. Run a static checker, a focused UI recording, and a sandbox test with insufficient concurrency. Require each checker to emit a typed outcome plus evidence references. Exercise an override, then verify that the final report preserves the unresolved race rather than rewriting it as passed.
+
+## Sources and further reading
+
+- [Devin testing and recordings](https://docs.devin.ai/work-with-devin/testing-and-recordings) — focused test proof and the boundary with CI.
+- [Greptile Trex code execution](https://www.greptile.com/blog/trex-code-execution) — disposable execution and runtime artifacts.
+- [CodeRabbit pre-merge checks](https://docs.coderabbit.ai/pr-reviews/pre-merge-checks) — typed statuses, policy modes, and override receipts.
+- [Qodo code review overview](https://docs.qodo.ai/code-review/overview) — current first-party product claims and context model.
+- [PR-Agent v0.43.0](https://github.com/The-PR-Agent/pr-agent/tree/4ebd5c5333c6ef21509e7304d27969eb825e6f22) — release-pinned public implementation, not a proxy for proprietary internals.

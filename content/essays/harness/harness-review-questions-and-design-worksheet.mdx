@@ -1,0 +1,125 @@
+---
+slug: harness-review-questions-and-design-worksheet
+title: Harness Review Questions and Design Worksheet
+description: A failure-path review instrument for making responsibility, authority, durability, evidence, memory, recovery, and closure inspectable before release.
+sequence: Harness Engineering
+sequence_position: 40
+revision: 1
+authors:
+  - author-shivansh-fulper
+published_at: 2026-08-27
+substantively_revised_at: 2026-08-27
+reading_time_source: 10 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-nist-ai-rmf-1
+  - source-w3c-trace-context
+revision_id: revision-harness-review-questions-and-design-worksheet-001
+previous_essay_slug: harness-capstone
+next_essay_slug: keeping-the-guide-current
+---
+
+## Review the failure path
+
+A component tour can make a harness sound complete while leaving its hardest seams unnamed. Review one concrete responsibility from admission through closure, then walk the same path under lost response, stale ownership, revocation, missing evidence, and user correction.
+
+This worksheet is an original design instrument, not an external standard. Adapt it to the system's consequence level and retain the completed worksheet with the release evidence.
+
+## Responsibility and principal
+
+- What outcome is the system accepting responsibility to advance?
+- Which principal requested it, and how was identity established?
+- Which authority is user-owned, delegated, derived, or prohibited?
+- What would make the request inadmissible?
+- Who may change, cancel, accept, close, or reopen it?
+
+If the answer is “the agent,” name the actual credential, scope, policy, and accountable owner behind that shorthand.
+
+## Context and capabilities
+
+- Which source records are compiled into context, with what provenance and freshness?
+- Which instructions can conflict, and how is precedence made visible?
+- Which tools and operations are bound for this run?
+- What are the provider-specific capability differences?
+- Where are credentials resolved, and can revocation take effect before the next effect?
+
+Record unsupported controls explicitly. Absence is safer than a control that appears available but cannot be enforced.
+
+## State, ownership, and effects
+
+- What is durable before the first external effect?
+- Which run, attempt, and effect identifiers survive retries?
+- Who owns the lease, and where is the fencing token checked?
+- How are intent and dispatch coupled?
+- What happens when the provider commits but the response is lost?
+- Which lookup or reconciliation path can establish external state?
+
+Draw the durable cuts. For each one, state the expected recovery and forbidden transition.
+
+## Evidence, verification, and disposition
+
+- Which observations are native, normalized, inferred, stale, or missing?
+- Can a second operator reconstruct the trace from durable records?
+- Is the checker independent of the maker's editable surface?
+- What does each test or judge prove, and what does it not prove?
+- Which policy gate can block an otherwise verified result?
+- Who owns acceptance, and what evidence permits conscious closure?
+
+Overrides need actor, policy, reason, evidence, time, and expiry. Inconclusive is not pass.
+
+## Memory and learning
+
+- Is captured material an observation, candidate belief, validated fact, or procedure?
+- Which principal and scope may retrieve it?
+- What is its validity interval and source lineage?
+- How can the user correct, suppress, expire, or delete it?
+- Can deletion propagate through summaries and derived artifacts?
+- Which evaluator protects harness-learning candidates from self-approval?
+
+Memory authority must not grow simply because information persists or appears frequently.
+
+## Recovery, re-entry, and retirement
+
+- What partial work remains recoverable after crash or cancellation?
+- How are contradictions surfaced rather than overwritten?
+- Which unresolved outcomes create open loops?
+- What context is rebuilt on re-entry?
+- Which runtime, adapter, instruction, or procedure versions can roll back?
+- When and how are obsolete capabilities and procedures retired?
+
+Closure is a disposition, not garbage collection. Retention and deletion follow policy after the responsibility is understood.
+
+## Compact release worksheet
+
+<dl className="completion-map">
+  <div><dt>Responsibility and owner</dt><dd>Release answer: ____________________</dd></div>
+  <div><dt>Principal and admitted authority</dt><dd>Release answer: ____________________</dd></div>
+  <div><dt>Context version and sources</dt><dd>Release answer: ____________________</dd></div>
+  <div><dt>Capability manifest and provider differences</dt><dd>Release answer: ____________________</dd></div>
+  <div><dt>Durable state and fencing</dt><dd>Release answer: ____________________</dd></div>
+  <div><dt>Effect intent, idempotency, and reconciliation</dt><dd>Release answer: ____________________</dd></div>
+  <div><dt>Evidence bundle and checker</dt><dd>Release answer: ____________________</dd></div>
+  <div><dt>Policy, acceptance, closure, and re-entry</dt><dd>Release answer: ____________________</dd></div>
+  <div><dt>Memory lifecycle and correction</dt><dd>Release answer: ____________________</dd></div>
+  <div><dt>Failure fixtures and rollback</dt><dd>Release answer: ____________________</dd></div>
+  <div><dt>Known unknowns and falsifiers</dt><dd>Release answer: ____________________</dd></div>
+</dl>
+
+## Failure boundary
+
+The review fails if it accepts component names as contracts, skips the lost-response path, treats scope filtering as identity, omits override receipts, requires one canonical reasoning trace, or cannot name who closes and reopens the outcome. It also fails if known unknowns disappear from the release record.
+
+## Retrieval check
+
+A design review says “we use a durable workflow, an agent memory, and an AI reviewer.” Which worksheet questions must be answered before those components support any reliability claim?
+
+## Build-and-break lab
+
+Complete the worksheet for one real or synthetic responsibility. Exchange it with another reviewer, who chooses three durable cuts and one authority challenge. Revise the contracts until the reviewer can predict the expected state, evidence, and owner action for every injected failure.
+
+## Sources and further reading
+
+- [Harness Engineering Study Guide](/fieldbook/harness-engineering-study-guide) — the full responsibility vocabulary behind the worksheet.
+- [NIST AI RMF 1.0](https://doi.org/10.6028/NIST.AI.100-1) — governance, mapping, measurement, and management framing.
+- [W3C Trace Context](https://www.w3.org/TR/trace-context/) — interoperable trace propagation, used here without overstating correlation as proof.

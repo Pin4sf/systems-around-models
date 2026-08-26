@@ -1,0 +1,64 @@
+{
+  "id": "revision-model-harness-evaluation-001",
+  "essaySlug": "model-harness-evaluation",
+  "revision": 1,
+  "publishedAt": "2026-08-27",
+  "substantivelyRevisedAt": "2026-08-27",
+  "summary": "Initial evaluation chapter defining configuration-level units, constructs, factorial comparisons, protected evaluators, matched budgets, and held-out tasks.",
+  "affectedClaimIds": [],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-10f7b771f02ce2be01f552919cc8306bb2a9efa521db0515928c6b5137186ec3",
+  "sourceIds": [
+    "source-ahe-harness-evolution",
+    "source-cursor-continually-improving-agent-harness",
+    "source-harness-engineering-fieldbook-v1",
+    "source-rethinking-harness-evolution",
+    "source-swe-bench-evaluation-harness"
+  ],
+  "sourceValidationDates": {
+    "source-harness-engineering-fieldbook-v1": "2026-08-21",
+    "source-cursor-continually-improving-agent-harness": "2026-08-25",
+    "source-swe-bench-evaluation-harness": "2026-08-26",
+    "source-ahe-harness-evolution": "2026-08-26",
+    "source-rethinking-harness-evolution": "2026-08-26"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-ahe-harness-evolution",
+      "title": "Agentic Harness Engineering: Observability-Driven Automatic Evolution of Coding-Agent Harnesses",
+      "canonicalUrl": "https://arxiv.org/abs/2604.25850v4",
+      "lastValidated": "2026-08-26",
+      "licenseStatus": "unknown"
+    },
+    {
+      "id": "source-cursor-continually-improving-agent-harness",
+      "title": "Continually improving the agent harness",
+      "canonicalUrl": "https://cursor.com/blog/continually-improving-agent-harness",
+      "lastValidated": "2026-08-25",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-rethinking-harness-evolution",
+      "title": "Rethinking the Evaluation of Harness Evolution for Agents",
+      "canonicalUrl": "https://arxiv.org/abs/2607.12227v1",
+      "lastValidated": "2026-08-26",
+      "licenseStatus": "unknown"
+    },
+    {
+      "id": "source-swe-bench-evaluation-harness",
+      "title": "SWE-bench evaluation harness repository",
+      "canonicalUrl": "https://github.com/SWE-bench/SWE-bench/tree/7a21e05772954cc81471ae19d56f436cecf43c54",
+      "lastValidated": "2026-08-26",
+      "licenseStatus": "MIT"
+    }
+  ]
+}

@@ -6,3 +6,10 @@ substantively_revised_at: 2026-08-26
 summary: Expanded corpus revision adding native-protocol preservation, adapter capability, and event-delivery semantics.
 affected_claim_ids: []
 correction_disposition: publication
+content_hash: sha256-a2afb34d1b375bbda7eebfbd90a0ca142198835b3ae38f234ec9d8d7d2718386
+sources:
+  - { id: source-drover-fleet-runtime, title: Drover v0.3.7 repository release, canonical_url: https://github.com/arniesaha/drover/tree/81b344d025a7850d5697a7c19468ca8fd95e909e, last_validated: 2026-08-26, license_status: Apache-2.0 }
+  - { id: source-harness-engineering-fieldbook-v1, title: "The Agent Systems Fieldbook — Harness Engineering, version 1", canonical_url: /manifests/revision-fieldbook-essay-001.json, last_validated: 2026-08-21, license_status: all-rights-reserved }
+source_validation_order:
+  - source-harness-engineering-fieldbook-v1
+  - source-drover-fleet-runtime

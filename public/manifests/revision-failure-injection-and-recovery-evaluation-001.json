@@ -1,0 +1,64 @@
+{
+  "id": "revision-failure-injection-and-recovery-evaluation-001",
+  "essaySlug": "failure-injection-and-recovery-evaluation",
+  "revision": 1,
+  "publishedAt": "2026-08-27",
+  "substantivelyRevisedAt": "2026-08-27",
+  "summary": "Initial recovery-first failure-injection chapter covering durable cuts, ambiguous effects, stale ownership, revocation, corruption, and evidence degradation.",
+  "affectedClaimIds": [],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-b1f7325b0f4b02586ebb9ebb0dcfbc86f1d02c4d311899bfe96d3bd2233cd294",
+  "sourceIds": [
+    "source-aws-making-retries-safe",
+    "source-aws-transactional-outbox",
+    "source-harness-engineering-fieldbook-v1",
+    "source-rasa-why-agents-fail",
+    "source-temporal-workflow-execution-docs"
+  ],
+  "sourceValidationDates": {
+    "source-harness-engineering-fieldbook-v1": "2026-08-21",
+    "source-rasa-why-agents-fail": "2026-08-22",
+    "source-aws-making-retries-safe": "2026-08-23",
+    "source-aws-transactional-outbox": "2026-08-23",
+    "source-temporal-workflow-execution-docs": "2026-08-24"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-aws-making-retries-safe",
+      "title": "Making retries safe with idempotent APIs",
+      "canonicalUrl": "https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/",
+      "lastValidated": "2026-08-23",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-aws-transactional-outbox",
+      "title": "Transactional outbox pattern",
+      "canonicalUrl": "https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/transactional-outbox.html",
+      "lastValidated": "2026-08-23",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-rasa-why-agents-fail",
+      "title": "Why Agents Fail",
+      "canonicalUrl": "https://github.com/RasaHQ/why-agents-fail",
+      "lastValidated": "2026-08-22",
+      "licenseStatus": "MIT"
+    },
+    {
+      "id": "source-temporal-workflow-execution-docs",
+      "title": "Temporal Workflow Execution and Event History documentation",
+      "canonicalUrl": "https://github.com/temporalio/documentation/tree/053c35af7e9ead0a7714d01612576bba14f0fcc1/docs/encyclopedia/workflow/workflow-execution",
+      "lastValidated": "2026-08-24",
+      "licenseStatus": "MIT"
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+---
+slug: conformance-and-trajectory-evaluation
+title: Conformance and Trajectory Evaluation
+description: A practical method for evaluating final outcomes, acceptable execution paths, and runtime-contract compliance without requiring one canonical trace.
+sequence: Harness Engineering
+sequence_position: 35
+revision: 1
+authors:
+  - author-shivansh-fulper
+published_at: 2026-08-27
+substantively_revised_at: 2026-08-27
+reading_time_source: 8 minute editorial estimate
+status: public
+source_manifest_ids:
+  - source-harness-engineering-fieldbook-v1
+  - source-nist-ai-rmf-1
+  - source-w3c-trace-context
+  - source-swe-bench-evaluation-harness
+  - source-llm-as-judge-mt-bench
+revision_id: revision-conformance-and-trajectory-evaluation-001
+previous_essay_slug: model-harness-evaluation
+next_essay_slug: failure-injection-and-recovery-evaluation
+---
+
+## Three evaluators answer three questions
+
+Outcome evaluation asks whether the final result satisfied a task-specific oracle. Trajectory evaluation asks whether the path was acceptable and evidentially coherent. Conformance evaluation asks whether the runtime obeyed its declared contracts. A credible harness needs all three, because each catches failures the others cannot.
+
+A correct patch can arrive through an unauthorized effect. A contract-conformant run can produce the wrong answer. A plausible trajectory can end without external acceptance. Do not compress those judgments into one score.
+
+## Evaluate outcomes with task-specific oracles
+
+Prefer deterministic checks when the task permits them: tests, schema validation, policy rules, artifact parsing, or a confirmed external receipt. Use model-based judges for semantic qualities only with calibrated rubrics, blinded samples, disagreement analysis, and human review of consequential cases.
+
+MT-Bench demonstrates the utility of model judges in a research setup, but judge agreement is not ground truth. A judge can share the producer's blind spots, favor style over substance, or be steered by irrelevant text in the artifact.
+
+## Evaluate trajectories by invariants
+
+Do not require the agent to reproduce one reference chain of thought. Evaluate observable trajectory properties:
+
+- capabilities used were admitted for the principal and task;
+- protected data did not cross an unauthorized boundary;
+- external effects had stable intent and recovery records;
+- retries did not duplicate canonical effects;
+- evidence remained attributable to attempts and tools;
+- checker and acceptance authority remained separate from the maker.
+
+This allows novel valid paths while rejecting forbidden transitions. Trace context helps correlate work across processes, but correlation identifiers do not prove causality, authorization, or correctness.
+
+## Evaluate conformance against declared capabilities
+
+Write executable adapter fixtures for supported operations, error states, cancellation, recovery, and protocol drift. Share the fixture shape across providers, but evaluate each provider against its declared capability manifest. Conformance means “does what it promises,” not “every adapter behaves identically.”
+
+Test the seams: state transition plus durable write, effect intent plus outbox dispatch, lease expiration plus fencing, revocation plus tool use, evidence creation plus projection. Incomplete contracts can pass their own tests, so conformance suites need periodic adversarial review.
+
+## Use a proof ladder carefully
+
+For a particular claim, evidence may progress from self-report to trace, artifact, deterministic check, independent verification, policy disposition, and owner acceptance. This ladder is an original design instrument, not an external standard. Higher levels do not erase lower-level contradictions, and not every task needs every rung.
+
+The evaluator should state exactly what a result proves. “Test passed in container X at commit Y” is stronger and narrower than “the feature works.” Precision makes future correction possible.
+
+## Failure boundary
+
+Evaluation fails if a correct output excuses an unauthorized path, a clean trace substitutes for outcome proof, conformance is defined as provider parity, a model judge attests its own uncalibrated preferences, or a missing observation is scored as pass. It also fails if the evaluator requires one hidden reasoning trajectory rather than observable contracts.
+
+## Retrieval check
+
+An agent produces the correct artifact, but used a credential after revocation and the trace lacks the final external receipt. How should outcome, trajectory, and conformance evaluators score the run independently?
+
+## Build-and-break lab
+
+Define one task oracle, five trajectory invariants, and an adapter capability manifest. Generate three runs: correct result with forbidden tool use, wrong result with perfect conformance, and correct authorized result with missing evidence. Require a three-axis report that preserves each disagreement.
+
+## Sources and further reading
+
+- [NIST AI RMF 1.0](https://doi.org/10.6028/NIST.AI.100-1) — lifecycle governance, measurement, and management responsibilities.
+- [W3C Trace Context](https://www.w3.org/TR/trace-context/) — interoperable correlation context and its limits.
+- [SWE-bench evaluation harness](https://github.com/SWE-bench/SWE-bench/tree/7a21e05772954cc81471ae19d56f436cecf43c54) — executable task and grading machinery.
+- [Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena](https://arxiv.org/abs/2306.05685) — primary model-judge research and calibration context.

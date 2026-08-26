@@ -1,0 +1,23 @@
+id: source-coderabbit-pre-merge-checks
+title: CodeRabbit pre-merge checks
+author: CodeRabbit
+canonical_url: https://docs.coderabbit.ai/pr-reviews/pre-merge-checks
+published_at: 2026-08-24
+retrieved_at: 2026-08-26
+inspected_paths:
+  - /pr-reviews/pre-merge-checks
+source_type: first-party-article
+basis: Direct reading of CodeRabbit's current documentation for built-in and custom checks, severity modes, typed statuses, and recorded per-pull-request overrides.
+license_status: all-rights-reserved
+evidence_grade: FD
+observed_mechanisms:
+  - description: Checks can report passed, error, warning, or inconclusive states and can be configured as off, warning, or error gates.
+    evidence_grade: FD
+    basis: The official pre-merge documentation enumerates check modes, result states, and override behavior.
+author_reported_claims: []
+unknowns:
+  - A configured check may still encode an incomplete policy or share blind spots with the code producer.
+falsifiers:
+  - Current documentation no longer exposes typed check states or recorded override behavior.
+last_validated: 2026-08-26
+correction_ledger_status: reviewed

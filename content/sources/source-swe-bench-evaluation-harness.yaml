@@ -1,0 +1,32 @@
+id: source-swe-bench-evaluation-harness
+title: SWE-bench evaluation harness repository
+author: SWE-bench contributors
+canonical_url: https://github.com/SWE-bench/SWE-bench/tree/7a21e05772954cc81471ae19d56f436cecf43c54
+published_at: 2026-08-18
+retrieved_at: 2026-08-26
+repository_commit: 7a21e05772954cc81471ae19d56f436cecf43c54
+inspected_paths:
+  - README.md
+  - LICENSE
+  - docs/guides/evaluation.md
+  - docs/reference/harness.md
+  - swebench/harness/run_evaluation.py
+  - swebench/harness/grading.py
+  - swebench/harness/reporting.py
+  - swebench/harness/docker_utils.py
+  - tests/test_evaluation.py
+source_type: first-party-repository
+basis: Commit-pinned inspection of the official MIT-licensed evaluation harness, grading, reporting, container, documentation, and evaluation-test paths.
+license_status: MIT
+evidence_grade: IP
+observed_mechanisms:
+  - description: Evaluation combines task instances, predictions, controlled environments, grading logic, and reports rather than reducing the measured unit to a model name.
+    evidence_grade: IP
+    basis: The inspected harness paths directly implement environment setup, execution, grading, and result reporting.
+author_reported_claims: []
+unknowns:
+  - Benchmark resolution does not establish product safety, user value, or transfer to a different task distribution.
+falsifiers:
+  - The pinned repository paths do not implement the documented evaluation, grading, and reporting responsibilities.
+last_validated: 2026-08-26
+correction_ledger_status: reviewed

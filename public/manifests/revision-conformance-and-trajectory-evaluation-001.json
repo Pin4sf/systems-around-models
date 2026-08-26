@@ -1,0 +1,64 @@
+{
+  "id": "revision-conformance-and-trajectory-evaluation-001",
+  "essaySlug": "conformance-and-trajectory-evaluation",
+  "revision": 1,
+  "publishedAt": "2026-08-27",
+  "substantivelyRevisedAt": "2026-08-27",
+  "summary": "Initial three-axis evaluation chapter separating outcome, observable trajectory, and runtime-contract conformance.",
+  "affectedClaimIds": [],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-62a887d43bb29107b52ef303dead37c0ddbcbe6bca024852a31cf72414a8bd72",
+  "sourceIds": [
+    "source-harness-engineering-fieldbook-v1",
+    "source-llm-as-judge-mt-bench",
+    "source-nist-ai-rmf-1",
+    "source-swe-bench-evaluation-harness",
+    "source-w3c-trace-context"
+  ],
+  "sourceValidationDates": {
+    "source-harness-engineering-fieldbook-v1": "2026-08-21",
+    "source-nist-ai-rmf-1": "2026-08-24",
+    "source-w3c-trace-context": "2026-08-24",
+    "source-swe-bench-evaluation-harness": "2026-08-26",
+    "source-llm-as-judge-mt-bench": "2026-08-24"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    },
+    {
+      "id": "source-llm-as-judge-mt-bench",
+      "title": "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena",
+      "canonicalUrl": "https://arxiv.org/abs/2306.05685",
+      "lastValidated": "2026-08-24",
+      "licenseStatus": "unknown"
+    },
+    {
+      "id": "source-nist-ai-rmf-1",
+      "title": "Artificial Intelligence Risk Management Framework (AI RMF 1.0)",
+      "canonicalUrl": "https://doi.org/10.6028/NIST.AI.100-1",
+      "lastValidated": "2026-08-24",
+      "licenseStatus": "unknown"
+    },
+    {
+      "id": "source-swe-bench-evaluation-harness",
+      "title": "SWE-bench evaluation harness repository",
+      "canonicalUrl": "https://github.com/SWE-bench/SWE-bench/tree/7a21e05772954cc81471ae19d56f436cecf43c54",
+      "lastValidated": "2026-08-26",
+      "licenseStatus": "MIT"
+    },
+    {
+      "id": "source-w3c-trace-context",
+      "title": "Trace Context",
+      "canonicalUrl": "https://www.w3.org/TR/2021/REC-trace-context-1-20211123/",
+      "lastValidated": "2026-08-24",
+      "licenseStatus": "unknown"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+id: source-devin-testing-recordings
+title: Testing and recordings with Devin
+author: Cognition
+canonical_url: https://docs.devin.ai/work-with-devin/testing-and-recordings
+published_at: 2026-08-26
+retrieved_at: 2026-08-26
+inspected_paths:
+  - /work-with-devin/testing-and-recordings
+  - /work-with-devin/devin-review
+source_type: first-party-article
+basis: Direct reading of Cognition's current documentation for test plans, browser execution, annotated recordings, focused proof, CI, and Devin Review.
+license_status: all-rights-reserved
+evidence_grade: FD
+observed_mechanisms:
+  - description: Devin can produce a focused browser-based test recording with annotations while the documentation reserves exhaustive coverage for continuous integration.
+    evidence_grade: FD
+    basis: The testing documentation explicitly separates focused visual proof from comprehensive CI coverage.
+author_reported_claims: []
+unknowns:
+  - A recording demonstrates the captured path only and does not establish exhaustive correctness.
+falsifiers:
+  - Current Cognition documentation no longer distinguishes focused recordings from exhaustive CI coverage.
+last_validated: 2026-08-26
+correction_ledger_status: reviewed

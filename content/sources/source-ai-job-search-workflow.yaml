@@ -1,25 +1,37 @@
 id: source-ai-job-search-workflow
 title: AI Job Search repository
 author: Mads Lorentzen
-canonical_url: https://github.com/MadsLorentzen/ai-job-search/tree/e2c311a5b40512daf79a04b22c96d7e049afc745
-published_at: 2026-03-18
-retrieved_at: 2026-08-25
-repository_commit: e2c311a5b40512daf79a04b22c96d7e049afc745
+canonical_url: https://github.com/MadsLorentzen/ai-job-search/tree/ab91c60cc47147d9416f0af758fb5e2d109956ce
+published_at: 2026-08-19
+retrieved_at: 2026-08-26
+repository_commit: ab91c60cc47147d9416f0af758fb5e2d109956ce
 inspected_paths:
   - README.md
+  - SECURITY.md
   - LICENSE
+  - .claude/commands/apply.md
+  - .claude/commands/outcome.md
+  - .claude/commands/gmail-sync.md
+  - tools/verify_pdf.py
+  - tools/security_guards.py
+  - tests/test_verify_pdf.py
+  - tests/test_security_guards.py
 source_type: first-party-repository
-basis: Commit-pinned inspection of the official repository README and MIT license for its documented drafting, review, artifact-checking, and application-state workflow.
+basis: Release-pinned inspection of the official v1.6.0 workflow, security boundary, drafting, review, artifact verification, approval, outcome, and guard-test paths.
 license_status: MIT
 evidence_grade: FD
 observed_mechanisms:
   - description: The repository documents separate drafting and review stages plus PDF compilation, visual inspection, text-layer checks, and application tracking.
-    evidence_grade: FD
-    basis: The pinned README describes the workflow stages and artifact checks.
+    evidence_grade: IP
+    basis: The pinned commands, verifier, guards, and tests implement the documented stages and artifact checks.
+  - description: External posting text is handled as untrusted input, submission remains human-owned, and email-derived status changes are proposed for approval.
+    evidence_grade: IP
+    basis: The pinned security and command paths preserve these authority and data boundaries.
 author_reported_claims: []
 unknowns:
   - The inspected workflow does not itself establish that an application is truthful, accepted by an employer, or authorized for automatic external submission.
+  - The documented instruction defenses reduce risk but do not constitute a sandbox.
 falsifiers:
   - The pinned README does not document separate review, PDF generation, artifact checks, or application state.
-last_validated: 2026-08-25
+last_validated: 2026-08-26
 correction_ledger_status: reviewed
