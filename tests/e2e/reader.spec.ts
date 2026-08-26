@@ -142,10 +142,10 @@ test("@desktop discovery endpoints expose only released publication routes", asy
   expect(rss).toContain("revision-open-loops-re-entry-001");
   expect(rss).toContain("Hermes: An Integrated Agent Runtime");
   expect(rss).toContain("revision-hermes-integrated-agent-runtime-002");
-  expect(rss).toContain("revision-qm-scoped-resources-and-leased-runs-001");
-  expect(rss).toContain("revision-cloudflare-think-and-agents-001");
-  expect(rss).toContain("revision-deepseek-harness-and-cordis-001");
-  expect(rss).toContain("revision-drover-fleet-custody-and-evidence-001");
+  expect(rss).toContain("revision-qm-scoped-resources-and-leased-runs-002");
+  expect(rss).toContain("revision-cloudflare-think-and-agents-002");
+  expect(rss).toContain("revision-deepseek-harness-and-cordis-002");
+  expect(rss).toContain("revision-drover-fleet-custody-and-evidence-002");
 });
 
 test("@desktop architecture field map compares nine profiles and opens extended studies without JavaScript", async ({ page }) => {

@@ -4,17 +4,17 @@ title: Cloudflare Think and Agents
 description: A source-pinned study of Cloudflare's Durable Object agent substrate and Think harness across durable state, submissions, sessions, recovery, actions, channels, and sub-agents.
 sequence: Harness Engineering
 sequence_position: 27
-revision: 1
+revision: 2
 authors:
   - author-shivansh-fulper
 published_at: 2026-08-26
 substantively_revised_at: 2026-08-26
-reading_time_source: 9 minute editorial estimate
+reading_time_source: 11 minute editorial estimate
 status: public
 source_manifest_ids:
   - source-harness-engineering-fieldbook-v1
   - source-cloudflare-think-agents
-revision_id: revision-cloudflare-think-and-agents-001
+revision_id: revision-cloudflare-think-and-agents-002
 previous_essay_slug: qm-scoped-resources-and-leased-runs
 next_essay_slug: deepseek-harness-and-cordis
 ---
@@ -39,11 +39,25 @@ Durable fibers persist checkpoints so work can resume after eviction. A durable 
 
 These are strong runtime guarantees with a narrow scope. Cancellation is cooperative. A callback can ignore it. Recovery can replay local computation but cannot decide whether an arbitrary payment, message, or deployment already happened. External effects still need stable identities, provider receipts, and reconciliation rules.
 
+## Put one idempotency key at each ownership boundary
+
+Cloudflare's release exposes at least three different deduplication boundaries. A managed fiber can use an inbound delivery ID to deduplicate an application-owned job. A Think submission can use a turn key to ensure one external event is admitted to the session once. An Action can use a domain key such as an invoice ID to replay a settled effect result without executing the effect again.
+
+Those keys are related, but they are not interchangeable. The outer fiber answers whether the webhook job was accepted, recovered, cancelled, or resolved. The submission ledger answers whether a turn was admitted and completed. The action ledger answers whether a particular effect has a settled result. Reusing one opaque request ID everywhere erases ownership and makes reconciliation harder.
+
+The failure cases differ too. A duplicate submission returns the existing admission record. An Action without an explicit stable key falls back to its tool-call identity, which does not deduplicate a new recovery attempt. If an isolate dies after an explicitly keyed Action becomes pending, the default lease may eventually reclaim and rerun it; without that explicit key, Think surfaces an unknown pending state instead. The application still has to choose a domain key whose external system can reconcile. Idempotency is a stack of local contracts, not one global switch.
+
 ## Model sessions as branches, not one transcript
 
 Think sessions store a tree of messages and context blocks, support search, and compact history without treating the compacted view as the only record. This matters when a user branches, retries, resumes, or invokes a sub-agent. The request should name the intended branch and the context selected from it.
 
 Compaction helps fit a model input. It does not promote retrieved material into policy or make old credentials current. A recovered turn should preserve lineage to the session branch and re-check consequential authority at the effect boundary.
+
+## Treat defaults as admitted capabilities
+
+At the release pin, every Think agent receives model-visible workspace tools, including a sandboxed `bash` tool whose network access starts disabled. By default, Think also sends reasoning chunks to chat clients, includes connected MCP tools in turns, and wraps chat turns in recovery fibers. These are functional defaults, but they are also effective policy.
+
+An application should record the actual per-turn tool set, disclosure choice, network bindings, and recovery mode. Overrides should narrow or deliberately replace that view. A durable workspace file, connected MCP server, or recovered context block is available state; none becomes current authority merely because the actor preserved it.
 
 ## Treat Actions and Channels as experimental policy seams
 

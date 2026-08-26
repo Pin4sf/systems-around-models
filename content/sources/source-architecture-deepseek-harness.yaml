@@ -10,6 +10,8 @@ inspected_paths:
   - LICENSE
   - docs/architecture.md
   - packages/core/agent-loop/src/tool-calls.ts
+  - packages/boot/app-boot/src/profile.ts
+  - examples/acp-agent/both-mode.cordis.snapshot.yml
   - packages/core/session/src
   - vendor/cordis/src/fiber.ts
 source_type: first-party-repository
@@ -23,6 +25,12 @@ observed_mechanisms:
   - description: Tool bodies may overlap within bounds while durable results commit in the model-declared order and exclusive calls form barriers.
     evidence_grade: IP
     basis: The inspected tool-call scheduler implements bounded execution and ordered causal commit.
+  - description: Runtime profiles compose ordered plugin bundles, a profile-owned patch layer, and launcher patches into the resolved executable configuration.
+    evidence_grade: IP
+    basis: The inspected profile launcher and snapshot show provider, tool-mode, persistence, and plugin ownership changing through ordered composition.
+  - description: Durable session events are distinct from live agent and capability extension events, including waterfalls that can intercept an in-flight request.
+    evidence_grade: IP
+    basis: The inspected architecture contract names which event families survive reload and which remain live extension seams.
 author_reported_claims:
   - The project describes every product element as a plugin composed through Cordis contexts and services.
 unknowns:

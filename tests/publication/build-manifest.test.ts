@@ -146,25 +146,53 @@ describe("deterministic public build manifest", () => {
         expect.objectContaining({
           id: "revision-qm-scoped-resources-and-leased-runs-001",
           essaySlug: "qm-scoped-resources-and-leased-runs",
+          revision: 1,
+          contentHash: "sha256-5e0eec5c2a319161b7504d98295481d51d3c71cd5b756e6cbed922120e195e8c",
           sourceIds: expect.arrayContaining(["source-qm-agent-runtime"]),
+        }),
+        expect.objectContaining({
+          id: "revision-qm-scoped-resources-and-leased-runs-002",
+          essaySlug: "qm-scoped-resources-and-leased-runs",
+          revision: 2,
         }),
         expect.objectContaining({
           id: "revision-cloudflare-think-and-agents-001",
           essaySlug: "cloudflare-think-and-agents",
+          revision: 1,
+          contentHash: "sha256-04870322ff7b4f76fedbb0204fc123047ea79da4f94b84bede611757c709bde7",
           sourceIds: expect.arrayContaining(["source-cloudflare-think-agents"]),
+        }),
+        expect.objectContaining({
+          id: "revision-cloudflare-think-and-agents-002",
+          essaySlug: "cloudflare-think-and-agents",
+          revision: 2,
         }),
         expect.objectContaining({
           id: "revision-deepseek-harness-and-cordis-001",
           essaySlug: "deepseek-harness-and-cordis",
+          revision: 1,
+          contentHash: "sha256-a3aff29235a4d1a49d2fa5114e2ba72c5a60ba73e50a348da7ce0f6788004ba3",
           sourceIds: expect.arrayContaining([
             "source-architecture-deepseek-harness",
             "source-architecture-cordis",
           ]),
         }),
         expect.objectContaining({
+          id: "revision-deepseek-harness-and-cordis-002",
+          essaySlug: "deepseek-harness-and-cordis",
+          revision: 2,
+        }),
+        expect.objectContaining({
           id: "revision-drover-fleet-custody-and-evidence-001",
           essaySlug: "drover-fleet-custody-and-evidence",
+          revision: 1,
+          contentHash: "sha256-09156cfa8c0234dca5df23b44afd3f61be416422deff22986a11ffa6d3abdde6",
           sourceIds: expect.arrayContaining(["source-drover-fleet-runtime"]),
+        }),
+        expect.objectContaining({
+          id: "revision-drover-fleet-custody-and-evidence-002",
+          essaySlug: "drover-fleet-custody-and-evidence",
+          revision: 2,
         }),
       ]),
     });

@@ -275,13 +275,13 @@ describe("publication discovery endpoints", () => {
     expect(body).toContain(`<link>${canonicalSite}/fieldbook/hermes-integrated-agent-runtime</link>`);
     expect(body).toContain("revision-hermes-integrated-agent-runtime-002");
     expect(body).toContain("<title>QM: Scoped Resources and Leased Runs</title>");
-    expect(body).toContain("revision-qm-scoped-resources-and-leased-runs-001");
+    expect(body).toContain("revision-qm-scoped-resources-and-leased-runs-002");
     expect(body).toContain("<title>Cloudflare Think and Agents</title>");
-    expect(body).toContain("revision-cloudflare-think-and-agents-001");
+    expect(body).toContain("revision-cloudflare-think-and-agents-002");
     expect(body).toContain("<title>DeepSeek Harness and Cordis</title>");
-    expect(body).toContain("revision-deepseek-harness-and-cordis-001");
+    expect(body).toContain("revision-deepseek-harness-and-cordis-002");
     expect(body).toContain("<title>Drover: Fleet Custody and Evidence</title>");
-    expect(body).toContain("revision-drover-fleet-custody-and-evidence-001");
+    expect(body).toContain("revision-drover-fleet-custody-and-evidence-002");
     expect(body).toContain("<dc:creator>Shivansh Fulper</dc:creator>");
   });
 

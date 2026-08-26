@@ -6,3 +6,10 @@ substantively_revised_at: 2026-08-26
 summary: Initial public revision of the release-pinned Cloudflare Think and Agents case study.
 affected_claim_ids: []
 correction_disposition: publication
+content_hash: sha256-04870322ff7b4f76fedbb0204fc123047ea79da4f94b84bede611757c709bde7
+sources:
+  - { id: source-cloudflare-think-agents, title: Cloudflare Agents 0.21.0 and Think 0.16.0 releases, canonical_url: https://github.com/cloudflare/agents/tree/d42494503efe836a073fbf911fae1fbd12253198, last_validated: 2026-08-26, license_status: MIT }
+  - { id: source-harness-engineering-fieldbook-v1, title: "The Agent Systems Fieldbook — Harness Engineering, version 1", canonical_url: /manifests/revision-fieldbook-essay-001.json, last_validated: 2026-08-21, license_status: all-rights-reserved }
+source_validation_order:
+  - source-harness-engineering-fieldbook-v1
+  - source-cloudflare-think-agents

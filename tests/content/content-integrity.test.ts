@@ -172,6 +172,54 @@ describe("public content registry", () => {
     expect(source).toContain("common MCP `memory_recall` tool does not expose or forward project");
   });
 
+  it("publishes the expanded Chapters 25–28 as source-pinned second revisions", async () => {
+    const content = await loadContent();
+    const cases = [
+      {
+        slug: "qm-scoped-resources-and-leased-runs",
+        revisionId: "revision-qm-scoped-resources-and-leased-runs-002",
+        heading: "## Declare adapter capabilities instead of promising parity",
+        sourceId: "source-qm-agent-runtime",
+        inspectedPath: "src/harness/harness.ts",
+      },
+      {
+        slug: "cloudflare-think-and-agents",
+        revisionId: "revision-cloudflare-think-and-agents-002",
+        heading: "## Put one idempotency key at each ownership boundary",
+        sourceId: "source-cloudflare-think-agents",
+        inspectedPath: "docs/think/programmatic-submissions.md",
+      },
+      {
+        slug: "deepseek-harness-and-cordis",
+        revisionId: "revision-deepseek-harness-and-cordis-002",
+        heading: "## Treat profiles as executable architecture",
+        sourceId: "source-architecture-deepseek-harness",
+        inspectedPath: "packages/boot/app-boot/src/profile.ts",
+      },
+      {
+        slug: "drover-fleet-custody-and-evidence",
+        revisionId: "revision-drover-fleet-custody-and-evidence-002",
+        heading: "## Preserve native protocol truth through compatibility layers",
+        sourceId: "source-drover-fleet-runtime",
+        inspectedPath: "src/drover/server/harness/structured/pusher.py",
+      },
+    ];
+
+    for (const item of cases) {
+      const essay = content.essays.get(item.slug);
+      const source = content.sources.get(item.sourceId);
+      const body = await readFile(
+        path.join(process.cwd(), `content/essays/harness/${item.slug}.mdx`),
+        "utf8",
+      );
+
+      expect(essay).toMatchObject({ revision: 2, revisionId: item.revisionId });
+      expect(content.revisions.get(item.revisionId)?.summary.toLowerCase()).toContain("expanded corpus");
+      expect(source?.inspectedPaths).toContain(item.inspectedPath);
+      expect(body).toContain(item.heading);
+    }
+  });
+
   it("covers the central Memory Engineering claims with source-backed revision records", async () => {
     const [content, source] = await Promise.all([
       loadContent(),

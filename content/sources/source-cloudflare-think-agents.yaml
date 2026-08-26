@@ -11,9 +11,11 @@ inspected_paths:
   - packages/agents/src/index.ts
   - packages/think/package.json
   - packages/think/src/think.ts
+  - packages/think/README.md
   - docs/agents/state.md
   - docs/agents/sub-agents.md
   - docs/agents/durable-execution.md
+  - docs/think/programmatic-submissions.md
   - docs/think/actions.md
   - docs/think/channels.md
 source_type: first-party-repository
@@ -27,6 +29,12 @@ observed_mechanisms:
   - description: Think persists session branches and submissions, then unifies wait, stream, replay, and recovery paths around the same durable turn record.
     evidence_grade: IP
     basis: The inspected Think runtime, session, recovery, action, and channel paths implement the documented turn lifecycle.
+  - description: Managed fibers, durable turn submissions, and Actions use distinct idempotency identities for application jobs, session admission, and effect results.
+    evidence_grade: IP
+    basis: The inspected durable-execution, programmatic-submission, and Action contracts assign different ledgers, retry behavior, and ambiguity states to each boundary.
+  - description: Workspace shell access, reasoning disclosure, MCP inclusion, and chat recovery are default capabilities that can be narrowed or configured per runtime and turn.
+    evidence_grade: IP
+    basis: The release-pinned Think package contract lists the built-in workspace and its functional defaults.
 author_reported_claims:
   - Cloudflare describes its Agents platform as scaling to very large numbers of idle and active Durable Object instances.
 unknowns:

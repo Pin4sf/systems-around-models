@@ -43,7 +43,16 @@ function historicalSourceSnapshot(revision) {
   if (new Set(sourceIds).size !== sourceIds.length) {
     throw new Error(`Historical revision ${revision.id} contains duplicate source snapshots`);
   }
-  return { sourceDetails, sourceIds };
+  const validationOrder = revision.source_validation_order ?? sourceIds;
+  if (
+    !Array.isArray(validationOrder) ||
+    validationOrder.length !== sourceIds.length ||
+    new Set(validationOrder).size !== validationOrder.length ||
+    validationOrder.some((id) => !sourceIds.includes(id))
+  ) {
+    throw new Error(`Historical revision ${revision.id} contains an invalid source validation order`);
+  }
+  return { sourceDetails, sourceIds, validationOrder };
 }
 
 async function filesRecursively(directory, extension) {
@@ -97,7 +106,7 @@ export async function generatePublicManifest(root = process.cwd()) {
   const revisionRecords = revisions.map((revision) => {
     const essay = essays.find(({ metadata }) => metadata.revision_id === revision.id);
     if (!essay) {
-      const { sourceDetails, sourceIds } = historicalSourceSnapshot(revision);
+      const { sourceDetails, sourceIds, validationOrder } = historicalSourceSnapshot(revision);
       frozenRevisionSources.set(revision.id, sourceDetails);
       return {
         id: revision.id,
@@ -111,7 +120,10 @@ export async function generatePublicManifest(root = process.cwd()) {
         contentHash: revision.content_hash,
         sourceIds: [...sourceIds].sort(),
         sourceValidationDates: Object.fromEntries(
-          sourceDetails.map((source) => [source.id, source.lastValidated]),
+          validationOrder.map((id) => {
+            const source = sourceDetails.find((item) => item.id === id);
+            return [id, source.lastValidated];
+          }),
         ),
       };
     }

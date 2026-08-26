@@ -1,0 +1,37 @@
+{
+  "id": "revision-drover-fleet-custody-and-evidence-002",
+  "essaySlug": "drover-fleet-custody-and-evidence",
+  "revision": 2,
+  "publishedAt": "2026-08-26",
+  "substantivelyRevisedAt": "2026-08-26",
+  "summary": "Expanded corpus revision adding native-protocol preservation, adapter capability, and event-delivery semantics.",
+  "affectedClaimIds": [],
+  "correctionDisposition": "publication",
+  "contentHash": "sha256-a2afb34d1b375bbda7eebfbd90a0ca142198835b3ae38f234ec9d8d7d2718386",
+  "sourceIds": [
+    "source-drover-fleet-runtime",
+    "source-harness-engineering-fieldbook-v1"
+  ],
+  "sourceValidationDates": {
+    "source-harness-engineering-fieldbook-v1": "2026-08-21",
+    "source-drover-fleet-runtime": "2026-08-26"
+  },
+  "schemaVersion": 2,
+  "validationSchemaVersion": "publication-v2",
+  "sources": [
+    {
+      "id": "source-drover-fleet-runtime",
+      "title": "Drover v0.3.7 repository release",
+      "canonicalUrl": "https://github.com/arniesaha/drover/tree/81b344d025a7850d5697a7c19468ca8fd95e909e",
+      "lastValidated": "2026-08-26",
+      "licenseStatus": "Apache-2.0"
+    },
+    {
+      "id": "source-harness-engineering-fieldbook-v1",
+      "title": "The Agent Systems Fieldbook — Harness Engineering, version 1",
+      "canonicalUrl": "/manifests/revision-fieldbook-essay-001.json",
+      "lastValidated": "2026-08-21",
+      "licenseStatus": "all-rights-reserved"
+    }
+  ]
+}
