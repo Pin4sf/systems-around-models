@@ -345,4 +345,3 @@ Those ideas should sharpen Chapters 26 and 28, but the four runtime case studies
 4. Add the QM adapter-capability admission paragraph and narrow replay qualification.
 5. Re-run the exact release-pin check immediately before publishing any revision.
 6. Keep every operational or comparative result labeled **unverified** until independently executed; make no SOTA claim from this corpus.
-
